@@ -62,7 +62,8 @@ async function ProductResults({ params, page }) {
 
   try {
     ({ products, totalPages, total } = await getProductsWithCount(params));
-  } catch {
+  } catch (error) {
+    console.error("Failed to fetch products from WooCommerce:", error.message);
     products = [];
     totalPages = 0;
     total = 0;
