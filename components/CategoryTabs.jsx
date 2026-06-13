@@ -8,10 +8,13 @@ export default function CategoryTabs({ categories, activeCategoryId, className =
   const activeRef = useRef(null);
 
   useEffect(() => {
-    activeRef.current?.scrollIntoView({
+    const el = activeRef.current;
+    const container = el?.parentElement;
+    if (!el || !container) return;
+
+    container.scrollTo({
+      left: el.offsetLeft - container.clientWidth / 2 + el.offsetWidth / 2,
       behavior: "smooth",
-      block: "nearest",
-      inline: "center",
     });
   }, [activeCategoryId]);
 

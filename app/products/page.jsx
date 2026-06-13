@@ -39,7 +39,7 @@ async function MobileCategoryTabs({ activeCategoryId }) {
     <CategoryTabs
       categories={[{ id: "", name: "All Products" }, ...categories]}
       activeCategoryId={activeCategoryId}
-      className="mb-4 sm:hidden"
+      className="sticky top-[113px] z-30 -mx-4 mt-2 mb-4 bg-white px-4 pt-2 sm:hidden"
     />
   );
 }
