@@ -37,7 +37,9 @@ export default async function Navbar() {
               </Suspense>
             </div>
 
-            <MobileMenu />
+            <Suspense fallback={null}>
+              <MobileMenu />
+            </Suspense>
             <CartIcon />
           </div>
         </div>
