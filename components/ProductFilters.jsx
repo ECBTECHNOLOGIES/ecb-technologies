@@ -96,14 +96,13 @@ export default function ProductFilters({ categories }) {
             <li key={category.id}>
               <Link
                 href={categoryHref(category.id)}
-                className={`flex items-center justify-between rounded px-2 py-1 text-sm ${
+                className={`block rounded px-2 py-1 text-sm ${
                   activeCategory === String(category.id)
                     ? "bg-[#5B8DEF] text-white"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
-                <span>{decodeEntities(category.name)}</span>
-                <span className="text-xs opacity-70">{category.count}</span>
+                {decodeEntities(category.name)}
               </Link>
             </li>
           ))}

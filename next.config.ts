@@ -15,7 +15,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "api.ecbtechkenya.com",
+      },
+      {
+        protocol: "https",
         hostname: "secure.gravatar.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
     ],
   },

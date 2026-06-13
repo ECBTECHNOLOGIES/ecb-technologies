@@ -28,7 +28,7 @@ export default function SearchBar({ className = "" }) {
       <button
         type="submit"
         aria-label="Search"
-        className="absolute right-1 top-1 bottom-1 flex items-center justify-center rounded-md bg-brand-green px-3 text-white transition-colors hover:bg-green-700"
+        className="absolute right-1 top-1 bottom-1 flex items-center justify-center rounded-md px-3 text-gray-500 transition-colors hover:text-brand-blue"
       >
         <Search className="h-4 w-4" />
       </button>

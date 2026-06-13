@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { getOnSaleProducts } from "@/lib/woocommerce";
+import { getProducts } from "@/lib/woocommerce";
 import ProductCard from "./ProductCard";
+
+const STUDENT_DEALS_CATEGORY_ID = 390;
 
 export default async function StudentDeals() {
   let products = [];
   try {
-    products = await getOnSaleProducts(8);
+    products = await getProducts({ category: STUDENT_DEALS_CATEGORY_ID, per_page: 8 });
   } catch {
     products = [];
   }
@@ -25,7 +27,7 @@ export default async function StudentDeals() {
             </h2>
           </div>
           <Link
-            href="/products?on_sale=true"
+            href={`/products?category=${STUDENT_DEALS_CATEGORY_ID}`}
             className="text-sm font-semibold text-brand-blue hover:underline"
           >
             View all

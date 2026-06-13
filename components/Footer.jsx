@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const LOGO_URL =
-  "https://www.ecbtechkenya.com/wp-content/uploads/2025/04/Ebc-864-by-216-6.png";
+const LOGO_URL = `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/2025/04/Ebc-864-by-216-6.png`;
 
 export default function Footer() {
   return (
@@ -34,7 +33,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/products?on_sale=true" className="hover:text-[#5B8DEF]">
-                Student Deals
+                Deals
               </Link>
             </li>
             <li>

@@ -58,22 +58,20 @@ function ResultsSkeleton() {
 async function ProductResults({ params, page }) {
   let products = [];
   let totalPages = 0;
-  let total = 0;
 
   try {
-    ({ products, totalPages, total } = await getProductsWithCount(params));
+    ({ products, totalPages } = await getProductsWithCount(params));
   } catch (error) {
     console.error("Failed to fetch products from WooCommerce:", error.message);
     products = [];
     totalPages = 0;
-    total = 0;
   }
 
   let heading = "All Products";
   if (params.search) {
     heading = `Search results for "${params.search}"`;
   } else if (params.on_sale === true) {
-    heading = "Student Deals";
+    heading = "Deals";
   } else if (params.category) {
     const categories = await getFilteredCategories();
     heading = decodeEntities(
@@ -83,9 +81,8 @@ async function ProductResults({ params, page }) {
 
   return (
     <div className="flex-1">
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-gray-900">{heading}</h1>
-        <span className="text-sm text-gray-500">{total} products</span>
       </div>
 
       {products.length === 0 ? (

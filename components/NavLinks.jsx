@@ -6,7 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 const links = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/products" },
-  { label: "Student Deals", href: "/products?on_sale=true" },
+  { label: "Deals", href: "/products?on_sale=true" },
 ];
 
 export default function NavLinks() {
