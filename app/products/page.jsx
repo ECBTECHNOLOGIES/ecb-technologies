@@ -29,15 +29,15 @@ async function CategoryFilters() {
 }
 
 async function MobileCategoryTabs({ activeCategoryId }) {
-  const categories = (await getFilteredCategories())
-    .filter((category) => category.id !== 274)
-    .slice(0, 8);
+  const categories = (await getFilteredCategories()).filter(
+    (category) => category.id !== 274
+  );
 
   if (!categories.length) return null;
 
   return (
     <CategoryTabs
-      categories={categories}
+      categories={[{ id: "", name: "All Products" }, ...categories]}
       activeCategoryId={activeCategoryId}
       className="mb-4 sm:hidden"
     />

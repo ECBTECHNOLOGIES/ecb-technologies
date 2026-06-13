@@ -5,11 +5,13 @@ export default function CategoryTabs({ categories, activeCategoryId, className =
   return (
     <div className={`flex gap-2 overflow-x-auto pb-1 ${className}`}>
       {categories.map((category) => {
-        const isActive = activeCategoryId === String(category.id);
+        const isActive = category.id
+          ? activeCategoryId === String(category.id)
+          : !activeCategoryId;
         return (
           <Link
-            key={category.id}
-            href={`/products?category=${category.id}`}
+            key={category.id || "all"}
+            href={category.id ? `/products?category=${category.id}` : "/products"}
             className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold no-underline transition-colors ${
               isActive
                 ? "border-brand-blue bg-brand-blue text-white"

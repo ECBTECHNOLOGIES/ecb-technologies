@@ -77,7 +77,7 @@ export default function ProductFilters({ categories }) {
         </select>
       </div>
 
-      <div>
+      <div className="hidden sm:block">
         <h3 className="text-sm font-semibold text-gray-900">Categories</h3>
         <ul className="mt-2 space-y-1">
           <li>
