@@ -20,7 +20,6 @@ export default function ProductFilters({ categories }) {
   const [maxPrice, setMaxPrice] = useState(searchParams.get("max_price") ?? "");
 
   const activeCategory = searchParams.get("category") ?? "";
-  const onSale = searchParams.get("on_sale") === "true";
   const currentSort = `${searchParams.get("orderby") ?? "date"}-${searchParams.get("order") ?? "desc"}`;
 
   function updateParams(updates) {
@@ -137,16 +136,6 @@ export default function ProductFilters({ categories }) {
           Apply
         </button>
       </form>
-
-      <label className="flex items-center gap-2 text-sm text-gray-700">
-        <input
-          type="checkbox"
-          checked={onSale}
-          onChange={(e) => updateParams({ on_sale: e.target.checked ? "true" : null })}
-          className="h-4 w-4 rounded border-gray-300 text-brand-green focus:ring-brand-green"
-        />
-        On Sale Only
-      </label>
     </aside>
   );
 }
