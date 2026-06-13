@@ -5,6 +5,7 @@ import CartIcon from "./CartIcon";
 import SearchBar from "./SearchBar";
 import NavLinks from "./NavLinks";
 import MobileMenu from "./MobileMenu";
+import BackButton from "./BackButton";
 
 const LOGO_URL = `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/2025/04/Ebc-864-by-216-6.png`;
 
@@ -37,17 +38,22 @@ export default async function Navbar() {
               </Suspense>
             </div>
 
+            <CartIcon />
             <Suspense fallback={null}>
               <MobileMenu />
             </Suspense>
-            <CartIcon />
           </div>
         </div>
 
-        <div className="px-4 pb-3 md:hidden">
+        <div className="flex items-center gap-2 px-4 pb-3 md:hidden">
           <Suspense fallback={null}>
-            <SearchBar />
+            <BackButton />
           </Suspense>
+          <div className="flex-1">
+            <Suspense fallback={null}>
+              <SearchBar />
+            </Suspense>
+          </div>
         </div>
       </div>
     </header>

@@ -99,13 +99,7 @@ async function ProductResults({ params, page }) {
   return (
     <div className="flex-1">
       <div className="mb-4">
-        <h1
-          className={`text-2xl font-bold ${
-            params.category ? "text-brand-blue" : "text-gray-900"
-          }`}
-        >
-          {heading}
-        </h1>
+        <h1 className="text-2xl font-bold text-brand-blue">{heading}</h1>
       </div>
 
       {products.length === 0 ? (

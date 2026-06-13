@@ -102,7 +102,7 @@ export default function HeroSlider() {
         type="button"
         aria-label="Previous slide"
         onClick={() => goTo(index - 1)}
-        className="absolute left-2 top-4 z-10 rounded-full bg-white/20 p-2 text-white hover:bg-white/40 sm:top-1/2 sm:-translate-y-1/2"
+        className="absolute left-2 top-[82%] z-10 -translate-y-1/2 rounded-full bg-white/20 p-2 text-white hover:bg-white/40 sm:top-1/2"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
@@ -110,7 +110,7 @@ export default function HeroSlider() {
         type="button"
         aria-label="Next slide"
         onClick={() => goTo(index + 1)}
-        className="absolute right-2 top-4 z-10 rounded-full bg-white/20 p-2 text-white hover:bg-white/40 sm:top-1/2 sm:-translate-y-1/2"
+        className="absolute right-2 top-[82%] z-10 -translate-y-1/2 rounded-full bg-white/20 p-2 text-white hover:bg-white/40 sm:top-1/2"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
