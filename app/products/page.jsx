@@ -3,6 +3,7 @@ import { getCategories, getProductsWithCount } from "@/lib/woocommerce";
 import ProductCard from "@/components/ProductCard";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 import ProductFilters from "@/components/ProductFilters";
+import CategoryTabs from "@/components/CategoryTabs";
 import Pagination from "@/components/Pagination";
 import Skeleton from "@/components/Skeleton";
 import { decodeEntities } from "@/lib/utils";
@@ -25,6 +26,22 @@ async function getFilteredCategories() {
 async function CategoryFilters() {
   const categories = await getFilteredCategories();
   return <ProductFilters categories={categories} />;
+}
+
+async function MobileCategoryTabs({ activeCategoryId }) {
+  const categories = (await getFilteredCategories())
+    .filter((category) => category.id !== 274)
+    .slice(0, 8);
+
+  if (!categories.length) return null;
+
+  return (
+    <CategoryTabs
+      categories={categories}
+      activeCategoryId={activeCategoryId}
+      className="mb-4 sm:hidden"
+    />
+  );
 }
 
 function FiltersSkeleton() {
@@ -122,6 +139,10 @@ export default async function ProductsPage({ searchParams }) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <Suspense fallback={null}>
+        <MobileCategoryTabs activeCategoryId={params.category} />
+      </Suspense>
+
       <div className="flex flex-col gap-8 lg:flex-row">
         <Suspense fallback={<FiltersSkeleton />}>
           <CategoryFilters />
