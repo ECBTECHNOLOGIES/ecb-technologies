@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import CartIcon from "./CartIcon";
 import SearchBar from "./SearchBar";
 import NavLinks from "./NavLinks";
+import MobileMenu from "./MobileMenu";
 
 const LOGO_URL = `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/2025/04/Ebc-864-by-216-6.png`;
 
@@ -36,6 +37,7 @@ export default async function Navbar() {
               </Suspense>
             </div>
 
+            <MobileMenu />
             <CartIcon />
           </div>
         </div>

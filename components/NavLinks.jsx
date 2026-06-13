@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
-const links = [
+export const links = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/products" },
   { label: "Deals", href: "/products?on_sale=true" },
