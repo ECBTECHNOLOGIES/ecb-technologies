@@ -26,10 +26,10 @@ export default function NavLinks() {
         <Link
           key={link.href}
           href={link.href}
-          className={`text-sm font-bold transition-colors active:text-[#5B8DEF] ${
+          className={`text-sm font-bold transition-colors ${
             isActive(link.href)
-              ? "text-[#5B8DEF]"
-              : "text-brand-blue hover:text-[#2651AB]"
+              ? "text-brand-green"
+              : "text-brand-blue hover:text-[#2651AB] active:text-[#5B8DEF]"
           }`}
         >
           {link.label}
