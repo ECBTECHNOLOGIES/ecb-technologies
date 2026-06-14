@@ -144,9 +144,11 @@ export default async function ProductsPage({ searchParams }) {
       </Suspense>
 
       <div className="flex flex-col gap-8 lg:flex-row">
-        <Suspense fallback={<FiltersSkeleton />}>
-          <CategoryFilters />
-        </Suspense>
+        <div className="lg:sticky lg:top-24 lg:h-fit lg:self-start">
+          <Suspense fallback={<FiltersSkeleton />}>
+            <CategoryFilters />
+          </Suspense>
+        </div>
 
         <Suspense key={JSON.stringify(queryParams)} fallback={<ResultsSkeleton />}>
           <ProductResults params={queryParams} page={page} />

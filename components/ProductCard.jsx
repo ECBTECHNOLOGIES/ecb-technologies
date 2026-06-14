@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { BLUR_DATA_URL, decodeEntities, formatPrice, stripHtml } from "@/lib/utils";
 import AddToCartButton from "./AddToCartButton";
 import SelectOptionsButton from "./SelectOptionsButton";
@@ -78,6 +79,14 @@ export default function ProductCard({ product }) {
         ) : (
           <SelectOptionsButton product={product} className="mt-2 w-full" />
         )}
+
+        <Link
+          href={`/products/${product.slug}`}
+          className="flex items-center justify-center gap-1 text-xs font-medium text-brand-blue hover:underline"
+        >
+          Show details
+          <ArrowRight className="h-3 w-3" />
+        </Link>
       </div>
     </div>
   );
