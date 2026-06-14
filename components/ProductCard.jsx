@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BLUR_DATA_URL, decodeEntities, formatPrice, stripHtml } from "@/lib/utils";
 import AddToCartButton from "./AddToCartButton";
+import SelectOptionsButton from "./SelectOptionsButton";
 
 export default function ProductCard({ product }) {
   const image = product.images?.[0];
@@ -75,12 +76,7 @@ export default function ProductCard({ product }) {
         {canAddToCart ? (
           <AddToCartButton product={product} className="mt-2 w-full" />
         ) : (
-          <Link
-            href={`/products/${product.slug}`}
-            className="mt-2 flex w-full items-center justify-center rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700"
-          >
-            Select Options
-          </Link>
+          <SelectOptionsButton product={product} className="mt-2 w-full" />
         )}
       </div>
     </div>
