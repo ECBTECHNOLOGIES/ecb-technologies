@@ -13,8 +13,8 @@ export default async function Navbar() {
   return (
     <header className="sticky top-0 z-50 shadow-sm">
       <div className="bg-white">
-        <div className="flex items-center px-4 py-3 sm:px-6 lg:px-8">
-          <div className="flex w-1/2 items-center">
+        <div className="flex items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+          <div className="flex flex-1 items-center">
             <Link href="/" className="flex shrink-0 items-center">
               <Image
                 src={LOGO_URL}
@@ -27,11 +27,11 @@ export default async function Navbar() {
             </Link>
           </div>
 
-          <div className="flex w-1/2 items-center justify-end gap-4">
-            <Suspense fallback={null}>
-              <NavLinks />
-            </Suspense>
+          <Suspense fallback={null}>
+            <NavLinks />
+          </Suspense>
 
+          <div className="flex flex-1 items-center justify-end gap-4">
             <div className="hidden flex-1 md:block">
               <Suspense fallback={null}>
                 <SearchBar />

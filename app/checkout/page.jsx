@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Script from "next/script";
+import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/lib/store";
 import { formatPrice } from "@/lib/utils";
@@ -160,7 +161,15 @@ export default function CheckoutPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <Script src="https://js.paystack.co/v1/inline.js" strategy="afterInteractive" />
 
-      <h1 className="text-2xl font-bold text-gray-900">Checkout</h1>
+      <Link
+        href="/cart"
+        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-blue hover:underline"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Cart
+      </Link>
+
+      <h1 className="mt-4 text-2xl font-bold text-gray-900">Checkout</h1>
 
       <div className="mt-6 flex flex-col gap-8 lg:flex-row">
         <form onSubmit={handleSubmit} className="flex-1 space-y-4">
@@ -186,7 +195,7 @@ export default function CheckoutPage() {
           )}
 
           <p className="text-sm text-gray-500">
-            You&apos;ll be asked to pay securely with Paystack without leaving this page.
+            Pay securely with M-Pesa or your debit/credit card, without leaving this page.
           </p>
 
           <button
@@ -199,7 +208,7 @@ export default function CheckoutPage() {
         </form>
 
         <div className="w-full shrink-0 rounded-lg bg-white p-6 shadow-sm lg:w-80">
-          <h2 className="text-lg font-bold text-gray-900">Order Summary</h2>
+          <h2 className="text-lg font-bold text-brand-green">Order Summary</h2>
           <ul className="mt-4 space-y-2">
             {items.map((item) => (
               <li
@@ -209,7 +218,7 @@ export default function CheckoutPage() {
                 <span className="pr-2">
                   {item.name} &times; {item.quantity}
                 </span>
-                <span className="shrink-0 font-medium text-gray-900">
+                <span className="shrink-0 font-medium text-brand-green">
                   {formatPrice(item.price * item.quantity)}
                 </span>
               </li>
@@ -217,7 +226,7 @@ export default function CheckoutPage() {
           </ul>
           <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
             <span>Total</span>
-            <span>{formatPrice(getTotalPrice())}</span>
+            <span className="text-brand-green">{formatPrice(getTotalPrice())}</span>
           </div>
         </div>
       </div>

@@ -18,6 +18,10 @@
   --color-brand-green: #358c27;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -37,6 +41,22 @@ body {
   left: 0;
   width: 100%;
   height: 3px;
+}
+
+/* Enlarge and center the Paystack inline checkout popup, and make sure it
+   sits above the sticky navbar and isn't clipped by any parent. */
+#paystackEmbedIframe,
+iframe[src*="paystack"] {
+  width: min(95vw, 800px) !important;
+  max-width: none !important;
+  height: min(90vh, 750px) !important;
+  max-height: none !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 9999 !important;
+  overflow: visible !important;
 }
 
 #nprogress .peg {

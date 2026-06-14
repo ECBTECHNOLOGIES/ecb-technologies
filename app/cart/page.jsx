@@ -27,7 +27,7 @@ export default function CartPage() {
         </p>
         <Link
           href="/products"
-          className="mt-6 inline-block rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+          className="mt-6 inline-block rounded-lg border-2 border-brand-green px-4 py-2 text-sm font-semibold text-brand-green hover:bg-brand-green hover:text-white"
         >
           Continue Shopping
         </Link>
@@ -71,7 +71,7 @@ export default function CartPage() {
                 >
                   {item.name}
                 </Link>
-                <p className="mt-1 text-sm font-semibold text-brand-blue">
+                <p className="mt-1 text-sm font-semibold text-brand-green">
                   {formatPrice(item.price)}
                 </p>
               </div>
@@ -102,7 +102,7 @@ export default function CartPage() {
                 </button>
               </div>
 
-              <div className="w-24 text-right text-sm font-bold text-gray-900">
+              <div className="w-24 text-right text-sm font-bold text-brand-green">
                 {formatPrice(item.price * item.quantity)}
               </div>
 
@@ -119,7 +119,7 @@ export default function CartPage() {
         </div>
 
         <div className="w-full shrink-0 rounded-lg bg-white p-6 shadow-sm lg:w-80">
-          <h2 className="text-lg font-bold text-gray-900">Order Summary</h2>
+          <h2 className="text-lg font-bold text-brand-green">Order Summary</h2>
           <div className="mt-4 flex justify-between text-sm text-gray-600">
             <span>Subtotal</span>
             <span>{formatPrice(getTotalPrice())}</span>
@@ -129,7 +129,7 @@ export default function CartPage() {
           </p>
           <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
             <span>Total</span>
-            <span>{formatPrice(getTotalPrice())}</span>
+            <span className="text-brand-green">{formatPrice(getTotalPrice())}</span>
           </div>
           <Link
             href="/checkout"
@@ -139,7 +139,7 @@ export default function CartPage() {
           </Link>
           <Link
             href="/products"
-            className="mt-3 block w-full rounded-lg bg-brand-green px-4 py-2 text-center text-sm font-semibold text-white hover:bg-green-700"
+            className="mt-3 block w-full rounded-lg border-2 border-brand-green px-4 py-2 text-center text-sm font-semibold text-brand-green hover:bg-brand-green hover:text-white"
           >
             Continue Shopping
           </Link>

@@ -1,26 +1,45 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { BLUR_DATA_URL, decodeEntities, formatPrice, stripHtml } from "@/lib/utils";
+import { Heart } from "lucide-react";
+import { BLUR_DATA_URL, decodeEntities, formatPrice } from "@/lib/utils";
 import AddToCartButton from "./AddToCartButton";
 import SelectOptionsButton from "./SelectOptionsButton";
+
+const NEW_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+
+function isNew(product) {
+  if (!product.date_created) return false;
+  return Date.now() - new Date(product.date_created).getTime() < NEW_WINDOW_MS;
+}
+
+function getBrandName(product) {
+  if (product.brands?.[0]?.name) return product.brands[0].name;
+  const brandAttribute = product.attributes?.find((attr) => /brand/i.test(attr.name));
+  return brandAttribute?.options?.[0] ?? null;
+}
 
 export default function ProductCard({ product }) {
   const image = product.images?.[0];
   const name = decodeEntities(product.name);
-  const canAddToCart =
-    product.type === "simple" && product.stock_status === "instock";
+  const brand = getBrandName(product);
+  const isSoldOut = product.stock_status !== "instock";
+  const canAddToCart = !isSoldOut && product.type === "simple";
+
+  let badge = null;
+  if (isSoldOut) badge = { label: "Sold Out", className: "bg-[#888888]" };
+  else if (product.on_sale) badge = { label: "Sale", className: "bg-brand-red" };
+  else if (isNew(product)) badge = { label: "New", className: "bg-brand-green" };
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md">
-      <Link href={`/products/${product.slug}`} className="relative block aspect-square bg-gray-50">
+    <div className="flex flex-col overflow-hidden rounded-xl border-[0.5px] border-gray-300 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+      <Link href={`/products/${product.slug}`} className="relative block h-[180px] bg-[#f5f5f5]">
         {image ? (
           <Image
             src={image.src}
             alt={image.alt || name}
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
-            className="object-contain p-4 transition-transform group-hover:scale-105"
+            className="object-contain p-4"
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
             loading="lazy"
@@ -31,62 +50,61 @@ export default function ProductCard({ product }) {
           </div>
         )}
 
-        {product.stock_status !== "instock" ? (
-          <span className="absolute left-2 top-2 rounded bg-[#9CA3AF] px-2 py-1 text-xs font-bold text-white">
-            Sold Out
+        {badge && (
+          <span
+            className={`absolute left-2 top-2 rounded px-2 py-[3px] text-[10px] font-bold text-white ${badge.className}`}
+          >
+            {badge.label}
           </span>
-        ) : (
-          product.on_sale && (
-            <span className="absolute left-2 top-2 rounded bg-brand-red px-2 py-1 text-xs font-bold text-white">
-              Sale
-            </span>
-          )
         )}
+
+        <Heart className="absolute right-2 top-2 h-4 w-4 text-gray-400" />
       </Link>
 
-      <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="flex flex-1 flex-col gap-1 p-3">
+        {brand && (
+          <span className="text-[10px] uppercase tracking-wide text-gray-400">{brand}</span>
+        )}
+
         <Link href={`/products/${product.slug}`}>
-          <h3 className="line-clamp-2 text-sm font-medium text-gray-800 hover:text-brand-blue">
+          <h3 className="line-clamp-2 text-[13px] font-bold text-gray-800 hover:text-brand-blue">
             {name}
           </h3>
         </Link>
 
-        {product.short_description && (
-          <p className="line-clamp-2 text-xs text-gray-500">
-            {stripHtml(product.short_description)}
-          </p>
-        )}
-
-        <div className="mt-auto flex items-center gap-2 pt-2">
-          {product.on_sale && product.regular_price ? (
-            <>
-              <span className="text-base font-bold text-brand-red">
-                {formatPrice(product.price)}
-              </span>
-              <span className="text-sm text-gray-400 line-through">
-                {formatPrice(product.regular_price)}
-              </span>
-            </>
-          ) : (
-            <span className="text-base font-bold text-brand-blue">
-              {formatPrice(product.price)}
+        <div className="flex items-center gap-2">
+          <span className="text-[14px] font-bold text-brand-green">
+            {formatPrice(product.price)}
+          </span>
+          {product.on_sale && product.regular_price && (
+            <span className="text-xs text-gray-400 line-through">
+              {formatPrice(product.regular_price)}
             </span>
           )}
         </div>
 
-        {canAddToCart ? (
-          <AddToCartButton product={product} className="mt-2 w-full" />
-        ) : (
-          <SelectOptionsButton product={product} className="mt-2 w-full" />
-        )}
+        <div className="mt-auto flex items-center justify-between pt-2">
+          <Link
+            href={`/products/${product.slug}`}
+            className="text-xs font-medium text-brand-blue hover:underline"
+          >
+            Show details →
+          </Link>
 
-        <Link
-          href={`/products/${product.slug}`}
-          className="flex items-center justify-center gap-1 text-xs font-medium text-brand-blue hover:underline"
-        >
-          Show details
-          <ArrowRight className="h-3 w-3" />
-        </Link>
+          {isSoldOut ? (
+            <button
+              type="button"
+              disabled
+              className="min-w-[100px] shrink-0 rounded-md bg-[#888888] px-4 py-[7px] text-xs font-semibold text-white disabled:cursor-not-allowed"
+            >
+              Sold Out
+            </button>
+          ) : canAddToCart ? (
+            <AddToCartButton product={product} className="shrink-0" />
+          ) : (
+            <SelectOptionsButton product={product} className="shrink-0" />
+          )}
+        </div>
       </div>
     </div>
   );
