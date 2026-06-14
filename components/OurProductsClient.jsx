@@ -6,7 +6,7 @@ export default function OurProductsClient({ tabs, groups = [] }) {
     <section className="px-4 py-10 sm:px-6 lg:px-8">
       <h2 className="text-2xl font-bold text-brand-blue">Our Products</h2>
 
-      <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+      <div className="sticky top-[118px] z-30 -mx-4 flex gap-2 overflow-x-auto bg-white px-4 py-2 sm:top-[70px] sm:mx-0 sm:px-0">
         {tabs.map((tab, i) => (
           <Link
             key={tab.label}
@@ -35,7 +35,7 @@ export default function OurProductsClient({ tabs, groups = [] }) {
               </Link>
             </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-4">
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
               {group.products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

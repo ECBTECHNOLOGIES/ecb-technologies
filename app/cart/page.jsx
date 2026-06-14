@@ -44,7 +44,7 @@ export default function CartPage() {
           {items.map((item) => (
             <div
               key={`${item.id}-${item.variationId ?? "default"}`}
-              className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm"
+              className="flex flex-wrap items-center gap-4 rounded-lg bg-white p-4 shadow-sm sm:flex-nowrap"
             >
               <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-gray-50">
                 {item.image ? (
@@ -64,7 +64,7 @@ export default function CartPage() {
                 )}
               </div>
 
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <Link
                   href={`/products/${item.slug}`}
                   className="text-sm font-medium text-gray-800 hover:text-brand-blue"
@@ -76,44 +76,46 @@ export default function CartPage() {
                 </p>
               </div>
 
-              <div className="flex items-center rounded-md border border-gray-300">
+              <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-start">
+                <div className="flex items-center rounded-md border border-gray-300">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateQuantity(item.id, item.variationId, item.quantity - 1)
+                    }
+                    className="p-2 text-gray-600 hover:text-brand-blue"
+                    aria-label="Decrease quantity"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <span className="w-10 text-center text-sm font-medium">
+                    {item.quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateQuantity(item.id, item.variationId, item.quantity + 1)
+                    }
+                    className="p-2 text-gray-600 hover:text-brand-blue"
+                    aria-label="Increase quantity"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+
+                <div className="text-right text-sm font-bold text-brand-green sm:w-24">
+                  {formatPrice(item.price * item.quantity)}
+                </div>
+
                 <button
                   type="button"
-                  onClick={() =>
-                    updateQuantity(item.id, item.variationId, item.quantity - 1)
-                  }
-                  className="p-2 text-gray-600 hover:text-brand-blue"
-                  aria-label="Decrease quantity"
+                  onClick={() => removeItem(item.id, item.variationId)}
+                  aria-label="Remove item"
+                  className="p-2 text-gray-400 transition-colors hover:text-brand-red"
                 >
-                  <Minus className="h-4 w-4" />
-                </button>
-                <span className="w-10 text-center text-sm font-medium">
-                  {item.quantity}
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateQuantity(item.id, item.variationId, item.quantity + 1)
-                  }
-                  className="p-2 text-gray-600 hover:text-brand-blue"
-                  aria-label="Increase quantity"
-                >
-                  <Plus className="h-4 w-4" />
+                  <Trash2 className="h-5 w-5" />
                 </button>
               </div>
-
-              <div className="w-24 text-right text-sm font-bold text-brand-green">
-                {formatPrice(item.price * item.quantity)}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => removeItem(item.id, item.variationId)}
-                aria-label="Remove item"
-                className="p-2 text-gray-400 hover:text-brand-red"
-              >
-                <Trash2 className="h-5 w-5" />
-              </button>
             </div>
           ))}
         </div>

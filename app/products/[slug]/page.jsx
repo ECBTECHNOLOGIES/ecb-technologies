@@ -4,6 +4,7 @@ import {
   getProductBySlug,
   getProductVariations,
 } from "@/lib/woocommerce";
+import GoBackButton from "@/components/GoBackButton";
 import ProductGallery from "@/components/ProductGallery";
 import ProductPurchaseBox from "@/components/ProductPurchaseBox";
 import { decodeEntities } from "@/lib/utils";
@@ -36,7 +37,9 @@ export default async function ProductPage({ params }) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <nav className="mb-6 text-sm text-gray-500">
+      <GoBackButton />
+
+      <nav className="mt-4 mb-6 text-sm text-gray-500">
         <Link href="/" className="hover:text-brand-blue">
           Home
         </Link>

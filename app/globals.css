@@ -43,20 +43,24 @@ body {
   height: 3px;
 }
 
-/* Enlarge and center the Paystack inline checkout popup, and make sure it
-   sits above the sticky navbar and isn't clipped by any parent. */
-#paystackEmbedIframe,
-iframe[src*="paystack"] {
-  width: min(95vw, 800px) !important;
-  max-width: none !important;
-  height: min(90vh, 750px) !important;
-  max-height: none !important;
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  z-index: 9999 !important;
-  overflow: visible !important;
+/* Enlarge and center the Paystack inline checkout popup on larger screens,
+   and make sure it sits above the sticky navbar and isn't clipped by any
+   parent. On small screens, leave Paystack's default full-screen layout
+   alone so the M-Pesa/OTP forms stay fully usable. */
+@media (min-width: 640px) {
+  #paystackEmbedIframe,
+  iframe[src*="paystack"] {
+    width: min(95vw, 800px) !important;
+    max-width: none !important;
+    height: min(90vh, 750px) !important;
+    max-height: none !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 9999 !important;
+    overflow: visible !important;
+  }
 }
 
 #nprogress .peg {

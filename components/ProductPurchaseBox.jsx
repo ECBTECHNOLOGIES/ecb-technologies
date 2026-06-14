@@ -14,7 +14,10 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
 
   const isVariable = product.type === "variable" && variations.length > 0;
   const variationAttributes = useMemo(
-    () => product.attributes?.filter((attr) => attr.variation) ?? [],
+    () =>
+      product.attributes?.filter(
+        (attr) => attr.variation && !/warranty/i.test(attr.name)
+      ) ?? [],
     [product.attributes]
   );
 
@@ -22,19 +25,49 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
 
+  // Auto-select a valid combination of options (preferring "Brand New" for
+  // Condition) so Add to Cart works immediately. Customers can still change
+  // any option via the buttons below.
+  useEffect(() => {
+    if (!variationAttributes.length || !variations.length) return;
+
+    setSelected((prev) => {
+      if (Object.keys(prev).length > 0) return prev;
+
+      const brandNewVariation = variations.find((variation) =>
+        variation.attributes.some(
+          (attr) => /condition/i.test(attr.name) && /brand new/i.test(attr.option)
+        )
+      );
+      const defaultVariation = brandNewVariation ?? variations[0];
+
+      const defaults = {};
+      for (const attr of variationAttributes) {
+        const match = defaultVariation.attributes.find(
+          (vAttr) => vAttr.name.toLowerCase() === attr.name.toLowerCase()
+        );
+        defaults[attr.name] = match?.option ?? attr.options[0];
+      }
+      return defaults;
+    });
+  }, [variationAttributes, variations]);
+
   const matchedVariation = useMemo(() => {
     if (!isVariable) return null;
     if (variationAttributes.some((attr) => !selected[attr.name])) return null;
 
     return variations.find((variation) =>
-      variation.attributes.every((attr) => {
-        const expected = Object.entries(selected).find(
-          ([name]) => name.toLowerCase() === attr.name.toLowerCase()
-        )?.[1];
-        return expected === attr.option;
+      variationAttributes.every((attr) => {
+        const variationAttr = variation.attributes.find(
+          (vAttr) => vAttr.name.toLowerCase() === attr.name.toLowerCase()
+        );
+        return variationAttr?.option === selected[attr.name];
       })
     );
   }, [isVariable, variationAttributes, selected, variations]);
+
+  const conditionAttr = variationAttributes.find((attr) => /condition/i.test(attr.name));
+  const selectedCondition = conditionAttr ? selected[conditionAttr.name] : null;
 
   const activeStockStatus = matchedVariation?.stock_status ?? product.stock_status;
   const inStock = activeStockStatus === "instock";
@@ -77,7 +110,14 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
 
   return (
     <div className="space-y-4">
-      <div className="text-3xl font-bold text-brand-blue">{priceDisplay()}</div>
+      <div className="flex items-center gap-2">
+        <span className="text-3xl font-bold text-brand-blue">{priceDisplay()}</span>
+        {selectedCondition && (
+          <span className="rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-600">
+            {selectedCondition}
+          </span>
+        )}
+      </div>
 
       <div>
         {inStock ? (
@@ -148,11 +188,7 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
         type="button"
         onClick={handleAddToCart}
         disabled={!canAddToCart}
-        className={`flex w-full items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
-          cartItem
-            ? "bg-brand-blue text-white hover:bg-brand-blue-hover"
-            : "bg-brand-green text-white hover:bg-green-700"
-        }`}
+        className="flex w-full items-center justify-center rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {added
           ? "Added to Cart!"
@@ -169,7 +205,7 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
         <div className="space-y-2 text-center">
           <Link
             href="/checkout"
-            className="block w-full rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-yellow-500"
+            className="block w-full rounded-lg border-2 border-brand-green px-4 py-2 text-sm font-semibold text-brand-green transition-colors hover:bg-brand-green hover:text-white"
           >
             Proceed to Checkout
           </Link>
@@ -177,7 +213,7 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
             href="/products"
             className="block text-sm font-medium text-brand-blue hover:underline"
           >
-            Continue Shopping
+            ← Continue Shopping
           </Link>
         </div>
       )}

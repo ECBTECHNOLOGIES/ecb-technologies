@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { useCartStore } from "@/lib/store";
 import { decodeEntities, formatPrice } from "@/lib/utils";
 
@@ -11,6 +12,14 @@ export default function QuickSelectModal({ product, onClose }) {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState({});
   const [added, setAdded] = useState(false);
+
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -31,22 +40,55 @@ export default function QuickSelectModal({ product, onClose }) {
   }, [product.id]);
 
   const variationAttributes = useMemo(
-    () => product.attributes?.filter((attr) => attr.variation) ?? [],
+    () =>
+      product.attributes?.filter(
+        (attr) => attr.variation && !/warranty/i.test(attr.name)
+      ) ?? [],
     [product.attributes]
   );
+
+  // Auto-select a valid combination of options (preferring "Brand New" for
+  // Condition) so Add to Cart works immediately. Customers can still change
+  // any option via the buttons below.
+  useEffect(() => {
+    if (!variationAttributes.length || !variations.length) return;
+
+    setSelected((prev) => {
+      if (Object.keys(prev).length > 0) return prev;
+
+      const brandNewVariation = variations.find((variation) =>
+        variation.attributes.some(
+          (attr) => /condition/i.test(attr.name) && /brand new/i.test(attr.option)
+        )
+      );
+      const defaultVariation = brandNewVariation ?? variations[0];
+
+      const defaults = {};
+      for (const attr of variationAttributes) {
+        const match = defaultVariation.attributes.find(
+          (vAttr) => vAttr.name.toLowerCase() === attr.name.toLowerCase()
+        );
+        defaults[attr.name] = match?.option ?? attr.options[0];
+      }
+      return defaults;
+    });
+  }, [variationAttributes, variations]);
 
   const matchedVariation = useMemo(() => {
     if (variationAttributes.some((attr) => !selected[attr.name])) return null;
 
     return variations.find((variation) =>
-      variation.attributes.every((attr) => {
-        const expected = Object.entries(selected).find(
-          ([name]) => name.toLowerCase() === attr.name.toLowerCase()
-        )?.[1];
-        return expected === attr.option;
+      variationAttributes.every((attr) => {
+        const variationAttr = variation.attributes.find(
+          (vAttr) => vAttr.name.toLowerCase() === attr.name.toLowerCase()
+        );
+        return variationAttr?.option === selected[attr.name];
       })
     );
   }, [variationAttributes, selected, variations]);
+
+  const conditionAttr = variationAttributes.find((attr) => /condition/i.test(attr.name));
+  const selectedCondition = conditionAttr ? selected[conditionAttr.name] : null;
 
   const activeStockStatus = matchedVariation?.stock_status ?? product.stock_status;
   const inStock = activeStockStatus === "instock";
@@ -79,13 +121,13 @@ export default function QuickSelectModal({ product, onClose }) {
     return formatPrice(product.price);
   }
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-4 sm:items-center"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-sm rounded-lg bg-white p-5 shadow-lg"
+        className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-lg bg-white p-5 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-2">
@@ -102,7 +144,14 @@ export default function QuickSelectModal({ product, onClose }) {
           </button>
         </div>
 
-        <div className="mt-1 text-lg font-bold text-brand-blue">{priceDisplay()}</div>
+        <div className="mt-1 flex items-center gap-2">
+          <span className="text-lg font-bold text-brand-blue">{priceDisplay()}</span>
+          {selectedCondition && (
+            <span className="rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-600">
+              {selectedCondition}
+            </span>
+          )}
+        </div>
 
         {loading ? (
           <p className="mt-4 text-sm text-gray-500">Loading options...</p>
@@ -151,6 +200,7 @@ export default function QuickSelectModal({ product, onClose }) {
           {added ? "Added!" : !inStock ? "Out of Stock" : "Add to Cart"}
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -83,7 +83,7 @@ export default function ProductCard({ product }) {
           )}
         </div>
 
-        <div className="mt-auto flex items-center justify-between pt-2">
+        <div className="mt-auto flex flex-col items-stretch gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href={`/products/${product.slug}`}
             className="text-xs font-medium text-brand-blue hover:underline"
@@ -95,14 +95,14 @@ export default function ProductCard({ product }) {
             <button
               type="button"
               disabled
-              className="min-w-[100px] shrink-0 rounded-md bg-[#888888] px-4 py-[7px] text-xs font-semibold text-white disabled:cursor-not-allowed"
+              className="w-full shrink-0 whitespace-nowrap rounded-md bg-[#888888] px-3 py-[7px] text-[11px] font-bold text-white disabled:cursor-not-allowed sm:w-auto sm:min-w-[100px]"
             >
               Sold Out
             </button>
           ) : canAddToCart ? (
-            <AddToCartButton product={product} className="shrink-0" />
+            <AddToCartButton product={product} className="w-full shrink-0 sm:w-auto" />
           ) : (
-            <SelectOptionsButton product={product} className="shrink-0" />
+            <SelectOptionsButton product={product} className="w-full shrink-0 sm:w-auto" />
           )}
         </div>
       </div>

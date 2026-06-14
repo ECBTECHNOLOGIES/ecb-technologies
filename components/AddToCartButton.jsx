@@ -22,7 +22,7 @@ export default function AddToCartButton({
     <button
       type="button"
       onClick={handleClick}
-      className={`flex min-w-[100px] items-center justify-center rounded-md bg-brand-green px-4 py-[7px] text-xs font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60 ${className}`}
+      className={`flex items-center justify-center whitespace-nowrap rounded-md bg-brand-green px-3 py-[7px] text-[11px] font-bold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-[100px] ${className}`}
     >
       {added ? "Added!" : "Shop Now"}
     </button>
