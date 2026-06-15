@@ -46,7 +46,14 @@ body {
 /* Enlarge and center the Paystack inline checkout popup on larger screens,
    and make sure it sits above the sticky navbar and isn't clipped by any
    parent. On small screens, leave Paystack's default full-screen layout
-   alone so the M-Pesa/OTP forms stay fully usable. */
+   alone so the M-Pesa/OTP forms stay fully usable.
+
+   Note: don't override z-index here. Paystack renders the checkout in two
+   stacked full-screen iframes - a dimmed backdrop (no matching src/id, so
+   it's untouched by this rule) plus the checkout form (matched below).
+   Paystack sets both to the maximum possible z-index (2147483647). If we
+   lower the checkout iframe's z-index, the backdrop iframe ends up on top
+   and silently swallows all clicks, making the popup look unresponsive. */
 @media (min-width: 640px) {
   #paystackEmbedIframe,
   iframe[src*="paystack"] {
@@ -58,7 +65,6 @@ body {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    z-index: 9999 !important;
     overflow: visible !important;
   }
 }
