@@ -7,6 +7,7 @@ export const links = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/products" },
   { label: "Deals", href: "/products?on_sale=true" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function NavLinks() {

@@ -51,14 +51,22 @@ export default function Footer() {
           <ul className="mt-3 space-y-2 text-sm text-white/80">
             <li>Nairobi, Kenya</li>
             <li>
+              <a href="tel:+254717040531" className="hover:text-[#5B8DEF]">
+                0717 040 531
+              </a>
+            </li>
+            <li>
               <a
-                href="https://www.ecbtechkenya.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:info@ecbtechkenya.com"
                 className="hover:text-[#5B8DEF]"
               >
-                www.ecbtechkenya.com
+                info@ecbtechkenya.com
               </a>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-[#5B8DEF]">
+                Contact Us
+              </Link>
             </li>
           </ul>
         </div>
