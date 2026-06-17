@@ -39,7 +39,7 @@ async function MobileCategoryTabs({ activeCategoryId }) {
     <CategoryTabs
       categories={[{ id: "", name: "All Products" }, ...categories]}
       activeCategoryId={activeCategoryId}
-      className="sticky top-[118px] z-30 -mx-4 mb-4 bg-white px-4 pt-2 sm:hidden"
+      className="sticky top-[118px] z-30 bg-white px-4 pt-2 sm:hidden"
     />
   );
 }
@@ -138,12 +138,12 @@ export default async function ProductsPage({ searchParams }) {
   if (params.on_sale === "true") queryParams.on_sale = true;
 
   return (
-    <div className="px-4 py-8 sm:px-6 lg:px-10">
+    <div className="pb-8 sm:px-6 sm:py-8 lg:px-10">
       <Suspense fallback={null}>
         <MobileCategoryTabs activeCategoryId={params.category} />
       </Suspense>
 
-      <div className="flex flex-col gap-8 lg:flex-row">
+      <div className="flex flex-col gap-8 px-4 pt-4 sm:px-0 sm:pt-0 lg:flex-row">
         <div className="lg:sticky lg:top-24 lg:h-fit lg:self-start">
           <Suspense fallback={<FiltersSkeleton />}>
             <CategoryFilters />
