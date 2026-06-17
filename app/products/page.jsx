@@ -63,7 +63,7 @@ function ResultsSkeleton() {
         <Skeleton className="h-7 w-48" />
         <Skeleton className="h-4 w-20" />
       </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {Array.from({ length: 12 }).map((_, i) => (
           <ProductCardSkeleton key={i} />
         ))}
@@ -107,7 +107,7 @@ async function ProductResults({ params, page }) {
           No products found. Try adjusting your filters.
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -138,7 +138,7 @@ export default async function ProductsPage({ searchParams }) {
   if (params.on_sale === "true") queryParams.on_sale = true;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="px-4 py-8 sm:px-6 lg:px-10">
       <Suspense fallback={null}>
         <MobileCategoryTabs activeCategoryId={params.category} />
       </Suspense>

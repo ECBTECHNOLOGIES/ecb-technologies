@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Heart } from "lucide-react";
 import { BLUR_DATA_URL, decodeEntities, formatPrice } from "@/lib/utils";
 import AddToCartButton from "./AddToCartButton";
 import SelectOptionsButton from "./SelectOptionsButton";
@@ -57,8 +56,6 @@ export default function ProductCard({ product }) {
             {badge.label}
           </span>
         )}
-
-        <Heart className="absolute right-2 top-2 h-4 w-4 text-gray-400" />
       </Link>
 
       <div className="flex flex-1 flex-col gap-1 p-3">
@@ -72,8 +69,8 @@ export default function ProductCard({ product }) {
           </h3>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <span className="text-[14px] font-bold text-brand-green">
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+          <span className="font-heading text-[14px] font-bold text-brand-green">
             {formatPrice(product.price)}
           </span>
           {product.on_sale && product.regular_price && (
@@ -86,7 +83,7 @@ export default function ProductCard({ product }) {
         <div className="mt-auto flex flex-col items-stretch gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href={`/products/${product.slug}`}
-            className="text-xs font-medium text-brand-blue hover:underline"
+            className="whitespace-nowrap text-xs font-medium text-brand-blue hover:underline"
           >
             Show details →
           </Link>
@@ -95,7 +92,7 @@ export default function ProductCard({ product }) {
             <button
               type="button"
               disabled
-              className="w-full shrink-0 whitespace-nowrap rounded-md bg-[#888888] px-3 py-[7px] text-[11px] font-bold text-white disabled:cursor-not-allowed sm:w-auto sm:min-w-[100px]"
+              className="w-full shrink-0 whitespace-nowrap rounded-md bg-[#888888] px-2.5 py-[6px] text-[11px] font-bold text-white disabled:cursor-not-allowed sm:w-auto"
             >
               Sold Out
             </button>

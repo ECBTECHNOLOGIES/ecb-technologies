@@ -145,7 +145,7 @@ export default function QuickSelectModal({ product, onClose }) {
         </div>
 
         <div className="mt-1 flex items-center gap-2">
-          <span className="text-lg font-bold text-brand-blue">{priceDisplay()}</span>
+          <span className="font-heading text-lg font-bold text-brand-blue">{priceDisplay()}</span>
           {selectedCondition && (
             <span className="rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-600">
               {selectedCondition}

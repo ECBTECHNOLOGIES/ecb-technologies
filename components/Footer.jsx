@@ -41,6 +41,11 @@ export default function Footer() {
                 Cart
               </Link>
             </li>
+            <li>
+              <Link href="/track-order" className="hover:text-[#5B8DEF]">
+                Track Order
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -57,10 +62,10 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="mailto:info@ecbtechkenya.com"
+                href="mailto:ecbtechnologies001@gmail.com"
                 className="hover:text-[#5B8DEF]"
               >
-                info@ecbtechkenya.com
+                ecbtechnologies001@gmail.com
               </a>
             </li>
             <li>

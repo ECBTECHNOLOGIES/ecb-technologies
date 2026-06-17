@@ -115,6 +115,10 @@ export default function CheckoutPage() {
 
       clearCart();
       setCompletedOrderId(orderId);
+      localStorage.setItem(
+        "ecb-last-order",
+        JSON.stringify({ orderId, email: form.email })
+      );
     } catch (err) {
       setError(err.message);
     } finally {
@@ -132,12 +136,20 @@ export default function CheckoutPage() {
           Order #{completedOrderId} has been placed and payment received. We&apos;ll start
           processing it right away.
         </p>
-        <Link
-          href="/products"
-          className="mt-6 inline-block rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
-        >
-          Continue Shopping
-        </Link>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link
+            href="/products"
+            className="inline-block rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+          >
+            Continue Shopping
+          </Link>
+          <Link
+            href="/track-order"
+            className="inline-block rounded-lg border-2 border-brand-blue px-4 py-2 text-sm font-semibold text-brand-blue hover:bg-brand-blue hover:text-white"
+          >
+            Track Your Order
+          </Link>
+        </div>
       </div>
     );
   }
@@ -218,7 +230,7 @@ export default function CheckoutPage() {
                 <span className="pr-2">
                   {item.name} &times; {item.quantity}
                 </span>
-                <span className="shrink-0 font-medium text-brand-green">
+                <span className="font-heading shrink-0 font-medium text-brand-green">
                   {formatPrice(item.price * item.quantity)}
                 </span>
               </li>
@@ -226,7 +238,7 @@ export default function CheckoutPage() {
           </ul>
           <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
             <span>Total</span>
-            <span className="text-brand-green">{formatPrice(getTotalPrice())}</span>
+            <span className="font-heading text-brand-green">{formatPrice(getTotalPrice())}</span>
           </div>
         </div>
       </div>

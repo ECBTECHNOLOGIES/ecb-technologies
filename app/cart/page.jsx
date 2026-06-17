@@ -71,7 +71,7 @@ export default function CartPage() {
                 >
                   {item.name}
                 </Link>
-                <p className="mt-1 text-sm font-semibold text-brand-green">
+                <p className="font-heading mt-1 text-sm font-semibold text-brand-green">
                   {formatPrice(item.price)}
                 </p>
               </div>
@@ -103,7 +103,7 @@ export default function CartPage() {
                   </button>
                 </div>
 
-                <div className="text-right text-sm font-bold text-brand-green sm:w-24">
+                <div className="font-heading text-right text-sm font-bold text-brand-green sm:w-24">
                   {formatPrice(item.price * item.quantity)}
                 </div>
 
@@ -131,11 +131,11 @@ export default function CartPage() {
           </p>
           <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
             <span>Total</span>
-            <span className="text-brand-green">{formatPrice(getTotalPrice())}</span>
+            <span className="font-heading text-brand-green">{formatPrice(getTotalPrice())}</span>
           </div>
           <Link
             href="/checkout"
-            className="mt-6 block w-full rounded-lg bg-brand-green px-4 py-2 text-center text-sm font-semibold text-white hover:bg-green-700"
+            className="font-heading mt-6 block w-full rounded-lg bg-brand-green px-4 py-2 text-center text-sm font-semibold text-white hover:bg-green-700"
           >
             Proceed to Checkout
           </Link>

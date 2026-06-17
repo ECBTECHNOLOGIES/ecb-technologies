@@ -22,14 +22,14 @@ const CONTACT_DETAILS = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@ecbtechkenya.com",
-    href: "mailto:info@ecbtechkenya.com",
+    value: "ecbtechnologies001@gmail.com",
+    href: "mailto:ecbtechnologies001@gmail.com",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Nairobi, Kenya",
-    href: null,
+    value: "Iconic Business Plaza, Nairobi, Kenya",
+    href: "https://www.google.com/maps/search/?api=1&query=Iconic+Business+Plaza+Nairobi",
   },
 ];
 

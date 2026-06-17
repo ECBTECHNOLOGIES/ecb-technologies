@@ -7,7 +7,7 @@ export default function BackButton() {
   const pathname = usePathname();
   const router = useRouter();
 
-  if (!pathname.startsWith("/products")) return null;
+  if (pathname === "/") return null;
 
   return (
     <button

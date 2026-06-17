@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, Truck, X } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { links } from "./NavLinks";
@@ -38,12 +38,20 @@ export default function MobileMenu() {
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className={`rounded px-2 py-2.5 text-sm font-bold ${
-                  isActive(link.href) ? "text-[#5B8DEF]" : "text-brand-blue"
+                  isActive(link.href) ? "text-brand-blue" : "text-gray-500"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/track-order"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded px-2 py-2.5 text-sm font-bold text-gray-500"
+            >
+              <Truck className="h-4 w-4" />
+              Track Order
+            </Link>
           </nav>
         </div>
       )}

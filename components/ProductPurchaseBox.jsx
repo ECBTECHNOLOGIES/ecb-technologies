@@ -111,7 +111,7 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <span className="text-3xl font-bold text-brand-blue">{priceDisplay()}</span>
+        <span className="font-heading text-3xl font-bold text-brand-blue">{priceDisplay()}</span>
         {selectedCondition && (
           <span className="rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-600">
             {selectedCondition}

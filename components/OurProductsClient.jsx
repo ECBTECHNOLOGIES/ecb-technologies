@@ -3,15 +3,15 @@ import ProductCard from "./ProductCard";
 
 export default function OurProductsClient({ tabs, groups = [] }) {
   return (
-    <section className="px-4 py-10 sm:px-6 lg:px-8">
+    <section className="px-4 pb-10 pt-4 sm:px-6 sm:pt-6 lg:px-8">
       <h2 className="text-2xl font-bold text-brand-blue">Our Products</h2>
 
-      <div className="sticky top-[118px] z-30 -mx-4 flex gap-2 overflow-x-auto bg-white px-4 py-2 sm:top-[70px] sm:mx-0 sm:px-0">
+      <div className="sticky top-[118px] z-30 -mx-4 flex gap-2 overflow-x-auto bg-white px-4 py-2 sm:mx-0 sm:px-0 md:top-[70px]">
         {tabs.map((tab, i) => (
           <Link
             key={tab.label}
             href={tab.categoryId ? `/products?category=${tab.categoryId}` : "/products"}
-            className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-1.5 text-center text-sm font-semibold transition-colors ${
+            className={`font-heading shrink-0 whitespace-nowrap rounded-full border px-4 py-1.5 text-center text-sm font-semibold transition-colors ${
               i === 0
                 ? "border-brand-blue bg-brand-blue text-white"
                 : "border-gray-200 bg-white text-gray-700 hover:border-brand-blue hover:bg-brand-blue hover:text-white"
@@ -29,7 +29,7 @@ export default function OurProductsClient({ tabs, groups = [] }) {
               <h3 className="text-lg font-bold text-brand-blue">{group.label}</h3>
               <Link
                 href={`/products?category=${group.categoryId}`}
-                className="text-sm font-semibold text-brand-green hover:underline"
+                className="text-sm font-semibold text-brand-blue hover:underline"
               >
                 See more →
               </Link>
