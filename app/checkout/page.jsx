@@ -15,7 +15,6 @@ const initialForm = {
   address_1: "",
   city: "",
   state: "",
-  postcode: "",
   country: "KE",
 };
 
@@ -196,10 +195,9 @@ export default function CheckoutPage() {
 
           <Field label="Address" name="address_1" value={form.address_1} onChange={handleChange} required />
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field label="City" name="city" value={form.city} onChange={handleChange} required />
             <Field label="County" name="state" value={form.state} onChange={handleChange} />
-            <Field label="Postal Code" name="postcode" value={form.postcode} onChange={handleChange} />
           </div>
 
           {error && (
