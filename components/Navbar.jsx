@@ -66,7 +66,9 @@ export default async function Navbar() {
             <Suspense fallback={null}>
               <BackButton />
             </Suspense>
-            <MobileSearchPanel />
+            <Suspense fallback={null}>
+              <MobileSearchPanel />
+            </Suspense>
           </MobileSecondRow>
         </div>
       </MobileSearchProvider>
