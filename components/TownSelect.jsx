@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Search, ChevronDown, Check } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import shippingRates from "@/lib/shipping-rates.json";
@@ -56,15 +56,27 @@ export default function TownSelect({ value, onChange }) {
     setOpen(false);
   }
 
-  function handleBlur(e) {
-    if (!containerRef.current?.contains(e.relatedTarget)) {
-      setOpen(false);
-      setQuery("");
+  // Close on outside taps/clicks. We deliberately don't rely on the input's
+  // onBlur + e.relatedTarget here: iOS Safari doesn't reliably set
+  // relatedTarget on touch-triggered blur, so the list would close (blur)
+  // before the tap's click on an option had a chance to register, making
+  // options look unclickable on iPhone.
+  useEffect(() => {
+    if (!open) return;
+
+    function handlePointerDown(e) {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setOpen(false);
+        setQuery("");
+      }
     }
-  }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [open]);
 
   return (
-    <div className="relative" ref={containerRef} onBlur={handleBlur}>
+    <div className="relative" ref={containerRef}>
       <label className="block text-sm" htmlFor={`${listboxId}-input`}>
         <span className="font-medium text-gray-700">
           Delivery Location <span className="text-brand-red">*</span>
