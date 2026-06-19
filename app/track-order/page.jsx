@@ -1,37 +1,74 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { formatPrice } from "@/lib/utils";
 
 export const STATUS_LABELS = {
   pending: { label: "Pending Payment", className: "bg-yellow-100 text-yellow-800" },
   processing: { label: "Processing", className: "bg-blue-100 text-blue-800" },
+  dispatched: { label: "Dispatched", className: "bg-indigo-100 text-indigo-800" },
   "on-hold": { label: "On Hold", className: "bg-yellow-100 text-yellow-800" },
-  completed: { label: "Completed", className: "bg-green-100 text-green-800" },
+  completed: { label: "Delivered", className: "bg-green-100 text-green-800" },
   cancelled: { label: "Cancelled", className: "bg-gray-100 text-gray-700" },
   refunded: { label: "Refunded", className: "bg-gray-100 text-gray-700" },
   failed: { label: "Failed", className: "bg-red-100 text-brand-red" },
 };
 
-export default function TrackOrderPage() {
+// Statuses that progress through the delivery pipeline, in order. Orders
+// outside this list (cancelled/refunded/failed/on-hold) are terminal or
+// exceptional, so they show just the status badge with no stepper.
+const PROGRESS_STEPS = [
+  { key: "pending", label: "Order Received" },
+  { key: "processing", label: "Processing" },
+  { key: "dispatched", label: "Dispatched" },
+  { key: "completed", label: "Delivered" },
+];
+
+function OrderProgress({ status }) {
+  const currentIndex = PROGRESS_STEPS.findIndex((step) => step.key === status);
+  if (currentIndex === -1) return null;
+
+  return (
+    <div className="mt-4 flex items-center">
+      {PROGRESS_STEPS.map((step, i) => (
+        <div key={step.key} className="flex flex-1 items-center last:flex-none">
+          <div className="flex flex-col items-center">
+            <div
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                i <= currentIndex ? "bg-brand-green text-white" : "bg-gray-200 text-gray-500"
+              }`}
+            >
+              {i + 1}
+            </div>
+            <span
+              className={`mt-1 w-20 text-center text-[11px] ${
+                i <= currentIndex ? "font-medium text-gray-900" : "text-gray-400"
+              }`}
+            >
+              {step.label}
+            </span>
+          </div>
+          {i < PROGRESS_STEPS.length - 1 && (
+            <div
+              className={`mx-1 h-0.5 flex-1 ${i < currentIndex ? "bg-brand-green" : "bg-gray-200"}`}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TrackOrderForm() {
+  const searchParams = useSearchParams();
   const [orderId, setOrderId] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [order, setOrder] = useState(null);
 
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("ecb-last-order"));
-      if (saved?.orderId) setOrderId(String(saved.orderId));
-      if (saved?.email) setEmail(saved.email);
-    } catch {
-      // ignore malformed/missing data
-    }
-  }, []);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const trackOrder = useCallback(async (id, addr) => {
     setLoading(true);
     setError("");
     setOrder(null);
@@ -40,7 +77,7 @@ export default function TrackOrderPage() {
       const res = await fetch("/api/track-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderId, email }),
+        body: JSON.stringify({ orderId: id, email: addr }),
       });
 
       const data = await res.json();
@@ -55,6 +92,34 @@ export default function TrackOrderPage() {
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  // The checkout confirmation page links here with ?orderId=&email= so the
+  // customer never has to retype either value. Fall back to the last order
+  // saved in localStorage (e.g. they navigate here later in the same browser).
+  useEffect(() => {
+    const queryOrderId = searchParams.get("orderId");
+    const queryEmail = searchParams.get("email");
+
+    if (queryOrderId && queryEmail) {
+      setOrderId(queryOrderId);
+      setEmail(queryEmail);
+      trackOrder(queryOrderId, queryEmail);
+      return;
+    }
+
+    try {
+      const saved = JSON.parse(localStorage.getItem("ecb-last-order"));
+      if (saved?.orderId) setOrderId(String(saved.orderId));
+      if (saved?.email) setEmail(saved.email);
+    } catch {
+      // ignore malformed/missing data
+    }
+  }, [searchParams, trackOrder]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    trackOrder(orderId, email);
   }
 
   const status = order && (STATUS_LABELS[order.status] ?? {
@@ -121,6 +186,8 @@ export default function TrackOrderPage() {
             Placed on {new Date(order.date_created).toLocaleDateString()}
           </p>
 
+          <OrderProgress status={order.status} />
+
           <ul className="mt-4 space-y-2 border-t border-gray-100 pt-4">
             {order.line_items.map((item) => (
               <li key={item.id} className="flex justify-between text-sm text-gray-600">
@@ -143,5 +210,13 @@ export default function TrackOrderPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function TrackOrderPage() {
+  return (
+    <Suspense fallback={null}>
+      <TrackOrderForm />
+    </Suspense>
   );
 }

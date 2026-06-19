@@ -2,21 +2,21 @@
 
 import Link from "next/link";
 import Script from "next/script";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Copy, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/lib/store";
 import { formatPrice } from "@/lib/utils";
+import TownSelect, { getShippingOption, PICKUP_KEY } from "@/components/TownSelect";
 
 const initialForm = {
   first_name: "",
   last_name: "",
   email: "",
   phone: "",
-  address_1: "",
-  city: "",
-  state: "",
   country: "KE",
 };
+
+const PICKUP_OPTION = getShippingOption(PICKUP_KEY);
 
 export default function CheckoutPage() {
   const items = useCartStore((state) => state.items);
@@ -25,11 +25,21 @@ export default function CheckoutPage() {
 
   const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState(initialForm);
+  const [deliveryMethod, setDeliveryMethod] = useState("delivery");
+  const [shippingKey, setShippingKey] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [completedOrderId, setCompletedOrderId] = useState(null);
+  const [completedEmail, setCompletedEmail] = useState("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
+  const shippingOption =
+    deliveryMethod === "pickup" ? PICKUP_OPTION : getShippingOption(shippingKey);
+  const subtotal = getTotalPrice();
+  const shippingCost = shippingOption?.cost ?? 0;
+  const orderTotal = subtotal + shippingCost;
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -38,14 +48,36 @@ export default function CheckoutPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!shippingOption) {
+      setError("Please select a delivery location.");
+      return;
+    }
+
     setSubmitting(true);
     setError("");
 
     try {
+      const billing = {
+        ...form,
+        address_1: shippingOption.isPickup
+          ? "Iconic Business Plaza, Moi Avenue, Nairobi"
+          : `Fargo Courier Branch, ${shippingOption.label}`,
+        city: shippingOption.isPickup ? "Nairobi" : shippingOption.label,
+      };
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ billing: form, items }),
+        body: JSON.stringify({
+          billing,
+          items,
+          shipping: {
+            method_id: shippingOption.isPickup ? "local_pickup" : "flat_rate",
+            method_title: shippingOption.isPickup ? "Store Pickup" : shippingOption.label,
+            total: String(shippingOption.cost),
+          },
+        }),
       });
 
       const data = await res.json();
@@ -114,6 +146,7 @@ export default function CheckoutPage() {
 
       clearCart();
       setCompletedOrderId(orderId);
+      setCompletedEmail(form.email);
       localStorage.setItem(
         "ecb-last-order",
         JSON.stringify({ orderId, email: form.email })
@@ -128,13 +161,44 @@ export default function CheckoutPage() {
   if (!mounted) return null;
 
   if (completedOrderId) {
+    const trackOrderHref = `/track-order?orderId=${encodeURIComponent(completedOrderId)}&email=${encodeURIComponent(completedEmail)}`;
+
+    function handleCopyOrderId() {
+      navigator.clipboard.writeText(String(completedOrderId));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+
     return (
       <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold text-gray-900">Thank you for your order!</h1>
         <p className="mt-2 text-gray-500">
-          Order #{completedOrderId} has been placed and payment received. We&apos;ll start
-          processing it right away.
+          Your order has been placed and payment received. We&apos;ll start processing it
+          right away.
         </p>
+
+        <div className="mx-auto mt-6 inline-flex items-center gap-3 rounded-lg border border-gray-200 bg-white px-5 py-3 shadow-sm">
+          <span className="text-sm text-gray-500">Order ID</span>
+          <span className="font-heading text-xl font-bold text-brand-green">
+            #{completedOrderId}
+          </span>
+          <button
+            type="button"
+            onClick={handleCopyOrderId}
+            className="inline-flex items-center gap-1 rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold text-gray-600 hover:bg-gray-50"
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5 text-brand-green" /> Copied
+              </>
+            ) : (
+              <>
+                <Copy className="h-3.5 w-3.5" /> Copy
+              </>
+            )}
+          </button>
+        </div>
+
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             href="/products"
@@ -143,10 +207,10 @@ export default function CheckoutPage() {
             Continue Shopping
           </Link>
           <Link
-            href="/track-order"
+            href={trackOrderHref}
             className="inline-block rounded-lg border-2 border-brand-blue px-4 py-2 text-sm font-semibold text-brand-blue hover:bg-brand-blue hover:text-white"
           >
-            Track Your Order
+            Track My Order
           </Link>
         </div>
       </div>
@@ -193,12 +257,54 @@ export default function CheckoutPage() {
             <Field label="Phone" name="phone" type="tel" value={form.phone} onChange={handleChange} required />
           </div>
 
-          <Field label="Delivery Address" name="address_1" value={form.address_1} onChange={handleChange} required />
+          <fieldset className="space-y-2">
+            <legend className="text-sm font-medium text-gray-700">Delivery Method</legend>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <Field label="City" name="city" value={form.city} onChange={handleChange} required />
-            <Field label="County" name="state" value={form.state} onChange={handleChange} />
-          </div>
+            <label className="flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 text-sm">
+              <input
+                type="radio"
+                name="delivery_method"
+                value="delivery"
+                checked={deliveryMethod === "delivery"}
+                onChange={() => setDeliveryMethod("delivery")}
+                className="h-4 w-4 accent-brand-green"
+              />
+              Deliver to my location
+            </label>
+
+            <label className="flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 text-sm">
+              <input
+                type="radio"
+                name="delivery_method"
+                value="pickup"
+                checked={deliveryMethod === "pickup"}
+                onChange={() => setDeliveryMethod("pickup")}
+                className="h-4 w-4 accent-brand-green"
+              />
+              Free pickup at ECB store (Iconic Business Plaza, Moi Avenue, Nairobi)
+            </label>
+          </fieldset>
+
+          {deliveryMethod === "delivery" ? (
+            <>
+              <TownSelect value={shippingKey} onChange={setShippingKey} />
+              <p className="text-xs text-gray-500">
+                Your order is delivered to the Fargo Courier branch in your selected town —
+                you&apos;ll collect it from there.
+              </p>
+
+              {shippingOption?.surcharge && (
+                <p className="rounded-md bg-amber-50 px-4 py-2 text-sm text-amber-800">
+                  Orders over 5kg to this location may incur an additional KSh 150/kg —
+                  we&apos;ll confirm final shipping cost before dispatch.
+                </p>
+              )}
+            </>
+          ) : (
+            <p className="rounded-md bg-blue-50 px-4 py-2 text-sm text-brand-blue">
+              Pick up at Iconic Business Plaza, Moi Avenue, Nairobi — Open Mon–Sat, 8am–6:30pm.
+            </p>
+          )}
 
           {error && (
             <p className="rounded-md bg-red-50 px-4 py-2 text-sm text-brand-red">{error}</p>
@@ -210,7 +316,7 @@ export default function CheckoutPage() {
 
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !shippingOption}
             className="w-full rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
             {submitting ? "Processing..." : "Place Order & Pay"}
@@ -234,9 +340,27 @@ export default function CheckoutPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
+
+          <div className="mt-4 space-y-2 border-t border-gray-200 pt-4 text-sm text-gray-600">
+            <div className="flex justify-between">
+              <span>Subtotal</span>
+              <span className="font-medium text-gray-900">{formatPrice(subtotal)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Shipping {shippingOption && !shippingOption.isPickup ? `(${shippingOption.label})` : ""}</span>
+              <span className="font-medium text-gray-900">
+                {!shippingOption
+                  ? "—"
+                  : shippingOption.isPickup
+                    ? "Free"
+                    : formatPrice(shippingCost)}
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-2 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
             <span>Total</span>
-            <span className="font-heading text-brand-green">{formatPrice(getTotalPrice())}</span>
+            <span className="font-heading text-brand-green">{formatPrice(orderTotal)}</span>
           </div>
         </div>
       </div>

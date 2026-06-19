@@ -1,0 +1,1024 @@
+{
+  "Baraton": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 2,
+    "cost": 700,
+    "surcharge": null
+  },
+  "Bungoma": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 3,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Burnt forest": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 4,
+    "cost": 520,
+    "surcharge": null
+  },
+  "Chwele": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 5,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Eldama Ravine": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 6,
+    "cost": 470,
+    "surcharge": null
+  },
+  "Eldoret": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 7,
+    "cost": 450,
+    "surcharge": null
+  },
+  "Engineer": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 8,
+    "cost": 400,
+    "surcharge": null
+  },
+  "Gilgil": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 9,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Iten": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 10,
+    "cost": 450,
+    "surcharge": null
+  },
+  "Kabarnet": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 11,
+    "cost": 450,
+    "surcharge": null
+  },
+  "Kapenguria": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 12,
+    "cost": 780,
+    "surcharge": null
+  },
+  "Kapsabet": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 13,
+    "cost": 620,
+    "surcharge": null
+  },
+  "Kijabe": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 14,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Kimilili": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 15,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Kitale": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 16,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Limuru": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 17,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Lodwar": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 18,
+    "cost": 2050,
+    "surcharge": "KSh 150/kg above 5kg (standard is KSh 65-100/kg)"
+  },
+  "Lokichogio": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 19,
+    "cost": 2850,
+    "surcharge": "KSh 150/kg above 5kg (standard is KSh 65-100/kg)"
+  },
+  "Lugari": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 20,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Malaba": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 21,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Maralal": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 22,
+    "cost": 1100,
+    "surcharge": null
+  },
+  "Moi's Bridge": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 23,
+    "cost": 530,
+    "surcharge": null
+  },
+  "Molo": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 24,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Mumias": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 25,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Nairetoi": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 26,
+    "cost": 950,
+    "surcharge": null
+  },
+  "Naivasha": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 27,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Nakuru": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 28,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Nandi Hills": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 29,
+    "cost": 620,
+    "surcharge": null
+  },
+  "Narok": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 30,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Njoro": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 31,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Nyahururu": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 32,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Nzoia": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 33,
+    "cost": 710,
+    "surcharge": null
+  },
+  "Olkalau": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 34,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Rumuruti": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 35,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Talek": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 36,
+    "cost": 680,
+    "surcharge": null
+  },
+  "Turbo": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 37,
+    "cost": 450,
+    "surcharge": null
+  },
+  "Webuye": {
+    "zone": "Rift Valley Routes",
+    "zoneId": 2,
+    "methodInstanceId": 38,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Chogoria": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 40,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Chuka": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 41,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Embu": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 42,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Isiolo": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 43,
+    "cost": 650,
+    "surcharge": null
+  },
+  "Juja": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 44,
+    "cost": 380,
+    "surcharge": null
+  },
+  "Kagio": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 45,
+    "cost": 400,
+    "surcharge": null
+  },
+  "Kangari": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 46,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Kangema": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 47,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Karatina": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 48,
+    "cost": 400,
+    "surcharge": null
+  },
+  "Kerugoya": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 49,
+    "cost": 400,
+    "surcharge": null
+  },
+  "Kiganjo": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 50,
+    "cost": 410,
+    "surcharge": null
+  },
+  "Kutus": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 51,
+    "cost": 410,
+    "surcharge": null
+  },
+  "Makutano": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 52,
+    "cost": 460,
+    "surcharge": null
+  },
+  "Makuyu": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 53,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Marsabit": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 54,
+    "cost": 950,
+    "surcharge": null
+  },
+  "Matuu": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 55,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Maua": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 56,
+    "cost": 650,
+    "surcharge": null
+  },
+  "Meru": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 57,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Moyale": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 58,
+    "cost": 3050,
+    "surcharge": null
+  },
+  "Mukurweini": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 59,
+    "cost": 410,
+    "surcharge": null
+  },
+  "Murang'a": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 60,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Murarandia": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 61,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Mwea": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 62,
+    "cost": 410,
+    "surcharge": null
+  },
+  "Mwingi": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 63,
+    "cost": 550,
+    "surcharge": null
+  },
+  "Nanyuki": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 64,
+    "cost": 520,
+    "surcharge": null
+  },
+  "Naromoru": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 65,
+    "cost": 520,
+    "surcharge": null
+  },
+  "Nkubu": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 66,
+    "cost": 460,
+    "surcharge": null
+  },
+  "Nyeri": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 67,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Othaya": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 68,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Ruiru": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 69,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Runyenjes": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 70,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Sabasaba": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 71,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Sagana": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 72,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Thika": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 73,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Timau": {
+    "zone": "Mt Kenya Routes",
+    "zoneId": 3,
+    "methodInstanceId": 74,
+    "cost": 520,
+    "surcharge": null
+  },
+  "Ahero": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 76,
+    "cost": 640,
+    "surcharge": null
+  },
+  "Awendo": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 77,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Bomet": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 78,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Bondo": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 79,
+    "cost": 640,
+    "surcharge": null
+  },
+  "Busia": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 80,
+    "cost": 660,
+    "surcharge": null
+  },
+  "Homabay": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 81,
+    "cost": 700,
+    "surcharge": null
+  },
+  "Isebania": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 82,
+    "cost": 740,
+    "surcharge": null
+  },
+  "Kakamega": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 83,
+    "cost": 740,
+    "surcharge": null
+  },
+  "Kehancha": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 84,
+    "cost": 740,
+    "surcharge": null
+  },
+  "Kendubay": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 85,
+    "cost": 750,
+    "surcharge": null
+  },
+  "Kericho": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 86,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Keroka": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 87,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Kilgoris": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 88,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Kisii": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 89,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Kisumu": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 90,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Litein": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 91,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Londiani": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 92,
+    "cost": 660,
+    "surcharge": null
+  },
+  "Luanda": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 93,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Maseno": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 94,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Mbale": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 95,
+    "cost": 480,
+    "surcharge": null
+  },
+  "Mbita": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 96,
+    "cost": 720,
+    "surcharge": null
+  },
+  "Migori": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 97,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Muhoroni": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 98,
+    "cost": 660,
+    "surcharge": null
+  },
+  "Nambale": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 99,
+    "cost": 670,
+    "surcharge": null
+  },
+  "Nyamira": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 100,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Ogembo": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 101,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Oyugis": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 102,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Rachuonyo": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 103,
+    "cost": 750,
+    "surcharge": null
+  },
+  "Rongo": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 104,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Sabatia": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 105,
+    "cost": 650,
+    "surcharge": null
+  },
+  "Siaya": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 106,
+    "cost": 650,
+    "surcharge": null
+  },
+  "Sotik": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 107,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Ugunja": {
+    "zone": "Lake Routes",
+    "zoneId": 4,
+    "methodInstanceId": 108,
+    "cost": 650,
+    "surcharge": null
+  },
+  "Diani": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 110,
+    "cost": 770,
+    "surcharge": null
+  },
+  "Garsen": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 111,
+    "cost": 1400,
+    "surcharge": null
+  },
+  "Kilifi": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 112,
+    "cost": 800,
+    "surcharge": null
+  },
+  "Lamu": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 113,
+    "cost": 2050,
+    "surcharge": "KSh 150/kg above 5kg (standard is KSh 65-100/kg)"
+  },
+  "Malindi": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 114,
+    "cost": 840,
+    "surcharge": null
+  },
+  "Mariakani": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 115,
+    "cost": 640,
+    "surcharge": null
+  },
+  "Mombasa": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 116,
+    "cost": 640,
+    "surcharge": null
+  },
+  "Mpeketoni": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 117,
+    "cost": 2050,
+    "surcharge": "KSh 150/kg above 5kg (standard is KSh 65-100/kg)"
+  },
+  "Mtwapa": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 118,
+    "cost": 640,
+    "surcharge": null
+  },
+  "Mwatate": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 119,
+    "cost": 840,
+    "surcharge": null
+  },
+  "Sultan hamud": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 120,
+    "cost": 580,
+    "surcharge": null
+  },
+  "Taveta": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 121,
+    "cost": 850,
+    "surcharge": "KSh 150/kg above 5kg (standard is KSh 65-100/kg)"
+  },
+  "Voi": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 122,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Watamu": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 123,
+    "cost": 850,
+    "surcharge": null
+  },
+  "Wundanyi": {
+    "zone": "Coast Routes",
+    "zoneId": 5,
+    "methodInstanceId": 124,
+    "cost": 800,
+    "surcharge": null
+  },
+  "Athi River": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 126,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Emali": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 127,
+    "cost": 580,
+    "surcharge": null
+  },
+  "Garissa": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 128,
+    "cost": 750,
+    "surcharge": null
+  },
+  "Isinya": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 129,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Kajiado": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 130,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Kangundo": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 131,
+    "cost": 400,
+    "surcharge": null
+  },
+  "Kibwezi": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 132,
+    "cost": 580,
+    "surcharge": null
+  },
+  "Kitengela": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 133,
+    "cost": 360,
+    "surcharge": null
+  },
+  "Kitui": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 134,
+    "cost": 450,
+    "surcharge": null
+  },
+  "Machakos": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 135,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Makindu": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 136,
+    "cost": 580,
+    "surcharge": null
+  },
+  "Masii": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 137,
+    "cost": 500,
+    "surcharge": null
+  },
+  "Mtito Andei": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 138,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Mutomo": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 139,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Mwala": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 140,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Namanga": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 141,
+    "cost": 670,
+    "surcharge": null
+  },
+  "Oloitoktok": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 142,
+    "cost": 670,
+    "surcharge": null
+  },
+  "Tala": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 143,
+    "cost": 420,
+    "surcharge": null
+  },
+  "Wote": {
+    "zone": "Outer Nairobi Routes",
+    "zoneId": 6,
+    "methodInstanceId": 144,
+    "cost": 600,
+    "surcharge": null
+  },
+  "Gatundu": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 146,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Githunguri": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 147,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Kiambu": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 148,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Kikuyu": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 149,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Nairobi": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 150,
+    "cost": 300,
+    "surcharge": null
+  },
+  "Ngong": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 151,
+    "cost": 350,
+    "surcharge": null
+  },
+  "Ongata rongai": {
+    "zone": "Nairobi Routes",
+    "zoneId": 7,
+    "methodInstanceId": 152,
+    "cost": 350,
+    "surcharge": null
+  }
+}

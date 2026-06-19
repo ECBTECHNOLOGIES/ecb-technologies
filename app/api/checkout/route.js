@@ -3,11 +3,11 @@ import { createOrder } from "@/lib/woocommerce";
 
 export async function POST(request) {
   const body = await request.json();
-  const { billing, items } = body;
+  const { billing, items, shipping } = body;
 
-  if (!billing || !items?.length) {
+  if (!billing || !items?.length || !shipping) {
     return NextResponse.json(
-      { error: "Missing billing details or cart items" },
+      { error: "Missing billing details, cart items, or delivery location" },
       { status: 400 }
     );
   }
@@ -30,6 +30,7 @@ export async function POST(request) {
       billing,
       shipping: billing,
       line_items,
+      shipping_lines: [shipping],
     });
 
     return NextResponse.json({
