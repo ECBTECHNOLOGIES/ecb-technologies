@@ -54,6 +54,20 @@ const nextConfig: NextConfig = {
         destination: "/products?category=276",
         permanent: true,
       },
+      // "Uncategorized" is WooCommerce's meaningless default bucket category,
+      // not a real one - but Google indexed its archive page (titled "Buy
+      // Latest Uncategorized in Kenya"), so send that traffic to Deals
+      // instead of dumping it on the unfiltered catalog.
+      {
+        source: "/uncategorized",
+        destination: "/products?on_sale=true",
+        permanent: true,
+      },
+      {
+        source: "/product-category/uncategorized",
+        destination: "/products?on_sale=true",
+        permanent: true,
+      },
       {
         source: "/product-category/:slug*",
         destination: "/products",
