@@ -32,17 +32,17 @@ function OrderProgress({ status }) {
   return (
     <div className="mt-4 flex items-center">
       {PROGRESS_STEPS.map((step, i) => (
-        <div key={step.key} className="flex flex-1 items-center last:flex-none">
-          <div className="flex flex-col items-center">
+        <div key={step.key} className="flex min-w-0 flex-1 items-center last:flex-none">
+          <div className="flex min-w-0 flex-col items-center">
             <div
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+              className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold sm:h-8 sm:w-8 sm:text-xs ${
                 i <= currentIndex ? "bg-brand-green text-white" : "bg-gray-200 text-gray-500"
               }`}
             >
               {i + 1}
             </div>
             <span
-              className={`mt-1 w-20 text-center text-[11px] ${
+              className={`mt-1 max-w-14 text-center text-[9px] leading-tight sm:max-w-none sm:text-[11px] ${
                 i <= currentIndex ? "font-medium text-gray-900" : "text-gray-400"
               }`}
             >
@@ -51,7 +51,7 @@ function OrderProgress({ status }) {
           </div>
           {i < PROGRESS_STEPS.length - 1 && (
             <div
-              className={`mx-1 h-0.5 flex-1 ${i < currentIndex ? "bg-brand-green" : "bg-gray-200"}`}
+              className={`mx-0.5 h-0.5 flex-1 sm:mx-1 ${i < currentIndex ? "bg-brand-green" : "bg-gray-200"}`}
             />
           )}
         </div>
@@ -173,7 +173,7 @@ function TrackOrderForm() {
       </form>
 
       {order && (
-        <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="mt-8 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-lg font-bold text-gray-900">Order #{order.id}</h2>
             <span
