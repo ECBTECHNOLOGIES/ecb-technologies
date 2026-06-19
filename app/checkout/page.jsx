@@ -380,7 +380,7 @@ function Field({ label, name, type = "text", value, onChange, required }) {
         value={value}
         onChange={onChange}
         required={required}
-        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+        className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-base focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
       />
     </label>
   );

@@ -143,7 +143,7 @@ function TrackOrderForm() {
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
             required
-            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-base focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
           />
         </label>
         <label className="block text-sm sm:col-span-1">
@@ -153,7 +153,7 @@ function TrackOrderForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-sm focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+            className="mt-1 w-full rounded-md border border-gray-200 px-3 py-2 text-base focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
           />
         </label>
 

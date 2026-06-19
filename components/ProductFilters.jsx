@@ -137,7 +137,7 @@ export default function ProductFilters({ categories }) {
               placeholder="Min"
               value={minPrice}
               onChange={(e) => setMinPrice(e.target.value)}
-              className="w-full rounded-md border border-gray-200 px-2 py-1.5 text-sm focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+              className="w-full rounded-md border border-gray-200 px-2 py-1.5 text-base focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
             />
             <span className="text-gray-400">-</span>
             <input
@@ -146,7 +146,7 @@ export default function ProductFilters({ categories }) {
               placeholder="Max"
               value={maxPrice}
               onChange={(e) => setMaxPrice(e.target.value)}
-              className="w-full rounded-md border border-gray-200 px-2 py-1.5 text-sm focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+              className="w-full rounded-md border border-gray-200 px-2 py-1.5 text-base focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
             />
           </div>
           <button

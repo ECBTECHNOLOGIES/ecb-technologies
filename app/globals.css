@@ -35,6 +35,26 @@ button {
   font-family: var(--font-heading), Arial, Helvetica, sans-serif;
 }
 
+/* iOS/Android auto-zoom backstop: mobile browsers zoom the whole page in
+   when a focused text input's font-size is under 16px, then zoom back out
+   on blur. That single zoom affects the entire viewport (not just the
+   input), which is what makes unrelated content nearby look like it's
+   "jumping". Per-component text-base/sm:text-sm classes are the primary
+   fix; this is a blanket backstop in case any input is missed. */
+@media (max-width: 639px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="number"],
+  input[type="password"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
 /* NProgress page transition bar */
 #nprogress {
   pointer-events: none;
