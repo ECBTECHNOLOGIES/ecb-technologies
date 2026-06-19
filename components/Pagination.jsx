@@ -15,7 +15,7 @@ export default function Pagination({ currentPage, totalPages, searchParams }) {
   for (let i = start; i <= end; i++) pages.push(i);
 
   return (
-    <nav className="mt-8 flex items-center justify-center gap-2">
+    <nav className="mt-8 flex flex-wrap items-center justify-center gap-2">
       <Link
         href={buildHref(Math.max(1, currentPage - 1))}
         aria-disabled={currentPage === 1}
