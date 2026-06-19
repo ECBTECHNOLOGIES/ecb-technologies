@@ -21,8 +21,37 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/mobile-accessories",
+        destination: "/products?category=276",
+        permanent: true,
+      },
+      {
         source: "/contact-us",
         destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/shop",
+        destination: "/products",
+        permanent: true,
+      },
+      // WooCommerce's real category archive URLs were /product-category/<slug>/,
+      // not the bare slugs above - map the ones Google actually has indexed to
+      // their specific category first, falling back to the unfiltered catalog
+      // for any other category slug that isn't explicitly listed.
+      {
+        source: "/product-category/laptops",
+        destination: "/products?category=272",
+        permanent: true,
+      },
+      {
+        source: "/product-category/computer-accessories",
+        destination: "/products?category=274",
+        permanent: true,
+      },
+      {
+        source: "/product-category/mobile-accessories",
+        destination: "/products?category=276",
         permanent: true,
       },
       {
