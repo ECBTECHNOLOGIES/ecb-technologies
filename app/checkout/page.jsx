@@ -302,7 +302,8 @@ export default function CheckoutPage() {
             </>
           ) : (
             <p className="rounded-md bg-blue-50 px-4 py-2 text-sm text-brand-blue">
-              Pick up at Iconic Business Plaza, Moi Avenue, Nairobi — Open Mon–Sat, 8am–6:30pm.
+              Pick up at Iconic Business Plaza, Moi Avenue, Nairobi — Open Mon–Fri 8am–5:30pm,
+              Sat–Sun &amp; public holidays 8am–12pm.
             </p>
           )}
 
