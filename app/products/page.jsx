@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getCategories, getProductsWithCount } from "@/lib/woocommerce";
+import { getCategories, getInterleavedProductsWithCount } from "@/lib/woocommerce";
 import ProductCard from "@/components/ProductCard";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 import ProductFilters from "@/components/ProductFilters";
@@ -77,7 +77,7 @@ async function ProductResults({ params, page }) {
   let totalPages = 0;
 
   try {
-    ({ products, totalPages } = await getProductsWithCount(params));
+    ({ products, totalPages } = await getInterleavedProductsWithCount(params));
   } catch (error) {
     console.error("Failed to fetch products from WooCommerce:", error.message);
     products = [];
