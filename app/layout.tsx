@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
-import { BUSINESS, MAPS_URL, SITE_URL, jsonLdHtml } from "@/lib/business";
+import { BUSINESS, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml } from "@/lib/business";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | ECB Technologies",
   },
   description:
-    "Shop laptops, phones and accessories at ECB Technologies, Iconic Business Plaza, Moi Avenue, Nairobi CBD. Order online with M-Pesa or card, pick up in store or get delivery across Kenya.",
+    "Shop laptops, phones and accessories at ECB Technologies, Iconic Business Plaza (3rd Floor, Room T12), Moi Avenue, Nairobi CBD. Order online with M-Pesa or card, pick up in store or get delivery across Kenya.",
   openGraph: {
     type: "website",
     siteName: BUSINESS.name,
@@ -50,6 +50,7 @@ const siteJsonLd = {
       "@type": "ElectronicsStore",
       "@id": storeId,
       name: BUSINESS.name,
+      alternateName: BUSINESS.alternateName,
       url: SITE_URL,
       logo: BUSINESS.logo,
       image: BUSINESS.logo,
@@ -57,7 +58,7 @@ const siteJsonLd = {
       email: BUSINESS.email,
       address: {
         "@type": "PostalAddress",
-        streetAddress: `${BUSINESS.address.building}, ${BUSINESS.address.street}`,
+        streetAddress: STREET_ADDRESS,
         addressLocality: BUSINESS.address.city,
         addressCountry: BUSINESS.address.country,
       },

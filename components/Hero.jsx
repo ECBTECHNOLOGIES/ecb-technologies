@@ -13,7 +13,8 @@ export default function Hero() {
         </h1>
         <p className="mt-3 text-sm text-gray-600 sm:mt-4 sm:text-[18px]">
           Genuine laptops, phones &amp; accessories. Walk in at Iconic
-          Business Plaza on Moi Avenue or order online, we deliver across Kenya.
+          Business Plaza (3rd Floor, Room T12) on Moi Avenue or order online,
+          we deliver across Kenya.
         </p>
         <div className="mt-6 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
           <Link

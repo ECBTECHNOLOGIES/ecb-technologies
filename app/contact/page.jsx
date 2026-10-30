@@ -1,10 +1,10 @@
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { ADDRESS_LINE, BUSINESS, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
+import { Clock, Mail, MapPin, MessageCircle, Phone, Star } from "lucide-react";
+import { ADDRESS_LINE, BUSINESS, GOOGLE_PROFILE_URL, GOOGLE_REVIEWS, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
 
 export const metadata = {
   title: "Contact & Shop Location - Moi Avenue, Nairobi CBD",
   description:
-    "Visit ECB Technologies at Iconic Business Plaza, Moi Avenue, Nairobi CBD, or call, WhatsApp or email us about laptops, phones and accessories.",
+    "Visit ECB Technologies at Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD, or call, WhatsApp or email us about laptops, phones and accessories.",
   alternates: { canonical: "/contact" },
 };
 
@@ -37,6 +37,12 @@ const CONTACT_DETAILS = [
     icon: Clock,
     label: "Opening Hours",
     value: BUSINESS.hoursDisplay,
+  },
+  {
+    icon: Star,
+    label: "Google Reviews",
+    value: `Rated ${GOOGLE_REVIEWS.rating} from ${GOOGLE_REVIEWS.count} reviews`,
+    href: GOOGLE_PROFILE_URL,
   },
 ];
 

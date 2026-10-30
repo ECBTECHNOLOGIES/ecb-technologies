@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ADDRESS_LINE, BUSINESS, MAPS_URL, whatsappUrl } from "@/lib/business";
+import { ADDRESS_LINE, BUSINESS, GOOGLE_PROFILE_URL, GOOGLE_REVIEWS, MAPS_URL, whatsappUrl } from "@/lib/business";
 
 export default function Footer() {
   return (
@@ -64,6 +64,16 @@ export default function Footer() {
               </a>
             </li>
             <li>{BUSINESS.hoursDisplay}</li>
+            <li>
+              <a
+                href={GOOGLE_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#5B8DEF]"
+              >
+                ★ {GOOGLE_REVIEWS.rating} on Google ({GOOGLE_REVIEWS.count} reviews)
+              </a>
+            </li>
             <li>
               <a href={`tel:${BUSINESS.phoneE164}`} className="hover:text-[#5B8DEF]">
                 Call {BUSINESS.phoneDisplay}

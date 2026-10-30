@@ -16,18 +16,20 @@ Labels: **VERIFIED** (confirmed in code or first-party config) · **TESTED**
 
 | Fact | Value | Status |
 |---|---|---|
-| Name | ECB Technologies | VERIFIED |
+| Name | Website: "ECB Technologies". GBP: "ECB TECHNOLOGIES KENYA" (added as `alternateName`) | VERIFIED. **Owner decision:** use one name everywhere |
+| Google reviews | 4.9 from 183 reviews (GBP, 2026-10-30). Shown on the footer and contact page, never in schema | VERIFIED |
+| Products per GBP description | Laptops, desktops, TVs, phones, fridges, sound bars, accessories | VERIFIED as an owner statement. Site copy mentions only laptops, phones and accessories |
 | Canonical domain | https://www.ecbtechkenya.com (`metadataBase`, sitemap, robots) | VERIFIED in code. Apex → www redirect is UNKNOWN |
-| Shop address | Iconic Business Plaza, Moi Avenue, Nairobi (CBD) | VERIFIED (checkout pickup address) |
-| Phone / WhatsApp | 0717 040 531 / +254717040531 | VERIFIED. Whether WhatsApp is monitored is UNKNOWN |
+| Shop address | Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD | VERIFIED (Google Business Profile, 2026-10-30) |
+| Phone / WhatsApp | 0717 040 531 / +254717040531 | VERIFIED (matches GBP). Whether WhatsApp is monitored is UNKNOWN |
 | Email | ecbtechnologies001@gmail.com | VERIFIED |
-| Hours | Mon–Fri 8am–5:30pm, Sat–Sun & public holidays 8am–12pm | VERIFIED as *pickup* hours. **Owner must confirm they are the shop's opening hours and match GBP** |
+| Hours | Site: Mon–Fri 8am–5:30pm, Sat–Sun & public holidays 8am–12pm. GBP shows "Opens 8:30 am" | **CONFLICT**: owner must supply the full weekly hours from GBP, then the site and GBP must match |
 | Payment | M-Pesa, debit/credit card | VERIFIED (checkout) |
 | Delivery | Countrywide flat rates per town (`lib/shipping-rates.json`), free store pickup | VERIFIED |
 | Warranty terms | Not published anywhere in the code | UNKNOWN |
 | Returns/refund policy | No policy page exists | UNKNOWN |
 | Product condition | Variable products carry a "Condition" attribute (e.g. "Brand New"; other values exist) | VERIFIED that the attribute exists. Values per product are UNKNOWN |
-| Building floor / shop number, GPS coordinates | Not in code | UNKNOWN |
+| GPS coordinates, social profile URLs (Facebook, TikTok, YouTube listed on GBP) | Not supplied | UNKNOWN: needed for `geo` and `sameAs` |
 | Analytics / Search Console / Merchant Center | No GA4, GTM, Meta pixel or verification tags in the code | VERIFIED absent from code. Could exist via DNS or Vercel; UNKNOWN |
 
 Before this pass, the site described the business inconsistently. The footer
