@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to load Inter and Poppins.
 
 ## Learn More
 
@@ -37,17 +37,18 @@ Copy `.env.example` to `.env.local` and fill in your WooCommerce REST API creden
 - `NEXT_PUBLIC_WP_URL` - the WooCommerce site URL, e.g. `https://www.ecbtechkenya.com`
 - `WC_CONSUMER_KEY` / `WC_CONSUMER_SECRET` - server-only API keys, never exposed to the browser
 
-## Deploy on Vercel
+## Deployment (Cloudflare)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site is hosted on Cloudflare, connected to this GitHub repository.
+Every push to `main` deploys to production at https://www.ecbtechkenya.com.
 
-1. Push this repository to GitHub and import it in Vercel.
-2. In the Vercel project settings, add the environment variables listed above
-   (`NEXT_PUBLIC_WP_URL`, `WC_CONSUMER_KEY`, `WC_CONSUMER_SECRET`) for the
-   Production, Preview, and Development environments.
-3. Vercel auto-detects Next.js - no extra build configuration is required.
-4. Product images are served from `ecbtechkenya.com`, which is already
-   allow-listed in `next.config.ts` under `images.remotePatterns`. If the
-   WooCommerce media host changes, update that list.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Cloudflare does not post build statuses back to GitHub, so check the
+  build result in the Cloudflare dashboard (Workers & Pages → the project
+  → Deployments), or confirm the change on the live site.
+- Set the environment variables listed above (`NEXT_PUBLIC_WP_URL`,
+  `WC_CONSUMER_KEY`, `WC_CONSUMER_SECRET`) in the Cloudflare project
+  settings. `NEXT_PUBLIC_WP_URL` is inlined at build time, so it must be
+  available to the build as well as at runtime.
+- Product images are served from the WooCommerce host, which is
+  allow-listed in `next.config.ts` under `images.remotePatterns`. If the
+  media host changes, update that list.

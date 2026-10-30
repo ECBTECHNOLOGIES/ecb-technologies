@@ -30,7 +30,7 @@ Labels: **VERIFIED** (confirmed in code or first-party config) · **TESTED**
 | Returns/refund policy | No policy page exists | UNKNOWN |
 | Product condition | Variable products carry a "Condition" attribute (e.g. "Brand New"; other values exist) | VERIFIED that the attribute exists. Values per product are UNKNOWN |
 | GPS coordinates, social profile URLs (Facebook, TikTok, YouTube listed on GBP) | Not supplied | UNKNOWN: needed for `geo` and `sameAs` |
-| Analytics / Search Console / Merchant Center | No GA4, GTM, Meta pixel or verification tags in the code | VERIFIED absent from code. Could exist via DNS or Vercel; UNKNOWN |
+| Analytics / Search Console / Merchant Center | No GA4, GTM, Meta pixel or verification tags in the code | VERIFIED absent from code. Could exist via DNS or Cloudflare; UNKNOWN |
 
 Before this pass, the site described the business inconsistently. The footer
 said only "Nairobi, Kenya", the contact page left out Moi Avenue, and the hero
