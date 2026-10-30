@@ -21,8 +21,32 @@ live site until one of the following happens:
 - **B.** Give access to the live site's own code or CMS, so the fixes can
   be applied there.
 
-Owner decision required. Until then, the status here means "done in this
-codebase", not "live".
+**Owner decision (2026-10-30): A.** Replace the current live site with
+this store. The plan, in order:
+
+1. Deploy this repo to Cloudflare on a preview address
+   (`*.workers.dev`), with the WooCommerce and Paystack keys set in the
+   Cloudflare project.
+2. Test on the preview: catalogue, product pages, cart, checkout with a
+   real M-Pesa or card payment, and order tracking.
+3. Show the owner the preview and get explicit approval.
+4. Switch `www.ecbtechkenya.com` to the new store, and 301 the apex
+   domain to `www`. Note the old site's settings first, so switching back
+   is possible.
+5. Resubmit `/sitemap.xml` in Search Console and re-run the Ahrefs checks
+   on the live URL.
+
+Access this needs in the cloud environment settings (the owner adds
+these; never paste them into chat):
+
+- Allowed domains: `api.ecbtechkenya.com`, `ecbtechkenya.com`,
+  `www.ecbtechkenya.com`, `api.cloudflare.com`, `workers.dev`
+- Secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`,
+  `NEXT_PUBLIC_WP_URL`, `WC_CONSUMER_KEY`, `WC_CONSUMER_SECRET`,
+  `PAYSTACK_SECRET_KEY`, `NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY`
+
+Until the switch, the status here means "done in this codebase", not
+"live".
 
 ## 1. Batch log
 
