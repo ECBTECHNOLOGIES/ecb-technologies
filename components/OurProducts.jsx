@@ -29,6 +29,7 @@ export default async function OurProducts() {
     ...categories.map((category) => ({
       label: decodeEntities(category.name),
       categoryId: category.id,
+      image: category.image?.src ?? null,
     })),
   ];
 

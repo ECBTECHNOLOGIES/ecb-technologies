@@ -111,8 +111,8 @@ export default function QuickSelectModal({ product, onClose }) {
     if (product.on_sale && product.regular_price) {
       return (
         <>
-          <span className="text-brand-red">{formatPrice(product.price)}</span>{" "}
-          <span className="text-sm text-gray-400 line-through">
+          {formatPrice(product.price)}{" "}
+          <span className="text-sm text-ink-48 line-through">
             {formatPrice(product.regular_price)}
           </span>
         </>
@@ -123,54 +123,47 @@ export default function QuickSelectModal({ product, onClose }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-4 sm:items-center"
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 backdrop-blur-sm sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-lg bg-white p-5 shadow-lg"
+        className="max-h-[85vh] w-full overflow-y-auto rounded-t-[18px] bg-white p-6 sm:max-w-md sm:rounded-[18px]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-2 text-base font-semibold text-gray-900">
+          <h3 className="type-tagline line-clamp-2 text-ink">
             {decodeEntities(product.name)}
           </h3>
           <button
             type="button"
             aria-label="Close"
             onClick={onClose}
-            className="shrink-0 text-gray-400 hover:text-gray-600"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-parchment text-ink-80"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="mt-1 flex items-center gap-2">
-          <span className="font-heading text-lg font-bold text-brand-blue">{priceDisplay()}</span>
-          {selectedCondition && (
-            <span className="rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-600">
-              {selectedCondition}
-            </span>
-          )}
-        </div>
+        <p className="mt-2 text-[17px] text-ink-80">
+          {priceDisplay()}
+          {selectedCondition && <span className="text-ink-48"> · {selectedCondition}</span>}
+        </p>
 
         {loading ? (
-          <p className="mt-4 text-sm text-gray-500">Loading options...</p>
+          <p className="type-caption mt-6 text-ink-48">Loading options…</p>
         ) : (
-          <div className="mt-4 space-y-4">
+          <div className="mt-6 space-y-6">
             {variationAttributes.map((attr) => (
               <div key={attr.id ?? attr.name}>
-                <label className="text-sm font-semibold text-gray-900">{attr.name}</label>
+                <p className="text-[15px] font-semibold text-ink">{attr.name}</p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {attr.options.map((option) => (
                     <button
                       key={option}
                       type="button"
                       onClick={() => handleSelectAttribute(attr.name, option)}
-                      className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
-                        selected[attr.name] === option
-                          ? "border-brand-green bg-brand-green text-white"
-                          : "border-gray-300 text-gray-700 hover:border-brand-blue"
-                      }`}
+                      aria-pressed={selected[attr.name] === option}
+                      className={`chip ${selected[attr.name] === option ? "chip-active" : ""}`}
                     >
                       {option}
                     </button>
@@ -180,13 +173,11 @@ export default function QuickSelectModal({ product, onClose }) {
             ))}
 
             {variationAttributes.length > 0 && allSelected && !matchedVariation && (
-              <p className="text-xs text-red-600">This combination is unavailable.</p>
+              <p className="type-caption text-danger">This combination is unavailable.</p>
             )}
 
             {!inStock && (
-              <span className="inline-block rounded bg-red-100 px-2 py-1 text-xs font-bold uppercase text-red-700">
-                Out of Stock
-              </span>
+              <p className="type-caption text-danger">Out of stock</p>
             )}
           </div>
         )}
@@ -195,9 +186,9 @@ export default function QuickSelectModal({ product, onClose }) {
           type="button"
           onClick={handleAddToCart}
           disabled={!canAddToCart || loading}
-          className="mt-5 flex w-full items-center justify-center rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="btn-primary mt-8 w-full"
         >
-          {added ? "Added!" : !inStock ? "Out of Stock" : "Add to Cart"}
+          {added ? "Added" : !inStock ? "Out of stock" : "Add to cart"}
         </button>
       </div>
     </div>,

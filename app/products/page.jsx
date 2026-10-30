@@ -82,71 +82,23 @@ async function getFilteredCategories() {
   }
 }
 
-async function CategoryFilters() {
+async function CategoryChips({ activeCategoryId }) {
   const categories = await getFilteredCategories();
-  return <ProductFilters categories={categories} />;
-}
-
-async function MobileCategoryTabs({ activeCategoryId }) {
-  const categories = (await getFilteredCategories()).filter(
-    (category) => category.id !== 274
-  );
-
   if (!categories.length) return null;
 
   return (
     <CategoryTabs
-      categories={[{ id: "", name: "All Products" }, ...categories]}
+      categories={[{ id: "", name: "All" }, ...categories]}
       activeCategoryId={activeCategoryId}
-      className="sticky top-[118px] z-30 bg-white px-4 pt-2 sm:hidden"
     />
   );
 }
 
-function FiltersSkeleton() {
-  return (
-    <div className="w-full shrink-0 space-y-4 lg:w-64">
-      <Skeleton className="h-5 w-24" />
-      <Skeleton className="h-32 w-full" />
-      <Skeleton className="h-5 w-24" />
-      <Skeleton className="h-20 w-full" />
-      <Skeleton className="h-9 w-full" />
-    </div>
-  );
-}
-
-function ResultsSkeleton() {
-  return (
-    <div className="flex-1">
-      <div className="mb-4 flex items-center justify-between">
-        <Skeleton className="h-7 w-48" />
-        <Skeleton className="h-4 w-20" />
-      </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <ProductCardSkeleton key={i} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-async function ProductResults({ params, page }) {
-  let products = [];
-  let totalPages = 0;
-
-  try {
-    ({ products, totalPages } = await getInterleavedProductsWithCount(params));
-  } catch (error) {
-    console.error("Failed to fetch products from WooCommerce:", error.message);
-    products = [];
-    totalPages = 0;
-  }
-
-  let heading = "All Products";
+async function ListingHeader({ params, page }) {
+  let heading = "All products";
   let intro = "";
   if (params.search) {
-    heading = `Search results for "${params.search}"`;
+    heading = `Results for \u201c${params.search}\u201d`;
   } else if (params.on_sale === true) {
     heading = "Deals";
   } else if (params.category) {
@@ -160,26 +112,57 @@ async function ProductResults({ params, page }) {
   }
 
   return (
-    <div className="flex-1">
-      <div className="mb-4">
-        <h1 className="text-2xl font-bold text-brand-blue">{heading}</h1>
-        {intro && <p className="mt-2 max-w-3xl text-sm text-gray-600">{intro}</p>}
+    <div>
+      <h1 className="type-hero text-ink">{heading}</h1>
+      {intro && <p className="type-lead mt-3 max-w-3xl text-ink-80">{intro}</p>}
+    </div>
+  );
+}
+
+function ResultsSkeleton() {
+  return (
+    <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <ProductCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+}
+
+async function ProductResults({ params, page }) {
+  let products = [];
+  let totalPages = 0;
+  let total = 0;
+
+  try {
+    ({ products, totalPages, total } = await getInterleavedProductsWithCount(params));
+  } catch (error) {
+    console.error("Failed to fetch products from WooCommerce:", error.message);
+    products = [];
+    totalPages = 0;
+  }
+
+  if (products.length === 0) {
+    return (
+      <p className="type-lead py-24 text-center text-ink-48">
+        No products match. Try another category or clear the price filter.
+      </p>
+    );
+  }
+
+  return (
+    <>
+      <p className="type-caption mb-6 text-ink-48">
+        {total} {total === 1 ? "product" : "products"}
+      </p>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
 
-      {products.length === 0 ? (
-        <p className="py-16 text-center text-gray-500">
-          No products found. Try adjusting your filters.
-        </p>
-      ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
-
       <Pagination currentPage={page} totalPages={totalPages} searchParams={params} />
-    </div>
+    </>
   );
 }
 
@@ -202,18 +185,24 @@ export default async function ProductsPage({ searchParams }) {
   if (params.on_sale === "true") queryParams.on_sale = true;
 
   return (
-    <div className="pb-8 sm:px-6 sm:py-8 lg:px-10">
-      <Suspense fallback={null}>
-        <MobileCategoryTabs activeCategoryId={params.category} />
+    <div className="mx-auto max-w-[1440px] px-6 pb-24 pt-10 sm:pt-14 lg:px-8">
+      <Suspense fallback={<Skeleton className="h-12 w-64" />}>
+        <ListingHeader params={queryParams} page={page} />
       </Suspense>
 
-      <div className="flex flex-col gap-8 px-4 pt-4 sm:px-0 sm:pt-0 lg:flex-row">
-        <div className="lg:sticky lg:top-24 lg:h-fit lg:self-start">
-          <Suspense fallback={<FiltersSkeleton />}>
-            <CategoryFilters />
-          </Suspense>
-        </div>
+      <div className="mt-8">
+        <Suspense fallback={<Skeleton className="h-9 w-full max-w-xl rounded-full" />}>
+          <CategoryChips activeCategoryId={params.category} />
+        </Suspense>
+      </div>
 
+      <div className="mt-4 border-b border-hairline pb-4">
+        <Suspense fallback={<div className="h-9" />}>
+          <ProductFilters />
+        </Suspense>
+      </div>
+
+      <div className="mt-6">
         <Suspense key={JSON.stringify(queryParams)} fallback={<ResultsSkeleton />}>
           <ProductResults params={queryParams} page={page} />
         </Suspense>

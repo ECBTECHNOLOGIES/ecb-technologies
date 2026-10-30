@@ -98,8 +98,8 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
     if (product.on_sale && product.regular_price) {
       return (
         <>
-          <span className="text-brand-red">{formatPrice(product.price)}</span>{" "}
-          <span className="text-lg text-gray-400 line-through">
+          {formatPrice(product.price)}{" "}
+          <span className="text-[17px] font-normal text-ink-48 line-through">
             {formatPrice(product.regular_price)}
           </span>
         </>
@@ -109,111 +109,87 @@ export default function ProductPurchaseBox({ product, variations = [] }) {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <span className="font-heading text-3xl font-bold text-brand-blue">{priceDisplay()}</span>
-        {selectedCondition && (
-          <span className="rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-600">
-            {selectedCondition}
-          </span>
-        )}
-      </div>
-
-      <div>
-        {inStock ? (
-          <span className="inline-block rounded bg-green-100 px-2 py-1 text-xs font-bold uppercase text-green-700">
-            In Stock
-          </span>
-        ) : (
-          <span className="inline-block rounded bg-red-100 px-2 py-1 text-xs font-bold uppercase text-red-700">
-            Out of Stock
-          </span>
-        )}
-      </div>
+    <div>
+      <p className="text-[24px] font-semibold tracking-tight text-ink">{priceDisplay()}</p>
+      <p className={`type-caption mt-1 ${inStock ? "text-success" : "text-danger"}`}>
+        {inStock ? "In stock" : "Out of stock"}
+        {selectedCondition && <span className="text-ink-48"> · {selectedCondition}</span>}
+      </p>
 
       {isVariable &&
         variationAttributes.map((attr) => (
-          <div key={attr.id ?? attr.name}>
-            <label className="text-sm font-semibold text-gray-900">{attr.name}</label>
-            <div className="mt-2 flex flex-wrap gap-2">
+          <fieldset key={attr.id ?? attr.name} className="mt-8">
+            <legend className="text-[17px] font-semibold text-ink">{attr.name}</legend>
+            <div className="mt-3 flex flex-wrap gap-2">
               {attr.options.map((option) => (
                 <button
                   key={option}
                   type="button"
                   onClick={() => handleSelectAttribute(attr.name, option)}
-                  className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
-                    selected[attr.name] === option
-                      ? "border-brand-green bg-brand-green text-white"
-                      : "border-gray-300 text-gray-700 hover:border-brand-blue"
-                  }`}
+                  aria-pressed={selected[attr.name] === option}
+                  className={`chip px-5 py-3 ${selected[attr.name] === option ? "chip-active" : ""}`}
                 >
                   {option}
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
         ))}
 
-      <div>
-        <label className="text-sm font-semibold text-gray-900">Quantity</label>
-        <div className="mt-2 flex w-fit items-center rounded-md border border-gray-300">
+      <div className="mt-8 flex items-center gap-3">
+        <div className="flex h-12 items-center rounded-full bg-parchment">
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="p-2 text-gray-600 hover:text-brand-blue"
+            className="flex h-12 w-12 items-center justify-center text-ink-80 disabled:opacity-30"
+            disabled={quantity === 1}
             aria-label="Decrease quantity"
           >
             <Minus className="h-4 w-4" />
           </button>
-          <span className="w-10 text-center text-sm font-medium">{quantity}</span>
+          <span className="w-6 text-center text-[17px]" aria-live="polite">{quantity}</span>
           <button
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
-            className="p-2 text-gray-600 hover:text-brand-blue"
+            className="flex h-12 w-12 items-center justify-center text-ink-80"
             aria-label="Increase quantity"
           >
             <Plus className="h-4 w-4" />
           </button>
         </div>
+
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          disabled={!canAddToCart}
+          className="btn-primary h-12 flex-1"
+        >
+          {added
+            ? "Added to cart"
+            : isVariable && !matchedVariation
+              ? "Choose options"
+              : !inStock
+                ? "Out of stock"
+                : cartItem
+                  ? "Add another"
+                  : "Add to cart"}
+        </button>
       </div>
 
       {cartItem && !added && (
-        <div className="flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2 text-sm font-semibold text-brand-green">
-          <CheckCircle2 className="h-4 w-4" />
-          Already in your cart (Qty: {cartItem.quantity})
-        </div>
+        <p className="type-caption mt-3 flex items-center gap-1.5 text-ink-48">
+          <CheckCircle2 className="h-4 w-4 text-success" />
+          {cartItem.quantity} already in your cart
+        </p>
       )}
 
-      <button
-        type="button"
-        onClick={handleAddToCart}
-        disabled={!canAddToCart}
-        className="flex w-full items-center justify-center rounded-lg bg-brand-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        {added
-          ? "Added to Cart!"
-          : isVariable && !matchedVariation
-            ? "Select Options"
-            : !inStock
-              ? "Out of Stock"
-              : cartItem
-                ? "Add Another"
-                : "Shop Now"}
-      </button>
-
       {(added || cartItem) && (
-        <div className="space-y-2 text-center">
-          <Link
-            href="/checkout"
-            className="block w-full rounded-lg border-2 border-brand-green px-4 py-2 text-sm font-semibold text-brand-green transition-colors hover:bg-brand-green hover:text-white"
-          >
-            Proceed to Checkout
+        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <Link href="/checkout" className="btn-secondary">
+            Check out
           </Link>
-          <Link
-            href="/products"
-            className="block text-sm font-medium text-brand-blue hover:underline"
-          >
-            ← Continue Shopping
+          <Link href="/products" className="link text-[17px]">
+            Continue shopping
           </Link>
         </div>
       )}

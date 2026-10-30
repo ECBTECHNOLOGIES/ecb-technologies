@@ -3,28 +3,17 @@ import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 
 export default function Loading() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-8 lg:flex-row">
-        <aside className="w-full shrink-0 space-y-4 lg:w-64">
-          <Skeleton className="h-5 w-24" />
-          <Skeleton className="h-32 w-full" />
-          <Skeleton className="h-5 w-24" />
-          <Skeleton className="h-20 w-full" />
-          <Skeleton className="h-9 w-full" />
-        </aside>
-
-        <div className="flex-1">
-          <div className="mb-4 flex items-center justify-between">
-            <Skeleton className="h-7 w-48" />
-            <Skeleton className="h-4 w-20" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <ProductCardSkeleton key={i} />
-            ))}
-          </div>
-        </div>
+    <div className="mx-auto max-w-[1440px] px-6 pb-24 pt-10 sm:pt-14 lg:px-8">
+      <Skeleton className="h-12 w-64" />
+      <div className="mt-8 flex gap-2">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Skeleton key={i} className="h-9 w-24 rounded-full" />
+        ))}
+      </div>
+      <div className="mt-14 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
       </div>
     </div>
   );

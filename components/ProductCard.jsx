@@ -11,97 +11,73 @@ function isNew(product) {
   return Date.now() - new Date(product.date_created).getTime() < NEW_WINDOW_MS;
 }
 
-function getBrandName(product) {
-  if (product.brands?.[0]?.name) return product.brands[0].name;
-  const brandAttribute = product.attributes?.find((attr) => /brand/i.test(attr.name));
-  return brandAttribute?.options?.[0] ?? null;
-}
-
+// Store-grid card: image tile, a one-word status, name, price and a single
+// action. The image tile flips to white on parchment sections and the text to
+// white on dark tiles (see the .on-parchment / .on-dark section classes).
 export default function ProductCard({ product }) {
   const image = product.images?.[0];
   const name = decodeEntities(product.name);
-  const brand = getBrandName(product);
   const isSoldOut = product.stock_status !== "instock";
   const canAddToCart = !isSoldOut && product.type === "simple";
 
-  let badge = null;
-  if (isSoldOut) badge = { label: "Sold Out", className: "bg-[#888888]" };
-  else if (product.on_sale) badge = { label: "Sale", className: "bg-brand-red" };
-  else if (isNew(product)) badge = { label: "New", className: "bg-brand-green" };
+  let label = null;
+  if (isSoldOut) label = { text: "Sold out", className: "text-ink-48 [.on-dark_&]:text-white/60" };
+  else if (product.on_sale) label = { text: "Sale", className: "text-deal [.on-dark_&]:text-[#ff9f40]" };
+  else if (isNew(product)) label = { text: "New", className: "text-deal [.on-dark_&]:text-[#ff9f40]" };
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border-[0.5px] border-gray-300 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-      <Link href={`/products/${product.slug}`} className="relative block h-[180px] bg-[#f5f5f5]">
+    <div className="group flex flex-col">
+      <Link
+        href={`/products/${product.slug}`}
+        className="relative block aspect-square overflow-hidden rounded-[18px] bg-parchment [.on-dark_&]:bg-white [.on-parchment_&]:bg-white"
+      >
         {image ? (
           <Image
             src={image.src}
             alt={image.alt || name}
             fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
-            className="object-contain p-4"
+            sizes="(max-width: 1024px) 50vw, 25vw"
+            className={`object-contain p-6 transition-transform duration-500 group-hover:scale-[1.03] sm:p-8 ${
+              isSoldOut ? "opacity-60" : ""
+            }`}
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-sm text-gray-400">
+          <span className="type-caption flex h-full w-full items-center justify-center text-ink-48">
             No image
-          </div>
-        )}
-
-        {badge && (
-          <span
-            className={`absolute left-2 top-2 rounded px-2 py-[3px] text-[10px] font-bold text-white ${badge.className}`}
-          >
-            {badge.label}
           </span>
         )}
       </Link>
 
-      <div className="flex flex-1 flex-col gap-1 p-3">
-        {brand && (
-          <span className="text-[10px] uppercase tracking-wide text-gray-400">{brand}</span>
-        )}
+      <div className="mt-4 flex flex-1 flex-col px-1">
+        {label && <span className={`type-fine font-semibold ${label.className}`}>{label.text}</span>}
 
-        <Link href={`/products/${product.slug}`}>
-          <h3 className="line-clamp-2 text-[13px] font-bold text-gray-800 hover:text-brand-blue">
+        <Link href={`/products/${product.slug}`} className="mt-0.5">
+          <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-ink sm:text-[17px] [.on-dark_&]:text-white">
             {name}
           </h3>
         </Link>
 
-        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-          <span className="font-heading text-[14px] font-bold text-brand-green">
-            {formatPrice(product.price)}
-          </span>
+        <div className="mt-1 flex flex-wrap items-baseline gap-x-2 text-[15px] sm:text-[17px]">
+          <span className="text-ink-80 [.on-dark_&]:text-white/80">{formatPrice(product.price)}</span>
           {product.on_sale && product.regular_price && (
-            <span className="text-xs text-gray-400 line-through">
+            <span className="type-caption text-ink-48 line-through [.on-dark_&]:text-white/50">
               {formatPrice(product.regular_price)}
             </span>
           )}
         </div>
 
-        <div className="mt-auto flex flex-col items-stretch gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between">
-          <Link
-            href={`/products/${product.slug}`}
-            className="whitespace-nowrap text-xs font-medium text-brand-blue hover:underline"
-          >
-            Show details →
-          </Link>
-
-          {isSoldOut ? (
-            <button
-              type="button"
-              disabled
-              className="w-full shrink-0 whitespace-nowrap rounded-md bg-[#888888] px-2.5 py-[6px] text-[11px] font-bold text-white disabled:cursor-not-allowed sm:w-auto"
-            >
-              Sold Out
-            </button>
-          ) : canAddToCart ? (
-            <AddToCartButton product={product} className="w-full shrink-0 sm:w-auto" />
-          ) : (
-            <SelectOptionsButton product={product} className="w-full shrink-0 sm:w-auto" />
-          )}
-        </div>
+        {!isSoldOut && (
+          <div className="mt-auto pt-3">
+            {canAddToCart ? (
+              <AddToCartButton product={product} className="w-full sm:w-auto" />
+            ) : (
+              <SelectOptionsButton product={product} className="w-full sm:w-auto" />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

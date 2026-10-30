@@ -16,9 +16,9 @@ export function MobileSearchButton() {
       type="button"
       aria-label="Search"
       onClick={() => setOpen(true)}
-      className="flex shrink-0 items-center justify-center p-2 text-brand-blue md:hidden"
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink md:hidden"
     >
-      <Search className="h-6 w-6" />
+      <Search className="h-5 w-5" strokeWidth={1.75} />
     </button>
   );
 }
@@ -39,7 +39,7 @@ export function MobileSearchPanel() {
           type="button"
           aria-label="Close search"
           onClick={() => setOpen(false)}
-          className="flex shrink-0 items-center justify-center p-2 text-gray-500"
+          className="flex h-9 w-9 shrink-0 items-center justify-center text-ink-48"
         >
           <X className="h-5 w-5" />
         </button>
@@ -55,6 +55,6 @@ export function MobileSecondRow({ children }) {
   if (pathname === "/" && !open) return null;
 
   return (
-    <div className="flex items-center gap-2 px-4 pb-3 md:hidden">{children}</div>
+    <div className="flex items-center gap-1 px-4 pb-2.5 md:hidden">{children}</div>
   );
 }

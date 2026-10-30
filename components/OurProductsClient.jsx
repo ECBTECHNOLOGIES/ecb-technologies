@@ -1,48 +1,75 @@
+import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import { BLUR_DATA_URL } from "@/lib/utils";
 import ProductCard from "./ProductCard";
 
+function categoryImage(tab) {
+  return tab.image ?? tab.products.find((product) => product.images?.[0])?.images[0].src ?? null;
+}
+
 export default function OurProductsClient({ tabs, groups = [] }) {
+  const shelf = tabs.filter((tab) => tab.categoryId);
+
   return (
-    <section className="px-4 pb-10 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-      <h2 className="text-2xl font-bold text-brand-blue">Our Products</h2>
+    <>
+      {shelf.length > 0 && (
+        <section className="pb-14 sm:pb-20">
+          <div className="no-scrollbar mx-auto flex max-w-[1440px] gap-6 overflow-x-auto px-6 sm:justify-center sm:gap-10 lg:px-8">
+            {shelf.map((tab) => {
+              const image = categoryImage(tab);
+              return (
+                <Link
+                  key={tab.categoryId}
+                  href={`/products?category=${tab.categoryId}`}
+                  className="group flex w-[84px] shrink-0 flex-col items-center text-center sm:w-24"
+                >
+                  <span className="relative h-[72px] w-[72px] sm:h-20 sm:w-20">
+                    {image && (
+                      <Image
+                        src={image}
+                        alt=""
+                        fill
+                        sizes="80px"
+                        className="object-contain transition-transform duration-300 group-hover:scale-105"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                      />
+                    )}
+                  </span>
+                  <span className="type-caption mt-3 font-semibold text-ink">{tab.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
-      <div className="sticky top-[118px] z-30 -mx-4 flex gap-2 overflow-x-auto bg-white px-4 py-2 sm:mx-0 sm:px-0 md:top-[70px]">
-        {tabs.map((tab, i) => (
-          <Link
-            key={tab.label}
-            href={tab.categoryId ? `/products?category=${tab.categoryId}` : "/products"}
-            className={`font-heading shrink-0 whitespace-nowrap rounded-full border px-4 py-1.5 text-center text-sm font-semibold transition-colors ${
-              i === 0
-                ? "border-brand-blue bg-brand-blue text-white"
-                : "border-gray-200 bg-white text-gray-700 hover:border-brand-blue hover:bg-brand-blue hover:text-white"
-            }`}
-          >
-            {tab.label}
-          </Link>
-        ))}
-      </div>
-
-      <div className="mt-10 space-y-12">
-        {groups.map((group) => (
-          <div key={group.label}>
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-brand-blue">{group.label}</h3>
+      {groups.map((group, i) => (
+        <section
+          key={group.label}
+          className={`py-14 sm:py-20 ${i % 2 === 0 ? "on-parchment bg-parchment" : "bg-white"}`}
+        >
+          <div className="mx-auto max-w-[1440px] px-6 lg:px-8">
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="type-display text-ink">{group.label}</h2>
               <Link
                 href={`/products?category=${group.categoryId}`}
-                className="text-sm font-semibold text-brand-blue hover:underline"
+                className="link type-caption inline-flex shrink-0 items-center sm:text-[17px]"
               >
-                See more →
+                See all
+                <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
               {group.products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>
-        ))}
-      </div>
-    </section>
+        </section>
+      ))}
+    </>
   );
 }

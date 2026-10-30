@@ -22,15 +22,16 @@ export default function SearchBar({ className = "" }) {
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for products..."
-        className="w-full rounded-md border border-gray-200 bg-white py-2 pl-4 pr-12 text-base text-gray-900 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
+        placeholder="Search products"
+        aria-label="Search products"
+        className="h-9 w-full rounded-full bg-parchment pl-9 pr-4 text-base text-ink placeholder:text-ink-48 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-focus/40 sm:text-[14px]"
       />
       <button
         type="submit"
         aria-label="Search"
-        className="absolute right-1 top-1 bottom-1 flex items-center justify-center rounded-md px-3 text-gray-500 transition-colors hover:text-brand-blue"
+        className="absolute left-0 top-0 flex h-9 w-9 items-center justify-center text-ink-48"
       >
-        <Search className="h-4 w-4" />
+        <Search className="h-4 w-4" strokeWidth={2} />
       </button>
     </form>
   );

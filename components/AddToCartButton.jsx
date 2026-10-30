@@ -22,9 +22,9 @@ export default function AddToCartButton({
     <button
       type="button"
       onClick={handleClick}
-      className={`flex items-center justify-center whitespace-nowrap rounded-md bg-brand-green px-2.5 py-[6px] text-[11px] font-bold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60 ${className}`}
+      className={`btn-primary btn-sm ${className}`}
     >
-      {added ? "Added!" : "Shop Now"}
+      {added ? "Added" : "Add to cart"}
     </button>
   );
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Truck } from "lucide-react";
+import { Package } from "lucide-react";
 import { Suspense } from "react";
 import CartIcon from "./CartIcon";
 import SearchBar from "./SearchBar";
@@ -13,64 +13,59 @@ import { MobileSearchProvider } from "./MobileSearchContext";
 import NavLinks from "./NavLinks";
 import MobileMenu from "./MobileMenu";
 import BackButton from "./BackButton";
-
-const LOGO_URL = `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/2025/04/Ebc-864-by-216-6.png`;
+import { BUSINESS } from "@/lib/business";
 
 export default async function Navbar() {
   return (
-    <header className="sticky top-0 z-50 shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-black/[0.06] bg-white/80 backdrop-blur-xl backdrop-saturate-150">
       <MobileSearchProvider>
-        <div className="bg-white">
-          <div className="flex items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
-            <div className="flex flex-1 items-center">
-              <Link href="/" className="flex shrink-0 items-center">
-                <Image
-                  src={LOGO_URL}
-                  alt="ECB Technologies"
-                  width={172}
-                  height={43}
-                  priority
-                  className="h-10 w-auto object-contain"
-                />
-              </Link>
-            </div>
+        <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-6 px-4 sm:px-6 lg:px-8">
+          <Link href="/" className="flex shrink-0 items-center" aria-label={`${BUSINESS.name} home`}>
+            <Image
+              src={BUSINESS.logo}
+              alt={BUSINESS.name}
+              width={172}
+              height={43}
+              priority
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
 
-            <Suspense fallback={null}>
-              <NavLinks />
-            </Suspense>
+          <Suspense fallback={null}>
+            <NavLinks />
+          </Suspense>
 
-            <div className="flex flex-1 items-center justify-end gap-4">
-              <div className="hidden flex-1 md:block">
-                <Suspense fallback={null}>
-                  <SearchBar />
-                </Suspense>
-              </div>
-
-              <Link
-                href="/track-order"
-                aria-label="Track your order"
-                className="hidden items-center justify-center p-2 text-brand-blue transition-colors hover:text-[#2651AB] sm:flex"
-              >
-                <Truck className="h-6 w-6" />
-              </Link>
-
-              <CartIcon />
-              <MobileSearchButton />
+          <div className="ml-auto flex items-center gap-1 sm:gap-2">
+            <div className="hidden w-60 md:block">
               <Suspense fallback={null}>
-                <MobileMenu />
+                <SearchBar />
               </Suspense>
             </div>
-          </div>
 
-          <MobileSecondRow>
+            <Link
+              href="/track-order"
+              aria-label="Track your order"
+              className="hidden h-10 w-10 items-center justify-center rounded-full text-ink-80 transition-colors hover:text-ink sm:flex"
+            >
+              <Package className="h-5 w-5" strokeWidth={1.75} />
+            </Link>
+
+            <CartIcon />
+            <MobileSearchButton />
             <Suspense fallback={null}>
-              <BackButton />
+              <MobileMenu />
             </Suspense>
-            <Suspense fallback={null}>
-              <MobileSearchPanel />
-            </Suspense>
-          </MobileSecondRow>
+          </div>
         </div>
+
+        <MobileSecondRow>
+          <Suspense fallback={null}>
+            <BackButton />
+          </Suspense>
+          <Suspense fallback={null}>
+            <MobileSearchPanel />
+          </Suspense>
+        </MobileSecondRow>
       </MobileSearchProvider>
     </header>
   );

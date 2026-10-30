@@ -23,7 +23,7 @@ Labels: **VERIFIED** (confirmed in code or first-party config) · **TESTED**
 | Shop address | Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD | VERIFIED (Google Business Profile, 2026-10-30) |
 | Phone / WhatsApp | 0717 040 531 / +254717040531 | VERIFIED (matches GBP). Whether WhatsApp is monitored is UNKNOWN |
 | Email | ecbtechnologies001@gmail.com | VERIFIED |
-| Hours | Site: Mon–Fri 8am–5:30pm, Sat–Sun & public holidays 8am–12pm. GBP shows "Opens 8:30 am" | **CONFLICT**: owner must supply the full weekly hours from GBP, then the site and GBP must match |
+| Hours | Open daily, 9am–7pm (owner-confirmed 2026-10-30). Used site-wide and in JSON-LD | VERIFIED. **Update the Google Business Profile to match** (it showed an 8:30am opening) |
 | Payment | M-Pesa, debit/credit card | VERIFIED (checkout) |
 | Delivery | Countrywide flat rates per town (`lib/shipping-rates.json`), free store pickup | VERIFIED |
 | Warranty terms | Not published anywhere in the code | UNKNOWN |

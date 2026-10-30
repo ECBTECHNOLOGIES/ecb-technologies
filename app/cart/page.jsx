@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/lib/store";
 import { BLUR_DATA_URL, formatPrice } from "@/lib/utils";
@@ -20,132 +20,124 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
-        <h1 className="text-2xl font-bold text-gray-900">Your cart is empty</h1>
-        <p className="mt-2 text-gray-500">
-          Looks like you haven&apos;t added anything to your cart yet.
-        </p>
-        <Link
-          href="/products"
-          className="mt-6 inline-block rounded-lg border-2 border-brand-green px-4 py-2 text-sm font-semibold text-brand-green hover:bg-brand-green hover:text-white"
-        >
-          Continue Shopping
+      <div className="px-6 py-24 text-center sm:py-32">
+        <h1 className="type-hero text-ink">Your cart is empty.</h1>
+        <p className="type-lead mt-4 text-ink-80">Find something you&apos;ll love.</p>
+        <Link href="/products" className="btn-primary mt-8">
+          Continue shopping
         </Link>
       </div>
     );
   }
 
+  const total = getTotalPrice();
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="text-2xl font-bold text-gray-900">Your Cart</h1>
+    <div className="mx-auto max-w-[980px] px-6 pb-24 pt-10 sm:pt-14">
+      <h1 className="type-hero text-ink">Your cart total is {formatPrice(total)}.</h1>
+      <p className="type-lead mt-3 text-ink-80">Free pickup in store. Delivery across Kenya.</p>
+      <div className="mt-8">
+        <Link href="/checkout" className="btn-primary w-full sm:w-auto sm:min-w-60">
+          Check out
+        </Link>
+      </div>
 
-      <div className="mt-6 flex flex-col gap-8 lg:flex-row">
-        <div className="flex-1 space-y-4">
-          {items.map((item) => (
-            <div
-              key={`${item.id}-${item.variationId ?? "default"}`}
-              className="flex flex-wrap items-center gap-4 rounded-lg bg-white p-4 shadow-sm sm:flex-nowrap"
+      <ul className="mt-12 divide-y divide-hairline border-y border-hairline">
+        {items.map((item) => (
+          <li
+            key={`${item.id}-${item.variationId ?? "default"}`}
+            className="flex gap-5 py-8 sm:gap-8"
+          >
+            <Link
+              href={`/products/${item.slug}`}
+              className="relative h-24 w-24 shrink-0 overflow-hidden rounded-[18px] bg-parchment sm:h-36 sm:w-36"
             >
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-gray-50">
-                {item.image ? (
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    sizes="80px"
-                    className="object-contain p-1"
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
-                    No image
-                  </div>
-                )}
-              </div>
+              {item.image ? (
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  sizes="144px"
+                  className="object-contain p-3 sm:p-5"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                />
+              ) : (
+                <span className="type-fine flex h-full w-full items-center justify-center text-ink-48">
+                  No image
+                </span>
+              )}
+            </Link>
 
-              <div className="min-w-0 flex-1">
-                <Link
-                  href={`/products/${item.slug}`}
-                  className="text-sm font-medium text-gray-800 hover:text-brand-blue"
-                >
+            <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="min-w-0">
+                <Link href={`/products/${item.slug}`} className="type-tagline text-ink hover:underline">
                   {item.name}
                 </Link>
-                <p className="font-heading mt-1 text-sm font-semibold text-brand-green">
-                  {formatPrice(item.price)}
-                </p>
+                <p className="type-caption mt-1 text-ink-48">{formatPrice(item.price)} each</p>
               </div>
 
-              <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-start">
-                <div className="flex items-center rounded-md border border-gray-300">
+              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 sm:flex-col sm:flex-nowrap sm:items-end">
+                <p className="type-tagline text-ink">{formatPrice(item.price * item.quantity)}</p>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 items-center rounded-full bg-parchment">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        updateQuantity(item.id, item.variationId, item.quantity - 1)
+                      }
+                      className="flex h-10 w-10 items-center justify-center text-ink-80"
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <span className="w-5 text-center text-[15px]">{item.quantity}</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        updateQuantity(item.id, item.variationId, item.quantity + 1)
+                      }
+                      className="flex h-10 w-10 items-center justify-center text-ink-80"
+                      aria-label="Increase quantity"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
                   <button
                     type="button"
-                    onClick={() =>
-                      updateQuantity(item.id, item.variationId, item.quantity - 1)
-                    }
-                    className="p-2 text-gray-600 hover:text-brand-blue"
-                    aria-label="Decrease quantity"
+                    onClick={() => removeItem(item.id, item.variationId)}
+                    className="link text-[15px]"
                   >
-                    <Minus className="h-4 w-4" />
-                  </button>
-                  <span className="w-10 text-center text-sm font-medium">
-                    {item.quantity}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      updateQuantity(item.id, item.variationId, item.quantity + 1)
-                    }
-                    className="p-2 text-gray-600 hover:text-brand-blue"
-                    aria-label="Increase quantity"
-                  >
-                    <Plus className="h-4 w-4" />
+                    Remove
                   </button>
                 </div>
-
-                <div className="font-heading text-right text-sm font-bold text-brand-green sm:w-24">
-                  {formatPrice(item.price * item.quantity)}
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => removeItem(item.id, item.variationId)}
-                  aria-label="Remove item"
-                  className="p-2 text-gray-400 transition-colors hover:text-brand-red"
-                >
-                  <Trash2 className="h-5 w-5" />
-                </button>
               </div>
             </div>
-          ))}
-        </div>
+          </li>
+        ))}
+      </ul>
 
-        <div className="w-full shrink-0 rounded-lg bg-white p-6 shadow-sm lg:w-80">
-          <h2 className="text-lg font-bold text-brand-green">Order Summary</h2>
-          <div className="mt-4 flex justify-between text-sm text-gray-600">
-            <span>Subtotal</span>
-            <span>{formatPrice(getTotalPrice())}</span>
-          </div>
-          <p className="mt-1 text-xs text-gray-400">
-            Shipping &amp; taxes calculated at checkout.
-          </p>
-          <div className="mt-4 flex justify-between border-t border-gray-200 pt-4 text-base font-bold text-gray-900">
-            <span>Total</span>
-            <span className="font-heading text-brand-green">{formatPrice(getTotalPrice())}</span>
-          </div>
-          <Link
-            href="/checkout"
-            className="font-heading mt-6 block w-full rounded-lg bg-brand-green px-4 py-2 text-center text-sm font-semibold text-white hover:bg-green-700"
-          >
-            Proceed to Checkout
-          </Link>
-          <Link
-            href="/products"
-            className="mt-3 block w-full rounded-lg border-2 border-brand-green px-4 py-2 text-center text-sm font-semibold text-brand-green hover:bg-brand-green hover:text-white"
-          >
-            Continue Shopping
-          </Link>
+      <dl className="ml-auto mt-8 max-w-sm space-y-3 text-[17px]">
+        <div className="flex justify-between text-ink-80">
+          <dt>Subtotal</dt>
+          <dd>{formatPrice(total)}</dd>
         </div>
+        <div className="flex justify-between text-ink-80">
+          <dt>Shipping</dt>
+          <dd>Calculated at checkout</dd>
+        </div>
+        <div className="flex justify-between border-t border-hairline pt-4 text-[21px] font-semibold text-ink">
+          <dt>Total</dt>
+          <dd>{formatPrice(total)}</dd>
+        </div>
+      </dl>
+      <div className="mt-8 flex flex-col items-end gap-4">
+        <Link href="/checkout" className="btn-primary w-full sm:w-auto sm:min-w-60">
+          Check out
+        </Link>
+        <Link href="/products" className="link text-[17px]">
+          Continue shopping
+        </Link>
       </div>
     </div>
   );

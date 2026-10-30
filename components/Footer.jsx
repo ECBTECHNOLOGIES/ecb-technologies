@@ -1,110 +1,94 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ADDRESS_LINE, BUSINESS, GOOGLE_PROFILE_URL, GOOGLE_REVIEWS, MAPS_URL, whatsappUrl } from "@/lib/business";
+import {
+  ADDRESS_LINE,
+  BUSINESS,
+  GOOGLE_PROFILE_URL,
+  GOOGLE_REVIEWS,
+  MAPS_URL,
+  whatsappUrl,
+} from "@/lib/business";
+
+const SHOP_LINKS = [
+  { label: "All products", href: "/products" },
+  { label: "Deals", href: "/products?on_sale=true" },
+  { label: "Cart", href: "/cart" },
+  { label: "Track an order", href: "/track-order" },
+];
 
 export default function Footer() {
+  const contactLinks = [
+    { label: `Call ${BUSINESS.phoneDisplay}`, href: `tel:${BUSINESS.phoneE164}` },
+    { label: "WhatsApp", href: whatsappUrl(), external: true },
+    { label: BUSINESS.email, href: `mailto:${BUSINESS.email}` },
+    { label: "Contact us", href: "/contact" },
+  ];
+
   return (
-    <footer className="bg-brand-blue text-white">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3 lg:px-8">
-        <div>
-          <Image
-            src={BUSINESS.logo}
-            alt="ECB Technologies"
-            width={172}
-            height={43}
-            className="h-10 w-auto rounded bg-white object-contain p-1"
-          />
-          <p className="mt-3 text-sm text-white/80">
-            Laptops, phones and accessories from our shop on Moi Avenue,
-            Nairobi CBD, with delivery across Kenya.
-          </p>
+    <footer className="border-t border-hairline bg-parchment text-ink-80">
+      <div className="mx-auto max-w-[980px] px-6 pb-8 pt-12">
+        <p className="type-fine border-b border-hairline pb-4 text-ink-48">
+          Genuine laptops, phones and accessories from our shop on {BUSINESS.address.street},{" "}
+          {BUSINESS.address.area}, with delivery across Kenya. Prices are in Kenya Shillings.
+        </p>
+
+        <div className="grid gap-8 py-8 sm:grid-cols-3">
+          <div>
+            <h3 className="type-fine font-semibold text-ink">Shop</h3>
+            <ul className="mt-2">
+              {SHOP_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="type-fine leading-[2.2] hover:text-ink hover:underline">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="type-fine font-semibold text-ink">Contact</h3>
+            <ul className="mt-2">
+              {contactLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    className="type-fine leading-[2.2] hover:text-ink hover:underline"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="type-fine font-semibold text-ink">Visit</h3>
+            <ul className="type-fine mt-2 space-y-2 leading-normal">
+              <li>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-ink hover:underline">
+                  {ADDRESS_LINE}
+                </a>
+              </li>
+              <li>{BUSINESS.hoursDisplay}</li>
+              <li>
+                <a
+                  href={GOOGLE_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-ink hover:underline"
+                >
+                  ★ {GOOGLE_REVIEWS.rating} on Google · {GOOGLE_REVIEWS.count} reviews
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/90">
-            Shop
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-white/80">
-            <li>
-              <Link href="/products" className="hover:text-[#5B8DEF]">
-                All Products
-              </Link>
-            </li>
-            <li>
-              <Link href="/products?on_sale=true" className="hover:text-[#5B8DEF]">
-                Deals
-              </Link>
-            </li>
-            <li>
-              <Link href="/cart" className="hover:text-[#5B8DEF]">
-                Cart
-              </Link>
-            </li>
-            <li>
-              <Link href="/track-order" className="hover:text-[#5B8DEF]">
-                Track Order
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/90">
-            Contact
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-white/80">
-            <li>
-              <a
-                href={MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#5B8DEF]"
-              >
-                {ADDRESS_LINE}
-              </a>
-            </li>
-            <li>{BUSINESS.hoursDisplay}</li>
-            <li>
-              <a
-                href={GOOGLE_PROFILE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#5B8DEF]"
-              >
-                ★ {GOOGLE_REVIEWS.rating} on Google ({GOOGLE_REVIEWS.count} reviews)
-              </a>
-            </li>
-            <li>
-              <a href={`tel:${BUSINESS.phoneE164}`} className="hover:text-[#5B8DEF]">
-                Call {BUSINESS.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#5B8DEF]"
-              >
-                WhatsApp {BUSINESS.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${BUSINESS.email}`} className="hover:text-[#5B8DEF]">
-                {BUSINESS.email}
-              </a>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-[#5B8DEF]">
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
-        &copy; {new Date().getFullYear()} ECB Technologies. All rights reserved.
+        <p className="type-fine border-t border-hairline pt-4 text-ink-48">
+          Copyright © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

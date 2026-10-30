@@ -9,7 +9,7 @@ export default function ProductGallery({ images = [], productName }) {
 
   if (!images.length) {
     return (
-      <div className="flex aspect-square w-full items-center justify-center rounded-lg bg-gray-50 text-gray-400">
+      <div className="type-caption flex aspect-square w-full items-center justify-center rounded-[18px] bg-parchment text-ink-48">
         No image available
       </div>
     );
@@ -19,13 +19,13 @@ export default function ProductGallery({ images = [], productName }) {
 
   return (
     <div>
-      <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-50">
+      <div className="relative aspect-square w-full overflow-hidden rounded-[18px] bg-parchment">
         <Image
           src={active.src}
           alt={active.alt || productName}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-contain p-6"
+          className="product-shadow object-contain p-10 sm:p-16"
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
           priority
@@ -33,14 +33,16 @@ export default function ProductGallery({ images = [], productName }) {
       </div>
 
       {images.length > 1 && (
-        <div className="mt-4 grid grid-cols-5 gap-2">
+        <div className="no-scrollbar mt-4 flex gap-3 overflow-x-auto">
           {images.map((image, index) => (
             <button
               key={image.id ?? index}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`relative aspect-square overflow-hidden rounded-md border bg-gray-50 ${
-                index === activeIndex ? "border-brand-green" : "border-gray-200"
+              aria-label={`Show image ${index + 1}`}
+              aria-current={index === activeIndex}
+              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-parchment transition-shadow sm:h-20 sm:w-20 ${
+                index === activeIndex ? "shadow-[inset_0_0_0_2px_#0071e3]" : ""
               }`}
             >
               <Image
@@ -48,7 +50,7 @@ export default function ProductGallery({ images = [], productName }) {
                 alt={image.alt || productName}
                 fill
                 sizes="100px"
-                className="object-contain p-1"
+                className="object-contain p-2"
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
                 loading="lazy"

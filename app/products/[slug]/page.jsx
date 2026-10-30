@@ -4,12 +4,11 @@ import {
   getProductBySlug,
   getProductVariations,
 } from "@/lib/woocommerce";
-import GoBackButton from "@/components/GoBackButton";
 import ProductGallery from "@/components/ProductGallery";
 import ProductPurchaseBox from "@/components/ProductPurchaseBox";
 import { decodeEntities, formatPrice, stripHtml, truncateAtWord } from "@/lib/utils";
-import { ADDRESS_LINE, BUSINESS, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
-import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { BUSINESS, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml, whatsappUrl } from "@/lib/business";
+import { ChevronRight, CreditCard, MessageCircle, Phone, Store, Truck } from "lucide-react";
 
 function getBrandName(product) {
   if (product.brands?.[0]?.name) return decodeEntities(product.brands[0].name);
@@ -150,99 +149,124 @@ export default async function ProductPage({ params }) {
   const productName = decodeEntities(product.name);
   const enquiryMessage = `Hi ECB Technologies, I'm interested in the ${productName}. Is it available? ${SITE_URL}/products/${product.slug}`;
 
+  const brand = getBrandName(product);
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className={product.description ? "" : "pb-24"}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLdHtml(buildJsonLd(product, productName, variations, category))}
       />
-      <GoBackButton />
 
-      <nav className="mt-4 mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-brand-blue">
-          Home
-        </Link>
-        <span className="mx-2">/</span>
-        <Link href="/products" className="hover:text-brand-blue">
-          Products
-        </Link>
-        {category && (
-          <>
-            <span className="mx-2">/</span>
-            <Link href={`/products?category=${category.id}`} className="hover:text-brand-blue">
-              {decodeEntities(category.name)}
-            </Link>
-          </>
-        )}
-        <span className="mx-2">/</span>
-        <span className="text-gray-700">{productName}</span>
-      </nav>
-
-      <div className="grid gap-10 lg:grid-cols-2">
-        <ProductGallery images={product.images} productName={productName} />
-
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            {productName}
-          </h1>
-
-          {product.average_rating > 0 && (
-            <p className="mt-1 text-sm text-gray-500">
-              Rating: {product.average_rating} / 5 ({product.rating_count} reviews)
-            </p>
+      <div className="mx-auto max-w-[1440px] px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" className="type-fine flex flex-wrap items-center gap-1.5 pt-6 text-ink-48">
+          <Link href="/" className="hover:text-ink">
+            Home
+          </Link>
+          <ChevronRight className="h-3 w-3" />
+          <Link href="/products" className="hover:text-ink">
+            Products
+          </Link>
+          {category && (
+            <>
+              <ChevronRight className="h-3 w-3" />
+              <Link href={`/products?category=${category.id}`} className="hover:text-ink">
+                {decodeEntities(category.name)}
+              </Link>
+            </>
           )}
+        </nav>
 
-          <div className="mt-4 border-t border-gray-200 pt-4">
-            <ProductPurchaseBox product={product} variations={variations} />
+        <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16">
+          <div className="lg:sticky lg:top-20 lg:self-start">
+            <ProductGallery images={product.images} productName={productName} />
           </div>
 
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            <a
-              href={whatsappUrl(enquiryMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg border-2 border-brand-green px-4 py-2 text-sm font-semibold text-brand-green transition-colors hover:bg-brand-green hover:text-white"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Ask on WhatsApp
-            </a>
-            <a
-              href={`tel:${BUSINESS.phoneE164}`}
-              className="flex items-center justify-center gap-2 rounded-lg border-2 border-brand-blue px-4 py-2 text-sm font-semibold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white"
-            >
-              <Phone className="h-4 w-4" />
-              Call {BUSINESS.phoneDisplay}
-            </a>
-          </div>
+          <div>
+            {brand && <p className="type-caption font-semibold text-ink-48">{brand}</p>}
+            <h1 className="type-display mt-1 text-ink">{productName}</h1>
 
-          <ul className="mt-4 space-y-1 rounded-lg bg-gray-50 p-3 text-sm text-gray-600">
-            <li>
-              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1.5 hover:text-brand-blue">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                Free pickup at {ADDRESS_LINE} ({BUSINESS.hoursDisplay})
+            {product.rating_count > 0 && (
+              <p className="type-caption mt-2 text-ink-48">
+                ★ {product.average_rating} · {product.rating_count}{" "}
+                {product.rating_count === 1 ? "review" : "reviews"}
+              </p>
+            )}
+
+            <div className="mt-6">
+              <ProductPurchaseBox product={product} variations={variations} />
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+              <a
+                href={whatsappUrl(enquiryMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link inline-flex items-center gap-1.5 text-[17px]"
+              >
+                <MessageCircle className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                Ask on WhatsApp
               </a>
-            </li>
-            <li className="pl-[22px]">Delivery available across Kenya</li>
-            <li className="pl-[22px]">Pay with M-Pesa or debit/credit card</li>
-          </ul>
+              <a
+                href={`tel:${BUSINESS.phoneE164}`}
+                className="link inline-flex items-center gap-1.5 text-[17px]"
+              >
+                <Phone className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                Call {BUSINESS.phoneDisplay}
+              </a>
+            </div>
 
-          {product.short_description && (
-            <div
-              className="prose prose-sm mt-6 max-w-none text-gray-600"
-              dangerouslySetInnerHTML={{ __html: product.short_description }}
-            />
-          )}
+            <dl className="mt-8 divide-y divide-hairline border-y border-hairline">
+              <div className="flex gap-4 py-4">
+                <Store className="mt-0.5 h-5 w-5 shrink-0 text-ink-80" strokeWidth={1.5} />
+                <div>
+                  <dt className="text-[15px] font-semibold text-ink">Free pickup in store</dt>
+                  <dd className="type-caption mt-0.5 text-ink-48">
+                    {STREET_ADDRESS}. {BUSINESS.hoursDisplay}.{" "}
+                    <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="link">
+                      Directions
+                    </a>
+                  </dd>
+                </div>
+              </div>
+              <div className="flex gap-4 py-4">
+                <Truck className="mt-0.5 h-5 w-5 shrink-0 text-ink-80" strokeWidth={1.5} />
+                <div>
+                  <dt className="text-[15px] font-semibold text-ink">Delivery across Kenya</dt>
+                  <dd className="type-caption mt-0.5 text-ink-48">
+                    Shipping cost for your town is shown at checkout.
+                  </dd>
+                </div>
+              </div>
+              <div className="flex gap-4 py-4">
+                <CreditCard className="mt-0.5 h-5 w-5 shrink-0 text-ink-80" strokeWidth={1.5} />
+                <div>
+                  <dt className="text-[15px] font-semibold text-ink">M-Pesa or card</dt>
+                  <dd className="type-caption mt-0.5 text-ink-48">Pay securely at checkout.</dd>
+                </div>
+              </div>
+            </dl>
+
+            {product.short_description && (
+              <div
+                className="prose-ecb mt-8"
+                dangerouslySetInnerHTML={{ __html: product.short_description }}
+              />
+            )}
+          </div>
         </div>
       </div>
 
       {product.description && (
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <h2 className="text-xl font-bold text-gray-900">Description</h2>
-          <div
-            className="prose prose-sm mt-4 max-w-none text-gray-600"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
-        </div>
+        <section className="mt-20 bg-parchment py-16 sm:py-20">
+          <div className="mx-auto max-w-[980px] px-6">
+            <h2 className="type-display text-ink">Overview</h2>
+            <div
+              className="prose-ecb mt-8"
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            />
+          </div>
+        </section>
       )}
     </div>
   );

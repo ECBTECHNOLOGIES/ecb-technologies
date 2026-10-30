@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Truck, X } from "lucide-react";
+import { Menu, Package, X } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { links } from "./NavLinks";
@@ -24,21 +24,21 @@ export default function MobileMenu() {
         type="button"
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center justify-center p-2 text-brand-blue"
+        className="flex h-10 w-10 items-center justify-center rounded-full text-ink"
       >
-        {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        {open ? <X className="h-5 w-5" strokeWidth={1.75} /> : <Menu className="h-5 w-5" strokeWidth={1.75} />}
       </button>
 
       {open && (
-        <div className="absolute inset-x-0 top-full border-t border-gray-100 bg-white shadow-sm">
-          <nav className="flex flex-col px-4 py-2">
+        <div className="absolute inset-x-0 top-full h-[calc(100dvh-56px)] bg-white/95 backdrop-blur-xl">
+          <nav className="flex flex-col px-8 py-6">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`rounded px-2 py-2.5 text-sm font-bold ${
-                  isActive(link.href) ? "text-brand-blue" : "text-gray-500"
+                className={`py-2 text-[28px] font-semibold tracking-tight ${
+                  isActive(link.href) ? "text-ink" : "text-ink-80"
                 }`}
               >
                 {link.label}
@@ -47,9 +47,9 @@ export default function MobileMenu() {
             <Link
               href="/track-order"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded px-2 py-2.5 text-sm font-bold text-gray-500"
+              className="flex items-center gap-3 py-2 text-[28px] font-semibold tracking-tight text-ink-80"
             >
-              <Truck className="h-4 w-4" />
+              <Package className="h-6 w-6" strokeWidth={1.75} />
               Track Order
             </Link>
           </nav>

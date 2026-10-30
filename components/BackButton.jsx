@@ -14,9 +14,9 @@ export default function BackButton() {
       type="button"
       aria-label="Go back"
       onClick={() => router.back()}
-      className="flex shrink-0 items-center justify-center p-2 text-brand-blue"
+      className="flex h-9 w-9 shrink-0 items-center justify-center text-primary"
     >
-      <ArrowLeft className="h-5 w-5" />
+      <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
     </button>
   );
 }

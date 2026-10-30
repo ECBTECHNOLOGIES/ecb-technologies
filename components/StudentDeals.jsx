@@ -7,7 +7,7 @@ const STUDENT_DEALS_CATEGORY_ID = 390;
 export default async function StudentDeals() {
   let products = [];
   try {
-    products = await getProducts({ category: STUDENT_DEALS_CATEGORY_ID, per_page: 8 });
+    products = await getProducts({ category: STUDENT_DEALS_CATEGORY_ID, per_page: 4 });
   } catch {
     products = [];
   }
@@ -15,26 +15,20 @@ export default async function StudentDeals() {
   if (!products.length) return null;
 
   return (
-    <section className="border-y border-gray-100 bg-brand-blue/5 py-10">
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="inline-block rounded bg-brand-blue px-2 py-1 text-xs font-bold uppercase tracking-wide text-white">
-              Student Deals
-            </span>
-            <h2 className="mt-2 text-2xl font-bold text-black">
-              Save Big on Top Picks
-            </h2>
-          </div>
+    <section className="on-dark bg-tile py-14 text-white sm:py-20">
+      <div className="mx-auto max-w-[1440px] px-6 lg:px-8">
+        <div className="text-center">
+          <p className="type-caption font-semibold text-white/60">Student Deals</p>
+          <h2 className="type-display mt-2">Built for campus. Priced for it too.</h2>
           <Link
             href={`/products?category=${STUDENT_DEALS_CATEGORY_ID}`}
-            className="text-sm font-semibold text-brand-blue hover:underline"
+            className="mt-4 inline-block text-[17px] text-primary-on-dark hover:underline"
           >
-            View all
+            Shop student deals ›
           </Link>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

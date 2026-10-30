@@ -78,13 +78,11 @@ export default function TownSelect({ value, onChange }) {
 
   return (
     <div className="relative" ref={containerRef}>
-      <label className="block text-sm" htmlFor={`${listboxId}-input`}>
-        <span className="font-medium text-gray-700">
-          Delivery Location <span className="text-brand-red">*</span>
-        </span>
+      <label className="block" htmlFor={`${listboxId}-input`}>
+        <span className="field-label">Delivery town</span>
 
-        <div className="relative mt-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-48" />
           <input
             id={`${listboxId}-input`}
             type="text"
@@ -102,9 +100,9 @@ export default function TownSelect({ value, onChange }) {
               setOpen(true);
             }}
             placeholder="Search for your town..."
-            className="w-full rounded-md border border-gray-200 px-3 py-2 pl-9 pr-9 text-base focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue sm:text-sm"
+            className="field pl-10 pr-10"
           />
-          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-48" />
         </div>
       </label>
 
@@ -112,27 +110,27 @@ export default function TownSelect({ value, onChange }) {
         <ul
           id={listboxId}
           role="listbox"
-          className="absolute z-20 mt-1 max-h-72 w-full overflow-auto rounded-md border border-gray-200 bg-white py-1 shadow-lg"
+          className="absolute z-20 mt-2 max-h-72 w-full overflow-auto rounded-[14px] border border-hairline bg-white py-1.5 shadow-[0_10px_30px_rgb(0_0_0/0.08)]"
         >
           {filtered.length === 0 && (
-            <li className="px-3 py-2 text-sm text-gray-500">No matching towns</li>
+            <li className="type-caption px-4 py-2.5 text-ink-48">No matching towns</li>
           )}
           {filtered.map((option) => (
             <li key={option.key} role="option" aria-selected={option.key === value}>
               <button
                 type="button"
                 onClick={() => handleSelect(option)}
-                className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-sm hover:bg-gray-50"
+                className="flex w-full items-center justify-between gap-2 px-4 py-2.5 text-left text-[15px] text-ink hover:bg-parchment"
               >
                 <span className="flex items-center gap-2 truncate">
                   {option.key === value && (
-                    <Check className="h-4 w-4 shrink-0 text-brand-green" />
+                    <Check className="h-4 w-4 shrink-0 text-primary" />
                   )}
-                  <span className={option.isPickup ? "font-medium text-brand-green" : ""}>
+                  <span className={option.isPickup ? "font-semibold" : ""}>
                     {option.label}
                   </span>
                 </span>
-                <span className="shrink-0 font-medium text-gray-600">
+                <span className="shrink-0 text-ink-48">
                   {formatPrice(option.cost)}
                 </span>
               </button>

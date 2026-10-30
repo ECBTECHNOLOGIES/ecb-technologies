@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Design tokens - single accent system. Action Blue is the only
+   interactive colour; surfaces alternate white / parchment / dark tile and
+   the colour change itself divides sections (no decorative borders or
+   shadows on UI chrome). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-poppins);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter),
+    "Helvetica Neue", Arial, sans-serif;
 
-  --color-brand-red: #e31e24;
-  --color-brand-blue: #1b3f8b;
-  --color-brand-blue-hover: #2651ab;
-  --color-brand-blue-active: #5b8def;
-  --color-brand-green: #358c27;
+  --color-primary: #0066cc;
+  --color-primary-focus: #0071e3;
+  --color-primary-on-dark: #2997ff;
+  --color-ink: #1d1d1f;
+  --color-ink-80: #333336;
+  --color-ink-48: #6e6e73;
+  --color-parchment: #f5f5f7;
+  --color-pearl: #fafafc;
+  --color-hairline: #e0e0e0;
+  --color-field: #d2d2d7;
+  --color-tile: #272729;
+  --color-deal: #b64400;
+  --color-danger: #d70015;
+  --color-success: #1d8a3a;
 }
 
 html {
@@ -23,16 +29,190 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2,
-h3,
-button {
-  font-family: var(--font-heading), Arial, Helvetica, sans-serif;
+@layer components {
+/* Type scale. Display sizes are tight; body stays at 17px. */
+.type-hero {
+  font-size: 34px;
+  line-height: 1.07;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.type-display {
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.type-tagline {
+  font-size: 19px;
+  line-height: 1.21;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.type-lead {
+  font-size: 19px;
+  line-height: 1.32;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.type-caption {
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.016em;
+}
+.type-fine {
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 640px) {
+  .type-hero { font-size: 48px; }
+  .type-display { font-size: 40px; }
+  .type-tagline { font-size: 21px; }
+  .type-lead { font-size: 24px; }
+}
+@media (min-width: 1024px) {
+  .type-hero { font-size: 56px; }
+}
+
+/* Buttons: pills are actions. Press = slight scale, focus = blue ring. */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 11px 22px;
+  font-size: 17px;
+  line-height: 1.18;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-primary-focus);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-sm {
+  padding: 7px 15px;
+  font-size: 14px;
+}
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-primary:disabled:hover {
+  background: var(--color-primary);
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+.link {
+  color: var(--color-primary);
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Utility card: white, hairline, 18px radius, no shadow. */
+.card {
+  background: #fff;
+  border: 1px solid var(--color-hairline);
+  border-radius: 18px;
+}
+
+/* Form fields */
+.field {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--color-field);
+  background: #fff;
+  padding: 11px 16px;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+.field::placeholder {
+  color: var(--color-ink-48);
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-primary-focus);
+  box-shadow: 0 0 0 3px rgb(0 113 227 / 0.2);
+}
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* Option / category chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 1.29;
+  color: var(--color-ink);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--color-field);
+  white-space: nowrap;
+  transition: box-shadow 0.15s;
+}
+.chip:hover {
+  box-shadow: inset 0 0 0 1px var(--color-ink-48);
+}
+.chip-active,
+.chip-active:hover {
+  box-shadow: inset 0 0 0 2px var(--color-primary-focus);
+}
+
+/* The one shadow in the system: product imagery resting on a surface. */
+.product-shadow {
+  filter: drop-shadow(3px 5px 15px rgb(0 0 0 / 0.12));
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 }
 
 /* iOS/Android auto-zoom backstop: mobile browsers zoom the whole page in
@@ -61,7 +241,7 @@ button {
 }
 
 #nprogress .bar {
-  background: var(--color-brand-blue);
+  background: var(--color-primary);
   position: fixed;
   z-index: 1031;
   top: 0;
@@ -102,7 +282,65 @@ button {
   right: 0;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px var(--color-brand-blue), 0 0 5px var(--color-brand-blue);
+  box-shadow: 0 0 10px var(--color-primary), 0 0 5px var(--color-primary);
   opacity: 1;
   transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* WooCommerce product copy (short + long descriptions). */
+.prose-ecb {
+  color: var(--color-ink-80);
+  font-size: 17px;
+  line-height: 1.47;
+}
+.prose-ecb > * + * {
+  margin-top: 1em;
+}
+.prose-ecb h2,
+.prose-ecb h3,
+.prose-ecb h4 {
+  color: var(--color-ink);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 1.6em;
+}
+.prose-ecb h2 { font-size: 24px; }
+.prose-ecb h3 { font-size: 21px; }
+.prose-ecb h4 { font-size: 17px; }
+.prose-ecb ul,
+.prose-ecb ol {
+  padding-left: 1.25em;
+}
+.prose-ecb ul { list-style: disc; }
+.prose-ecb ol { list-style: decimal; }
+.prose-ecb li + li {
+  margin-top: 0.35em;
+}
+.prose-ecb a {
+  color: var(--color-primary);
+}
+.prose-ecb strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.prose-ecb img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+.prose-ecb table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.prose-ecb th,
+.prose-ecb td {
+  text-align: left;
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--color-hairline);
+  vertical-align: top;
+}
+.prose-ecb th {
+  color: var(--color-ink);
+  font-weight: 600;
 }

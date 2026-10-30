@@ -19,7 +19,7 @@ export default function CategoryTabs({ categories, activeCategoryId, className =
   }, [activeCategoryId]);
 
   return (
-    <div className={`flex gap-2 overflow-x-auto pb-1 ${className}`}>
+    <div className={`no-scrollbar -mx-6 flex gap-2 overflow-x-auto px-6 py-1 lg:mx-0 lg:flex-wrap lg:px-0 ${className}`}>
       {categories.map((category) => {
         const isActive = category.id
           ? activeCategoryId === String(category.id)
@@ -29,11 +29,8 @@ export default function CategoryTabs({ categories, activeCategoryId, className =
             key={category.id || "all"}
             ref={isActive ? activeRef : null}
             href={category.id ? `/products?category=${category.id}` : "/products"}
-            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold no-underline transition-colors ${
-              isActive
-                ? "border-brand-blue bg-brand-blue text-white"
-                : "border-gray-200 bg-white text-gray-700 hover:border-brand-blue hover:bg-brand-blue hover:text-white"
-            }`}
+            aria-current={isActive ? "page" : undefined}
+            className={`chip shrink-0 ${isActive ? "chip-active" : ""}`}
           >
             {decodeEntities(category.name)}
           </Link>
