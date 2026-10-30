@@ -1,5 +1,5 @@
-import { Clock, Mail, MapPin, MessageCircle, Phone, Star } from "lucide-react";
-import { ADDRESS_LINE, BUSINESS, GOOGLE_PROFILE_URL, GOOGLE_REVIEWS, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
+import { Clock, Mail, MapPin, MessageCircle, Navigation, Phone, Star } from "lucide-react";
+import { ADDRESS_LINE, BUSINESS, STREET_ADDRESS, GOOGLE_PROFILE_URL, GOOGLE_REVIEWS, MAPS_EMBED_URL, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
 
 export const metadata = {
   title: "Contact & Shop Location - Moi Avenue, Nairobi CBD",
@@ -63,8 +63,8 @@ export default function ContactPage() {
       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Contact Us</h1>
       <p className="mt-2 text-gray-600">
         Have a question about a product or order? Reach out to us through any
-        of the channels below, or visit our shop at {ADDRESS_LINE} in Nairobi
-        CBD, where you can also pick up online orders for free.
+        of the channels below, or visit our shop at {STREET_ADDRESS},{" "}
+        {BUSINESS.address.area}, where you can also pick up online orders for free.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -106,6 +106,43 @@ export default function ContactPage() {
           );
         })}
       </div>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-bold text-gray-900">Find Our Shop</h2>
+        <p className="mt-1 text-sm text-gray-600">
+          {STREET_ADDRESS}, {BUSINESS.address.area}.
+        </p>
+        <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-lg border border-gray-200 sm:aspect-video">
+          <iframe
+            src={MAPS_EMBED_URL}
+            title={`Map showing ${BUSINESS.name} at ${ADDRESS_LINE}`}
+            className="h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <a
+            href={GOOGLE_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 rounded-lg bg-brand-blue px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2651AB]"
+          >
+            <Navigation className="h-4 w-4" />
+            Get Directions on Google
+          </a>
+          <a
+            href={GOOGLE_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 rounded-lg border-2 border-brand-blue px-4 py-2 text-sm font-semibold text-brand-blue transition-colors hover:bg-brand-blue hover:text-white"
+          >
+            <Star className="h-4 w-4" />
+            {GOOGLE_REVIEWS.rating} ★ · Read our {GOOGLE_REVIEWS.count} Google reviews
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

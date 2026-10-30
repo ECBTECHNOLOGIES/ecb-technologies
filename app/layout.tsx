@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
-import { BUSINESS, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml } from "@/lib/business";
+import { BUSINESS, GOOGLE_PROFILE_URL, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml } from "@/lib/business";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -63,6 +63,8 @@ const siteJsonLd = {
         addressCountry: BUSINESS.address.country,
       },
       hasMap: MAPS_URL,
+      // Ties this website to the Google Business Profile as the same entity.
+      sameAs: [GOOGLE_PROFILE_URL],
       openingHoursSpecification: BUSINESS.openingHours.map((h) => ({
         "@type": "OpeningHoursSpecification",
         dayOfWeek: h.days,
