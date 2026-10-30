@@ -24,14 +24,16 @@ live site until one of the following happens:
 **Owner decision (2026-10-30): A.** Replace the current live site with
 this store. The plan, in order:
 
-1. Deploy this repo to Cloudflare on a preview address
-   (`*.workers.dev`), with the WooCommerce and Paystack keys set in the
-   Cloudflare project.
+1. Already done: Vercel deploys this repo on every push to `main`, at
+   https://ecb-technologies-five.vercel.app (confirmed from GitHub
+   deployment statuses on 2026-10-30). Cloudflare only manages the DNS.
 2. Test on the preview: catalogue, product pages, cart, checkout with a
    real M-Pesa or card payment, and order tracking.
 3. Show the owner the preview and get explicit approval.
-4. Switch `www.ecbtechkenya.com` to the new store, and 301 the apex
-   domain to `www`. Note the old site's settings first, so switching back
+4. Switch: in Vercel → Domains, add `www.ecbtechkenya.com` and
+   `ecbtechkenya.com` (redirecting to www). In Cloudflare DNS, point `www`
+   (CNAME `cname.vercel-dns.com`) and `@` (A `76.76.21.21`) at Vercel as
+   "DNS only". Leave `api` and the MX records alone. Note the old site's settings first, so switching back
    is possible.
 5. Resubmit `/sitemap.xml` in Search Console and re-run the Ahrefs checks
    on the live URL.
