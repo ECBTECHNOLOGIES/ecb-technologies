@@ -38,6 +38,20 @@ this store. The plan, in order:
 5. Resubmit `/sitemap.xml` in Search Console and re-run the Ahrefs checks
    on the live URL.
 
+**BLOCKER (2026-10-30): do not switch the domain yet.** The Vercel build
+renders, but with no products and a broken logo, so it cannot reach the
+WooCommerce backend (`NEXT_PUBLIC_WP_URL`, which serves the logo too). The
+current live site appears to run its own catalogue (images under
+`/assets/images/`, not WordPress). Products are managed by a third party;
+the owner is asking them:
+
+1. Which system holds the product catalogue now: WooCommerce at
+   `api.ecbtechkenya.com`, or the current live site's own admin?
+2. If WooCommerce: is it still running and up to date, and are valid
+   REST API keys and `NEXT_PUBLIC_WP_URL` set in the Vercel project?
+3. If the live site's own system: what platform is it, and does it have
+   a product API? This store would need a new data connector for it.
+
 Access this needs in the cloud environment settings (the owner adds
 these; never paste them into chat):
 
