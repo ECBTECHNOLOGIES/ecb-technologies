@@ -7,6 +7,7 @@ import CategoryTabs from "@/components/CategoryTabs";
 import Pagination from "@/components/Pagination";
 import Skeleton from "@/components/Skeleton";
 import { decodeEntities, stripHtml, truncateAtWord } from "@/lib/utils";
+import { pageMetadata } from "@/lib/seo";
 
 function parsePage(value) {
   const page = parseInt(value, 10);
@@ -30,7 +31,7 @@ export async function generateMetadata({ searchParams }) {
 
   let title = "Shop Laptops, Phones & Accessories in Kenya";
   let description =
-    "Browse laptops, smartphones, computer and mobile accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, M-Pesa or card payment, delivery across Kenya.";
+    "Browse laptops, smartphones and accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, M-Pesa or card, delivery across Kenya.";
   const canonical = new URLSearchParams();
 
   if (category) {
@@ -62,13 +63,13 @@ export async function generateMetadata({ searchParams }) {
   const query = canonical.toString();
   const canonicalUrl = `/products${query ? `?${query}` : ""}`;
 
-  return {
+  return pageMetadata({
     title,
     description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: { title, description, url: canonicalUrl },
+    path: canonicalUrl,
+    images: category?.image?.src ? [{ url: category.image.src, alt: decodeEntities(category.name) }] : undefined,
     robots: isFiltered ? { index: false, follow: true } : undefined,
-  };
+  });
 }
 
 async function getFilteredCategories() {

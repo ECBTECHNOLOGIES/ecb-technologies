@@ -28,7 +28,7 @@ export default function OurProductsClient({ tabs, groups = [] }) {
                     {image && (
                       <Image
                         src={image}
-                        alt=""
+                        alt={tab.label}
                         fill
                         sizes="80px"
                         className="object-contain transition-transform duration-300 group-hover:scale-105"

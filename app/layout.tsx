@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
 import { BUSINESS, GOOGLE_PROFILE_URL, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml } from "@/lib/business";
+import { DEFAULT_SHARE_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,15 +16,19 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "ECB Technologies | Laptops, Phones & Electronics Shop in Nairobi CBD",
+    default: SITE_TITLE,
     template: "%s | ECB Technologies",
   },
-  description:
-    "Shop laptops, phones and accessories at ECB Technologies, Iconic Business Plaza (3rd Floor, Room T12), Moi Avenue, Nairobi CBD. Order online with M-Pesa or card, pick up in store or get delivery across Kenya.",
+  description: SITE_DESCRIPTION,
   openGraph: {
     type: "website",
     siteName: BUSINESS.name,
     locale: "en_KE",
+    images: [DEFAULT_SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_SHARE_IMAGE.url],
   },
 };
 

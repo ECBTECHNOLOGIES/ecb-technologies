@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import { Clock, Mail, MapPin, MessageCircle, Phone, Star } from "lucide-react";
 import { ADDRESS_LINE, BUSINESS, STREET_ADDRESS, GOOGLE_PROFILE_URL, GOOGLE_REVIEWS, MAPS_EMBED_URL, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
 
-export const metadata = {
-  title: "Contact & Shop Location - Moi Avenue, Nairobi CBD",
+export const metadata = pageMetadata({
+  title: "Contact & Shop Location, Moi Avenue Nairobi",
   description:
-    "Visit ECB Technologies at Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD, or call, WhatsApp or email us about laptops, phones and accessories.",
-  alternates: { canonical: "/contact" },
-};
+    "Visit ECB Technologies at Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD. Open daily 9am–7pm. Call or WhatsApp 0717 040 531.",
+  path: "/contact",
+});
 
 const CONTACT_DETAILS = [
   {

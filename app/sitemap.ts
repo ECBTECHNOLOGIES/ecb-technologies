@@ -14,7 +14,7 @@ async function getAllProducts() {
       per_page: perPage,
       page,
       status: "publish",
-      _fields: "slug,date_modified",
+      _fields: "slug,date_modified,images",
     });
     allProducts = allProducts.concat(products);
     if (products.length < perPage) break;
@@ -67,9 +67,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
   const productRoutes: MetadataRoute.Sitemap = products.map(
-    (product: { slug: string; date_modified: string }) => ({
+    (product: { slug: string; date_modified: string; images?: { src: string }[] }) => ({
       url: `${BASE_URL}/products/${product.slug}`,
       lastModified: product.date_modified,
+      // Image sitemap entries so Google Images can find every product photo.
+      images: (product.images ?? []).map((image) => image.src).filter(Boolean),
       changeFrequency: "weekly" as const,
       priority: 0.6,
     })

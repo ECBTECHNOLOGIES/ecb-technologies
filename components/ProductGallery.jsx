@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { BLUR_DATA_URL } from "@/lib/utils";
+import { BLUR_DATA_URL, imageAlt } from "@/lib/utils";
 
 export default function ProductGallery({ images = [], productName }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -22,7 +22,7 @@ export default function ProductGallery({ images = [], productName }) {
       <div className="relative aspect-square w-full overflow-hidden rounded-[18px] bg-parchment">
         <Image
           src={active.src}
-          alt={active.alt || productName}
+          alt={imageAlt(active, productName, activeIndex)}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="product-shadow object-contain p-10 sm:p-16"
@@ -39,7 +39,6 @@ export default function ProductGallery({ images = [], productName }) {
               key={image.id ?? index}
               type="button"
               onClick={() => setActiveIndex(index)}
-              aria-label={`Show image ${index + 1}`}
               aria-current={index === activeIndex}
               className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-parchment transition-shadow sm:h-20 sm:w-20 ${
                 index === activeIndex ? "shadow-[inset_0_0_0_2px_#0071e3]" : ""
@@ -47,7 +46,7 @@ export default function ProductGallery({ images = [], productName }) {
             >
               <Image
                 src={image.src}
-                alt={image.alt || productName}
+                alt={imageAlt(image, productName, index)}
                 fill
                 sizes="100px"
                 className="object-contain p-2"

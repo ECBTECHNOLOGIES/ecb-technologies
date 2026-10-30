@@ -6,7 +6,8 @@ import {
 } from "@/lib/woocommerce";
 import ProductGallery from "@/components/ProductGallery";
 import ProductPurchaseBox from "@/components/ProductPurchaseBox";
-import { decodeEntities, formatPrice, stripHtml, truncateAtWord } from "@/lib/utils";
+import { decodeEntities, formatPrice, imageAlt, stripHtml, truncateAtWord } from "@/lib/utils";
+import { pageMetadata } from "@/lib/seo";
 import { BUSINESS, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml, whatsappUrl } from "@/lib/business";
 import { ChevronRight, CreditCard, MessageCircle, Phone, Store, Truck } from "lucide-react";
 
@@ -36,19 +37,18 @@ export async function generateMetadata({ params }) {
 
   const productName = decodeEntities(product.name);
   const description = buildDescription(product, productName);
-  const image = product.images?.[0];
+  const priced = `${productName} Price in Kenya`;
 
-  return {
-    title: `${productName} Price in Kenya`,
+  return pageMetadata({
+    // Model name first; keyword suffix only when it fits in ~60 characters.
+    title: priced.length <= 60 ? priced : productName,
     description,
-    alternates: { canonical: `/products/${product.slug}` },
-    openGraph: {
-      title: productName,
-      description,
-      url: `/products/${product.slug}`,
-      images: image ? [{ url: image.src, alt: image.alt || productName }] : undefined,
-    },
-  };
+    path: `/products/${product.slug}`,
+    images: product.images?.slice(0, 4).map((image, index) => ({
+      url: image.src,
+      alt: imageAlt(image, productName, index),
+    })),
+  });
 }
 
 const SCHEMA_AVAILABILITY = {

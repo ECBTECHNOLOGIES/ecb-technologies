@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BLUR_DATA_URL, decodeEntities, formatPrice } from "@/lib/utils";
+import { BLUR_DATA_URL, decodeEntities, formatPrice, imageAlt } from "@/lib/utils";
 import AddToCartButton from "./AddToCartButton";
 import SelectOptionsButton from "./SelectOptionsButton";
 
@@ -34,7 +34,7 @@ export default function ProductCard({ product }) {
         {image ? (
           <Image
             src={image.src}
-            alt={image.alt || name}
+            alt={imageAlt(image, name)}
             fill
             sizes="(max-width: 1024px) 50vw, 25vw"
             className={`object-contain p-6 transition-transform duration-500 group-hover:scale-[1.03] sm:p-8 ${

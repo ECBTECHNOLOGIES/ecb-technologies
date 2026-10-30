@@ -4,12 +4,15 @@ import Hero from "@/components/Hero";
 import OurProducts from "@/components/OurProducts";
 import StudentDeals from "@/components/StudentDeals";
 import StoreVisit from "@/components/StoreVisit";
+import { SITE_DESCRIPTION, SITE_TITLE, pageMetadata } from "@/lib/seo";
 import Skeleton from "@/components/Skeleton";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  path: "/",
+});
 
 function ProductGridSkeleton() {
   return (
