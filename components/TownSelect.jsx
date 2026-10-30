@@ -4,12 +4,13 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Search, ChevronDown, Check } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import shippingRates from "@/lib/shipping-rates.json";
+import { ADDRESS_LINE } from "@/lib/business";
 
 export const PICKUP_KEY = "__pickup__";
 
 const PICKUP_OPTION = {
   key: PICKUP_KEY,
-  label: "Store Pickup — Iconic Business Plaza, Moi Avenue, Nairobi",
+  label: `Store Pickup — ${ADDRESS_LINE}`,
   cost: 0,
   zone: null,
   surcharge: null,

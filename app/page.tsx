@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Hero from "@/components/Hero";
 import OurProducts from "@/components/OurProducts";
 import StudentDeals from "@/components/StudentDeals";
 import Skeleton from "@/components/Skeleton";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 function ProductGridSkeleton() {
   return (

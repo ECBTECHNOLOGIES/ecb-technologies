@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "@/lib/store";
 import { formatPrice } from "@/lib/utils";
 import TownSelect, { getShippingOption, PICKUP_KEY } from "@/components/TownSelect";
+import { ADDRESS_LINE, BUSINESS } from "@/lib/business";
 
 const initialForm = {
   first_name: "",
@@ -61,7 +62,7 @@ export default function CheckoutPage() {
       const billing = {
         ...form,
         address_1: shippingOption.isPickup
-          ? "Iconic Business Plaza, Moi Avenue, Nairobi"
+          ? ADDRESS_LINE
           : `Fargo Courier Branch, ${shippingOption.label}`,
         city: shippingOption.isPickup ? "Nairobi" : shippingOption.label,
       };
@@ -281,7 +282,7 @@ export default function CheckoutPage() {
                 onChange={() => setDeliveryMethod("pickup")}
                 className="h-4 w-4 accent-brand-green"
               />
-              Free pickup at ECB store (Iconic Business Plaza, Moi Avenue, Nairobi)
+              Free pickup at ECB store ({ADDRESS_LINE})
             </label>
           </fieldset>
 
@@ -302,8 +303,7 @@ export default function CheckoutPage() {
             </>
           ) : (
             <p className="rounded-md bg-blue-50 px-4 py-2 text-sm text-brand-blue">
-              Pick up at Iconic Business Plaza, Moi Avenue, Nairobi — Open Mon–Fri 8am–5:30pm,
-              Sat–Sun &amp; public holidays 8am–12pm.
+              Pick up at {ADDRESS_LINE} — Open {BUSINESS.hoursDisplay}.
             </p>
           )}
 

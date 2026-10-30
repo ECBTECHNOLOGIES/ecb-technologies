@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const LOGO_URL = `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/2025/04/Ebc-864-by-216-6.png`;
+import { ADDRESS_LINE, BUSINESS, MAPS_URL, whatsappUrl } from "@/lib/business";
 
 export default function Footer() {
   return (
@@ -9,15 +8,15 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
           <Image
-            src={LOGO_URL}
+            src={BUSINESS.logo}
             alt="ECB Technologies"
             width={172}
             height={43}
             className="h-10 w-auto rounded bg-white object-contain p-1"
           />
           <p className="mt-3 text-sm text-white/80">
-            Your trusted electronics store in Nairobi, Kenya. Laptops,
-            phones, accessories and more.
+            Laptops, phones and accessories from our shop on Moi Avenue,
+            Nairobi CBD, with delivery across Kenya.
           </p>
         </div>
 
@@ -54,18 +53,35 @@ export default function Footer() {
             Contact
           </h3>
           <ul className="mt-3 space-y-2 text-sm text-white/80">
-            <li>Nairobi, Kenya</li>
             <li>
-              <a href="tel:+254717040531" className="hover:text-[#5B8DEF]">
-                0717 040 531
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#5B8DEF]"
+              >
+                {ADDRESS_LINE}
+              </a>
+            </li>
+            <li>{BUSINESS.hoursDisplay}</li>
+            <li>
+              <a href={`tel:${BUSINESS.phoneE164}`} className="hover:text-[#5B8DEF]">
+                Call {BUSINESS.phoneDisplay}
               </a>
             </li>
             <li>
               <a
-                href="mailto:ecbtechnologies001@gmail.com"
+                href={whatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-[#5B8DEF]"
               >
-                ecbtechnologies001@gmail.com
+                WhatsApp {BUSINESS.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${BUSINESS.email}`} className="hover:text-[#5B8DEF]">
+                {BUSINESS.email}
               </a>
             </li>
             <li>

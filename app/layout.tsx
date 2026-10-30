@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
+import { BUSINESS, MAPS_URL, SITE_URL, jsonLdHtml } from "@/lib/business";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,18 +19,60 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ecbtechkenya.com"),
-  title: "ECB Technologies | Electronics Store in Nairobi, Kenya",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "ECB Technologies | Laptops, Phones & Electronics Shop in Nairobi CBD",
+    template: "%s | ECB Technologies",
+  },
   description:
-    "Shop laptops, phones, accessories and more at ECB Technologies, Nairobi's trusted electronics store.",
+    "Shop laptops, phones and accessories at ECB Technologies, Iconic Business Plaza, Moi Avenue, Nairobi CBD. Order online with M-Pesa or card, pick up in store or get delivery across Kenya.",
+  openGraph: {
+    type: "website",
+    siteName: BUSINESS.name,
+    locale: "en_KE",
+  },
 };
 
-const organizationJsonLd = {
+const storeId = `${SITE_URL}/#store`;
+
+const siteJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "ECB Technologies",
-  url: "https://www.ecbtechkenya.com",
-  logo: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/2025/04/Ebc-864-by-216-6.png`,
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: BUSINESS.name,
+      url: SITE_URL,
+      publisher: { "@id": storeId },
+      inLanguage: "en-KE",
+    },
+    {
+      "@type": "ElectronicsStore",
+      "@id": storeId,
+      name: BUSINESS.name,
+      url: SITE_URL,
+      logo: BUSINESS.logo,
+      image: BUSINESS.logo,
+      telephone: BUSINESS.phoneE164,
+      email: BUSINESS.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `${BUSINESS.address.building}, ${BUSINESS.address.street}`,
+        addressLocality: BUSINESS.address.city,
+        addressCountry: BUSINESS.address.country,
+      },
+      hasMap: MAPS_URL,
+      openingHoursSpecification: BUSINESS.openingHours.map((h) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: h.days,
+        opens: h.opens,
+        closes: h.closes,
+      })),
+      paymentAccepted: "M-Pesa, Credit Card, Debit Card",
+      currenciesAccepted: "KES",
+      areaServed: { "@type": "Country", name: "Kenya" },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -45,7 +88,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={jsonLdHtml(siteJsonLd)}
         />
         <Suspense fallback={null}>
           <ProgressBar />

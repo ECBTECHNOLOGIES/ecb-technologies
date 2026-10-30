@@ -1,16 +1,75 @@
 import { Suspense } from "react";
-import { getCategories, getInterleavedProductsWithCount } from "@/lib/woocommerce";
+import { getCategories, getCategory, getInterleavedProductsWithCount } from "@/lib/woocommerce";
 import ProductCard from "@/components/ProductCard";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
 import ProductFilters from "@/components/ProductFilters";
 import CategoryTabs from "@/components/CategoryTabs";
 import Pagination from "@/components/Pagination";
 import Skeleton from "@/components/Skeleton";
-import { decodeEntities } from "@/lib/utils";
+import { decodeEntities, stripHtml, truncateAtWord } from "@/lib/utils";
 
-export const metadata = {
-  title: "Shop Products | ECB Technologies",
-};
+function parsePage(value) {
+  const page = parseInt(value, 10);
+  return Number.isFinite(page) && page > 0 ? page : 1;
+}
+
+async function getActiveCategory(categoryId) {
+  if (!categoryId || !/^\d+$/.test(String(categoryId))) return null;
+  return getCategory(categoryId).catch(() => null);
+}
+
+// Only the plain category / deals / all-products listings (optionally
+// paginated) are indexable. Search results, price ranges and sort orders are
+// near-duplicates of those, so they're noindexed and canonicalised back to the
+// listing they were filtered from - this stops Google wasting crawl budget on
+// endless ?orderby=&min_price= combinations.
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const page = parsePage(params.page);
+  const category = await getActiveCategory(params.category);
+
+  let title = "Shop Laptops, Phones & Accessories in Kenya";
+  let description =
+    "Browse laptops, smartphones, computer and mobile accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, M-Pesa or card payment, delivery across Kenya.";
+  const canonical = new URLSearchParams();
+
+  if (category) {
+    const name = decodeEntities(category.name);
+    title = `${name} - Prices in Kenya`;
+    const categoryDescription = decodeEntities(stripHtml(category.description ?? ""))
+      .replace(/\s+/g, " ")
+      .trim();
+    description =
+      categoryDescription.length >= 70
+        ? truncateAtWord(categoryDescription)
+        : `Shop ${name} at ECB Technologies, Moi Avenue, Nairobi CBD. Compare prices in KSh, pay with M-Pesa or card, pick up in store or get delivery across Kenya.`;
+    canonical.set("category", String(category.id));
+  } else if (params.on_sale === "true") {
+    title = "Deals & Discounts on Electronics in Kenya";
+    description =
+      "Current deals on laptops, phones and accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Pay with M-Pesa or card, delivery across Kenya.";
+    canonical.set("on_sale", "true");
+  }
+
+  const isFiltered = Boolean(
+    params.search || params.min_price || params.max_price || params.orderby || params.order
+  );
+  if (!isFiltered && page > 1) {
+    canonical.set("page", String(page));
+    title = `${title} - Page ${page}`;
+  }
+
+  const query = canonical.toString();
+  const canonicalUrl = `/products${query ? `?${query}` : ""}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: { title, description, url: canonicalUrl },
+    robots: isFiltered ? { index: false, follow: true } : undefined,
+  };
+}
 
 async function getFilteredCategories() {
   try {
@@ -85,21 +144,26 @@ async function ProductResults({ params, page }) {
   }
 
   let heading = "All Products";
+  let intro = "";
   if (params.search) {
     heading = `Search results for "${params.search}"`;
   } else if (params.on_sale === true) {
     heading = "Deals";
   } else if (params.category) {
-    const categories = await getFilteredCategories();
-    heading = decodeEntities(
-      categories.find((c) => String(c.id) === params.category)?.name ?? "All Products"
-    );
+    const category = await getActiveCategory(params.category);
+    if (category) {
+      heading = decodeEntities(category.name);
+      // Owner-written category copy from WooCommerce, shown on page 1 only so
+      // paginated pages don't repeat it.
+      if (page === 1) intro = decodeEntities(stripHtml(category.description ?? "")).trim();
+    }
   }
 
   return (
     <div className="flex-1">
       <div className="mb-4">
         <h1 className="text-2xl font-bold text-brand-blue">{heading}</h1>
+        {intro && <p className="mt-2 max-w-3xl text-sm text-gray-600">{intro}</p>}
       </div>
 
       {products.length === 0 ? (
@@ -122,7 +186,7 @@ async function ProductResults({ params, page }) {
 export default async function ProductsPage({ searchParams }) {
   const params = await searchParams;
 
-  const page = Number(params.page ?? 1);
+  const page = parsePage(params.page);
   const queryParams = {
     per_page: 12,
     page,

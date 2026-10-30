@@ -1,45 +1,64 @@
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ADDRESS_LINE, BUSINESS, MAPS_URL, SITE_URL, jsonLdHtml, whatsappUrl } from "@/lib/business";
 
 export const metadata = {
-  title: "Contact Us | ECB Technologies",
+  title: "Contact & Shop Location - Moi Avenue, Nairobi CBD",
   description:
-    "Get in touch with ECB Technologies in Nairobi, Kenya - call, WhatsApp or email us for laptops, phones, accessories and more.",
+    "Visit ECB Technologies at Iconic Business Plaza, Moi Avenue, Nairobi CBD, or call, WhatsApp or email us about laptops, phones and accessories.",
+  alternates: { canonical: "/contact" },
 };
 
 const CONTACT_DETAILS = [
   {
     icon: Phone,
     label: "Call Us",
-    value: "0717 040 531",
-    href: "tel:+254717040531",
+    value: BUSINESS.phoneDisplay,
+    href: `tel:${BUSINESS.phoneE164}`,
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: "0717 040 531",
-    href: "https://wa.me/254717040531",
+    value: BUSINESS.phoneDisplay,
+    href: whatsappUrl(),
   },
   {
     icon: Mail,
     label: "Email",
-    value: "ecbtechnologies001@gmail.com",
-    href: "mailto:ecbtechnologies001@gmail.com",
+    value: BUSINESS.email,
+    href: `mailto:${BUSINESS.email}`,
   },
   {
     icon: MapPin,
-    label: "Location",
-    value: "Iconic Business Plaza, Nairobi, Kenya",
-    href: "https://www.google.com/maps/search/?api=1&query=Iconic+Business+Plaza+Nairobi",
+    label: "Shop Location",
+    value: `${ADDRESS_LINE} (${BUSINESS.address.area})`,
+    href: MAPS_URL,
+  },
+  {
+    icon: Clock,
+    label: "Opening Hours",
+    value: BUSINESS.hoursDisplay,
   },
 ];
+
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  url: `${SITE_URL}/contact`,
+  about: { "@id": `${SITE_URL}/#store` },
+};
 
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdHtml(contactPageJsonLd)}
+      />
       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Contact Us</h1>
       <p className="mt-2 text-gray-600">
         Have a question about a product or order? Reach out to us through any
-        of the channels below and our team will get back to you.
+        of the channels below, or visit our shop at {ADDRESS_LINE} in Nairobi
+        CBD, where you can also pick up online orders for free.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

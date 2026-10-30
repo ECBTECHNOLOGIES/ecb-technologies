@@ -68,9 +68,14 @@ const nextConfig: NextConfig = {
         destination: "/products?on_sale=true",
         permanent: true,
       },
+      // Any other /product-category/<slug> is resolved to its matching
+      // category by app/product-category/[...slug]/route.js.
+      //
+      // WooCommerce's product permalinks were /product/<slug>/ and the
+      // headless site reads the same WooCommerce catalogue, so slugs match 1:1.
       {
-        source: "/product-category/:slug*",
-        destination: "/products",
+        source: "/product/:slug",
+        destination: "/products/:slug",
         permanent: true,
       },
     ];

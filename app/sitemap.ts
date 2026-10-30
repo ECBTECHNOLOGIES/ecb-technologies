@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getCategories, getProducts } from "@/lib/woocommerce";
+import { SITE_URL } from "@/lib/business";
 
-const BASE_URL = "https://www.ecbtechkenya.com";
+const BASE_URL = SITE_URL;
 
 async function getAllProducts() {
   const perPage = 100;
@@ -23,15 +24,34 @@ async function getAllProducts() {
   return allProducts;
 }
 
+// Every non-empty category, including subcategories (brand and use-case
+// categories such as HP, Lenovo or Student Deals), since each is a distinct
+// landing page for its own searches.
+async function getAllCategories() {
+  const perPage = 100;
+  let page = 1;
+  let allCategories: Awaited<ReturnType<typeof getCategories>> = [];
+
+  while (true) {
+    const categories = await getCategories({ per_page: perPage, page });
+    allCategories = allCategories.concat(categories);
+    if (categories.length < perPage) break;
+    page += 1;
+  }
+
+  return allCategories;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [categories, products] = await Promise.all([
-    getCategories({ parent: 0 }),
+    getAllCategories(),
     getAllProducts(),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL, changeFrequency: "daily" as const, priority: 1 },
     { url: `${BASE_URL}/products`, changeFrequency: "daily" as const, priority: 0.9 },
+    { url: `${BASE_URL}/products?on_sale=true`, changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${BASE_URL}/contact`, changeFrequency: "yearly" as const, priority: 0.5 },
   ];
 

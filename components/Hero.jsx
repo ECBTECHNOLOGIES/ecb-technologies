@@ -6,14 +6,14 @@ export default function Hero() {
     <section className="grid grid-cols-1 items-center bg-white md:grid-cols-2">
       <div className="px-6 py-8 sm:px-10 sm:py-10 lg:px-16">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-blue sm:text-sm">
-          Nairobi&apos;s #1 Tech Store
+          Electronics Shop · Moi Avenue, Nairobi CBD
         </span>
         <h1 className="mt-3 text-[32px] font-bold leading-tight text-gray-900 sm:text-[48px] lg:text-[60px]">
           Tech That Moves With You
         </h1>
         <p className="mt-3 text-sm text-gray-600 sm:mt-4 sm:text-[18px]">
           Genuine laptops, phones &amp; accessories. Walk in at Iconic
-          Business Plaza or order online, we deliver across Kenya.
+          Business Plaza on Moi Avenue or order online, we deliver across Kenya.
         </p>
         <div className="mt-6 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
           <Link
