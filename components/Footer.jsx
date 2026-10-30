@@ -11,6 +11,7 @@ import {
 const SHOP_LINKS = [
   { label: "All products", href: "/products" },
   { label: "Deals", href: "/products?on_sale=true" },
+  { label: "Delivery across Kenya", href: "/delivery" },
   { label: "Cart", href: "/cart" },
   { label: "Track an order", href: "/track-order" },
 ];

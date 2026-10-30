@@ -1,0 +1,65 @@
+# SEO Implementation Register
+
+The running record of SEO work on this codebase. Update it at the end of
+every batch. Status values: **DONE** (implemented and tested on a local
+production build against a mock catalogue), **BLOCKED** (waiting on access
+or owner input), **TODO**.
+
+Last updated: 2026-10-30
+
+## 0. Critical blocker: the live domain serves a different website
+
+The audit on 2026-10-30 found that **ecbtechkenya.com does not serve this
+codebase.** It serves a separate site, with a "Premium Laptops That Fits Your
+Purpose" slider, account/wishlist/compare icons, `/assets/images/` URLs, no
+canonical, no JSON-LD and no sitemap. None of the work below affects the
+live site until one of the following happens:
+
+- **A.** Point `ecbtechkenya.com` and `www.ecbtechkenya.com` at this
+  Next.js app in Cloudflare, with the apex domain 301-redirecting to
+  `www`; or
+- **B.** Give access to the live site's own code or CMS, so the fixes can
+  be applied there.
+
+Owner decision required. Until then, the status here means "done in this
+codebase", not "live".
+
+## 1. Batch log
+
+| # | Task | Component | Status | Validation |
+|---|---|---|---|---|
+| 1 | Consistent business details; ElectronicsStore and WebSite JSON-LD | `lib/business.js`, `app/layout.tsx` | DONE | Rendered JSON-LD checked |
+| 2 | Canonicals; noindex on filter, sort and search URLs; per-category titles | `app/products/page.jsx` | DONE | Canonical and robots checked per URL |
+| 3 | Product and BreadcrumbList JSON-LD; specifications as `additionalProperty` | `app/products/[slug]/page.jsx` | DONE | JSON-LD parsed |
+| 4 | Legacy WordPress redirects (`/product/*`, `/product-category/*`, old sitemaps) | `next.config.ts`, `app/product-category` | DONE | 308 redirects followed |
+| 5 | Titles ≤60 characters, descriptions ≤160, one H1 per page | `lib/seo.js` | DONE | Automated audit of 7 page types |
+| 6 | Full Open Graph and Twitter card tags; 1200×630 share image | `lib/seo.js`, `public/og.png` | DONE | Automated audit |
+| 7 | Image alt text on the site (WooCommerce alt, else product name, numbered) | `lib/utils.js` `imageAlt` | DONE | 0 images without alt |
+| 8 | Fill missing alt text in WooCommerce itself | `scripts/fill-image-alt-text.mjs` | BLOCKED: owner runs it | Dry run tested on mock |
+| 9 | Sitemap index plus pages, categories and products sitemaps (with image entries); 503 instead of an empty sitemap if WooCommerce fails | `lib/sitemaps.js`, `app/sitemap.xml`, `app/sitemaps/*` | DONE | XML well-formed, 200s |
+| 10 | Delivery page: 146 towns and fees from the courier tariff, with FAQ | `app/delivery`, `lib/delivery.js` | DONE | 146 rows rendered |
+| 11 | Product specifications table and fact-only product FAQ | `lib/product-content.js` | DONE | Rendered on mock product |
+| 12 | Catalogue export with issue flags | `scripts/export-catalogue.mjs` | BLOCKED: owner runs it | Tested on mock |
+| 13 | Redesign (single-accent design system) | site-wide | DONE | Screenshots at desktop and 390px; no horizontal overflow |
+
+## 2. Deliberately not done, and why
+
+| Item | Reason |
+|---|---|
+| FAQPage schema | Google limits FAQ rich results to authoritative government and health sites. The FAQs are visible on the page but carry no FAQPage markup. |
+| Warranty, returns and delivery-time claims | Not verified. Never invent them. Waiting on the owner's policy terms. |
+| 47 county pages | Would be doorway pages. One delivery page covers every town actually served. County pages only where real demand and unique content exist (needs Search Console data). |
+| Separate `/brands/*` pages | Brand subcategories (HP, Lenovo, …) already exist as category pages. Duplicate brand pages would compete with them. Revisit after the catalogue export. |
+| Price, spec, use-case and listicle page families | Need the real catalogue to check that each page has enough in-stock products. Build after the catalogue export (§3). |
+| Published/modified dates, hreflang | Not applicable to shop pages on a single-language site. |
+
+## 3. Next batches (in order)
+
+1. **Owner:** resolve §0, then run the following and share the CSV:
+   - `node --env-file=.env.local scripts/export-catalogue.mjs`
+   - `node --env-file=.env.local scripts/fill-image-alt-text.mjs --apply`
+2. Catalogue issue register from the CSV: zero prices, duplicates, missing brands, thin descriptions, missing specs.
+3. Clean category URLs (`/laptops`, `/laptops/hp`) with 308s from `?category=`. Needs owner approval.
+4. Data-driven page families gated by inventory thresholds (spec, price band, use-case), plus ItemList and CollectionPage markup.
+5. Policy pages (warranty, returns) once terms are supplied, then `hasMerchantReturnPolicy` and `shippingDetails` markup and a Merchant Center feed.
+6. Search Console, GA4 and Merchant Center access to set baselines and build the keyword-to-URL map from real queries.

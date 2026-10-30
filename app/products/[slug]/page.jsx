@@ -8,6 +8,8 @@ import ProductGallery from "@/components/ProductGallery";
 import ProductPurchaseBox from "@/components/ProductPurchaseBox";
 import { decodeEntities, formatPrice, imageAlt, stripHtml, truncateAtWord } from "@/lib/utils";
 import { pageMetadata } from "@/lib/seo";
+import { DELIVERY_STATS } from "@/lib/delivery";
+import { buildProductFaqs, getSpecifications } from "@/lib/product-content";
 import { BUSINESS, MAPS_URL, SITE_URL, STREET_ADDRESS, jsonLdHtml, whatsappUrl } from "@/lib/business";
 import { ChevronRight, CreditCard, MessageCircle, Phone, Store, Truck } from "lucide-react";
 
@@ -100,6 +102,11 @@ function buildJsonLd(product, productName, variations, category) {
     sku: product.sku || undefined,
     brand: brand ? { "@type": "Brand", name: brand } : undefined,
     category: category ? decodeEntities(category.name) : undefined,
+    additionalProperty: getSpecifications(product).map((spec) => ({
+      "@type": "PropertyValue",
+      name: spec.name,
+      value: spec.value,
+    })),
     offers,
     aggregateRating:
       product.rating_count > 0
@@ -150,9 +157,11 @@ export default async function ProductPage({ params }) {
   const enquiryMessage = `Hi ECB Technologies, I'm interested in the ${productName}. Is it available? ${SITE_URL}/products/${product.slug}`;
 
   const brand = getBrandName(product);
+  const specifications = getSpecifications(product);
+  const faqs = buildProductFaqs(product, productName, variations);
 
   return (
-    <div className={product.description ? "" : "pb-24"}>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLdHtml(buildJsonLd(product, productName, variations, category))}
@@ -234,7 +243,11 @@ export default async function ProductPage({ params }) {
                 <div>
                   <dt className="text-[15px] font-semibold text-ink">Delivery across Kenya</dt>
                   <dd className="type-caption mt-0.5 text-ink-48">
-                    Shipping cost for your town is shown at checkout.
+                    {DELIVERY_STATS.townCount} towns via Fargo Courier, from{" "}
+                    {formatPrice(DELIVERY_STATS.minFee)}.{" "}
+                    <Link href="/delivery" className="link">
+                      Fees by town
+                    </Link>
                   </dd>
                 </div>
               </div>
@@ -257,17 +270,53 @@ export default async function ProductPage({ params }) {
         </div>
       </div>
 
-      {product.description && (
+      {(product.description || specifications.length > 0) && (
         <section className="mt-20 bg-parchment py-16 sm:py-20">
-          <div className="mx-auto max-w-[980px] px-6">
-            <h2 className="type-display text-ink">Overview</h2>
-            <div
-              className="prose-ecb mt-8"
-              dangerouslySetInnerHTML={{ __html: product.description }}
-            />
+          <div className="mx-auto max-w-[980px] space-y-14 px-6">
+            {specifications.length > 0 && (
+              <div>
+                <h2 className="type-display text-ink">Specifications</h2>
+                <dl className="mt-8 divide-y divide-hairline border-y border-hairline">
+                  {specifications.map((spec) => (
+                    <div key={spec.name} className="grid gap-1 py-4 sm:grid-cols-[220px_1fr] sm:gap-6">
+                      <dt className="text-[15px] font-semibold text-ink">{spec.name}</dt>
+                      <dd className="text-[15px] text-ink-80">{spec.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+            {product.description && (
+              <div>
+                <h2 className="type-display text-ink">Overview</h2>
+                <div
+                  className="prose-ecb mt-8"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                />
+              </div>
+            )}
           </div>
         </section>
       )}
+
+      <section className="mx-auto max-w-[980px] px-6 py-16 sm:py-20">
+        <h2 className="type-display text-ink">Questions about the {productName}</h2>
+        <dl className="mt-8 divide-y divide-hairline border-y border-hairline">
+          {faqs.map((faq) => (
+            <div key={faq.q} className="py-6">
+              <dt className="type-tagline text-ink">{faq.q}</dt>
+              <dd className="mt-2 text-[17px] text-ink-80">{faq.a}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="type-caption mt-6 text-ink-48">
+          Another question?{" "}
+          <a href={whatsappUrl(enquiryMessage)} target="_blank" rel="noopener noreferrer" className="link">
+            Ask us on WhatsApp
+          </a>
+          .
+        </p>
+      </section>
     </div>
   );
 }

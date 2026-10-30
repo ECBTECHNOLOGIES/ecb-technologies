@@ -68,6 +68,16 @@ const nextConfig: NextConfig = {
         destination: "/products?on_sale=true",
         permanent: true,
       },
+      // Sitemap URLs from the old WordPress site (Yoast / WP core) that
+      // Search Console may still have on file.
+      ...[
+        "/sitemap_index.xml",
+        "/product-sitemap.xml",
+        "/product_cat-sitemap.xml",
+        "/page-sitemap.xml",
+        "/post-sitemap.xml",
+        "/wp-sitemap.xml",
+      ].map((source) => ({ source, destination: "/sitemap.xml", permanent: true })),
       // Any other /product-category/<slug> is resolved to its matching
       // category by app/product-category/[...slug]/route.js.
       //
