@@ -7,7 +7,28 @@ or owner input), **TODO**.
 
 Last updated: 2026-10-30
 
-## 0. Critical blocker: the live domain serves a different website
+## 0. Decision update (2026-10-31): keep the live site
+
+The live ecbtechkenya.com is a custom shop system (not WordPress) with
+Agent Login and Rider Login, and **the shop uses it daily**. Replacing it
+with this Next.js store would break operations, so **the domain switch is
+cancelled**. SEO fixes for the live site are specified, ready for its
+developer, in `docs/seo/LIVE-SITE-SEO-FIXES.md`.
+
+Findings from the DNS check (Cloudflare):
+- Every record points to `217.20.120.93`.
+- There are no `wp`/`api` records, so the WooCommerce backend this repo
+  reads from is unreachable. That's why the Vercel build shows no products.
+- `app.ecbtechkenya.com` serves a "We shall be back soon" holding page.
+- The `mail`/`smtp`/`pop`/`ftp` records are Proxied, which breaks email.
+  They should be DNS only.
+- The live site states Mon–Sat 9:00–19:00, but the owner told us "daily
+  9–7". Confirm and align.
+
+This repo stays as a reference implementation. The sections below
+describe it, not the live site.
+
+## 0b. (Superseded) Earlier finding: the live domain serves a different website
 
 The audit on 2026-10-30 found that **ecbtechkenya.com does not serve this
 codebase.** It serves a separate site, with a "Premium Laptops That Fits Your
