@@ -14,7 +14,10 @@
 // - One product at a time, with a pause between, so the shop stays fast.
 // - A log can be downloaded at the end.
 (async () => {
-  const LIMIT = 1; // 1 = test on one product. Set to Infinity to do all.
+  const answer = (prompt("Type 1 to TEST on one product, or ALL to do every product.", "1") || "")
+    .trim().toUpperCase();
+  if (answer !== "1" && answer !== "ALL") return alert("Cancelled. Nothing was changed.");
+  const LIMIT = answer === "ALL" ? Infinity : 1;
   const DATA_URL =
     "https://raw.githubusercontent.com/ECBTECHNOLOGIES/ecb-technologies/main/docs/seo/live-site/product-seo.json";
   const PAUSE_MS = 1500;
