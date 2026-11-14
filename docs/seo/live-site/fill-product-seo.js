@@ -14,12 +14,21 @@
 // - One product at a time, with a pause between, so the shop stays fast.
 // - A log can be downloaded at the end.
 (async () => {
-  const answer = (prompt("Type 1 to TEST on one product, or ALL to do every product.", "1") || "")
-    .trim().toUpperCase();
-  if (answer !== "1" && answer !== "ALL") return alert("Cancelled. Nothing was changed.");
-  const LIMIT = answer === "ALL" ? Infinity : 1;
+  // Works in batches: after BATCH products it stops so the page can be reloaded,
+  // which frees the browser's memory. Finished products are remembered in this
+  // browser, so pasting the script again continues where the last batch ended.
+  const BATCH = 50;
+  const LIMIT = Infinity;
   const DATA_URL =
-    "https://raw.githubusercontent.com/ECBTECHNOLOGIES/ecb-technologies/main/docs/seo/live-site/product-seo.json";
+    "https://raw.githubusercontent.com/ECBTECHNOLOGIES/ecb-technologies/main/docs/seo/live-site/product-seo-remaining.json";
+  const KEY = "ecbSeoDone";
+  const doneIds = new Set((() => {
+    try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch { return []; }
+  })());
+  const remember = (id) => {
+    doneIds.add(id);
+    try { localStorage.setItem(KEY, JSON.stringify([...doneIds])); } catch {}
+  };
   const PAUSE_MS = 1500;
 
   if (!location.href.startsWith("https://www.ecbtechkenya.com/admin")) {
@@ -42,7 +51,16 @@
   };
 
   show("Loading product list… You can close the developer tools now; this box shows progress.");
-  const items = await (await fetch(DATA_URL, { cache: "no-store" })).json();
+  const items = (await (await fetch(DATA_URL, { cache: "no-store" })).json()).filter((i) => !doneIds.has(i.id));
+  if (!items.length) {
+    show("<b>All products are done.</b> Nothing left to add.");
+    return;
+  }
+  if (!confirm(`${items.length} products still need SEO. Start the next batch of up to ${BATCH}?`)) {
+    panel.remove();
+    return;
+  }
+  let loaded = 0;
 
   // A fresh hidden frame per product, removed afterwards, so memory is freed
   // as the run goes (one long-lived frame grew until Chrome paused it).
@@ -73,6 +91,8 @@
 
   for (const item of items) {
     if (changed >= LIMIT) break;
+    if (loaded >= BATCH) break;
+    loaded++;
     const tag = `#${item.id} ${item.name}`;
     try {
       freshFrame();
@@ -92,6 +112,7 @@
       const existing = metatags.tagit("assignedTags");
       if (seo.checked || desc.value.trim() || existing.length) {
         skipped++;
+        remember(item.id);
         log.push({ id: item.id, name: item.name, result: "skipped (already has SEO)" });
         show(`Changed ${changed} · skipped ${skipped} · failed ${failed}`, `⏭ ${tag}`);
         continue;
@@ -117,6 +138,7 @@
       if (!response.ok) throw new Error(`save failed: ${String(response.text).slice(0, 120)}`);
 
       changed++;
+      remember(item.id);
       log.push({ id: item.id, name: item.name, result: "SEO added", description: item.description });
       show(`Changed ${changed} · skipped ${skipped} · failed ${failed}`, `✅ ${tag}`);
     } catch (error) {
@@ -139,7 +161,13 @@
   link.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
   link.download = "ecb-product-seo-log.csv";
   link.textContent = "Download log";
-  show(`<b>Finished.</b> Changed ${changed} · skipped ${skipped} · failed ${failed}<br>`);
+  const left = items.length - loaded;
+  show(
+    left > 0
+      ? `<b>Batch done.</b> Added ${changed} · skipped ${skipped} · failed ${failed}. ` +
+          `<b>${left} left.</b> Reload this page (Cmd/Ctrl + R), then paste the script again for the next batch.<br>`
+      : `<b>All done!</b> Added ${changed} · skipped ${skipped} · failed ${failed} in this last batch.<br>`
+  );
   panel.appendChild(link);
   window.ecbSeoLog = log;
   console.table(log);
