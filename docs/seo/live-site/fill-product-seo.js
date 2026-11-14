@@ -41,12 +41,21 @@
       lines.slice(0, 40).join("<br>");
   };
 
-  show("Loading product list…");
+  show("Loading product list… You can close the developer tools now; this box shows progress.");
   const items = await (await fetch(DATA_URL, { cache: "no-store" })).json();
 
-  const frame = document.createElement("iframe");
-  frame.style.cssText = "position:fixed;left:-9999px;top:0;width:1200px;height:900px;border:0";
-  document.body.appendChild(frame);
+  // A fresh hidden frame per product, removed afterwards, so memory is freed
+  // as the run goes (one long-lived frame grew until Chrome paused it).
+  let frame = null;
+  const freshFrame = () => {
+    if (frame) {
+      frame.src = "about:blank";
+      frame.remove();
+    }
+    frame = document.createElement("iframe");
+    frame.style.cssText = "position:fixed;left:-9999px;top:0;width:1200px;height:900px;border:0";
+    document.body.appendChild(frame);
+  };
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const load = (url) =>
@@ -66,6 +75,7 @@
     if (changed >= LIMIT) break;
     const tag = `#${item.id} ${item.name}`;
     try {
+      freshFrame();
       await load(`/admin/products/edit/${item.id}`);
       await sleep(800); // let the page's editors and tag boxes initialise
       const w = frame.contentWindow, d = frame.contentDocument, $ = w.jQuery;
@@ -121,7 +131,7 @@
     await sleep(PAUSE_MS);
   }
 
-  frame.remove();
+  if (frame) frame.remove();
   const csv = ["id,name,result"]
     .concat(log.map((r) => [r.id, `"${String(r.name).replace(/"/g, '""')}"`, `"${r.result}"`].join(",")))
     .join("\n");
