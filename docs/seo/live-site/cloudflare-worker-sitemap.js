@@ -4,12 +4,16 @@
 //   pages, every category and every product. Cached for 6 hours, so new and
 //   removed products show up automatically.
 // - /robots.txt: the shop's own robots.txt, with the Sitemap line added.
+// - /assets/images/brands/*: the theme asks for brand logos that don't exist,
+//   and the shop answers each with a full 62 KB "not found" page. Missing ones
+//   now get a tiny, cached "not found" instead (the buttons keep showing text).
 // - Everything else passes straight through to the shop, unchanged.
 //
 // Deploy: Cloudflare dashboard → Workers & Pages → Create → Worker → paste this →
 // Deploy. Then add routes so it only handles these two paths:
 //   ecbtechkenya.com/sitemap.xml, www.ecbtechkenya.com/sitemap.xml,
-//   ecbtechkenya.com/robots.txt, www.ecbtechkenya.com/robots.txt
+//   ecbtechkenya.com/robots.txt, www.ecbtechkenya.com/robots.txt,
+//   ecbtechkenya.com/assets/images/brands/*, www.ecbtechkenya.com/assets/images/brands/*
 
 const CACHE_SECONDS = 6 * 60 * 60;
 
@@ -21,6 +25,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/sitemap.xml") return cached(request, ctx, () => buildSitemap(url));
     if (url.pathname === "/robots.txt") return robots(url);
+    if (url.pathname.startsWith("/assets/images/brands/")) return brandLogo(request, ctx);
     return fetch(request);
   },
 };
@@ -33,6 +38,20 @@ async function cached(request, ctx, build) {
   const response = await build();
   if (response.status === 200) ctx.waitUntil(cache.put(key, response.clone()));
   return response;
+}
+
+async function brandLogo(request, ctx) {
+  const cache = caches.default;
+  const hit = await cache.match(request);
+  if (hit) return hit;
+  const res = await fetch(request);
+  if (res.status !== 404) return res;
+  const tiny = new Response(null, {
+    status: 404,
+    headers: { "Cache-Control": "public, max-age=86400", "Content-Type": "image/png" },
+  });
+  ctx.waitUntil(cache.put(request, tiny.clone()));
+  return tiny;
 }
 
 async function getText(url) {
