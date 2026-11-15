@@ -599,3 +599,9 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - `node scripts/live-site/test-pseo.mjs` (11 tests).
   - Live crawl: all 36 pages return 200 with one H1 each and no duplicate
     titles; all 225 internal links resolve.
+
+## 2026-11-15: search suggestions removed (Worker v42)
+- The live suggestion dropdown under the search box is gone: its script and
+  CSS (seo.js) and the `/ecb-search` endpoint (now 404). Search fields get
+  `autocomplete="off"`, so browsers do not show their own list either.
+  Pressing Enter still opens the full results page.

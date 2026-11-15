@@ -68,10 +68,10 @@ const SKIN_ID = (() => {
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
-  waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
+  waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "41";
+const VERSION = "42";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -155,7 +155,6 @@ export default {
       if (url.pathname === "/ecb-research-state") return await researchStateResponse(env, ctx);
       if (url.pathname === "/guides/pages.json") return await guidesJson(request, env, ctx);
       if (url.pathname === "/ecb-assets/og.png") return ogImage();
-      if (url.pathname === "/ecb-search") return await suggest(url, ctx);
       if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
       if (url.pathname === "/ecb-indexnow" && request.method === "POST") return await indexNow(Object.assign(url, { request }), env);
       if (url.pathname.startsWith("/ecb-assets/")) return serveBundle(url);
@@ -607,41 +606,6 @@ async function llmsWithResearch(env, ctx) {
     "",
   ].join("\n");
   return base.replace("## Core pages", `${research}\n## Core pages`);
-}
-
-// Live search suggestions: the shop's own search, first 8 matches as JSON.
-async function suggest(url, ctx) {
-  const q = (url.searchParams.get("q") || "").trim().slice(0, 60);
-  const json = (data, maxAge) =>
-    new Response(JSON.stringify(data), {
-      headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": `public, max-age=${maxAge}`, "X-Robots-Tag": "noindex" },
-    });
-  if (q.length < 2) return json({ q, total: 0, items: [] }, 300);
-  const key = `https://www.ecbtechkenya.com/__ecb/suggest/${encodeURIComponent(q.toLowerCase())}`;
-  const hit = await caches.default.match(key);
-  if (hit) return hit;
-  const res = await fetch(`${SITE}/category?search=${encodeURIComponent(q)}&pageby=8`, { headers: { "User-Agent": "Mozilla/5.0 (ECB search)" } });
-  const html = await res.text();
-  const total = Number(((html.match(/class="ecb-cat-count">\s*(?:<strong>)?\s*(\d[\d,]*)/) || [])[1] || "0").replace(/,/g, ""));
-  const items = [];
-  for (const card of html.split('<div class="ecb-fp-card"').slice(1)) {
-    const link = card.match(/href="(https:\/\/www\.ecbtechkenya\.com\/item\/[A-Za-z0-9-]+)"/);
-    const name = card.match(/class="ecb-fp-name">\s*([^<]+?)\s*</);
-    const price = card.match(/class="ecb-fp-price">\s*([^<]+?)\s*</);
-    const img = card.match(/(?:data-o|src)="(https:\/\/www\.ecbtechkenya\.com\/assets\/images\/[^"]+)"/);
-    if (!link || !name) continue;
-    const path = img ? imagePath(img[1]) : null;
-    items.push({
-      url: link[1],
-      name: name[1].replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#0?39;/g, "'"),
-      price: price ? price[1].replace(/^KSH\s*/i, "KSh ") : "",
-      img: path ? resized(path, 96) : "",
-    });
-    if (items.length >= 8) break;
-  }
-  const out = json({ q, total: total || items.length, items }, 60);
-  ctx.waitUntil(caches.default.put(key, out.clone()));
-  return out;
 }
 
 // Sends every sitemap URL to IndexNow. Needs ?token=<INDEXNOW_TOKEN>.
@@ -1263,11 +1227,16 @@ function rewrite(response, url, bundle, hints) {
         e.after(SHIM_SCRIPT, { html: true });
       },
     })
+    // No suggestion lists under the search box (not even the browser's own).
+    .on('input[name="search"]', {
+      element(e) {
+        e.setAttribute("autocomplete", "off");
+      },
+    })
     .on("body", {
       element(e) {
         e.append(TOKEN_SCRIPT, { html: true });
         e.append(waFloat(product, seo.canonical), { html: true });
-        e.append(SUGGEST_SCRIPT, { html: true });
         if (useSubset) e.append(fullCssLoader(bundle), { html: true });
       },
     })

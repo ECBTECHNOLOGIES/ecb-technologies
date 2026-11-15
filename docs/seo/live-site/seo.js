@@ -379,24 +379,6 @@ export const socialLinks = (cls) =>
     .map(([href, name, icon]) => `<a href="${href}" class="${cls}" target="_blank" rel="noopener me" aria-label="ECB Technologies on ${name}">${icon}</a>`)
     .join("");
 
-// Live search suggestions: as you type (2+ letters), matching products with
-// photo and current price come straight from the shop's own search.
-export const SUGGEST_SCRIPT =
-  "<script>(function(){var esc=function(s){return String(s).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]})};" +
-  "var box=document.createElement('div');box.className='ecb-suggest';box.hidden=true;box.setAttribute('role','listbox');document.body.appendChild(box);" +
-  "var cur=null,t=null,last='',ctl=null,cache={};" +
-  "function place(){if(!cur)return;var r=cur.form.getBoundingClientRect();box.style.left=(r.left+window.scrollX)+'px';box.style.top=(r.bottom+window.scrollY+6)+'px';box.style.width=Math.max(r.width,300)+'px'}" +
-  "function render(d,q){if(!d.items.length){box.innerHTML='<div class=\"ecb-suggest-empty\">No products found for \u201c'+esc(q)+'\u201d</div>'}else{box.innerHTML=d.items.map(function(i){return '<a class=\"ecb-suggest-item\" href=\"'+esc(i.url)+'\"><img src=\"'+esc(i.img)+'\" alt=\"\" width=\"44\" height=\"44\"><span class=\"n\">'+esc(i.name)+'</span><span class=\"p\">'+esc(i.price)+'</span></a>'}).join('')+'<a class=\"ecb-suggest-all\" href=\"/category?search='+encodeURIComponent(q)+'\">See all '+d.total+' result'+(d.total==1?'':'s')+' \u2192</a>'}place();box.hidden=false}" +
-  "function run(inp){var q=inp.value.trim();if(q.length<2){box.hidden=true;last='';return}if(q===last&&!box.hidden)return;last=q;if(cache[q])return render(cache[q],q);if(ctl)ctl.abort();ctl=window.AbortController?new AbortController():null;" +
-  "fetch('/ecb-search?q='+encodeURIComponent(q),ctl?{signal:ctl.signal}:{}).then(function(r){return r.json()}).then(function(d){cache[q]=d;if(inp.value.trim()===q&&cur===inp)render(d,q)}).catch(function(){})}" +
-  "document.querySelectorAll('input[name=\"search\"]').forEach(function(inp){if(!inp.form)return;inp.setAttribute('autocomplete','off');" +
-  "inp.addEventListener('input',function(){cur=inp;clearTimeout(t);t=setTimeout(function(){run(inp)},200)});" +
-  "inp.addEventListener('focus',function(){cur=inp;if(inp.value.trim().length>1)run(inp)});" +
-  "inp.addEventListener('keydown',function(e){if(e.key==='Escape')box.hidden=true;if(e.key==='ArrowDown'&&!box.hidden){var a=box.querySelector('a');if(a){e.preventDefault();a.focus()}}})});" +
-  "box.addEventListener('keydown',function(e){var as=[].slice.call(box.querySelectorAll('a')),i=as.indexOf(document.activeElement);if(e.key==='ArrowDown'&&i<as.length-1){e.preventDefault();as[i+1].focus()}if(e.key==='ArrowUp'){e.preventDefault();if(i>0)as[i-1].focus();else if(cur)cur.focus()}if(e.key==='Escape'){box.hidden=true;if(cur)cur.focus()}});" +
-  "document.addEventListener('click',function(e){if(!box.contains(e.target)&&(!cur||!cur.form.contains(e.target)))box.hidden=true});" +
-  "addEventListener('resize',place);addEventListener('scroll',function(){if(!box.hidden)place()},{passive:true})})();</script>";
-
 export const SEO_CSS =
   ".ecb-seo-intro{background:#fff;border-bottom:1px solid #e8edf5}" +
   ".ecb-seo-intro .container{padding-top:20px;padding-bottom:20px}" +
@@ -412,14 +394,6 @@ export const SEO_CSS =
   ".ecb-wa-order:hover{background:#1ebe5a}" +
   ".ecb-wa-float{position:fixed;right:16px;bottom:16px;z-index:1030;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22)}" +
   "@media print{.ecb-wa-float{display:none}}" +
-  ".ecb-suggest{position:absolute;z-index:3000;background:#fff;border:1px solid #e2e2e2;border-radius:8px;box-shadow:0 14px 34px rgba(0,0,0,.1);max-height:70vh;overflow:auto;text-align:left}" +
-  ".ecb-suggest-item{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:8px 12px;color:#000!important;text-decoration:none!important;border-bottom:1px solid #f0f0f0}" +
-  ".ecb-suggest-item:hover,.ecb-suggest-item:focus{background:#f2f2f2;outline:none}" +
-  ".ecb-suggest-item img{width:44px;height:44px;object-fit:contain;background:#e9e9e9;border-radius:6px;mix-blend-mode:multiply}" +
-  ".ecb-suggest-item .n{font-size:13px;line-height:1.35}" +
-  ".ecb-suggest-item .p{font-family:'Space Mono',ui-monospace,monospace;font-size:12px;font-weight:700;white-space:nowrap}" +
-  ".ecb-suggest-all,.ecb-suggest-empty{display:block;padding:11px 12px;font-family:'Space Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#000!important;text-decoration:none!important}" +
-  ".ecb-suggest-empty{color:#5c5e5e!important;text-transform:none;letter-spacing:0;font-family:inherit;font-size:13px}" +
   // The banner heading became an h1; keep the theme's h2 sizes for it.
   ".ecb-guide-page .ecb-about-lead-body h2{font-size:24px;line-height:1.3;margin:30px 0 10px;color:#1a2840}" +
   ".ecb-guide-page .ecb-about-lead-body h3{font-size:18px;line-height:1.35;margin:22px 0 6px;color:#1a2840}" +
