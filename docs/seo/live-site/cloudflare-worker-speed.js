@@ -71,7 +71,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "42";
+const VERSION = "45";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -970,6 +970,11 @@ async function rewriteText(res, url, extra) {
   return rewrite(new Response(html, res), url, bundle, hints);
 }
 
+const HERO_HEADLINES = [
+  "The laptop you need.<br>At a price that makes sense.",
+  "The phone you want.<br>At a price that makes sense.",
+];
+
 function rewrite(response, url, bundle, hints) {
   let images = 0;
   let titles = 0;
@@ -1075,11 +1080,21 @@ function rewrite(response, url, bundle, hints) {
         if ((e.getAttribute("href") || "").replace(/\D/g, "").endsWith("717040531")) e.setAttribute("href", "tel:+254717040531");
       },
     })
+    // Home hero: one headline per slide instead of a small label and a
+    // one-word title. The first slide's headline is the page's h1.
     .on("p.ecb-hero-eyebrow", {
       element(e) {
-        if (!isHome || !SKIN || heroLabels++ > 0) return;
-        e.tagName = "h1";
-        e.setInnerContent("Laptops &amp; Phones · Nairobi CBD", { html: true });
+        if (isHome && SKIN) e.remove();
+      },
+    })
+    .on(".ecb-hero-title", {
+      element(e) {
+        if (!isHome || !SKIN) return;
+        const i = heroLabels++;
+        const line = HERO_HEADLINES[i];
+        if (!line) return;
+        if (i === 0) e.tagName = "h1";
+        e.setInnerContent(line, { html: true });
       },
     })
     .on("div.ecb-cats-grid", {

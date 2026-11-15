@@ -605,3 +605,10 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   CSS (seo.js) and the `/ecb-search` endpoint (now 404). Search fields get
   `autocomplete="off"`, so browsers do not show their own list either.
   Pressing Enter still opens the full results page.
+
+## 2026-11-15: hero headline (Worker v45)
+- Home hero: the small label ("Laptops & Phones · Nairobi CBD") and the
+  one-word titles are replaced by one headline per slide: "The laptop you
+  need. / At a price that makes sense." and "The phone you want. / At a price
+  that makes sense." The first is the page h1. Text is in `HERO_HEADLINES`
+  (cloudflare-worker-speed.js); sizes are in skin.js.
