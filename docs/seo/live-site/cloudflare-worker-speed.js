@@ -59,10 +59,14 @@ const SKIN_ID = (() => {
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
-  waOrderButton, waFloat, llmsTxt, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
+  waOrderButton, waFloat, llmsTxt, parseKsh, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "28";
+const VERSION = "31";
+
+// IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
+// /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
+const INDEXNOW_KEY = "a6a895d27584eebb2a87a7a9125acdb9";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -138,6 +142,8 @@ export default {
       }
       if (url.pathname === "/ecb-assets/og.png") return ogImage();
       if (url.pathname === "/ecb-search") return await suggest(url, ctx);
+      if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
+      if (url.pathname === "/ecb-indexnow" && request.method === "POST") return await indexNow(Object.assign(url, { request }), env);
       if (url.pathname.startsWith("/ecb-assets/")) return serveBundle(url);
       const isRead = request.method === "GET" || request.method === "HEAD";
       // One version of the site: the bare domain redirects to www.
@@ -192,6 +198,29 @@ async function suggest(url, ctx) {
   const out = json({ q, total: total || items.length, items }, 60);
   ctx.waitUntil(caches.default.put(key, out.clone()));
   return out;
+}
+
+// Sends every sitemap URL to IndexNow. Needs ?token=<INDEXNOW_TOKEN>.
+async function indexNow(url, env) {
+  if (!env.INDEXNOW_TOKEN || url.searchParams.get("token") !== env.INDEXNOW_TOKEN) return new Response("Not found", { status: 404 });
+  // The URL list comes in the POST body (the published sitemap); a Worker's
+  // own request for /sitemap.xml would reach the shop, which has none.
+  let urls = [];
+  try {
+    urls = (await url.request.json()).filter((u) => typeof u === "string" && u.startsWith(`${SITE}/`));
+  } catch {}
+  if (!urls.length) return new Response(JSON.stringify({ submitted: 0, error: "POST a JSON array of URLs" }), { status: 400 });
+  const body = JSON.stringify({ host: "www.ecbtechkenya.com", key: INDEXNOW_KEY, keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`, urlList: urls.slice(0, 10000) });
+  const results = {};
+  for (const endpoint of ["https://www.bing.com/indexnow", "https://yandex.com/indexnow", "https://api.indexnow.org/indexnow"]) {
+    try {
+      const res = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json; charset=utf-8" }, body });
+      results[endpoint] = `${res.status} ${(await res.text()).slice(0, 120)}`;
+    } catch (e) {
+      results[endpoint] = `error ${e.message}`;
+    }
+  }
+  return new Response(JSON.stringify({ submitted: urls.length, results }), { headers: { "Content-Type": "application/json" } });
 }
 
 function ogImage() {
@@ -430,6 +459,22 @@ function fitTitle(name, suffix) {
   return name;
 }
 
+// Product <title>: "<name> Price in Kenya | ECB Technologies" when it fits in
+// 60 characters; otherwise the name (minus any "Price in Kenya – …" the shop
+// typed into it), shortened at a word boundary.
+function productTitle(name, price) {
+  const len = (t) => t.replace(/&[a-z#0-9]+;/gi, "x").length;
+  const n = name.replace(/\s*Price in Kenya\b[\s\S]*$/i, "").replace(/\s+/g, " ").trim() || name;
+  for (const t of [`${n} Price in Kenya | ECB Technologies`, `${n} Price in Kenya`]) if (len(t) <= 60) return t;
+  // Long names: shorten, and add the price so variants (touch / non-touch,
+  // 8GB / 16GB…) that share the start of their name still differ.
+  const suffix = price ? ` – KSh ${price.toLocaleString("en-US")}` : "";
+  if (len(n + suffix) <= 60) return n + suffix;
+  let short = n;
+  while (len(short + suffix) > 60) short = short.replace(/\s+\S*$/, "");
+  return short.replace(/[\s|,–—-]+$/, "") + suffix;
+}
+
 function fixHtml(html, url) {
   let title = null;
   let description = null;
@@ -438,20 +483,23 @@ function fixHtml(html, url) {
   // generic <title> in <head> and puts the page in quirks mode.
   const pre = html.match(/^\uFEFF?\s*<title>([\s\S]*?)<\/title>\s*(?=<!DOCTYPE)/i);
   if (pre) html = html.slice(pre[0].length);
-  const crumb = ((html.match(/<h2 class="breadcrumb-title">\s*([^<]*?)\s*<\/h2>/) || [])[1] || "").replace(/\s+/g, " ");
+  let crumb = ((html.match(/<h2 class="breadcrumb-title">\s*([^<]*?)\s*<\/h2>/) || [])[1] || "").replace(/\s+/g, " ");
   const path = url.pathname.replace(/\/+$/, "") || "/";
   if (path.startsWith("/item/")) {
-    const name = pre ? pre[1].split("|")[0].trim() : "";
+    // The theme's title is "<name> | ECB Technologies Kenya"; names can contain "|".
+    const raw = pre ? pre[1].trim() : "";
+    const cut = raw.lastIndexOf(" | ");
+    const name = (cut > 0 ? raw.slice(0, cut) : raw).trim();
     // Keep the price in the meta description and the intro equal to the
     // current price (descriptions were written with the price of the day).
-    const pm = html.match(/id="sizeprice">\s*KSH\s*([\d,]+)/i);
-    const live = pm ? Number(pm[1].replace(/,/g, "")) : 0;
+    const pm = html.match(/id="sizeprice">\s*([^<]+)</i);
+    const live = pm ? parseKsh(pm[1]) || 0 : 0;
     if (live > 0 && live < 2000000) {
       const ksh = `KSh ${live.toLocaleString("en-US")}`;
       html = html.replace(/(<meta name="description"\s+content="[^"]*?)KSh [\d,]+/, `$1${ksh}`);
       html = html.replace(/(<h2 class="ecb-price-intro">[\s\S]{0,900}?<strong>)KSh [\d,]+(<\/strong>)/, `$1${ksh}$2`);
     }
-    if (name) title = fitTitle(name, " Price in Kenya");
+    if (name) title = productTitle(name, live > 0 && live < 2000000 ? live : 0);
     // The theme turns <strong>Label</strong> pairs in the description into a
     // spec table and hides the rest, which garbled the price intro. Show the
     // intro above the table instead.
@@ -466,6 +514,13 @@ function fixHtml(html, url) {
     title = "Shop All Laptops, Phones &amp; Accessories | ECB Technologies";
     description = "All laptops, smartphones, printers, gaming gear and accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya.";
   } else if (/^\/category\/[^/]+(\/[^/]+)?$/.test(path) && crumb) {
+    // Subcategories show their parent's name in the banner: "Gaming" under
+    // "Laptops" becomes "Gaming Laptops".
+    const sub = path.split("/")[3];
+    if (sub) {
+      crumb = `${decodeURIComponent(sub).replace(/-/g, " ")} ${crumb}`;
+      html = html.replace(/(<h2 class="breadcrumb-title">)\s*[^<]*?\s*(<\/h2>)/, `$1${crumb}$2`);
+    }
     title = fitTitle(crumb, " Prices in Kenya");
     description = `Shop ${crumb} at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, pay by M-Pesa or card, delivery across Kenya.`;
   } else if (path !== "/" && !path.startsWith("/category") && crumb) {

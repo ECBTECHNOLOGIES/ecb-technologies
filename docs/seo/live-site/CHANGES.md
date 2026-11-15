@@ -398,3 +398,55 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   title and the category row. The H1 moved to the first slide's label:
   "Laptops & Phones · Nairobi CBD". The meta description and structured
   data still carry the address, delivery and hours.
+
+## 2026-11-15: wrap-up (Worker v31)
+- **Prices with cents (admin):** eight products had cents typed in
+  (e.g. 57000.30), which the theme shows as "KSH57,000,30". They are now
+  whole shillings:
+  - #1112 → 57,000
+  - #1076 → 67,000
+  - #814 → 95,500
+  - #781 → 104,500
+  - #826 → 175,500
+  - #578 → 121,000
+  - #899 → 42,500
+  - #910 → 25,000
+  - `parseKsh` in seo.js reads such prices correctly in future.
+- **More duplicates (admin + dupes.js):**
+  - MSI MAG 275UPD E14: #726, and #701 (the KSh 5,700,027 copy), are
+    deactivated → #676.
+  - Samsung Odyssey G9 LS49FG910EMXUE: #717 is deactivated → #658 (#741
+    redirects straight to #658).
+- **Titles:**
+  - Product names that don't fit in 60 characters are shortened at a word
+    boundary and end with the price ("… – KSh 153,500"), so variants
+    (touch / non-touch, 8GB / 16GB…) get different titles.
+  - Names that contain "|" are no longer cut at the first "|".
+  - Subcategories are named "Gaming Laptops", "Budget Laptops".
+- **Sitemap:** cross-category copies (canonical elsewhere) and empty
+  subcategories are excluded. 640 URLs.
+- **IndexNow:**
+  - Key file at /a6a895d27584eebb2a87a7a9125acdb9.txt.
+  - `POST /ecb-indexnow?token=…` (token is the Worker secret
+    INDEXNOW_TOKEN, not in the repo) with a JSON array of URLs submits them.
+  - All sitemap URLs were submitted. Yandex accepted them, and IndexNow
+    shares submissions with Bing. Bing's and api.indexnow.org's own
+    endpoints rate-limit Cloudflare's shared IPs (429).
+- **Full check of all 640 sitemap pages:**
+  - all 200;
+  - title ≤ 60 and unique;
+  - description, canonical = own URL, exactly one H1, JSON-LD, robots meta
+    and X-Robots-Tag present;
+  - redesign applied.
+
+## Still open (owner)
+- Google Search Console: add the property and submit
+  https://www.ecbtechkenya.com/sitemap.xml.
+- Bing Webmaster Tools: submit the sitemap (or import from Search Console).
+- Cloudflare → Caching → Configuration → Crawler Hints: turn on.
+- Google Business Profile: hours Mon–Sat 9am–7pm, Sunday closed; add the
+  website and the Instagram / TikTok / X links.
+- Security: change the admin password; replace the Cloudflare token, R2 keys
+  and reCAPTCHA keys that were pasted in chat.
+- Refresh the three buying guides every month or two (prices change).
+- Facebook / YouTube: send the links if those profiles are created.

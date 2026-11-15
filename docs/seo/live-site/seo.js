@@ -107,6 +107,15 @@ export const NAV_FIXES = {
   [`${SITE}/category?search=printers`]: `${SITE}/category/printers`,
 };
 
+// The theme prints prices like "KSH57,000" and, when cents were typed in,
+// "KSH57,000,30" (cents after a comma). Returns whole shillings.
+export function parseKsh(text) {
+  let t = String(text || "").replace(/[^\d,.]/g, "");
+  t = t.replace(/[,.](\d{1,2})$/, "");
+  const n = Number(t.replace(/[,.]/g, ""));
+  return n > 0 ? n : null;
+}
+
 export function decode(s) {
   return String(s || "")
     .replace(/<[^>]+>/g, " ")
@@ -192,7 +201,7 @@ export function extractSeo(html, url, base) {
     const slug = path.slice(6);
     const name = decode((html.match(/<h1 class="ecb-pd-name">([\s\S]*?)<\/h1>/) || [])[1]);
     const priceText = (html.match(/id="sizeprice">\s*([^<]+)</) || [])[1] || "";
-    const price = Number(priceText.replace(/[^\d.]/g, "")) || null;
+    const price = parseKsh(priceText);
     const sku = decode((html.match(/ecb-pd-meta-label">SKU<\/span>\s*<span class="ecb-pd-meta-value">([^<]*)</) || [])[1]);
     const inStock = /ecb-pd-stock-badge--in/.test(html);
     const outStock = /ecb-pd-stock-badge--out/.test(html);
