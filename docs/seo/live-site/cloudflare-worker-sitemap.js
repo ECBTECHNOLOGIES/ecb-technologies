@@ -39,7 +39,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=6`, { method: "GET" });
+  const key = new Request(`${request.url}?v=7`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -105,8 +105,23 @@ async function buildSitemap(url, env) {
       if (st && st.changedAt) researchDate = st.changedAt.slice(0, 10);
     } catch {}
     for (const p of ["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]) pages.add(p);
+    // Laptop guides: only the pages that passed the quality gates (the speed
+    // Worker writes the list), dated by the catalogue change behind them.
+    const dated = new Set(["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]);
+    try {
+      const gs = env && env.PAGES ? await env.PAGES.get("guides-state", { type: "json" }) : null;
+      if (gs && Array.isArray(gs.urls) && gs.urls.length) {
+        for (const u of ["https://www.ecbtechkenya.com/guides", ...gs.urls]) {
+          const path = u.replace("https://www.ecbtechkenya.com", "");
+          if (/^\/(guides|best|compare|series|laptops)(\/[a-z0-9-]+)?$/.test(path)) {
+            pages.add(path);
+            dated.add(path);
+          }
+        }
+      }
+    } catch {}
     const entry = (path, priority) =>
-      `  <url><loc>${xmlEscape(origin + path)}</loc>${path.startsWith("/research") && researchDate ? `<lastmod>${researchDate}</lastmod>` : ""}<priority>${priority}</priority></url>`;
+      `  <url><loc>${xmlEscape(origin + path)}</loc>${dated.has(path) && researchDate ? `<lastmod>${researchDate}</lastmod>` : ""}<priority>${priority}</priority></url>`;
     const body = [
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',

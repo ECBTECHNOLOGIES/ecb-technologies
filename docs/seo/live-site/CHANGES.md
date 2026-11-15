@@ -543,3 +543,59 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
     `.md`.
 - **Admin to-do:** the HP OMEN Transcend 14 laptop is filed under
   SmartPhones; move it to Laptops or Gaming.
+
+## 2026-11-15: programmatic laptop guides (Worker v41)
+- **`pseo.js`:** `buildPages(products)` is pure and tested. It decides which
+  guide pages exist from the live catalogue, writes each one in the pSEO
+  JSON shape, and reports every rejected candidate with its reason.
+- **35 pages published**, plus the `/guides` hub:
+  - Curation (11): best laptops under 25k, 30k, 40k, 50k, 60k, 70k, 80k and
+    150k; 2-in-1; touchscreen; 16 GB RAM.
+  - Personas (4): business, programming, design and video editing, gaming.
+  - Directory (6): HP, Lenovo and Dell; Core i5, Core i7, Core Ultra and
+    Ryzen.
+  - Profiles (5): ThinkPad, EliteBook, Latitude, ZBook, HP x360.
+  - Comparisons (8): ThinkPad vs EliteBook, EliteBook vs Latitude, ThinkPad
+    vs Latitude, EliteBook vs ProBook, Core i5 vs i7, Core Ultra vs i7,
+    8 GB vs 16 GB RAM, MacBook vs Windows.
+- **Gates:**
+  - at least 10 matching laptops (8 per side for comparisons);
+  - a unique slug and a unique primary keyword;
+  - no more than 60% of listed laptops shared with an accepted page;
+  - not already covered by an existing guide;
+  - at least 600 words (900 for comparisons and profiles);
+  - at least 3 FAQs, 5 internal links and 2 related pages.
+  Links to pages that fail a gate are removed.
+- **16 SKIPPED:**
+  - Under 20k: only 7 laptops.
+  - Under 100k: duplicates the under-80k page.
+  - Apple directory: duplicates the design page.
+  - HP vs Dell, HP vs Lenovo and student laptops: existing guides already
+    cover them.
+  - ProBook, XPS and MacBook profiles: under 900 words.
+  - Playbooks not built: Templates, Conversions, Examples, Locations
+    (doorway risk), Integrations, Glossary and Translations.
+  Every reason is in `/guides/pages.json`.
+- **Ranking:** a published spec score out of 42 (processor class, processor
+  age, RAM, SSD). Pros and cons follow only from the listing. One example is
+  the Windows 11 support note for 7th-gen and older Intel chips.
+- **URLs:**
+  - `/best/*`, `/compare/*`, `/series/*` and `/laptops/*`; each has a `.md`
+    version.
+  - Bare `/best`, `/compare`, `/series` and `/laptops` return 301 to
+    `/guides`.
+  - A guide that drops below its gate later returns 302 to `/guides`
+    (never a 404). Unknown slugs return 404.
+- **Discovery:**
+  - The sitemap lists only published guides (KV `guides-state`, written by
+    the speed Worker), with lastmod set from the catalogue change.
+  - llms.txt has a "Laptop guides" section.
+  - The guides are in the markdown catalog.
+  - Footer link "Laptop guides"; laptop category pages link to `/guides`.
+- **Schema:** CollectionPage or Article, ItemList and FAQPage. The template
+  adds BreadcrumbList.
+- **Snapshot:** the JSON output is in `pseo-pages.json`.
+- **Checks:**
+  - `node scripts/live-site/test-pseo.mjs` (11 tests).
+  - Live crawl: all 36 pages return 200 with one H1 each and no duplicate
+    titles; all 225 internal links resolve.

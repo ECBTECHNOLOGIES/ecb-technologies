@@ -54,6 +54,7 @@ import {
   STUDIES, studyHtml, studyJsonLd, studyMarkdown, hubHtml, hubMarkdown, citeSection, RESEARCH_CSS, median as medianOf,
   lowerName,
 } from "./research.js";
+import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
 let SKIN = false;
@@ -70,7 +71,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "39";
+const VERSION = "41";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -150,8 +151,9 @@ export default {
       if (url.pathname === "/llms.txt") return textFile(request, await llmsWithResearch(env, ctx), 86400);
       if (url.pathname === "/llms-full.txt") return await llmsFull(request, env, ctx);
       if (url.pathname === "/ai.txt") return textFile(request, aiTxt(), 86400);
-      if (url.pathname === "/api/md/_catalog") return await mdCatalog(request, ctx);
+      if (url.pathname === "/api/md/_catalog") return await mdCatalog(request, env, ctx);
       if (url.pathname === "/ecb-research-state") return await researchStateResponse(env, ctx);
+      if (url.pathname === "/guides/pages.json") return await guidesJson(request, env, ctx);
       if (url.pathname === "/ecb-assets/og.png") return ogImage();
       if (url.pathname === "/ecb-search") return await suggest(url, ctx);
       if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
@@ -180,10 +182,13 @@ export default {
           mdPath = mdPath.replace(/\/+$/, "") || "/";
           if (mdPath === "/index") mdPath = "/";
           if (mdPath === "/research" || mdPath.startsWith("/research/")) return await serveResearchMd(request, mdPath, negotiated, env, ctx);
+          if (GUIDE_PATH.test(mdPath)) return await serveGuideMd(request, mdPath, negotiated, env, ctx);
           return await serveMarkdown(request, url, mdPath, negotiated, ctx);
         }
       }
       if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
+      if (isRead && /^\/(best|compare|series|laptops)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
+      if (isRead && GUIDE_PATH.test(url.pathname.replace(/\/+$/, ""))) return agentHeaders(await guidePage(request, url, env, ctx), url);
       if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
       if (request.method === "HEAD") return agentHeaders(await fetch(request), url);
       if (request.method !== "GET") return fetch(request);
@@ -329,7 +334,7 @@ async function serveMarkdown(request, url, path, negotiated, ctx) {
 }
 
 // Every markdown URL, as JSON.
-async function mdCatalog(request, ctx) {
+async function mdCatalog(request, env, ctx) {
   const products = await productList(ctx);
   const routes = [
     "/",
@@ -338,6 +343,8 @@ async function mdCatalog(request, ctx) {
     ...LISTED_CATEGORIES.map(([slug]) => `/category/${slug}`),
     "/research",
     ...Object.keys(STUDIES).map((slug) => `/research/${slug}`),
+    "/guides",
+    ...(await guides(env, ctx)).pages.map((d) => d.url.slice(SITE.length)),
     "/category/laptops/Gaming",
     "/category/laptops/Budget",
     ...products.map((p) => `/item/${p.slug}`),
@@ -436,18 +443,25 @@ async function serveResearch(request, url, env, ctx) {
   const content =
     `<style>${RESEARCH_CSS}</style>` +
     (slug ? studyHtml(slug, s, changedAt) + `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": studyJsonLd(slug, s, changedAt) }).replace(/</g, "\\u003c")}</script>` : hubHtml(all, changedAt));
-  const shellRes = await fetch(`${SITE}/delivery`, { headers: { "User-Agent": "Mozilla/5.0 (ECB research)", Cookie: request.headers.get("Cookie") || "" } });
+  return shellPage(request, url, { h1: title, description, content, crumbs: slug ? [["Research", "/research"]] : [], modified: changedAt });
+}
+
+// Our own content inside the shop's page template (header, footer, skin),
+// borrowed from /delivery.
+const escAttr = (t) => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+async function shellPage(request, url, { h1, title, description, content, crumbs, modified }) {
+  const shellRes = await fetch(`${SITE}/delivery`, { headers: { "User-Agent": "Mozilla/5.0 (ECB pages)", Cookie: request.headers.get("Cookie") || "" } });
   let html = await shellRes.text();
-  const esc = (t) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  const trail = [...crumbs.map(([t, href]) => `<a href="${href}">${escAttr(t)}</a></li><li>`), escAttr(h1)].join("");
   html = html
     .replace(/<meta name="keywords"[^>]*>/, "")
-    .replace(/(<meta name="description"\s+content=")[^"]*"/, `$1${esc(description)}"`)
-    .replace(/(<h2 class="breadcrumb-title">)[\s\S]*?(<\/h2>)/, `$1${esc(title)}$2`)
-    .replace(/(<ul class="bread-menu">[\s\S]*?<li>[\s\S]*?<\/li>\s*<li>)[\s\S]*?(<\/li>\s*<\/ul>)/, slug ? `$1<a href="/research">Research</a></li><li>${esc(title)}$2` : `$1Research$2`)
+    .replace(/(<meta name="description"\s+content=")[^"]*"/, `$1${escAttr(description)}"`)
+    .replace(/(<h2 class="breadcrumb-title">)[\s\S]*?(<\/h2>)/, `$1${escAttr(h1)}$2`)
+    .replace(/(<ul class="bread-menu">[\s\S]*?<li>[\s\S]*?<\/li>\s*<li>)[\s\S]*?(<\/li>\s*<\/ul>)/, `$1${trail}$2`)
     .replace(/(<div class="ecb-about-lead-body">)[\s\S]*?(<\/div>)/, `$1${content}$2`);
-  if (!/<meta name="description"/.test(html)) html = html.replace("</head>", `<meta name="description" content="${esc(description)}"></head>`);
+  if (!/<meta name="description"/.test(html)) html = html.replace("</head>", `<meta name="description" content="${escAttr(description)}"></head>`);
   const res = new Response(html, { status: 200, headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private" } });
-  return rewriteText(res, url, { modified: changedAt });
+  return rewriteText(res, url, { modified, title });
 }
 
 // Research pages for visitors without a session are cached for an hour, keyed
@@ -484,6 +498,99 @@ async function serveResearchMd(request, path, negotiated, env, ctx) {
   return new Response(request.method === "HEAD" ? null : md, { headers });
 }
 
+// ---------- laptop guides (pseo.js) ----------
+
+// Built from the same catalogue snapshot as the research pages. The list of
+// live URLs goes to KV for the sitemap Worker (written only when it changes).
+let guidesMemo = null;
+async function guides(env, ctx) {
+  const { products, changedAt } = await researchState(env, ctx);
+  if (guidesMemo && guidesMemo.changedAt === changedAt) return guidesMemo.built;
+  const built = buildPages(products, { changedAt });
+  guidesMemo = { changedAt, built };
+  if (env && env.PAGES) {
+    const urls = built.pages.map((d) => d.url);
+    try {
+      const prev = await env.PAGES.get("guides-state", { type: "json", cacheTtl: 300 });
+      if (!prev || prev.changedAt !== changedAt || prev.urls.join() !== urls.join()) {
+        (ctx || NOOP_CTX).waitUntil(env.PAGES.put("guides-state", JSON.stringify({ changedAt, urls })));
+      }
+    } catch {}
+  }
+  return built;
+}
+
+async function serveGuide(request, url, env, ctx) {
+  const path = url.pathname.replace(/\/+$/, "");
+  const built = await guides(env, ctx);
+  if (path === "/guides") {
+    return shellPage(request, url, {
+      h1: "Laptop guides",
+      title: "Laptop Buying Guides for Kenya | ECB Technologies",
+      description: `${built.pages.length} laptop buying guides built from our live catalogue: best laptops by budget, for business, programming, design and gaming, comparisons and series.`,
+      content: `<style>${RESEARCH_CSS}${PSEO_CSS}</style>${guidesHubHtml(built)}`,
+      crumbs: [],
+      modified: built.changedAt,
+    });
+  }
+  const doc = built.pages.find((d) => d.url === SITE + path);
+  if (!doc) {
+    // A guide that no longer has enough products goes to the hub, never a 404.
+    if (built.skipped.some((s) => s.url === SITE + path)) return Response.redirect(`${SITE}/guides`, 302);
+    return fetch(new Request(`${SITE}/ecb-not-found-${Date.now()}`, request));
+  }
+  const ld = `<script type="application/ld+json">${JSON.stringify(doc.schema.structured_data).replace(/</g, "\\u003c")}</script>`;
+  return shellPage(request, url, {
+    h1: doc.content.h1,
+    title: doc.seo.title,
+    description: doc.seo.meta_description,
+    content: `<style>${RESEARCH_CSS}${PSEO_CSS}</style>${guideHtml(doc)}${ld}`,
+    crumbs: [["Guides", "/guides"]],
+    modified: built.changedAt,
+  });
+}
+
+async function guidePage(request, url, env, ctx) {
+  if (hasSession(request)) return serveGuide(request, url, env, ctx);
+  const key = `${SITE}/__ecb/guides/v${VERSION}${SKIN ? "s" + SKIN_ID : ""}${url.pathname.replace(/\/+$/, "")}`;
+  const hit = await caches.default.match(key);
+  if (hit) return new Response(hit.body, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private", "X-Robots-Tag": "index, follow", "X-ECB-Cache": "HIT" } });
+  const res = await serveGuide(request, url, env, ctx);
+  if (res.status !== 200) return res;
+  const html = await res.text();
+  ctx.waitUntil(caches.default.put(key, new Response(html, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "public, max-age=3600" } })));
+  return new Response(html, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private", "X-Robots-Tag": "index, follow", "X-ECB-Cache": "MISS" } });
+}
+
+async function serveGuideMd(request, path, negotiated, env, ctx) {
+  const built = await guides(env, ctx);
+  const doc = built.pages.find((d) => d.url === SITE + path);
+  if (path !== "/guides" && !doc) return new Response(notFoundMd(path), { status: 404, headers: { "Content-Type": "text/markdown; charset=utf-8", "X-Robots-Tag": "noindex" } });
+  const md = doc ? guideMarkdown(doc) : guidesHubMarkdown(built);
+  const canonical = `${SITE}${path}`;
+  const headers = {
+    "Content-Type": "text/markdown; charset=utf-8",
+    "X-Markdown-Tokens": String(Math.ceil(md.length / 4)),
+    "X-Robots-Tag": "noindex, follow",
+    "Content-Location": canonical,
+    Link: `<${canonical}>; rel="canonical", ${DESCRIBED_BY}`,
+    "Last-Modified": new Date(built.changedAt).toUTCString(),
+    "Cache-Control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+    ...corsHeaders(),
+  };
+  if (negotiated) headers.Vary = "Accept";
+  return new Response(request.method === "HEAD" ? null : md, { headers });
+}
+
+// Every guide in the pSEO JSON format, plus every candidate that was rejected.
+async function guidesJson(request, env, ctx) {
+  const built = await guides(env, ctx);
+  const body = JSON.stringify({ site: SITE, generated: built.changedAt, count: built.pages.length, pages: built.pages.map(publicJson), skipped: built.skipped }, null, 1);
+  return new Response(request.method === "HEAD" ? null : body, {
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=600, s-maxage=3600", "X-Robots-Tag": "noindex", ...corsHeaders() },
+  });
+}
+
 async function llmsWithResearch(env, ctx) {
   const { studies: all, products } = await studies(env, ctx).then(async (r) => ({ ...r, products: await productList(ctx) }));
   const base = llmsSpec(products);
@@ -493,6 +600,10 @@ async function llmsWithResearch(env, ctx) {
     ...Object.entries(all).map(([slug, s]) => `- [${STUDIES[slug].title(s, new Date().getFullYear())}](${SITE}/research/${slug}.md): ${s.findings[0] ? s.findings[0].text : STUDIES[slug].question}`),
     "",
     citeSection(all),
+    "",
+    "## Laptop guides (built from the live catalogue)",
+    `- [All guides](${SITE}/guides.md)`,
+    ...(await guides(env, ctx)).pages.map((d) => `- [${d.content.h1}](${d.url}.md): ${d.seo.meta_description}`),
     "",
   ].join("\n");
   return base.replace("## Core pages", `${research}\n## Core pages`);
@@ -881,6 +992,7 @@ async function rewriteText(res, url, extra) {
   hints.description = fixed.description;
   hints.noindex = fixed.noindex;
   hints.seo = extractSeo(html, url, fixed);
+  if (extra && extra.title) hints.title = escAttr(extra.title);
   if (extra && extra.modified) {
     hints.seo.modified = extra.modified;
     for (const g of hints.seo.graph) if (g.dateModified) g.dateModified = extra.modified;
