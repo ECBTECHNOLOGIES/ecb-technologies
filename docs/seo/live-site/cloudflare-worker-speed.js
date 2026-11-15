@@ -28,12 +28,17 @@
 //    missing, a missing jQuery plugin stubbed, brand logos and hero pictures
 //    that don't exist on the server are left out (brand names show as text).
 //
+// F. Each product, category and info page gets its own <title> (products:
+//    "<name> Price in Kenya | ECB Technologies"), categories and info pages
+//    get a meta description, search/sort/filter pages get noindex, and the
+//    product price intro shows above the spec table.
+//
 // Admin, agent, rider, user, cart and checkout pages pass through unchanged.
 
 import { USED_FOR, USED_CSS } from "./used-css.js";
 import { BUNDLE_HASH, BUNDLE_CSS, THEME_VERSION } from "./bundle-css.js";
 
-const VERSION = "7";
+const VERSION = "8";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -65,6 +70,10 @@ const RESERVE_CSS =
   ".ecb-cats-grid:not(.slick-initialized){visibility:visible}" +
   ".ecb-bestsell-slider:not(.slick-initialized){height:384px}" +
   ".ecb-uniq-slider:not(.slick-initialized){height:316px}}";
+
+const INTRO_CSS =
+  ".ecb-pd-intro{padding:18px 22px 6px}.ecb-pd-intro h2{font-size:17px;font-weight:600;margin:0 0 6px;color:#1a2840}" +
+  ".ecb-pd-intro p{margin:0 0 10px;font-size:14px;line-height:1.55;color:#4a5568}";
 
 // Runs in the visitor's browser. Only acts on a cached copy (no session cookie
 // yet): on first interaction it gets a session and a fresh form token.
@@ -279,9 +288,62 @@ function scan(html) {
   };
 }
 
+// ---------- F. titles, descriptions, product intro ----------
+
+const PAGE_DESCRIPTIONS = {
+  "/about":
+    "ECB Technologies sells genuine laptops, phones and accessories from our shop on Moi Avenue, Nairobi CBD, with delivery across Kenya.",
+  "/contact":
+    "Visit ECB Technologies at Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD. Call 0717 040 531. Open Mon-Sat 9am-7pm.",
+};
+const NOINDEX_PARAMS = /^(search|sort|min|max|min_price|max_price|pageby|view_check|type|minprice|maxprice)$/i;
+
+// "<name><suffix> | ECB Technologies" if it fits in 60 characters,
+// otherwise without the brand, otherwise just the name.
+function fitTitle(name, suffix) {
+  const len = (t) => t.replace(/&[a-z#0-9]+;/gi, "x").length;
+  for (const t of [`${name}${suffix} | ECB Technologies`, `${name}${suffix}`]) if (len(t) <= 60) return t;
+  return name;
+}
+
+function fixHtml(html, url) {
+  let title = null;
+  let description = null;
+  let noindex = false;
+  // The theme prints product titles before <!DOCTYPE>, which leaves a second,
+  // generic <title> in <head> and puts the page in quirks mode.
+  const pre = html.match(/^\uFEFF?\s*<title>([\s\S]*?)<\/title>\s*(?=<!DOCTYPE)/i);
+  if (pre) html = html.slice(pre[0].length);
+  const crumb = ((html.match(/<h2 class="breadcrumb-title">\s*([^<]*?)\s*<\/h2>/) || [])[1] || "").replace(/\s+/g, " ");
+  const path = url.pathname.replace(/\/+$/, "") || "/";
+  if (path.startsWith("/item/")) {
+    const name = pre ? pre[1].split("|")[0].trim() : "";
+    if (name) title = fitTitle(name, " Price in Kenya");
+    // The theme turns <strong>Label</strong> pairs in the description into a
+    // spec table and hides the rest, which garbled the price intro. Show the
+    // intro above the table instead.
+    html = html.replace(
+      /(<div class="ecb-pd-description-body">)\s*(<h2 class="ecb-price-intro">[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>)/,
+      '<div class="ecb-pd-intro">$2</div>$1'
+    );
+  } else if (/^\/category\/[^/]+$/.test(path) && crumb) {
+    title = fitTitle(crumb, " Prices in Kenya");
+    description = `Shop ${crumb} at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, pay by M-Pesa or card, delivery across Kenya.`;
+  } else if (path !== "/" && !path.startsWith("/category") && crumb) {
+    title = fitTitle(crumb, "");
+    description = PAGE_DESCRIPTIONS[path] || null;
+  }
+  if (path.startsWith("/category") && [...url.searchParams.keys()].some((k) => NOINDEX_PARAMS.test(k))) noindex = true;
+  return { html, title, description, noindex };
+}
+
 async function rewriteText(res, url) {
-  const html = await res.text();
+  const fixed = fixHtml(await res.text(), url);
+  const html = fixed.html;
   const hints = scan(html);
+  hints.title = fixed.title;
+  hints.description = fixed.description;
+  hints.noindex = fixed.noindex;
   const bundle = hints.themeVersion === THEME_VERSION ? BUNDLE_PATH : null;
   if (hints.banner && /["'()<>\s]/.test(hints.banner)) hints.banner = null;
   if (hints.mainImg && /["'()<>\s]/.test(hints.mainImg)) hints.mainImg = null;
@@ -307,7 +369,8 @@ function rewrite(response, url, bundle, hints) {
     .on("head > title", {
       element(e) {
         titles++;
-        if (titles > 1) e.remove();
+        if (titles > 1) return e.remove();
+        if (hints.title) e.setInnerContent(hints.title, { html: true });
       },
     })
     .on('meta[name="description"]', {
@@ -339,7 +402,7 @@ function rewrite(response, url, bundle, hints) {
     })
     .on("head", {
       element(e) {
-        e.append(`<style>${RESERVE_CSS}</style>`, { html: true });
+        e.append(`<style>${RESERVE_CSS}${INTRO_CSS}</style>`, { html: true });
         if (hints.banner) {
           const pri = hints.mainImg ? "auto" : "high";
           e.prepend(
@@ -357,7 +420,9 @@ function rewrite(response, url, bundle, hints) {
           e.prepend(`<link rel="preload" as="image" href="${resized(hints.mainImg, 600)}" fetchpriority="high">`, { html: true });
         }
         e.onEndTag((end) => {
-          if (!hasDescription && isHome) end.before(`<meta name="description" content="${HOME_DESCRIPTION}">`, { html: true });
+          const desc = isHome ? HOME_DESCRIPTION : hints.description;
+          if (!hasDescription && desc) end.before(`<meta name="description" content="${desc}">`, { html: true });
+          if (hints.noindex) end.before(`<meta name="robots" content="noindex, follow">`, { html: true });
         });
       },
     })

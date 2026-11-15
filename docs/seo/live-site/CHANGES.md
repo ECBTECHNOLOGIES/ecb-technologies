@@ -104,6 +104,27 @@ TBT and CLS are near 0 everywhere.
 redeploy the Worker. Until then, pages automatically fall back to the
 original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 
+## 2026-11-15: titles and product intro (Worker v8)
+- Product SEO was already live on all 677 products: meta keywords and
+  description in each page's `<head>`. The theme has no visible tags
+  section, so they are never shown on the page itself.
+- Found: the theme prints each product's `<title>` *before* `<!DOCTYPE>`.
+  That gave every product page two titles (its own and the generic home
+  title) and put it in browser quirks mode. The Worker now:
+  - moves the product title into `<head>` as
+    "<name> Price in Kenya | ECB Technologies", keeping it to 60
+    characters or fewer (the brand is dropped when it doesn't fit);
+  - gives each category "<Category> Prices in Kenya | ECB Technologies"
+    plus a meta description;
+  - gives About and Contact their own titles and descriptions;
+  - adds `noindex, follow` to search, sort and filter pages.
+- Found: the theme builds the spec table from bold labels and hides the
+  raw description, which garbled the price intro ("KSh 51,000 | at ECB
+  Technologies…"). The intro now shows as a heading and paragraph above
+  the table.
+- Product pages render in standards mode now. The layout is the same
+  except a few pixels of spacing.
+
 ## Still open
 - Upload `cloudflare-redirects.csv` to Bulk Redirects. The current token
   lacks the lists/redirect-rules permissions.
