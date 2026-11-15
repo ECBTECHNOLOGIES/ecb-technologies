@@ -57,6 +57,53 @@
   every page, harmless. Product grids show one per row on phones; that is
   the theme's own layout.
 
+## 2026-11-15: speed Worker v7 (target: GTmetrix A, 97-100%)
+`ecb-speed` now also:
+- **Page cache:** visitors without a shop session (first visits, Google,
+  GTmetrix) get a ready-made copy from Cloudflare. Server wait drops from
+  about 700 ms to about 60 ms. Copies refresh in the background after
+  5 minutes. The home page and categories are also kept in a global
+  store (KV namespace `ecb-page-cache`) for Cloudflare locations with no
+  copy yet. Visitors with a session (cart, login, agents, riders) always
+  get the live page. A cached page fetches a fresh form token on first
+  interaction; forms and add-to-cart were tested.
+- **One stylesheet:** the 13 stylesheets are merged into one
+  (`bundle-css.js`, built by `scripts/live-site/build-css.py`, cached for a
+  year). The broken `styles.php` link is removed.
+- **Trimmed styles:** home, category and product pages carry only the
+  styles they use (94-128 KB instead of 1.2 MB), built by
+  `scripts/live-site/used-css.js`. The full file loads on interaction or
+  when the page is idle. Screenshots were pixel-identical across trimmed,
+  full and original styles.
+- **Images:** resized and served as AVIF/WebP via Cloudflare Image
+  Transformations, now turned on (free plan, 5,000 unique images/month).
+  This covers thumbnails, categories, banners, main product photos and
+  the page-header banner. If a resized image fails, the browser falls
+  back to the original.
+- **Load order:** the banner and the main product photo are announced at
+  the top of `<head>`.
+- **Missing pictures:** brand logos and hero pictures that don't exist on
+  the server are left out, and brand names show as text. Both hero
+  slider pictures are missing; re-upload them in Admin → Sliders.
+- **Other fixes:** the duplicate `<title>` is removed, the home page gets a
+  meta description, and the `counterUp` console error is stubbed out.
+- **Cache rules:** images and fonts 1 year, theme JS/CSS 30 days.
+
+Lighthouse results:
+
+| Page | Desktop | Phone |
+|---|---|---|
+| Home | 100 | 93 |
+| Category | 100 | 100 |
+| Product | 100 | 93–99 |
+| About | 99 | 91 |
+
+TBT and CLS are near 0 everywhere.
+
+**After any theme CSS change:** run `build-css.py`, then `used-css.js`, then
+redeploy the Worker. Until then, pages automatically fall back to the
+original stylesheets, as long as the `ecb-theme.css?v=` version changed.
+
 ## Still open
 - Upload `cloudflare-redirects.csv` to Bulk Redirects. The current token
   lacks the lists/redirect-rules permissions.
