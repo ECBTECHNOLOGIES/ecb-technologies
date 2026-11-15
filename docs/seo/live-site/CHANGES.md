@@ -31,10 +31,36 @@
   which is DirectAdmin, not cPanel. The control panel is likely at
   `https://<server>:2222`.
 
+## 2026-11-15: speed Worker
+- Worker `ecb-speed` (`cloudflare-worker-speed.js`) on `www.ecbtechkenya.com/*`
+  and `ecbtechkenya.com/*`. `/assets/*` and `/admin*` are skipped (routes
+  with no Worker). The `ecb-sitemap` routes still win for their paths.
+  It only changes the HTML of public pages:
+  - removes the theme's "hide the page until every script loads" rule
+  - drops the second copy of all.css
+  - loads animate, datatables, toastr and jQuery UI CSS without blocking
+  - lazy-loads images after the first six
+  - sets and preloads the page-header banner
+  - reserves carousel space so nothing jumps
+  User, agent, rider, cart, checkout and login pages are not touched.
+- Measured in a throttled phone simulation, before and after:
+
+  | Page | Before | After |
+  |---|---|---|
+  | Home | 2.9 s | 1.7 s |
+  | Category | 3.1 s | 1.6 s |
+  | Product | 3.5 s | 1.6 s |
+
+  Desktop is about 1.5 s. CLS stays at or below 0.05. Add-to-cart was tested.
+- To undo: Cloudflare → Workers Routes, delete the two `ecb-speed` routes.
+- Noted: `counterUp is not a function` is a script error that was already on
+  every page, harmless. Product grids show one per row on phones; that is
+  the theme's own layout.
+
 ## Still open
 - Upload `cloudflare-redirects.csv` to Bulk Redirects. The current token
   lacks the lists/redirect-rules permissions.
-- Theme code: the page is hidden until it has fully loaded, about 1.2 MB of
-  render-blocking CSS, and jQuery UI. Fixing these needs hosting (file)
-  access.
+- Theme code, needs hosting (file) access: about 1 MB of render-blocking
+  CSS (Bootstrap and the theme), jQuery UI JS loaded on every page, and two
+  Google Analytics tags.
 - Roll the Cloudflare API token. It and its R2 keys were pasted in chat.
