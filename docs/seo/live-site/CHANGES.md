@@ -284,3 +284,11 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - `seo.js` softens the photo's left edge (mask), tones it slightly
   (brightness .86, saturation .92) to sit with the navy, and adds a shadow
   behind the "LATEST TECH / BEST PRICES" corner text.
+- Follow-up (Worker v22):
+  - The hero photo is sized per screen: 750 px on phones and tablets,
+    1200 px on desktop, set through `<head>` CSS.
+  - The first slide's photo is preloaded.
+  - Roboto 400/700/900 are preloaded so text doesn't re-flow when the font
+    arrives. Desktop CLS had risen to 0.15 from the home intro re-flowing
+    and is now 0.003.
+  - Lighthouse home: desktop 100, phone 84–91.

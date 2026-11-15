@@ -51,7 +51,7 @@ import {
   waOrderButton, waFloat, llmsTxt,
 } from "./seo.js";
 
-const VERSION = "19";
+const VERSION = "22";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -324,8 +324,12 @@ function scan(html) {
   const banner = html.match(/class="gs-breadcrumb-section[^"]*"\s+data-background="([^"]+)"/);
   const main = html.match(/<img\s+id="ecbMainImg"\s+src="([^"]+)"/);
   const theme = html.match(/ecb-theme\.css\?v=([\w.-]+)/);
+  const font = html.match(/\/cf-fonts\/s\/roboto\/([\d.]+)\//);
+  const heroBgs = [...html.matchAll(/class="ecb-hero-img-bg"\s+style="background-image:url\('([^']+)'\)/g)].map((m) => imagePath(m[1]));
   return {
     themeVersion: theme ? theme[1] : null,
+    fontVersion: font ? font[1] : "5.2.10",
+    heroBgs: heroBgs.every(Boolean) ? heroBgs : [],
     banner: banner ? imagePath(banner[1]) : null,
     mainImg: main ? imagePath(main[1]) : null,
   };
@@ -578,6 +582,26 @@ function rewrite(response, url, bundle, hints) {
         if (hints.mainImg) {
           e.prepend(`<link rel="preload" as="image" href="${resized(hints.mainImg, 600)}" fetchpriority="high">`, { html: true });
         }
+        if (hints.heroBgs && hints.heroBgs.length) {
+          const rules = hints.heroBgs
+            .map((p, i) => `.ecb-hero-slide:nth-child(${i + 1}) .ecb-hero-img-bg{background-image:url('${resized(p, 1200)}')!important}`)
+            .join("");
+          e.append(`<style>@media (min-width:992px){${rules}}</style>`, { html: true });
+          // The first slide's photo is the largest thing on screen: fetch it early.
+          e.prepend(
+            `<link rel="preload" as="image" href="${resized(hints.heroBgs[0], 750)}" media="(max-width:991px)" fetchpriority="high">` +
+              `<link rel="preload" as="image" href="${resized(hints.heroBgs[0], 1200)}" media="(min-width:992px)" fetchpriority="high">`,
+            { html: true }
+          );
+        }
+        // Load the Roboto weights used above the fold before first paint, so
+        // text doesn't re-flow (layout shift) when the font arrives.
+        e.prepend(
+          ["400", "700", "900"]
+            .map((w) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="/cf-fonts/s/roboto/${hints.fontVersion}/latin/${w}/normal.woff2">`)
+            .join(""),
+          { html: true }
+        );
         e.onEndTag((end) => {
           const desc = isHome ? HOME_DESCRIPTION : hints.description;
           if (!hasDescription && desc) end.before(`<meta name="description" content="${desc}">`, { html: true });
@@ -645,7 +669,8 @@ function rewrite(response, url, bundle, hints) {
         const path = m && imagePath(m[1]);
         if (!path) return;
         if (!(await exists(new URL(path, "https://www.ecbtechkenya.com/").toString()))) e.removeAttribute("style");
-        else e.setAttribute("style", style.replace(m[0], `url('${resized(path, 1600)}')`));
+        // Phones/tablets get 750px; the <head> CSS below swaps in 1200px on desktop.
+        else e.setAttribute("style", style.replace(m[0], `url('${resized(path, 750)}')`));
       },
     })
     .on("section.gs-breadcrumb-section[data-background]", {
