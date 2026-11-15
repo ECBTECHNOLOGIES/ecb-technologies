@@ -58,7 +58,8 @@ export function isContentPath(path) {
     !!INFO_PAGES[path] ||
     path === "/category" ||
     /^\/category\/[A-Za-z0-9-]+(\/[A-Za-z0-9-]+)?$/.test(path) ||
-    /^\/item\/[A-Za-z0-9-]+$/.test(path)
+    /^\/item\/[A-Za-z0-9-]+$/.test(path) ||
+    /^\/research(\/[a-z0-9-]+)?$/.test(path)
   );
 }
 

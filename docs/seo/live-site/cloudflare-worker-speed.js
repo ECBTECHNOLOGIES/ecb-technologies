@@ -43,13 +43,17 @@
 
 import { USED_FOR, USED_CSS } from "./used-css.js";
 import { BUNDLE_HASH, BUNDLE_CSS, THEME_VERSION } from "./bundle-css.js";
-import { REDIRECTS } from "./catalog-map.js";
+import { REDIRECTS, CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
 import { DUPE_REDIRECTS } from "./dupes.js";
 import { SKIN_CSS, SKIN_FONTS } from "./skin.js";
 import {
   isContentPath, wantsMarkdown, mdPathFor, renderPath, markdownPage, notFoundMd, productCards,
   llmsTxt as llmsSpec, llmsFullTxt, aiTxt, INFO_PAGES, CORE_PAGES, LISTED_CATEGORIES,
 } from "./markdown.js";
+import {
+  STUDIES, studyHtml, studyJsonLd, studyMarkdown, hubHtml, hubMarkdown, citeSection, RESEARCH_CSS, median as medianOf,
+  lowerName,
+} from "./research.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
 let SKIN = false;
@@ -63,10 +67,10 @@ const SKIN_ID = (() => {
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
-  waOrderButton, waFloat, llmsTxt, parseKsh, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
+  waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "34";
+const VERSION = "39";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -143,10 +147,11 @@ export default {
     try {
       // ---- AI-readable files (markdown.js) ----
       if (request.method === "OPTIONS" && isAgentPath(url.pathname)) return new Response(null, { status: 204, headers: corsHeaders() });
-      if (url.pathname === "/llms.txt") return textFile(request, llmsSpec(await productList(ctx)), 86400);
-      if (url.pathname === "/llms-full.txt") return await llmsFull(request, ctx);
+      if (url.pathname === "/llms.txt") return textFile(request, await llmsWithResearch(env, ctx), 86400);
+      if (url.pathname === "/llms-full.txt") return await llmsFull(request, env, ctx);
       if (url.pathname === "/ai.txt") return textFile(request, aiTxt(), 86400);
       if (url.pathname === "/api/md/_catalog") return await mdCatalog(request, ctx);
+      if (url.pathname === "/ecb-research-state") return await researchStateResponse(env, ctx);
       if (url.pathname === "/ecb-assets/og.png") return ogImage();
       if (url.pathname === "/ecb-search") return await suggest(url, ctx);
       if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
@@ -174,9 +179,11 @@ export default {
         if (mdPath !== null) {
           mdPath = mdPath.replace(/\/+$/, "") || "/";
           if (mdPath === "/index") mdPath = "/";
+          if (mdPath === "/research" || mdPath.startsWith("/research/")) return await serveResearchMd(request, mdPath, negotiated, env, ctx);
           return await serveMarkdown(request, url, mdPath, negotiated, ctx);
         }
       }
+      if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
       if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
       if (request.method === "HEAD") return agentHeaders(await fetch(request), url);
       if (request.method !== "GET") return fetch(request);
@@ -188,6 +195,39 @@ export default {
     }
   },
 };
+
+// "348 Laptops in Kenya with Prices (2026)" and a one-sentence summary
+// (count, order, price range and median, newest three, date), from the same
+// product rows as llms.txt and the research pages.
+async function categorySummary(hints, url) {
+  const c = hints.seo.category;
+  const parts = url.pathname.split("/").filter(Boolean);
+  if (parts.length !== 2) return; // top-level categories only
+  const products = await productList(NOOP_CTX);
+  const rows = products.filter((p) => {
+    const ci = CATEGORY_OF[p.slug];
+    return ci !== undefined && CATEGORIES[ci][0].toLowerCase() === parts[1].toLowerCase() && p.price > 1000 && p.price < 2000000;
+  });
+  if (rows.length < 5) return;
+  const prices = rows.map((r) => r.price);
+  const year = new Date().getFullYear();
+  const raw = c.name.replace(/&amp;/g, "&");
+  // Shop category names are inconsistent ("SmartPhones", "Gaming"); use plain nouns.
+  const NOUN = { smartphones: "Phones & Tablets", gaming: "Gaming Products", printers: "Printers", laptops: "Laptops" };
+  const name = NOUN[parts[1].toLowerCase()] || raw;
+  const t = `${c.count} ${name} in Kenya with Prices (${year})`;
+  if (t.length <= 60) hints.title = t.replace(/&/g, "&amp;");
+  // Listing names can be cut off ("…"): drop the partial last word and keep the part before a comma.
+  const shortName = (nm) => {
+    let x = nm.endsWith("…") ? nm.slice(0, -1).replace(/\s+\S*$/, "") : nm;
+    return x.split(/,| \| /)[0].replace(/[\s\-–(/]+$/, "").trim();
+  };
+  const newest = rows.slice(0, 3).map((r) => shortName(r.name));
+  const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
+  c.summary =
+    `ECB Technologies lists ${c.count} ${lowerName(name)} in Nairobi, newest first, priced from KSh ${Math.min(...prices).toLocaleString("en-US")} to KSh ${Math.max(...prices).toLocaleString("en-US")} ` +
+    `(median KSh ${medianOf(prices).toLocaleString("en-US")}). Newest: ${newest.join(", ")}. Prices as of ${today}.`;
+}
 
 // ---------- AI-readable versions (markdown.js) ----------
 
@@ -296,6 +336,8 @@ async function mdCatalog(request, ctx) {
     ...Object.keys(INFO_PAGES),
     "/category",
     ...LISTED_CATEGORIES.map(([slug]) => `/category/${slug}`),
+    "/research",
+    ...Object.keys(STUDIES).map((slug) => `/research/${slug}`),
     "/category/laptops/Gaming",
     "/category/laptops/Budget",
     ...products.map((p) => `/item/${p.slug}`),
@@ -307,7 +349,7 @@ async function mdCatalog(request, ctx) {
 }
 
 // Core pages, guides and legal pages rendered in full, then every product.
-async function llmsFull(request, ctx) {
+async function llmsFull(request, env, ctx) {
   const key = `${SITE}/__ecb/llms-full/v${VERSION}`;
   const hit = await caches.default.match(key);
   let body = hit ? await hit.text() : null;
@@ -315,11 +357,145 @@ async function llmsFull(request, ctx) {
     const paths = CORE_PAGES;
     const rendered = await Promise.all(paths.map((p) => renderMarkdown(p, new URL(SITE + p))));
     const sections = paths.map((p, i) => [`${SITE}${p === "/" ? "/" : p}`, rendered[i].md]).filter((x, i) => rendered[i].status === 200);
-    body = llmsFullTxt(sections, await productList(ctx));
+    const { studies: all, changedAt } = await studies(env, ctx);
+    const research = [[`${SITE}/research`, hubMarkdown(all, changedAt)], ...Object.keys(all).map((slug) => [`${SITE}/research/${slug}`, studyMarkdown(slug, all[slug], changedAt)])];
+    body = llmsFullTxt([...sections.slice(0, 1), ...research, ...sections.slice(1)], await productList(ctx));
     if (body.length > 500000) console.warn(`llms-full.txt is ${body.length} chars`);
     ctx.waitUntil(caches.default.put(key, new Response(body, { headers: { "Cache-Control": "public, max-age=86400" } })));
   }
   return textFile(request, body, 86400);
+}
+
+// ---------- research pages (research.js) ----------
+
+const NOOP_CTX = { waitUntil() {} };
+
+// The catalogue's fingerprint and when it last changed (global, in KV).
+// Written only when prices or products change, so dates are honest.
+async function researchState(env, ctx) {
+  const products = await productList(ctx || NOOP_CTX);
+  const sig = products.map((p) => `${p.slug}:${p.price}`).sort().join("|");
+  let h = 0;
+  for (let i = 0; i < sig.length; i++) h = (h * 31 + sig.charCodeAt(i)) | 0;
+  const hash = (h >>> 0).toString(36);
+  let state = null;
+  if (env && env.PAGES) {
+    try {
+      state = await env.PAGES.get("research-state", { type: "json", cacheTtl: 300 });
+    } catch {}
+  }
+  if (!state || state.hash !== hash) {
+    state = { hash, changedAt: new Date().toISOString(), count: products.length };
+    if (env && env.PAGES) (ctx || NOOP_CTX).waitUntil(env.PAGES.put("research-state", JSON.stringify(state)));
+  }
+  return { products, changedAt: state.changedAt };
+}
+
+async function researchStateResponse(env, ctx) {
+  const { products, changedAt } = await researchState(env, ctx);
+  return new Response(JSON.stringify({ changedAt, products: products.length, studies: Object.keys(STUDIES) }), {
+    headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=600", "X-Robots-Tag": "noindex" },
+  });
+}
+
+// The full name of a product whose listing name was cut short ("…").
+async function fullName(p) {
+  if (!p || !/…$/.test(p.name)) return p;
+  try {
+    const html = await (await fetch(p.url, { headers: { "User-Agent": "Mozilla/5.0 (ECB research)" } })).text();
+    const m = html.match(/<h1 class="ecb-pd-name">([^<]+)</);
+    if (m) return { ...p, name: decode(m[1]) };
+  } catch {}
+  return p;
+}
+
+async function studies(env, ctx) {
+  const { products, changedAt } = await researchState(env, ctx);
+  const out = {};
+  for (const [slug, meta] of Object.entries(STUDIES)) out[slug] = meta.compute(products);
+  for (const s of Object.values(out)) {
+    if (s.min) {
+      s.min = await fullName(s.min);
+      const faq = s.faq.find((f) => f.id === "cheapest-laptop-kenya");
+      if (faq) faq.a = `The cheapest laptop is ${s.min.name} at KSh ${s.min.price.toLocaleString("en-US")}.`;
+    }
+  }
+  return { studies: out, changedAt };
+}
+
+// HTML: the research content inside the shop's own page template.
+async function serveResearch(request, url, env, ctx) {
+  const path = url.pathname.replace(/\/+$/, "");
+  const slug = path === "/research" ? null : path.slice(10);
+  if (slug !== null && !STUDIES[slug]) return new Response("Not found", { status: 404 });
+  const { studies: all, changedAt } = await studies(env, ctx);
+  const s = slug ? all[slug] : null;
+  const year = new Date(changedAt).getFullYear();
+  const title = slug ? STUDIES[slug].title(s, year) : "Research: Tech Prices in Kenya";
+  const description = (slug ? s.findings[0]?.text || STUDIES[slug].question : "Original statistics on laptop, phone and accessory prices in Kenya, from ECB Technologies' own catalogue.").slice(0, 160);
+  const content =
+    `<style>${RESEARCH_CSS}</style>` +
+    (slug ? studyHtml(slug, s, changedAt) + `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": studyJsonLd(slug, s, changedAt) }).replace(/</g, "\\u003c")}</script>` : hubHtml(all, changedAt));
+  const shellRes = await fetch(`${SITE}/delivery`, { headers: { "User-Agent": "Mozilla/5.0 (ECB research)", Cookie: request.headers.get("Cookie") || "" } });
+  let html = await shellRes.text();
+  const esc = (t) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  html = html
+    .replace(/<meta name="keywords"[^>]*>/, "")
+    .replace(/(<meta name="description"\s+content=")[^"]*"/, `$1${esc(description)}"`)
+    .replace(/(<h2 class="breadcrumb-title">)[\s\S]*?(<\/h2>)/, `$1${esc(title)}$2`)
+    .replace(/(<ul class="bread-menu">[\s\S]*?<li>[\s\S]*?<\/li>\s*<li>)[\s\S]*?(<\/li>\s*<\/ul>)/, slug ? `$1<a href="/research">Research</a></li><li>${esc(title)}$2` : `$1Research$2`)
+    .replace(/(<div class="ecb-about-lead-body">)[\s\S]*?(<\/div>)/, `$1${content}$2`);
+  if (!/<meta name="description"/.test(html)) html = html.replace("</head>", `<meta name="description" content="${esc(description)}"></head>`);
+  const res = new Response(html, { status: 200, headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private" } });
+  return rewriteText(res, url, { modified: changedAt });
+}
+
+// Research pages for visitors without a session are cached for an hour, keyed
+// by when the catalogue last changed.
+async function researchPage(request, url, env, ctx) {
+  if (hasSession(request)) return serveResearch(request, url, env, ctx);
+  const key = `${SITE}/__ecb/research/v${VERSION}${SKIN ? "s" + SKIN_ID : ""}${url.pathname.replace(/\/+$/, "")}`;
+  const hit = await caches.default.match(key);
+  if (hit) return new Response(hit.body, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private", "X-Robots-Tag": "index, follow", "X-ECB-Cache": "HIT" } });
+  const res = await serveResearch(request, url, env, ctx);
+  if (res.status !== 200) return res;
+  const html = await res.text();
+  ctx.waitUntil(caches.default.put(key, new Response(html, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "public, max-age=3600" } })));
+  return new Response(html, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private", "X-Robots-Tag": "index, follow", "X-ECB-Cache": "MISS" } });
+}
+
+async function serveResearchMd(request, path, negotiated, env, ctx) {
+  const slug = path === "/research" ? null : path.slice(10);
+  if (slug !== null && !STUDIES[slug]) return serveMarkdown(request, new URL(SITE + path), path, negotiated, ctx);
+  const { studies: all, changedAt } = await studies(env, ctx);
+  const md = slug ? studyMarkdown(slug, all[slug], changedAt) : hubMarkdown(all, changedAt);
+  const canonical = `${SITE}${path}`;
+  const headers = {
+    "Content-Type": "text/markdown; charset=utf-8",
+    "X-Markdown-Tokens": String(Math.ceil(md.length / 4)),
+    "X-Robots-Tag": "noindex, follow",
+    "Content-Location": canonical,
+    Link: `<${canonical}>; rel="canonical", ${DESCRIBED_BY}`,
+    "Last-Modified": new Date(changedAt).toUTCString(),
+    "Cache-Control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+    ...corsHeaders(),
+  };
+  if (negotiated) headers.Vary = "Accept";
+  return new Response(request.method === "HEAD" ? null : md, { headers });
+}
+
+async function llmsWithResearch(env, ctx) {
+  const { studies: all, products } = await studies(env, ctx).then(async (r) => ({ ...r, products: await productList(ctx) }));
+  const base = llmsSpec(products);
+  const research = [
+    "## Research (original statistics from our catalogue)",
+    `- [Research hub](${SITE}/research.md): every report`,
+    ...Object.entries(all).map(([slug, s]) => `- [${STUDIES[slug].title(s, new Date().getFullYear())}](${SITE}/research/${slug}.md): ${s.findings[0] ? s.findings[0].text : STUDIES[slug].question}`),
+    "",
+    citeSection(all),
+    "",
+  ].join("\n");
+  return base.replace("## Core pages", `${research}\n## Core pages`);
 }
 
 // Live search suggestions: the shop's own search, first 8 matches as JSON.
@@ -697,7 +873,7 @@ function fixHtml(html, url) {
   return { html, title, description, noindex, crumb: crumb ? crumb.replace(/&amp;/g, "&") : "" };
 }
 
-async function rewriteText(res, url) {
+async function rewriteText(res, url, extra) {
   const fixed = fixHtml(await res.text(), url);
   const html = fixed.html;
   const hints = scan(html);
@@ -705,6 +881,12 @@ async function rewriteText(res, url) {
   hints.description = fixed.description;
   hints.noindex = fixed.noindex;
   hints.seo = extractSeo(html, url, fixed);
+  if (extra && extra.modified) {
+    hints.seo.modified = extra.modified;
+    for (const g of hints.seo.graph) if (g.dateModified) g.dateModified = extra.modified;
+  }
+  // Category pages: count + year in the title and a quotable first sentence.
+  if (hints.seo.type === "category" && hints.seo.category && hints.seo.category.count && !url.search) await categorySummary(hints, url);
   if (hints.seo.type === "category" && hints.seo.category && hints.seo.category.count === 0) hints.noindex = true;
   const bundle = hints.themeVersion === THEME_VERSION ? BUNDLE_PATH : null;
   if (hints.banner && /["'()<>\s]/.test(hints.banner)) hints.banner = null;

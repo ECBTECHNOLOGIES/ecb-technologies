@@ -498,3 +498,48 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - **To give a new page type a markdown version:** add its path to
   `isContentPath` and a renderer in `renderPath` (markdown.js); llms.txt, the
   catalog and llms-full.txt pick it up from there.
+
+## 2026-11-15: research pages from the shop's own data (Worker v39)
+- **New pages, built live from the product list (`research.js`, pure and
+  tested):**
+  - `/research`: hub page.
+  - `/research/laptop-prices-kenya`: 348 laptops; 7 findings, each with its
+    own anchor; tables by budget, brand and processor; FAQ; methodology;
+    how to cite.
+  - `/research/tech-prices-kenya`: 635 products by category.
+  - Each page has Dataset and FAQPage JSON-LD and a `.md` version.
+  - The pages use the `/delivery` page as a shell, so they keep the site's
+    header and footer. They are cached for 1 hour.
+- **Rules:**
+  - A finding needs at least 20 rows.
+  - Prices of KSh 1,000 or less, or KSh 2,000,000 or more, are dropped, and
+    so are duplicates.
+  - Shares use largest remainder, so they add up to 100%.
+  - A gap under 5% is written as "about the same".
+  - The shop's "SmartPhones" category also holds tablets and e-readers, so
+    the study calls it "Phones & Tablets".
+- **Honest dates:** KV `research-state` stores a hash of slug:price for
+  every product. "Last updated", `dateModified` and the sitemap `lastmod`
+  change only when that hash changes. Other sitemap URLs no longer carry an
+  invented lastmod.
+- **Category pages** (top level):
+  - title `N <Category> in Kenya with Prices (YYYY)` (only if it fits in
+    60 characters);
+  - a summary line (count, range, median, three newest, the "prices as of"
+    date);
+  - a link to the matching study.
+- **llms.txt:** adds a "Research" section and a "Cite this site for"
+  section (one question per study, each with its findings and anchor URLs).
+  llms-full.txt includes the studies.
+- **robots.txt:** GPTBot, ClaudeBot, Google-Extended and Applebot-Extended
+  are now named in the same group as `*` too.
+- **Footer:** adds a Research link.
+- **Tests:** `node scripts/live-site/test-research.mjs` (10 tests).
+- **Not built:**
+  - Audio Accessories findings: 12 rows, under the minimum.
+  - Phone brand breakdown: samples too small.
+  - A product "at a glance" box: left out to keep the minimal design. The
+    same facts are already in the meta description, the JSON-LD and the
+    `.md`.
+- **Admin to-do:** the HP OMEN Transcend 14 laptop is filed under
+  SmartPhones; move it to Laptops or Gaming.

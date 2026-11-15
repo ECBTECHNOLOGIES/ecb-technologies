@@ -30,7 +30,7 @@ const EXCLUDE = /^\/(admin|user|rider|agent|vendor|carts?|checkout|addcart|addto
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === "/sitemap.xml") return cached(request, ctx, () => buildSitemap(url));
+    if (url.pathname === "/sitemap.xml") return cached(request, ctx, () => buildSitemap(url, env));
     if (url.pathname === "/robots.txt") return robots(url);
     if (url.pathname.startsWith("/assets/images/brands/")) return brandLogo(request, ctx);
     return fetch(request);
@@ -39,7 +39,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=5`, { method: "GET" });
+  const key = new Request(`${request.url}?v=6`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -75,7 +75,7 @@ function xmlEscape(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-async function buildSitemap(url) {
+async function buildSitemap(url, env) {
   const origin = SITE;
   try {
     const [home, all] = await Promise.all([getText(`${origin}/`), getText(`${origin}/category?pageby=10000`)]);
@@ -96,9 +96,17 @@ async function buildSitemap(url) {
 
     if (products.size < 10) throw new Error(`only ${products.size} products found`);
 
-    const today = new Date().toISOString().slice(0, 10);
+    // Honest dates only: research pages carry the date the catalogue last
+    // changed (kept in KV by the ecb-speed Worker); other pages have no lastmod
+    // rather than a made-up "today".
+    let researchDate = null;
+    try {
+      const st = env && env.PAGES ? await env.PAGES.get("research-state", { type: "json" }) : null;
+      if (st && st.changedAt) researchDate = st.changedAt.slice(0, 10);
+    } catch {}
+    for (const p of ["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]) pages.add(p);
     const entry = (path, priority) =>
-      `  <url><loc>${xmlEscape(origin + path)}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`;
+      `  <url><loc>${xmlEscape(origin + path)}</loc>${path.startsWith("/research") && researchDate ? `<lastmod>${researchDate}</lastmod>` : ""}<priority>${priority}</priority></url>`;
     const body = [
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -139,12 +147,18 @@ async function robots(url) {
     "# AI search and user-fetch crawlers are welcome on all public pages, as are",
     "# search engines. Training crawlers (GPTBot, ClaudeBot, Google-Extended,",
     "# Applebot-Extended, CCBot, Bytespider) are currently allowed by the * group.",
+    "# Named AI crawlers share the * rules (same group), so private paths stay",
+    "# blocked for them too.",
     "User-agent: OAI-SearchBot",
     "User-agent: ChatGPT-User",
+    "User-agent: GPTBot",
     "User-agent: Claude-SearchBot",
     "User-agent: Claude-User",
+    "User-agent: ClaudeBot",
     "User-agent: PerplexityBot",
     "User-agent: Perplexity-User",
+    "User-agent: Google-Extended",
+    "User-agent: Applebot-Extended",
     "User-agent: *",
     "Disallow: /admin",
     "Disallow: /user/",

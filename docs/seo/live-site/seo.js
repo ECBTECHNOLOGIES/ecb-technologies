@@ -324,9 +324,12 @@ export function categoryIntro(c) {
   const guides = /^laptops$/i.test((c.parts || [])[0] || "")
     ? ' · <a href="/laptop-prices-in-kenya">Price guide</a> · <a href="/student-laptops-kenya">Student picks</a> · <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a>'
     : "";
+  const research = /^laptops$/i.test((c.parts || [])[0] || "") ? ' · <a href="/research/laptop-prices-kenya">Laptop price statistics</a>' : ' · <a href="/research/tech-prices-kenya">Price statistics</a>';
   return (
-    '<div class="container ecb-seo-cat-intro"><p>' +
-    `${c.count.toLocaleString("en-US")} ${escapeHtml(c.name)} at ECB Technologies, Nairobi CBD · Prices in KSh · <a href="/delivery">Delivery across Kenya</a>${guides}` +
+    '<div class="container ecb-seo-cat-intro">' +
+    (c.summary ? `<p class="ecb-cat-summary">${escapeHtml(c.summary)}</p>` : "") +
+    "<p>" +
+    `${c.count.toLocaleString("en-US")} ${escapeHtml(c.name)} at ECB Technologies, Nairobi CBD · Prices in KSh · <a href="/delivery">Delivery across Kenya</a>${guides}${research}` +
     "</p></div>"
   );
 }
@@ -342,7 +345,7 @@ export function nothingFooter() {
     ["Buying guides", "/laptop-prices-in-kenya", INFO_TILE],
     ["Mon – Sat · 9am – 7pm", "/contact", CLOCK_TILE],
   ];
-  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
+  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["Research", "/research"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
   const social = [["Instagram", SOCIALS.instagram], ["TikTok", SOCIALS.tiktok], ["X", SOCIALS.x]];
   return (
     '<div class="nf-wrap">' +
