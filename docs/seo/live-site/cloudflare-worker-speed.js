@@ -44,13 +44,14 @@
 import { USED_FOR, USED_CSS } from "./used-css.js";
 import { BUNDLE_HASH, BUNDLE_CSS, THEME_VERSION } from "./bundle-css.js";
 import { REDIRECTS } from "./catalog-map.js";
+import { DUPE_REDIRECTS } from "./dupes.js";
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
   waOrderButton, waFloat, llmsTxt,
 } from "./seo.js";
 
-const VERSION = "12";
+const VERSION = "17";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -131,7 +132,8 @@ export default {
         return Response.redirect(`${SITE}${url.pathname}${url.search}`, 301);
       }
       // Product addresses that changed when the shop regenerated them.
-      const old = isRead && url.pathname.startsWith("/item/") && REDIRECTS[url.pathname.slice(6)];
+      const slug = url.pathname.startsWith("/item/") ? url.pathname.slice(6) : "";
+      const old = isRead && slug && (REDIRECTS[slug] || DUPE_REDIRECTS[slug]);
       if (old) return Response.redirect(`${SITE}/item/${old}${url.search}`, 301);
       if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
       if (request.method !== "GET") return fetch(request);
@@ -373,6 +375,15 @@ function fixHtml(html, url) {
   const path = url.pathname.replace(/\/+$/, "") || "/";
   if (path.startsWith("/item/")) {
     const name = pre ? pre[1].split("|")[0].trim() : "";
+    // Keep the price in the meta description and the intro equal to the
+    // current price (descriptions were written with the price of the day).
+    const pm = html.match(/id="sizeprice">\s*KSH\s*([\d,]+)/i);
+    const live = pm ? Number(pm[1].replace(/,/g, "")) : 0;
+    if (live > 0 && live < 2000000) {
+      const ksh = `KSh ${live.toLocaleString("en-US")}`;
+      html = html.replace(/(<meta name="description"\s+content="[^"]*?)KSh [\d,]+/, `$1${ksh}`);
+      html = html.replace(/(<h2 class="ecb-price-intro">[\s\S]{0,900}?<strong>)KSh [\d,]+(<\/strong>)/, `$1${ksh}$2`);
+    }
     if (name) title = fitTitle(name, " Price in Kenya");
     // The theme turns <strong>Label</strong> pairs in the description into a
     // spec table and hides the rest, which garbled the price intro. Show the
@@ -393,6 +404,13 @@ function fixHtml(html, url) {
   } else if (path !== "/" && !path.startsWith("/category") && crumb) {
     title = PAGE_TITLES[path] || fitTitle(crumb, "");
     description = PAGE_DESCRIPTIONS[path] || null;
+  }
+  // Info pages share the About template, whose fixed "Who We Are / Your
+  // One-Stop Shop" heading became every page's H1. Keep it on /about only.
+  if (path !== "/about" && /<main class="ecb-about-page"/.test(html)) {
+    html = html
+      .replace('<main class="ecb-about-page"', '<main class="ecb-about-page ecb-guide-page"')
+      .replace(/<span class="ecb-about-lead-eyebrow">[\s\S]*?<\/span>\s*<h1 class="ecb-about-lead-title">[\s\S]*?<\/h1>/, "");
   }
   if (path.startsWith("/category") && [...url.searchParams.keys()].some((k) => NOINDEX_PARAMS.test(k))) noindex = true;
   return { html, title, description, noindex, crumb: crumb ? crumb.replace(/&amp;/g, "&") : "" };

@@ -35,7 +35,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=2`, { method: "GET" });
+  const key = new Request(`${request.url}?v=3`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -81,7 +81,8 @@ async function buildSitemap(url) {
       if (!["compare", "show"].includes(m[1])) products.add(`/item/${m[1]}`);
     }
 
-    const pages = new Set(["/", "/category", "/about", "/contact", "/faq"]);
+    const pages = new Set(["/", "/category", "/about", "/contact", "/faq", "/delivery", "/laptop-prices-in-kenya",
+      "/student-laptops-kenya", "/hp-vs-dell-vs-lenovo-laptops-kenya"]);
     for (const m of (home + all).matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com(\/[^"#?]*)"/g)) {
       const path = m[1].replace(/\/+$/, "") || "/";
       if (path.startsWith("/item/") || EXCLUDE.test(path) || /^\/category\/TV-and-Home-Appliances$/i.test(path)) continue;

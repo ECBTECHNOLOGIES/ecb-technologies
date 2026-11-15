@@ -17,6 +17,7 @@
 // invented.
 
 import { CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
+import { DUPE_CANONICAL } from "./dupes.js";
 
 export const SITE = "https://www.ecbtechkenya.com";
 const PHONE = "+254717040531";
@@ -108,7 +109,9 @@ export function escapeHtml(s) {
 }
 
 export function canonicalFor(url, noindex) {
-  const path = url.pathname.replace(/\/+$/, "") || "/";
+  let path = url.pathname.replace(/\/+$/, "") || "/";
+  // The same product listed again in a second category points to the original.
+  if (path.startsWith("/item/") && DUPE_CANONICAL[path.slice(6)]) path = `/item/${DUPE_CANONICAL[path.slice(6)]}`;
   const u = new URL(SITE + path);
   if (!noindex) for (const [k, v] of url.searchParams) if (KEEP_PARAMS.test(k)) u.searchParams.set(k, v);
   return u.toString();
@@ -178,7 +181,8 @@ export function extractSeo(html, url, base) {
       brand: brand ? { "@type": "Brand", name: brand } : undefined,
       category: category ? category[1] : undefined,
     };
-    if (price) {
+    // Prices with extra digits (data-entry slips) are left out of the offer.
+    if (price && price < 2000000) {
       product.offers = {
         "@type": "Offer",
         url: canonical,
@@ -267,7 +271,7 @@ export function homeIntro() {
     '<section class="ecb-seo-intro"><div class="container">' +
     "<h1>Laptops, Phones &amp; Accessories Shop in Nairobi CBD</h1>" +
     `<p>ECB Technologies sells genuine laptops, smartphones, printers, gaming gear and accessories from our shop at ${ADDRESS}. ` +
-    "Pay by M-Pesa or card, collect free at the shop, or get rider delivery in Nairobi and courier delivery to all 47 counties. " +
+    'Pay by M-Pesa or card, collect free at the shop, or get rider delivery in Nairobi and <a href="/delivery">courier delivery to all 47 counties</a>. ' +
     "Open Monday to Saturday, 9am to 7pm.</p>" +
     '<div class="ecb-seo-cta">' +
     `<a class="ecb-cta-wa" href="${escapeHtml(whatsappLink("Hello ECB Technologies, I'd like to ask about a product."))}" target="_blank" rel="noopener" onclick="${track("home")}">${WA_ICON}Chat on WhatsApp</a>` +
@@ -283,7 +287,10 @@ export function categoryIntro(c) {
   return (
     '<div class="container ecb-seo-cat-intro"><p>' +
     `Shop ${c.count.toLocaleString("en-US")} ${escapeHtml(what)} at ECB Technologies, with prices in KSh. ` +
-    `Visit our shop at ${ADDRESS}, pay by M-Pesa or card, and get delivery to all 47 counties in Kenya.` +
+    `Visit our shop at ${ADDRESS}, pay by M-Pesa or card, and get <a href="/delivery">delivery to all 47 counties</a> in Kenya.` +
+    (/^laptops$/i.test((c.parts || [])[0] || "")
+      ? ' Compare <a href="/laptop-prices-in-kenya">laptop prices in Kenya</a>, <a href="/student-laptops-kenya">student laptops under KSh 40,000</a> and <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a>.'
+      : "") +
     "</p></div>"
   );
 }
@@ -304,6 +311,11 @@ export const SEO_CSS =
   ".ecb-wa-float{position:fixed;right:16px;bottom:16px;z-index:1030;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22)}" +
   "@media print{.ecb-wa-float{display:none}}" +
   // The banner heading became an h1; keep the theme's h2 sizes for it.
+  ".ecb-guide-page .ecb-about-lead-body h2{font-size:24px;line-height:1.3;margin:30px 0 10px;color:#1a2840}" +
+  ".ecb-guide-page .ecb-about-lead-body h3{font-size:18px;line-height:1.35;margin:22px 0 6px;color:#1a2840}" +
+  ".ecb-guide-page .ecb-about-lead-body table{font-size:14px}.ecb-guide-page .ecb-about-lead-body td a{word-break:break-word}" +
+  "@media (max-width:767px){.ecb-guide-page .ecb-about-lead-body table{display:block;overflow-x:auto}" +
+  ".ecb-guide-page .ecb-about-lead-body h2{font-size:20px}.ecb-guide-page .ecb-about-lead-body h3{font-size:17px}}" +
   "h1.breadcrumb-title{font-size:48px}@media (max-width:1199.97px){h1.breadcrumb-title{font-size:32px}}";
 
 export function llmsTxt() {
@@ -324,8 +336,15 @@ export function llmsTxt() {
 ${cats}
 - [All products](${SITE}/category)
 
+## Buying guides
+
+- [Laptop prices in Kenya](${SITE}/laptop-prices-in-kenya)
+- [Student laptops under KSh 40,000](${SITE}/student-laptops-kenya)
+- [HP vs Dell vs Lenovo laptops in Kenya](${SITE}/hp-vs-dell-vs-lenovo-laptops-kenya)
+
 ## Pages
 
+- [Delivery across Kenya](${SITE}/delivery)
 - [About ECB Technologies](${SITE}/about)
 - [Contact and directions](${SITE}/contact)
 - [Frequently asked questions](${SITE}/faq)

@@ -181,7 +181,96 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - Cart and forms still work.
   - Lighthouse: desktop 99–100, phone 91–100.
 
+## 2026-11-15: catalogue clean-up, new pages, live prices (Worker v17)
+- **ThinkPad names fixed (admin):** #968–#973 were "THINKPRAD"/"THINKPARD"
+  in mixed capitals and are now "Lenovo ThinkPad …". Their addresses are
+  unchanged.
+- **Duplicate listings (admin + Worker):**
+  - 34 same-category copies are deactivated. Re-enable them in Admin →
+    Products → Deactivated Product. Each old address redirects (301) to
+    the listing that stays (`dupes.js`).
+  - The listing went from 677 to 643 products; Gaming went from 70 to 39.
+  - 20 copies of monitors listed under both Gaming and PC Accessories stay
+    live; each copy's canonical points to the original listing.
+  - The HP EliteBook 840 G7 pair (#483/#484) has different prices, so both
+    stay.
+  - The LG monitor listed under Printers (#714) is deactivated.
+- **New pages (Admin → Other Pages, linked in the footer, in the sitemap
+  and in `llms.txt`):**
+  - `/delivery`: Delivery Across Kenya
+  - `/laptop-prices-in-kenya`: prices by budget, brand and processor, with
+    a Q&A section
+  - `/student-laptops-kenya`: 46 laptops at KSh 40,000 or less with an
+    8th-gen or newer Core i5/i7
+  - `/hp-vs-dell-vs-lenovo-laptops-kenya`: models, from/typical/max prices
+    and series
+  - All figures come from the catalogue on 15 November 2026. Sources are in
+    `docs/seo/live-site/pages/`. Prices go stale, so refresh these pages
+    every month or two.
+- **Info pages:** the theme's fixed "Who We Are / Your One-Stop Shop for Tech
+  & More" heading is removed on all pages except About. Each page's own
+  title is now its H1.
+- **Internal links:** the Laptops category intro links to the three guides,
+  and the home and category intros link to /delivery.
+- **Live prices:** product meta descriptions and the price intro always show
+  the current price, not the price on the day they were written.
+- **Impossible prices:** prices over KSh 2,000,000 are left out of Google's
+  price data (Offer). See "Still open".
+
+### Deactivated duplicates
+| Deactivated ID | Redirects to |
+|---|---|
+| 687 | /item/asus-tuf-vg34vql3a-34-wqhd-34401440-180hz-1ms-speakers-je53691zsf |
+| 712 | /item/asus-tuf-vg34vql3a-34-wqhd-34401440-180hz-1ms-speakers-je53691zsf |
+| 666 | /item/dji-osmo-pocket-4p-creator-combo-vlog-amj6453hol |
+| 698 | /item/hp-e24t-g4-touch-monitor-24-touch-ips-full-hd-60hz-bjs1657pf1 |
+| 702 | /item/hp-omen-27q-gaming-monitor-27-qhd-ips-165hz-wnz2589iaz |
+| 727 | /item/hp-omen-27q-gaming-monitor-27-qhd-ips-165hz-wnz2589iaz |
+| 688 | /item/hp-omen-34c-34-wqhd-34401440-165hz-1ms-built-in-speakers-zwx38989la |
+| 691 | /item/hp-omen-34c-34-wqhd-34401440-165hz-1ms-built-in-speakers-zwx38989la |
+| 699 | /item/hp-s27-fhd-27-fhd-ips-100hz-fe41859j6y |
+| 697 | /item/lg-34cb99-w-34-34401440-60hz-usb-c-built-in-speakers-nf61365sfn |
+| 715 | /item/lg-34u650a-b-34-ips-34401440-100hz-built-in-speakers-ez84221atb |
+| 689 | /item/lg-34wr55qk-b-34-va-wqhd-34401440-100hz-usb-c-ql74054tqb |
+| 714 | /item/lg-34wr55qk-b-34-va-wqhd-34401440-100hz-usb-c-ql74054tqb |
+| 686 | /item/msi-mag-346cq-34-34401440-180hz-1ms-z4y3485zzp |
+| 711 | /item/msi-mag-346cq-34-34401440-180hz-1ms-z4y3485zzp |
+| 703 | /item/msi-modern-md271ul-27-4k-ips-usb-c-60hz-wel3405ntg |
+| 685 | /item/msi-pro-mp341cqw-e12-34-34401440-120hz-1ms-white-xle3091ckt |
+| 710 | /item/msi-pro-mp341cqw-e12-34-34401440-120hz-1ms-white-xle3091ckt |
+| 682 | /item/samsung-m8-smart-monitor-ls32fm801umxue-32-4k-smart-usb-c-60hz-built-in-speakers-webcam-white-cub2207v4b |
+| 707 | /item/samsung-m8-smart-monitor-ls32fm801umxue-32-4k-smart-usb-c-60hz-built-in-speakers-webcam-white-cub2207v4b |
+| 695 | /item/samsung-odyssey-ark-2nd-gen-ls55cg97wnmxue-55-smart-4k-38402160-165hz-1ms-1000r-va-speakers-black-fso5311sft |
+| 720 | /item/samsung-odyssey-ark-2nd-gen-ls55cg97wnmxue-55-smart-4k-38402160-165hz-1ms-1000r-va-speakers-black-fso5311sft |
+| 708 | /item/samsung-odyssey-g5-g55c-ls27cg552emxue-27-qhd-2k-165hz-black-xby4396jzx |
+| 693 | /item/samsung-odyssey-g9-oled-ls49dg932smxue-49-5k-51201440-1800r-240hz-003ms-silver-9xf49688pz |
+| 718 | /item/samsung-odyssey-g9-oled-ls49dg932smxue-49-5k-51201440-1800r-240hz-003ms-silver-9xf49688pz |
+| 721 | /item/samsung-odyssey-neo-g9-ls57cg952nmxue-57-dual-4k-76802160-240hz-1ms-1000r-white-zsi8794rna |
+| 690 | /item/samsung-viewfinity-s6-ls34c650vamxue-34-34401440-100hz-usb-c-webcam-built-in-speakers-q8f4396qzf |
+| 716 | /item/samsung-viewfinity-s6-ls34c650vamxue-34-34401440-100hz-usb-c-webcam-built-in-speakers-q8f4396qzf |
+| 705 | /item/samsung-viewfinity-s8-ls27b800pxmxue-27-4k-ips-60hz-usb-c-1vk37893bk |
+| 684 | /item/xiaomi-g34wqi-34-wqhd-34401440-180hz-1ms-white-xav2868hko |
+| 709 | /item/xiaomi-g34wqi-34-wqhd-34401440-180hz-1ms-white-xav2868hko |
+| 706 | /item/hp-series-5-532sf-32-full-hd-100hz-h61399733o |
+| 694 | /item/samsung-odyssey-g9-smart-oled-ls49dg952smxue-49-smart-5k-51201440-1800r-240hz-003ms-speakers-silver-ia95136ebp |
+| 743 | /item/samsung-odyssey-g9-smart-oled-ls49dg952smxue49-smart-5k-51201440-1800r-240hz-003ms-speakers-silver-kr97548wqa |
+
 ## Still open
+- **Wrong prices, to fix in the admin.** These have extra digits:
+  - #701 MSI MAG 275UPD E14: KSh 5,700,027
+  - Dell XPS 13 9300 i5 10th Gen: KSh 5,700,030
+  - Lenovo ThinkPad P15 Gen 1: KSh 6,700,010
+  - Dell 7450 2-in-1 X360 Ultra 7: KSh 17,550,020
+  - Lenovo IdeaPad 5 X360 Core Ultra 5: KSh 9,550,020
+  - HP 15 Core Ultra 7 15th Gen: KSh 10,449,960
+- **Social profile links.** The top bar and footer icons point to "#".
+  They need the real URLs (Admin → Social Settings); then add them to
+  `sameAs` in `seo.js`.
+- **Confirm WhatsApp is on 0717 040 531.**
+- **Search Console and Bing Webmaster Tools.** Submit
+  https://www.ecbtechkenya.com/sitemap.xml.
+- **Cloudflare → Caching → Configuration → Crawler Hints:** turn on.
+- **Google Business Profile:** hours Mon–Sat 9am–7pm.
 - Theme code, needs hosting (file) access: about 1 MB of render-blocking
   CSS (Bootstrap and the theme), jQuery UI JS loaded on every page, and two
   Google Analytics tags.
