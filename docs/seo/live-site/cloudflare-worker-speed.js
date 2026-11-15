@@ -45,13 +45,24 @@ import { USED_FOR, USED_CSS } from "./used-css.js";
 import { BUNDLE_HASH, BUNDLE_CSS, THEME_VERSION } from "./bundle-css.js";
 import { REDIRECTS } from "./catalog-map.js";
 import { DUPE_REDIRECTS } from "./dupes.js";
+import { SKIN_CSS, SKIN_FONTS } from "./skin.js";
+
+// Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
+let SKIN = false;
+// Short fingerprint of the skin, part of the page-cache key, so editing the
+// skin refreshes cached pages.
+const SKIN_ID = (() => {
+  let h = 0;
+  for (let i = 0; i < SKIN_CSS.length; i++) h = (h * 31 + SKIN_CSS.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+})();
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
   waOrderButton, waFloat, llmsTxt,
 } from "./seo.js";
 
-const VERSION = "22";
+const VERSION = "24";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -80,7 +91,7 @@ const RESERVE_CSS =
   ".ecb-bestsell-slider:not(.slick-initialized){height:231px}" +
   ".ecb-uniq-slider:not(.slick-initialized){height:295px}}" +
   "@media (min-width:768px){" +
-  ".ecb-cats-grid:not(.slick-initialized){visibility:visible}" +
+  ".ecb-cats-grid:not(.slick-initialized),.ecb-promos-grid:not(.slick-initialized){visibility:visible}" +
   ".ecb-bestsell-slider:not(.slick-initialized){height:384px}" +
   ".ecb-uniq-slider:not(.slick-initialized){height:316px}}";
 
@@ -120,6 +131,7 @@ const IMAGE_RULES = [
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    SKIN = !!(env && env.SKIN === "1");
     try {
       if (url.pathname === "/llms.txt") {
         return new Response(llmsTxt(), { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
@@ -158,7 +170,15 @@ async function privatePage(request, url) {
   if (!PRIVATE.test(url.pathname) || !(res.headers.get("Content-Type") || "").includes("text/html")) return res;
   const out = new Response(res.body, res);
   out.headers.set("X-Robots-Tag", "noindex, follow");
-  return out;
+  if (!SKIN) return out;
+  // Same look on account, cart and checkout pages (styles only).
+  return new HTMLRewriter()
+    .on("head", {
+      element(e) {
+        e.append(`<link rel="stylesheet" href="${SKIN_FONTS}"><style id="ecb-skin">${SKIN_CSS}</style>`, { html: true });
+      },
+    })
+    .transform(out);
 }
 
 function hasSession(request) {
@@ -182,7 +202,7 @@ function cacheKey(url) {
   const k = new URL(url);
   for (const p of [...k.searchParams.keys()]) if (/^(utm_|fbclid|gclid|msclkid|_ga)/i.test(p)) k.searchParams.delete(p);
   k.searchParams.sort();
-  return `https://www.ecbtechkenya.com/__ecb/page/v${VERSION}/${k.host}${k.pathname}${k.search}`;
+  return `https://www.ecbtechkenya.com/__ecb/page/v${VERSION}${SKIN ? "s" + SKIN_ID : ""}/${k.host}${k.pathname}${k.search}`;
 }
 
 function kvSeconds(url) {
@@ -566,7 +586,7 @@ function rewrite(response, url, bundle, hints) {
     .on("head", {
       element(e) {
         e.append(`<style>${RESERVE_CSS}${INTRO_CSS}${SEO_CSS}</style>`, { html: true });
-        if (hints.banner) {
+        if (hints.banner && !SKIN) {
           const pri = hints.mainImg ? "auto" : "high";
           e.prepend(
             `<link rel="preload" as="image" href="${resized(hints.banner, 750)}" media="(max-width:767px)" fetchpriority="${pri}">` +
@@ -613,6 +633,7 @@ function rewrite(response, url, bundle, hints) {
             .join("");
           end.before(missing, { html: true });
           if (seo.graph && seo.graph.length) end.before(jsonLdTag(seo.graph), { html: true });
+          if (SKIN) end.before(`<link rel="stylesheet" href="${SKIN_FONTS}"><style id="ecb-skin">${SKIN_CSS}</style>`, { html: true });
         });
       },
     })

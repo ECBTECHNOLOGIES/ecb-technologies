@@ -292,3 +292,41 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
     arrives. Desktop CLS had risen to 0.15 from the home intro re-flowing
     and is now 0.003.
   - Lighthouse home: desktop 100, phone 84–91.
+
+## 2026-11-15: monochrome redesign (nothing.tech design language), Worker v24
+- `skin.js` is a CSS layer the Worker adds after all theme CSS, on every
+  public page and on login, register, cart and checkout. Admin is untouched.
+  It is controlled by the Worker variable `SKIN` (plain text "1"); remove the
+  variable and redeploy to switch back to the original theme instantly.
+- Design language follows the Nothing DESIGN.md:
+  - pure black / white / grey, no accent colour;
+  - sparse dot grid on a #f2f2f2 page;
+  - grey product tiles where white product photos blend in (multiply);
+  - 6px buttons, 8px cards, hairline borders, no shadows.
+- Fonts are open-licence stand-ins for Nothing's proprietary ones, served
+  from our own domain by Cloudflare Fonts:
+  - Doto (dot matrix) for section titles, page titles, prices and the
+    "ECB TECHNOLOGIES" wordmark;
+  - Space Mono uppercase for every label, button, menu link and product
+    name;
+  - Inter, light weight, for editorial headings and body text.
+- **Header:** black mono top bar, white capsule bar with the dot-matrix
+  wordmark (the logo image is hidden, not deleted), mono menu.
+- **Hero:** black, dot-matrix headline, white button.
+- **Product cards:** grey tile, mono name, mono price, black "Add to cart".
+- **Category and info pages:** big dot-matrix title on the grey page
+  instead of the photo banner, so the banner image is no longer downloaded.
+- **Product page:**
+  - name in Inter Light;
+  - price in Doto;
+  - black "Add to cart", outlined "Buy now" and "Order on WhatsApp";
+  - spec table with mono labels;
+  - the "Product Details" banner is removed.
+- **Bug fixed:** the home promo strip (Laptop deals / Samsung phones / Gaming)
+  had been invisible on desktop since the speed changes; it is visible again.
+- Page-cache keys include a fingerprint of the skin, so editing it refreshes
+  cached pages.
+- **Lighthouse:**
+  - desktop 100 on home, category and product pages;
+  - phone: category 99, product about 93, home about 86;
+  - CLS 0.
