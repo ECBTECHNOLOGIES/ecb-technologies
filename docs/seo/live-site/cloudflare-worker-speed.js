@@ -62,7 +62,7 @@ import {
   waOrderButton, waFloat, llmsTxt, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "27";
+const VERSION = "28";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -507,6 +507,7 @@ function rewrite(response, url, bundle, hints) {
   let bundleAdded = false;
   let brandMissing = false;
   let h1Seen = 0;
+  let heroLabels = 0;
   const seen = new Set();
   const seo = hints.seo || { graph: [], type: "page" };
   const product = seo.product && seo.product.name ? seo.product : null;
@@ -577,7 +578,9 @@ function rewrite(response, url, bundle, hints) {
     })
     .on("div.ecb-hero-outer", {
       element(e) {
-        if (isHome) e.after(homeIntro(), { html: true });
+        // With the skin, the home goes straight from the hero to the categories;
+        // the H1 moves into the first slide's label instead.
+        if (isHome && !SKIN) e.after(homeIntro(), { html: true });
       },
     })
     .on("section.gs-breadcrumb-section", {
@@ -600,6 +603,18 @@ function rewrite(response, url, bundle, hints) {
     .on('a[href^="tel:"]', {
       element(e) {
         if ((e.getAttribute("href") || "").replace(/\D/g, "").endsWith("717040531")) e.setAttribute("href", "tel:+254717040531");
+      },
+    })
+    .on("p.ecb-hero-eyebrow", {
+      element(e) {
+        if (!isHome || !SKIN || heroLabels++ > 0) return;
+        e.tagName = "h1";
+        e.setInnerContent("Laptops &amp; Phones · Nairobi CBD", { html: true });
+      },
+    })
+    .on("div.ecb-cats-grid", {
+      element(e) {
+        if (isHome && SKIN) e.before('<h2 class="ecb-cats-title">Shop by category</h2>', { html: true });
       },
     })
     .on("div.ecb-footer-main", {

@@ -534,6 +534,11 @@ export const SKIN_CSS = [
   `@media (max-width:767px){.ecb-hero-title{font-size:40px!important}}`,
   `.ecb-hero-eyebrow{color:${T.canvas}!important;opacity:.85}`,
   `.ecb-hero-dots{bottom:22px!important}`,
+  `.ecb-cats-title{${display};font-size:34px!important;text-align:center;margin:0 0 28px!important;color:${T.ink}!important}`,
+  `@media (max-width:767px){.ecb-cats-title{font-size:24px!important;margin-bottom:18px!important}}`,
+  `.ecb-cats-strip{padding-top:64px!important}`,
+  `@media (max-width:767px){.ecb-cats-strip{padding-top:40px!important}}`,
+  `h1.ecb-hero-eyebrow{font-size:11px!important;line-height:1.4!important;margin:0!important;font-weight:400!important}`,
   // Home: categories, 8 products, visit. Promos and best sellers go.
   `.ecb-promos-section,.ecb-bestsell-section{display:none!important}`,
   `.ecb-seo-intro .container{padding-top:56px!important;padding-bottom:24px!important}`,

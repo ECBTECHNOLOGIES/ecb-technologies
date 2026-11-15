@@ -393,3 +393,8 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - The hero photo is now `optimized-images/hero-friends-selfie.jpg` (four
   friends, selfie), on both slides. Phone crop is set to the left (20%) so
   the selfie and phone stay in frame.
+- Home: the intro block (heading, line, WhatsApp/Call/Shop buttons) is
+  removed; the page goes from the hero straight to a "Shop by category"
+  title and the category row. The H1 moved to the first slide's label:
+  "Laptops & Phones · Nairobi CBD". The meta description and structured
+  data still carry the address, delivery and hours.
