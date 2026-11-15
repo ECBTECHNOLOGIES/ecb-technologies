@@ -316,6 +316,10 @@ export const SEO_CSS =
   ".ecb-guide-page .ecb-about-lead-body table{font-size:14px}.ecb-guide-page .ecb-about-lead-body td a{word-break:break-word}" +
   "@media (max-width:767px){.ecb-guide-page .ecb-about-lead-body table{display:block;overflow-x:auto}" +
   ".ecb-guide-page .ecb-about-lead-body h2{font-size:20px}.ecb-guide-page .ecb-about-lead-body h3{font-size:17px}}" +
+  // Hero photo: soft left edge (no visible seam), toned to sit with the navy.
+  ".ecb-hero-img-bg{-webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 16%,#000 34%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 16%,#000 34%);filter:brightness(.86) saturate(.92)}" +
+  "@media (min-width:768px) and (max-width:991px){.ecb-hero-img-bg{-webkit-mask-image:none;mask-image:none}}" +
+  ".ecb-hero-badge-corner{text-shadow:0 1px 3px rgba(3,21,47,.9),0 2px 18px rgba(3,21,47,.85)}" +
   "h1.breadcrumb-title{font-size:48px}@media (max-width:1199.97px){h1.breadcrumb-title{font-size:32px}}";
 
 export function llmsTxt() {

@@ -51,7 +51,7 @@ import {
   waOrderButton, waFloat, llmsTxt,
 } from "./seo.js";
 
-const VERSION = "17";
+const VERSION = "19";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store

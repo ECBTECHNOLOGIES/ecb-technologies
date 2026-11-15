@@ -275,3 +275,12 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   CSS (Bootstrap and the theme), jQuery UI JS loaded on every page, and two
   Google Analytics tags.
 - Roll the Cloudflare API token. It and its R2 keys were pasted in chat.
+
+## 2026-11-15: hero photo
+- Both home slider slides (Admin → Home Page Settings → Sliders, #28 and
+  #31) now use the photo `optimized-images/hero-couple-phones.jpg`
+  (1920×1280, 284 KB). Visitors get a 1600 px AVIF from Cloudflare.
+- Slide text fixed: "That Fits" → "That Fit", "Smarphones" → "Smartphones".
+- `seo.js` softens the photo's left edge (mask), tones it slightly
+  (brightness .86, saturation .92) to sit with the navy, and adds a shadow
+  behind the "LATEST TECH / BEST PRICES" corner text.
