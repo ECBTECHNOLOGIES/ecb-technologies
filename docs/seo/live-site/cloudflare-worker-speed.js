@@ -555,6 +555,18 @@ function rewrite(response, url, bundle, hints) {
         if ((e.getAttribute("href") || "").replace(/\D/g, "").endsWith("717040531")) e.setAttribute("href", "tel:+254717040531");
       },
     })
+    .on("div.ecb-footer-bottom-links", {
+      element(e) {
+        // The top bar is hidden in the skin; staff logins move here.
+        if (SKIN) e.append('<a href="/user/vendor-login">Agent login</a><a href="/rider/login">Rider login</a>', { html: true });
+      },
+    })
+    .on("a.ecb-navbar__link", {
+      element(e) {
+        // "Laptops" in the menu pointed to all products.
+        if (e.getAttribute("href") === `${SITE}/category`) e.setAttribute("href", `${SITE}/category/laptops`);
+      },
+    })
     .on("a[href]", {
       element(e) {
         const to = NAV_FIXES[e.getAttribute("href")];

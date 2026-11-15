@@ -459,6 +459,64 @@ export const SKIN_CSS = [
   `.ecb-trust-badge{background:${T.page}!important;color:${T.ink}!important;${label};font-size:9.5px!important;border:1px solid ${T.hair}!important}`,
   `.ecb-trust-badge svg{color:${T.ink}!important}`,
 
+  // ---------- declutter (fewer, calmer elements, like nothing.tech) ----------
+  // Header: no top bar (address/hours/phone are in Visit and the footer; agent
+  // and rider logins move to the footer), icons only, account + cart only.
+  `.ecb-topbar{display:none!important}`,
+  `.ecb-midbar__action-label{display:none!important}`,
+  `.ecb-midbar__actions>.ecb-midbar__action-item:nth-child(2),.ecb-midbar__action-item:has(a[href*="compare"]){display:none!important}`,
+  `@media (max-width:991px){.ecb-midbar__inner{display:flex!important;flex-wrap:wrap!important;align-items:center!important;row-gap:10px!important}` +
+    `.ecb-midbar__mobile-toggle{order:0}.ecb-midbar__logo{order:1;flex:1 1 auto;justify-content:center!important}` +
+    `.ecb-midbar__actions{order:2;margin-left:auto!important;width:auto!important;flex:0 0 auto!important}` +
+    `.ecb-midbar__actions>.ecb-midbar__action-item:first-child{display:none!important}` +
+    `.ecb-midbar__search{order:3;flex:1 1 100%!important;width:100%!important}}`,
+  `@media (max-width:767px){.ecb-seo-intro p{font-size:13px!important}}`,
+  `.ecb-midbar__actions{gap:18px!important}`,
+  // Menu: six links, centred; the rest live in "All categories" and the footer.
+  `.ecb-navbar__item:has(a[href*="search=tablets"]),.ecb-navbar__item:has(a[href*="search=cctv"]),.ecb-navbar__item:has(a[href*="search=electronics"]),.ecb-navbar__item:has(a[href$="/contact"]){display:none!important}`,
+  `@media (min-width:992px){.ecb-navbar__container{justify-content:center!important;gap:28px!important}.ecb-navbar__list{gap:6px!important}}`,
+  `.ecb-navbar__all-cats-btn{background:transparent!important;color:${T.ink}!important;border:1px solid ${T.ink}!important}`,
+  `.ecb-navbar__all-cats-btn svg,.ecb-navbar__all-cats-btn .ecb-navbar__caret{color:${T.ink}!important}`,
+  // Hero: headline + one button.
+  `.ecb-hero-badges,.ecb-hero-badge-corner{display:none!important}`,
+  // Home intro: centred, quieter, two actions.
+  `.ecb-seo-intro .container{text-align:center;padding-top:48px!important;padding-bottom:40px!important}`,
+  `.ecb-seo-intro p{margin-left:auto!important;margin-right:auto!important;max-width:720px!important;font-size:14px!important}`,
+  `.ecb-seo-cta{justify-content:center!important}`,
+  `.ecb-seo-cta .ecb-cta-shop{display:none!important}`,
+  // Sections removed: brands row, repeated "Unique selections", "Why shop" grid,
+  // trust strip, empty footer map, social icons (they link nowhere yet).
+  `.ecb-brands-section,.ecb-uniq-section,.ecb-why-section,.ecb-trust-bar,.ecb-footer-map,.ecb-footer-socials,.ecb-topbar__social{display:none!important}`,
+  // Featured: 8 products in a calm 4-column grid, no tabs; "View all" for the rest.
+  `.ecb-featured-tabs{display:none!important}`,
+  `.ecb-fp-grid>.ecb-fp-item:nth-child(n+9){display:none!important}`,
+  `@media (min-width:992px){.ecb-featured-section .ecb-fp-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}}`,
+  `.ecb-featured-section .ecb-fp-arrow{display:none!important}`,
+  // Section titles centred with breathing room.
+  `.ecb-featured-header-row1,.ecb-bestsell-header{flex-direction:column!important;align-items:center!important;gap:14px!important;text-align:center!important}`,
+  `.ecb-bestsell-controls{justify-content:center!important}`,
+  `.ecb-featured-section,.ecb-bestsell-section,.ecb-promos-section{padding-top:56px!important;padding-bottom:16px!important}`,
+  `@media (max-width:767px){.ecb-featured-section,.ecb-bestsell-section,.ecb-promos-section{padding-top:36px!important}}`,
+  // Product cards: no wishlist hearts, no "NEW" on every item.
+  `.ecb-fp-wish,.ecb-bs-wish,.ecb-uniq-wish,.ecb-cat-list-wish,.ecb-fp-badge--new,.ecb-bs-badge--new,.ecb-uniq-badge--new{display:none!important}`,
+  `.ecb-fp-card,.ecb-bs-card{padding-bottom:14px!important}`,
+  // Visit section: one quiet card.
+  `.ecb-visit-section{padding:56px 0!important}`,
+  `.ecb-visit-detail-icon{display:none!important}`,
+  `.ecb-visit-open-badge{display:none!important}`,
+  // Footer: three columns, no repeated contact block icons.
+  `@media (min-width:992px){.ecb-footer-grid{grid-template-columns:1.2fr 1fr 1fr 1fr!important}}`,
+  `.ecb-footer-contact-row svg,.ecb-footer-address-block svg{display:none!important}`,
+  `.ecb-footer-bottom-links a{margin-left:18px!important}`,
+  // Product page: drop the marketplace extras.
+  `.ecb-pd-meta-row .ecb-pd-stars,.ecb-pd-rating-val,.ecb-pd-rating-count,.ecb-pd-actions,.ecb-pd-share,.ecb-pd-seller,.ecb-pd-stock-count,.ecb-pd-img-wish{display:none!important}`,
+  `.ecb-pd-meta-row{justify-content:flex-start!important}`,
+  `.ecb-pd-trust-strip{border:0!important;background:transparent!important}`,
+  // Category page: no list/grid switch, no "recent products".
+  `.ecb-cat-view-toggle{display:none!important}`,
+  // Mobile menu: no contact strip duplication.
+  `.ecb-mm-contact-strip{display:none!important}`,
+
   // ---------- forms and misc ----------
   `.form-control,.nice-select{border-radius:6px!important;border-color:${T.hair}!important;box-shadow:none!important}`,
   `.form-control:focus{border-color:${T.ink}!important}`,

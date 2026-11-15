@@ -86,6 +86,7 @@ const KEEP_PARAMS = /^page$/i;
 // Main-menu links that went to search results, and the category they mean.
 export const NAV_FIXES = {
   [`${SITE}/category?search=phones`]: `${SITE}/category/smartphones`,
+  [`${SITE}/category?search=accessories`]: `${SITE}/category/Computing-Accessories`,
   [`${SITE}/category?search=gaming`]: `${SITE}/category/gaming`,
   [`${SITE}/category?search=printers`]: `${SITE}/category/printers`,
 };

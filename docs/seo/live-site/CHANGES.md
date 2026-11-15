@@ -330,3 +330,26 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - desktop 100 on home, category and product pages;
   - phone: category 99, product about 93, home about 86;
   - CLS 0.
+
+## 2026-11-15: declutter (skin.js)
+- **Header:**
+  - The top bar is hidden; agent and rider logins move to the footer bottom
+    links.
+  - Header shows icons only (account + cart; wishlist and compare hidden).
+  - On phones: one row with menu, wordmark and cart, then search.
+- **Menu:** six links (Laptops, Phones, Accessories, Gaming, Printers,
+  Deals). Laptops now points to /category/laptops and Accessories to PC
+  Accessories.
+- **Hero:** headline and one button; the badges and the corner text are
+  gone.
+- **Home intro:** centred; two actions (WhatsApp, Call).
+- **Removed sections:** brands row, "Our Unique Selections" (it repeated the
+  featured products), "Why shop", the trust strip, the empty footer map,
+  and the social icons (they link nowhere until real URLs are added).
+- **Featured:** 8 products in a 4-column grid with no tabs; "View all"
+  leads to the rest.
+- **Product cards:** no wishlist hearts, no "NEW" badge on every item.
+- **Product page:** no empty 0.0 rating, compare/report links, share icons,
+  "Sold by" box or empty stock pill.
+- **Category page:** no grid/list switch.
+- Home page height went from about 6,300 px to 3,900 px on desktop.
