@@ -62,7 +62,7 @@ import {
   waOrderButton, waFloat, llmsTxt, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "26";
+const VERSION = "27";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store

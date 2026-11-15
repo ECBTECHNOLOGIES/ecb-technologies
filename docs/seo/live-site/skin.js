@@ -524,7 +524,7 @@ export const SKIN_CSS = [
   `.ecb-hero-slide,.ecb-hero-inner{min-height:min(78vh,760px)!important}`,
   `@media (max-width:767px){.ecb-hero-slide,.ecb-hero-inner{min-height:72vh!important}.ecb-hero-slide.active{display:block!important}}`,
   `.ecb-hero-img-bg{width:100%!important;left:0!important;right:0!important;opacity:1!important;-webkit-mask-image:none!important;mask-image:none!important;background-size:cover!important;background-position:center 30%!important;filter:brightness(.92) saturate(.9)!important}`,
-  `@media (max-width:767px){.ecb-hero-img-bg{background-position:62% center!important}}`,
+  `@media (max-width:767px){.ecb-hero-img-bg{background-position:20% center!important}}`,
   `.ecb-hero-overlay,.ecb-hero-overlay[class]{background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.35) 32%,rgba(0,0,0,0) 62%)!important}`,
   `.ecb-hero-inner{display:flex!important;align-items:flex-end!important;padding-bottom:64px!important;padding-top:0!important}`,
   `@media (max-width:767px){.ecb-hero-inner{padding-bottom:44px!important}}`,

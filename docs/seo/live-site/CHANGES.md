@@ -390,3 +390,6 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - Footer follows the nothing.tech pattern: big dot-matrix category links,
     dark action tiles, one row of small links + socials, and a dot grid on
     black.
+- The hero photo is now `optimized-images/hero-friends-selfie.jpg` (four
+  friends, selfie), on both slides. Phone crop is set to the left (20%) so
+  the selfie and phone stay in frame.
