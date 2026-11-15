@@ -450,3 +450,51 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   and reCAPTCHA keys that were pasted in chat.
 - Refresh the three buying guides every month or two (prices change).
 - Facebook / YouTube: send the links if those profiles are created.
+
+## 2026-11-15: AI-readable site (markdown.js, Worker v34)
+- **Markdown version of every public page:**
+  - Three ways to get it: `/<page>.md` (home: `/index.md`),
+    `Accept: text/markdown` on the page URL (only when text/markdown out-ranks
+    text/html; `*/*` or no Accept always gets HTML), or `/api/md/<path>`.
+  - Built from the page's own data:
+    - products: price, stock, category, SKU, intro, spec table, photo,
+      how to buy;
+    - categories: the product list with prices, paginated like the HTML;
+    - info pages and guides: their text and tables;
+    - FAQ: questions and answers;
+    - contact: the shop facts.
+  - Headers: `text/markdown`, `X-Markdown-Tokens`, `X-Robots-Tag: noindex,
+    follow`, `Content-Location` and `Link rel=canonical` pointing to the HTML
+    page, `Vary: Accept` when negotiated, CORS for GET/HEAD/OPTIONS, and
+    cache 1h + stale 1 day.
+  - Unknown, private, admin, cart and checkout paths return a markdown 404.
+    Moved or merged products 301 to the new `.md`.
+- **`/llms.txt`** (llmstxt.org): built from code with core pages, guides,
+  categories, the latest 50 products, machine-readable files, legal and
+  socials. Links point to the `.md` versions.
+- **`/llms-full.txt`:** 10 core, guide and legal pages rendered in full,
+  then every product with its price, grouped by category (about 145k
+  characters, cached 1 day).
+- **`/ai.txt`** (ai-txt v1.1.1): identity, permissions, restrictions (no
+  invented prices or stock, no fake reviews), attribution, scope, contact.
+- **`/api/md/_catalog`:** every markdown URL (JSON).
+- **Normal pages:**
+  - `<link rel="alternate" type="text/markdown">` and `<meta name="ai-summary">`
+    on public pages;
+  - `Link: rel="describedby"` header for llms.txt, llms-full.txt and ai.txt,
+    plus `rel="alternate"` to the markdown;
+  - `Vary: Accept`.
+  - ElectronicsStore and WebSite JSON-LD were already present.
+- **robots.txt:** OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User,
+  PerplexityBot and Perplexity-User are named in the main group (allowed on
+  public pages, kept out of private ones), with pointers to llms.txt and
+  ai.txt. Training crawlers stay allowed (owner's choice; blocking them would
+  not affect citations). `.md` URLs are not in the sitemap.
+- **Not added:** `/.well-known/mcp.json`, because the shop runs no MCP server.
+- **Check:** `scripts/live-site/check-markdown.py` requests the `.md` of every
+  sitemap URL and tests negotiation, the 404 behaviour and the site files.
+  The first run gave 640/640 (one transient origin error, then OK) and all
+  11 checks passed.
+- **To give a new page type a markdown version:** add its path to
+  `isContentPath` and a renderer in `renderPath` (markdown.js); llms.txt, the
+  catalog and llms-full.txt pick it up from there.

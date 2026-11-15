@@ -46,6 +46,10 @@ import { BUNDLE_HASH, BUNDLE_CSS, THEME_VERSION } from "./bundle-css.js";
 import { REDIRECTS } from "./catalog-map.js";
 import { DUPE_REDIRECTS } from "./dupes.js";
 import { SKIN_CSS, SKIN_FONTS } from "./skin.js";
+import {
+  isContentPath, wantsMarkdown, mdPathFor, renderPath, markdownPage, notFoundMd, productCards,
+  llmsTxt as llmsSpec, llmsFullTxt, aiTxt, INFO_PAGES, CORE_PAGES, LISTED_CATEGORIES,
+} from "./markdown.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
 let SKIN = false;
@@ -62,7 +66,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "31";
+const VERSION = "34";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -137,9 +141,12 @@ export default {
     const url = new URL(request.url);
     SKIN = !!(env && env.SKIN === "1");
     try {
-      if (url.pathname === "/llms.txt") {
-        return new Response(llmsTxt(), { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
-      }
+      // ---- AI-readable files (markdown.js) ----
+      if (request.method === "OPTIONS" && isAgentPath(url.pathname)) return new Response(null, { status: 204, headers: corsHeaders() });
+      if (url.pathname === "/llms.txt") return textFile(request, llmsSpec(await productList(ctx)), 86400);
+      if (url.pathname === "/llms-full.txt") return await llmsFull(request, ctx);
+      if (url.pathname === "/ai.txt") return textFile(request, aiTxt(), 86400);
+      if (url.pathname === "/api/md/_catalog") return await mdCatalog(request, ctx);
       if (url.pathname === "/ecb-assets/og.png") return ogImage();
       if (url.pathname === "/ecb-search") return await suggest(url, ctx);
       if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
@@ -154,16 +161,166 @@ export default {
       const slug = url.pathname.startsWith("/item/") ? url.pathname.slice(6) : "";
       const old = isRead && slug && (REDIRECTS[slug] || DUPE_REDIRECTS[slug]);
       if (old) return Response.redirect(`${SITE}/item/${old}${url.search}`, 301);
+      // Markdown: /page.md, /index.md, /api/md/<path>, or Accept: text/markdown.
+      if (isRead) {
+        let mdPath = null;
+        let negotiated = false;
+        if (url.pathname.startsWith("/api/md/")) mdPath = "/" + url.pathname.slice(8).replace(/\.md$/, "");
+        else if (url.pathname.endsWith(".md")) mdPath = url.pathname.slice(0, -3);
+        else if (isContentPath(url.pathname.replace(/\/+$/, "") || "/") && wantsMarkdown(request.headers.get("Accept"))) {
+          mdPath = url.pathname;
+          negotiated = true;
+        }
+        if (mdPath !== null) {
+          mdPath = mdPath.replace(/\/+$/, "") || "/";
+          if (mdPath === "/index") mdPath = "/";
+          return await serveMarkdown(request, url, mdPath, negotiated, ctx);
+        }
+      }
       if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
+      if (request.method === "HEAD") return agentHeaders(await fetch(request), url);
       if (request.method !== "GET") return fetch(request);
       // Search results always come live from the shop (never from the page cache).
-      if (hasSession(request) || url.searchParams.has("search")) return await live(request, ctx);
-      return await cached(request, url, env, ctx);
+      const res = hasSession(request) || url.searchParams.has("search") ? await live(request, ctx) : await cached(request, url, env, ctx);
+      return agentHeaders(res, url);
     } catch (error) {
       return fetch(request);
     }
   },
 };
+
+// ---------- AI-readable versions (markdown.js) ----------
+
+const isAgentPath = (p) => p.endsWith(".md") || p.startsWith("/api/md/") || ["/llms.txt", "/llms-full.txt", "/ai.txt"].includes(p);
+const corsHeaders = () => ({
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+  "Access-Control-Allow-Headers": "Accept, Content-Type",
+  "Access-Control-Max-Age": "86400",
+});
+const DESCRIBED_BY = '</llms.txt>; rel="describedby"; type="text/plain", </llms-full.txt>; rel="describedby"; type="text/plain", </ai.txt>; rel="describedby"; type="text/plain"';
+
+// HTML pages: advertise the markdown version and the site files.
+function agentHeaders(res, url) {
+  if (!(res.headers.get("Content-Type") || "").includes("text/html") || res.status !== 200) return res;
+  const out = new Response(res.body, res);
+  const path = url.pathname.replace(/\/+$/, "") || "/";
+  const links = [DESCRIBED_BY];
+  if (isContentPath(path)) {
+    links.push(`<${SITE}${mdPathFor(path)}>; rel="alternate"; type="text/markdown"`);
+    out.headers.append("Vary", "Accept");
+  }
+  out.headers.set("Link", links.join(", "));
+  return out;
+}
+
+function textFile(request, body, maxAge, type = "text/plain") {
+  return new Response(request.method === "HEAD" ? null : body, {
+    headers: {
+      "Content-Type": `${type}; charset=utf-8`,
+      "Cache-Control": `public, max-age=3600, s-maxage=${maxAge}, stale-while-revalidate=604800`,
+      "X-Markdown-Tokens": String(Math.ceil(body.length / 4)),
+      ...corsHeaders(),
+    },
+  });
+}
+
+// Every product (name, URL, price) from the shop's full listing, cached 6 hours.
+async function productList(ctx) {
+  const key = `${SITE}/__ecb/products/v1`;
+  const hit = await caches.default.match(key);
+  if (hit) return hit.json();
+  const html = await (await fetch(`${SITE}/category?pageby=10000`, { headers: { "User-Agent": "Mozilla/5.0 (ECB llms)" } })).text();
+  const list = productCards(html).filter((p) => !REDIRECTS[p.slug] && !DUPE_REDIRECTS[p.slug]);
+  if (list.length > 10) {
+    ctx.waitUntil(caches.default.put(key, new Response(JSON.stringify(list), { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=21600" } })));
+  }
+  return list;
+}
+
+// Renders one path to markdown from the shop's own page. Returns { status, md, canonical }.
+async function renderMarkdown(path, url) {
+  if (!isContentPath(path)) return { status: 404, md: notFoundMd(path) };
+  const q = new URL(SITE + path);
+  const page = url.searchParams.get("page");
+  if (page && /^\d+$/.test(page)) q.searchParams.set("page", page);
+  const res = await fetch(q.toString(), { headers: { "User-Agent": "Mozilla/5.0 (ECB markdown)", Accept: "text/html" } });
+  const finalPath = new URL(res.url || q.toString()).pathname.replace(/\/+$/, "") || "/";
+  if (res.status !== 200 || finalPath !== path || !(res.headers.get("Content-Type") || "").includes("text/html")) {
+    return { status: 404, md: notFoundMd(path) };
+  }
+  const fixed = fixHtml(await res.text(), q);
+  const seo = extractSeo(fixed.html, q, fixed);
+  if (path.startsWith("/item/") && !(seo.product && seo.product.name)) return { status: 404, md: notFoundMd(path) };
+  const rendered = renderPath(path, q, fixed.html, seo);
+  if (!rendered) return { status: 404, md: notFoundMd(path) };
+  return { status: 200, md: markdownPage(rendered, seo.canonical), canonical: seo.canonical };
+}
+
+async function serveMarkdown(request, url, path, negotiated, ctx) {
+  // Product addresses that changed or were merged.
+  const slug = path.startsWith("/item/") ? path.slice(6) : "";
+  const moved = slug && (REDIRECTS[slug] || DUPE_REDIRECTS[slug]);
+  if (moved) return Response.redirect(`${SITE}/item/${moved}.md`, 301);
+  const page = url.searchParams.get("page");
+  const key = `${SITE}/__ecb/md/v${VERSION}${path}${page && /^\d+$/.test(page) ? `?page=${page}` : ""}`;
+  let r;
+  const hit = await caches.default.match(key);
+  if (hit) r = { status: hit.status, md: await hit.text(), canonical: hit.headers.get("Content-Location") };
+  else {
+    r = await renderMarkdown(path, url);
+    if (r.status === 200) {
+      ctx.waitUntil(caches.default.put(key, new Response(r.md, { headers: { "Cache-Control": "public, max-age=3600", "Content-Location": r.canonical } })));
+    }
+  }
+  const headers = {
+    "Content-Type": "text/markdown; charset=utf-8",
+    "X-Markdown-Tokens": String(Math.ceil(r.md.length / 4)),
+    "X-Robots-Tag": "noindex, follow",
+    "Cache-Control": r.status === 200 ? "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400" : "public, max-age=60",
+    ...corsHeaders(),
+  };
+  if (r.canonical) {
+    headers["Content-Location"] = r.canonical;
+    headers.Link = `<${r.canonical}>; rel="canonical", ${DESCRIBED_BY}`;
+  }
+  if (negotiated) headers.Vary = "Accept";
+  return new Response(request.method === "HEAD" ? null : r.md, { status: r.status, headers });
+}
+
+// Every markdown URL, as JSON.
+async function mdCatalog(request, ctx) {
+  const products = await productList(ctx);
+  const routes = [
+    "/",
+    ...Object.keys(INFO_PAGES),
+    "/category",
+    ...LISTED_CATEGORIES.map(([slug]) => `/category/${slug}`),
+    "/category/laptops/Gaming",
+    "/category/laptops/Budget",
+    ...products.map((p) => `/item/${p.slug}`),
+  ].map((p) => ({ markdown: `${SITE}${mdPathFor(p)}`, html: `${SITE}${p === "/" ? "/" : p}` }));
+  const body = JSON.stringify({ site: SITE, generated: new Date().toISOString(), count: routes.length, routes }, null, 1);
+  return new Response(request.method === "HEAD" ? null : body, {
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=3600, s-maxage=21600", "X-Robots-Tag": "noindex", ...corsHeaders() },
+  });
+}
+
+// Core pages, guides and legal pages rendered in full, then every product.
+async function llmsFull(request, ctx) {
+  const key = `${SITE}/__ecb/llms-full/v${VERSION}`;
+  const hit = await caches.default.match(key);
+  let body = hit ? await hit.text() : null;
+  if (!body) {
+    const paths = CORE_PAGES;
+    const rendered = await Promise.all(paths.map((p) => renderMarkdown(p, new URL(SITE + p))));
+    const sections = paths.map((p, i) => [`${SITE}${p === "/" ? "/" : p}`, rendered[i].md]).filter((x, i) => rendered[i].status === 200);
+    body = llmsFullTxt(sections, await productList(ctx));
+    if (body.length > 500000) console.warn(`llms-full.txt is ${body.length} chars`);
+    ctx.waitUntil(caches.default.put(key, new Response(body, { headers: { "Cache-Control": "public, max-age=86400" } })));
+  }
+  return textFile(request, body, 86400);
+}
 
 // Live search suggestions: the shop's own search, first 8 matches as JSON.
 async function suggest(url, ctx) {
@@ -786,6 +943,15 @@ function rewrite(response, url, bundle, hints) {
             { html: true }
           );
           if (seo.published) end.before(`<meta property="article:published_time" content="${seo.published}">`, { html: true });
+          // AI agents: markdown alternate and a short factual summary.
+          const mdPath = url.pathname.replace(/\/+$/, "") || "/";
+          if (!hints.noindex && isContentPath(mdPath)) {
+            end.before(`<link rel="alternate" type="text/markdown" href="${SITE}${mdPathFor(mdPath)}">`, { html: true });
+            const summary = isHome
+              ? "ECB Technologies is an electronics shop in Nairobi CBD, Kenya, selling genuine laptops, smartphones, printers and accessories with prices in KSh, M-Pesa or card payment, and delivery to all 47 counties."
+              : seo.description;
+            if (summary) end.before(`<meta name="ai-summary" content="${escapeHtml(summary)}">`, { html: true });
+          }
           if (seo.modified) end.before(`<meta property="article:modified_time" content="${seo.modified}"><meta property="og:updated_time" content="${seo.modified}">`, { html: true });
           if (seo.canonical) end.before(`<link rel="canonical" href="${seo.canonical}">`, { html: true });
           const missing = Object.entries(social)

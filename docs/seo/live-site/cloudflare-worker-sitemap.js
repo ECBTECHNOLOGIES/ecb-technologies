@@ -130,6 +130,21 @@ async function robots(url) {
   // public page. Only account, cart, checkout, agent/rider and admin areas
   // are kept out (they are also marked noindex).
   const text = [
+    "# ECB Technologies - robots.txt",
+    "# Keep in sync with /llms.txt and /ai.txt.",
+    "# Site guide for AI: https://www.ecbtechkenya.com/llms.txt",
+    "# AI usage policy: https://www.ecbtechkenya.com/ai.txt",
+    "# Every public page also has a markdown version at <page>.md (noindex; the HTML page is canonical).",
+    "",
+    "# AI search and user-fetch crawlers are welcome on all public pages, as are",
+    "# search engines. Training crawlers (GPTBot, ClaudeBot, Google-Extended,",
+    "# Applebot-Extended, CCBot, Bytespider) are currently allowed by the * group.",
+    "User-agent: OAI-SearchBot",
+    "User-agent: ChatGPT-User",
+    "User-agent: Claude-SearchBot",
+    "User-agent: Claude-User",
+    "User-agent: PerplexityBot",
+    "User-agent: Perplexity-User",
     "User-agent: *",
     "Disallow: /admin",
     "Disallow: /user/",
