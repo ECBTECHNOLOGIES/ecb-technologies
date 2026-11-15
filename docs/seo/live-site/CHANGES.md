@@ -353,3 +353,40 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   "Sold by" box or empty stock pill.
 - **Category page:** no grid/list switch.
 - Home page height went from about 6,300 px to 3,900 px on desktop.
+
+## 2026-11-15: Ahrefs page fixes, socials, Sunday, live search, nothing.tech pass 2 (Worker v26)
+- **Ahrefs page fixes:**
+  - `<meta name="robots" content="index, follow, max-image-preview:large…">`
+    and an `X-Robots-Tag` header on every page (`noindex, follow` where
+    applicable).
+  - `twitter:site` and `twitter:creator` are `@ecbtechnologies`.
+  - Dates: `article:published_time` / `article:modified_time` /
+    `og:updated_time`, plus a WebPage/ItemPage/CollectionPage node with
+    datePublished/dateModified. Published dates: products use the upload
+    time in their photo's file name; written pages use the day they were
+    written; other pages use the site setup date (from the logo upload).
+- **Socials:** Instagram, TikTok and X are in the footer, in the
+  ElectronicsStore `sameAs` and in llms.txt. Facebook and YouTube icons are
+  removed (no profiles yet).
+- **Sunday:** the Visit section reads "Sunday: Closed".
+- **Search:**
+  - Results pages bypass the page cache, so they always come live from the
+    shop.
+  - New `/ecb-search?q=` endpoint returns the shop's first 8 matches as JSON
+    (cached 60 seconds).
+  - Every search box shows live suggestions (photo, name, current price,
+    "See all N results"), with keyboard support.
+- **Slider:** titles shortened to "Laptops" and "Smartphones", each with a
+  "Nairobi CBD" label (admin).
+- **skin.js, nothing.tech pass 2:**
+  - Full-bleed hero photo with text bottom-left (photo 1920 px on desktop,
+    1000 px on phones).
+  - Home shows the intro, categories, 8 products and Visit only (promos and
+    best sellers hidden).
+  - Product tiles are image, name in dot-matrix and price, with no buttons.
+  - Product page: flat, dot-matrix name, mono price; no trail, trust strip
+    or tabs.
+  - Category intro is one mono line.
+  - Footer follows the nothing.tech pattern: big dot-matrix category links,
+    dark action tiles, one row of small links + socials, and a dot grid on
+    black.

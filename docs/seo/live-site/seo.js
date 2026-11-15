@@ -24,6 +24,22 @@ const PHONE = "+254717040531";
 const WHATSAPP = "254717040531";
 const LOGO = `${SITE}/assets/images/1789718740logopng.png`;
 export const SHARE_IMAGE = `${SITE}/ecb-assets/og.png`;
+// The shop's social profiles (owner-confirmed).
+export const SOCIALS = {
+  instagram: "https://www.instagram.com/ecb_technologies/",
+  tiktok: "https://www.tiktok.com/@ecbtechnologies",
+  x: "https://x.com/ecbtechnologies",
+};
+export const X_HANDLE = "@ecbtechnologies";
+// The site was set up when the logo was uploaded (1789718740 in its file name).
+const SITE_SINCE = new Date(1789718740 * 1000).toISOString();
+// Pages written on a known date.
+const PAGE_PUBLISHED = {
+  "/delivery": "2026-11-15T10:00:00+03:00",
+  "/laptop-prices-in-kenya": "2026-11-15T10:00:00+03:00",
+  "/student-laptops-kenya": "2026-11-15T10:00:00+03:00",
+  "/hp-vs-dell-vs-lenovo-laptops-kenya": "2026-11-15T10:00:00+03:00",
+};
 const ADDRESS = "Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD";
 
 const BRANDS = [
@@ -64,7 +80,7 @@ const STORE = {
     },
   ],
   areaServed: { "@type": "Country", name: "Kenya" },
-  sameAs: ["https://share.google/56ymLkB3i6DS0HHvJ"],
+  sameAs: ["https://share.google/56ymLkB3i6DS0HHvJ", SOCIALS.instagram, SOCIALS.tiktok, SOCIALS.x],
 };
 
 const WEBSITE = {
@@ -148,9 +164,27 @@ export function extractSeo(html, url, base) {
   out.description = description;
   out.title = decode(title);
   out.h1Count = (html.match(/<h1[\s>]/g) || []).length;
+  // Dates: products from the upload time in their photo's file name; written
+  // pages from when they were written; everything else from when the site was
+  // set up. "Modified" is when this copy of the page was built from the shop.
+  const photoTime = (html.match(/assets\/images\/(?:products|thumbnails)\/(1[6-9]\d{8})/) || [])[1];
+  out.published = path.startsWith("/item/") && photoTime ? new Date(Number(photoTime) * 1000).toISOString() : PAGE_PUBLISHED[path] || SITE_SINCE;
+  out.modified = new Date().toISOString();
+  const webPage = (type) => ({
+    "@type": type,
+    "@id": `${canonical}#webpage`,
+    url: canonical,
+    name: title,
+    description: description || undefined,
+    isPartOf: { "@id": `${SITE}/#website` },
+    inLanguage: "en-KE",
+    datePublished: out.published,
+    dateModified: out.modified,
+  });
 
   if (path === "/") {
     out.type = "home";
+    out.graph.push(webPage("WebPage"));
     return out;
   }
 
@@ -196,7 +230,7 @@ export function extractSeo(html, url, base) {
     const crumbs = [["Home", `${SITE}/`]];
     if (category) crumbs.push([category[1], `${SITE}/category/${category[0]}`]);
     crumbs.push([name, canonical]);
-    out.graph.push(product, breadcrumbList(crumbs));
+    out.graph.push(Object.assign(webPage("ItemPage"), { mainEntity: { "@id": `${canonical}#product` } }), product, breadcrumbList(crumbs));
     return out;
   }
 
@@ -218,12 +252,7 @@ export function extractSeo(html, url, base) {
     } else crumbs.push(["All products", `${SITE}/category`]);
     out.graph.push(
       {
-        "@type": "CollectionPage",
-        "@id": `${canonical}#page`,
-        name: title,
-        url: canonical,
-        description: description || undefined,
-        isPartOf: { "@id": `${SITE}/#website` },
+        ...webPage("CollectionPage"),
         mainEntity: {
           "@type": "ItemList",
           numberOfItems: count || items.length,
@@ -235,6 +264,7 @@ export function extractSeo(html, url, base) {
     return out;
   }
 
+  out.graph.push(webPage(path === "/about" ? "AboutPage" : path === "/contact" ? "ContactPage" : "WebPage"));
   if (crumb) out.graph.push(breadcrumbList([["Home", `${SITE}/`], [crumb, canonical]]));
   return out;
 }
@@ -271,12 +301,10 @@ export function homeIntro() {
   return (
     '<section class="ecb-seo-intro"><div class="container">' +
     "<h1>Laptops, Phones &amp; Accessories Shop in Nairobi CBD</h1>" +
-    `<p>ECB Technologies sells genuine laptops, smartphones, printers, gaming gear and accessories from our shop at ${ADDRESS}. ` +
-    'Pay by M-Pesa or card, collect free at the shop, or get rider delivery in Nairobi and <a href="/delivery">courier delivery to all 47 counties</a>. ' +
-    "Open Monday to Saturday, 9am to 7pm.</p>" +
+    '<p>Genuine laptops and phones. Moi Avenue, Nairobi CBD. <a href="/delivery">Delivery to all 47 counties</a>.</p>' +
     '<div class="ecb-seo-cta">' +
-    `<a class="ecb-cta-wa" href="${escapeHtml(whatsappLink("Hello ECB Technologies, I'd like to ask about a product."))}" target="_blank" rel="noopener" onclick="${track("home")}">${WA_ICON}Chat on WhatsApp</a>` +
-    `<a class="ecb-cta-call" href="tel:${PHONE}">Call 0717 040 531</a>` +
+    `<a class="ecb-cta-wa" href="${escapeHtml(whatsappLink("Hello ECB Technologies, I'd like to ask about a product."))}" target="_blank" rel="noopener" onclick="${track("home")}">${WA_ICON}WhatsApp</a>` +
+    `<a class="ecb-cta-call" href="tel:${PHONE}">Call</a>` +
     '<a class="ecb-cta-shop" href="/category/laptops">Shop laptops</a>' +
     "</div></div></section>"
   );
@@ -284,17 +312,78 @@ export function homeIntro() {
 
 export function categoryIntro(c) {
   if (!c || !c.count) return "";
-  const what = c.name;
+  const guides = /^laptops$/i.test((c.parts || [])[0] || "")
+    ? ' · <a href="/laptop-prices-in-kenya">Price guide</a> · <a href="/student-laptops-kenya">Student picks</a> · <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a>'
+    : "";
   return (
     '<div class="container ecb-seo-cat-intro"><p>' +
-    `Shop ${c.count.toLocaleString("en-US")} ${escapeHtml(what)} at ECB Technologies, with prices in KSh. ` +
-    `Visit our shop at ${ADDRESS}, pay by M-Pesa or card, and get <a href="/delivery">delivery to all 47 counties</a> in Kenya.` +
-    (/^laptops$/i.test((c.parts || [])[0] || "")
-      ? ' Compare <a href="/laptop-prices-in-kenya">laptop prices in Kenya</a>, <a href="/student-laptops-kenya">student laptops under KSh 40,000</a> and <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a>.'
-      : "") +
+    `${c.count.toLocaleString("en-US")} ${escapeHtml(c.name)} at ECB Technologies, Nairobi CBD · Prices in KSh · <a href="/delivery">Delivery across Kenya</a>${guides}` +
     "</p></div>"
   );
 }
+
+// Footer in the nothing.tech pattern: big dot-matrix links, a short list of
+// action tiles, then one row of small links and socials.
+export function nothingFooter() {
+  const big = [["Laptops", "/category/laptops"], ["Phones", "/category/smartphones"], ["Gaming", "/category/gaming"], ["Printers", "/category/printers"], ["Accessories", "/category/Computing-Accessories"]];
+  const tiles = [
+    ["WhatsApp 0717 040 531", whatsappLink("Hello ECB Technologies, I'd like to ask about a product."), WA_TILE],
+    ["Visit: Moi Avenue, Nairobi CBD", "/contact", PIN_TILE],
+    ["Delivery across Kenya", "/delivery", BOX_TILE],
+    ["Buying guides", "/laptop-prices-in-kenya", INFO_TILE],
+    ["Mon – Sat · 9am – 7pm", "/contact", CLOCK_TILE],
+  ];
+  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
+  const social = [["Instagram", SOCIALS.instagram], ["TikTok", SOCIALS.tiktok], ["X", SOCIALS.x]];
+  return (
+    '<div class="nf-wrap">' +
+    '<nav class="nf-big" aria-label="Shop">' + big.map(([t, h]) => `<a href="${h}">${t}</a>`).join("") + "</nav>" +
+    '<div class="nf-tiles">' +
+    tiles.map(([t, h, icon]) => `<a class="nf-tile" href="${escapeHtml(h)}"${h.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}><span>${t}</span>${icon}</a>`).join("") +
+    "</div>" +
+    '<div class="nf-bottom"><div class="nf-links">' + small.map(([t, h]) => `<a href="${h}">${t}</a>`).join("") + "</div>" +
+    '<div class="nf-links nf-social">' + social.map(([t, h]) => `<a href="${h}" target="_blank" rel="noopener me">${t}</a>`).join("") + "</div></div>" +
+    '<p class="nf-copy">© ' + new Date().getFullYear() + " ECB Technologies · Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi</p>" +
+    "</div>"
+  );
+}
+const tileIcon = (path) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
+const WA_TILE = tileIcon('<path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.4 8.4 0 1 1 21 11.5z"/>');
+const PIN_TILE = tileIcon('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>');
+const BOX_TILE = tileIcon('<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>');
+const INFO_TILE = tileIcon('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>');
+const CLOCK_TILE = tileIcon('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>');
+
+const IG_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+const TT_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.12V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.34 7.34 0 0 0 4.29 1.38V7.3a4.28 4.28 0 0 1-3.23-1.48z"/></svg>';
+const X_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg>';
+
+export const socialLinks = (cls) =>
+  [
+    [SOCIALS.instagram, "Instagram", IG_ICON],
+    [SOCIALS.tiktok, "TikTok", TT_ICON],
+    [SOCIALS.x, "X", X_ICON],
+  ]
+    .map(([href, name, icon]) => `<a href="${href}" class="${cls}" target="_blank" rel="noopener me" aria-label="ECB Technologies on ${name}">${icon}</a>`)
+    .join("");
+
+// Live search suggestions: as you type (2+ letters), matching products with
+// photo and current price come straight from the shop's own search.
+export const SUGGEST_SCRIPT =
+  "<script>(function(){var esc=function(s){return String(s).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]})};" +
+  "var box=document.createElement('div');box.className='ecb-suggest';box.hidden=true;box.setAttribute('role','listbox');document.body.appendChild(box);" +
+  "var cur=null,t=null,last='',ctl=null,cache={};" +
+  "function place(){if(!cur)return;var r=cur.form.getBoundingClientRect();box.style.left=(r.left+window.scrollX)+'px';box.style.top=(r.bottom+window.scrollY+6)+'px';box.style.width=Math.max(r.width,300)+'px'}" +
+  "function render(d,q){if(!d.items.length){box.innerHTML='<div class=\"ecb-suggest-empty\">No products found for \u201c'+esc(q)+'\u201d</div>'}else{box.innerHTML=d.items.map(function(i){return '<a class=\"ecb-suggest-item\" href=\"'+esc(i.url)+'\"><img src=\"'+esc(i.img)+'\" alt=\"\" width=\"44\" height=\"44\"><span class=\"n\">'+esc(i.name)+'</span><span class=\"p\">'+esc(i.price)+'</span></a>'}).join('')+'<a class=\"ecb-suggest-all\" href=\"/category?search='+encodeURIComponent(q)+'\">See all '+d.total+' result'+(d.total==1?'':'s')+' \u2192</a>'}place();box.hidden=false}" +
+  "function run(inp){var q=inp.value.trim();if(q.length<2){box.hidden=true;last='';return}if(q===last&&!box.hidden)return;last=q;if(cache[q])return render(cache[q],q);if(ctl)ctl.abort();ctl=window.AbortController?new AbortController():null;" +
+  "fetch('/ecb-search?q='+encodeURIComponent(q),ctl?{signal:ctl.signal}:{}).then(function(r){return r.json()}).then(function(d){cache[q]=d;if(inp.value.trim()===q&&cur===inp)render(d,q)}).catch(function(){})}" +
+  "document.querySelectorAll('input[name=\"search\"]').forEach(function(inp){if(!inp.form)return;inp.setAttribute('autocomplete','off');" +
+  "inp.addEventListener('input',function(){cur=inp;clearTimeout(t);t=setTimeout(function(){run(inp)},200)});" +
+  "inp.addEventListener('focus',function(){cur=inp;if(inp.value.trim().length>1)run(inp)});" +
+  "inp.addEventListener('keydown',function(e){if(e.key==='Escape')box.hidden=true;if(e.key==='ArrowDown'&&!box.hidden){var a=box.querySelector('a');if(a){e.preventDefault();a.focus()}}})});" +
+  "box.addEventListener('keydown',function(e){var as=[].slice.call(box.querySelectorAll('a')),i=as.indexOf(document.activeElement);if(e.key==='ArrowDown'&&i<as.length-1){e.preventDefault();as[i+1].focus()}if(e.key==='ArrowUp'){e.preventDefault();if(i>0)as[i-1].focus();else if(cur)cur.focus()}if(e.key==='Escape'){box.hidden=true;if(cur)cur.focus()}});" +
+  "document.addEventListener('click',function(e){if(!box.contains(e.target)&&(!cur||!cur.form.contains(e.target)))box.hidden=true});" +
+  "addEventListener('resize',place);addEventListener('scroll',function(){if(!box.hidden)place()},{passive:true})})();</script>";
 
 export const SEO_CSS =
   ".ecb-seo-intro{background:#fff;border-bottom:1px solid #e8edf5}" +
@@ -311,6 +400,14 @@ export const SEO_CSS =
   ".ecb-wa-order:hover{background:#1ebe5a}" +
   ".ecb-wa-float{position:fixed;right:16px;bottom:16px;z-index:1030;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22)}" +
   "@media print{.ecb-wa-float{display:none}}" +
+  ".ecb-suggest{position:absolute;z-index:3000;background:#fff;border:1px solid #e2e2e2;border-radius:8px;box-shadow:0 14px 34px rgba(0,0,0,.1);max-height:70vh;overflow:auto;text-align:left}" +
+  ".ecb-suggest-item{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:8px 12px;color:#000!important;text-decoration:none!important;border-bottom:1px solid #f0f0f0}" +
+  ".ecb-suggest-item:hover,.ecb-suggest-item:focus{background:#f2f2f2;outline:none}" +
+  ".ecb-suggest-item img{width:44px;height:44px;object-fit:contain;background:#e9e9e9;border-radius:6px;mix-blend-mode:multiply}" +
+  ".ecb-suggest-item .n{font-size:13px;line-height:1.35}" +
+  ".ecb-suggest-item .p{font-family:'Space Mono',ui-monospace,monospace;font-size:12px;font-weight:700;white-space:nowrap}" +
+  ".ecb-suggest-all,.ecb-suggest-empty{display:block;padding:11px 12px;font-family:'Space Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#000!important;text-decoration:none!important}" +
+  ".ecb-suggest-empty{color:#5c5e5e!important;text-transform:none;letter-spacing:0;font-family:inherit;font-size:13px}" +
   // The banner heading became an h1; keep the theme's h2 sizes for it.
   ".ecb-guide-page .ecb-about-lead-body h2{font-size:24px;line-height:1.3;margin:30px 0 10px;color:#1a2840}" +
   ".ecb-guide-page .ecb-about-lead-body h3{font-size:18px;line-height:1.35;margin:22px 0 6px;color:#1a2840}" +
@@ -334,6 +431,9 @@ export function llmsTxt() {
 - Opening hours: Monday to Saturday, 9am to 7pm
 - Payment: M-Pesa or card
 - Delivery: rider delivery within Nairobi, courier delivery to all 47 counties, free pickup at the shop
+- Instagram: ${SOCIALS.instagram}
+- TikTok: ${SOCIALS.tiktok}
+- X: ${SOCIALS.x}
 - Every product page lists the current price in KSh, stock status and specifications.
 
 ## Categories

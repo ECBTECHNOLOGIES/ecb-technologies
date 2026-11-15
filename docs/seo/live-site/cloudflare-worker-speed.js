@@ -59,10 +59,10 @@ const SKIN_ID = (() => {
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
-  waOrderButton, waFloat, llmsTxt,
+  waOrderButton, waFloat, llmsTxt, SOCIALS, X_HANDLE, socialLinks, SUGGEST_SCRIPT, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "24";
+const VERSION = "26";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -137,6 +137,7 @@ export default {
         return new Response(llmsTxt(), { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
       }
       if (url.pathname === "/ecb-assets/og.png") return ogImage();
+      if (url.pathname === "/ecb-search") return await suggest(url, ctx);
       if (url.pathname.startsWith("/ecb-assets/")) return serveBundle(url);
       const isRead = request.method === "GET" || request.method === "HEAD";
       // One version of the site: the bare domain redirects to www.
@@ -149,13 +150,49 @@ export default {
       if (old) return Response.redirect(`${SITE}/item/${old}${url.search}`, 301);
       if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
       if (request.method !== "GET") return fetch(request);
-      if (hasSession(request)) return await live(request, ctx);
+      // Search results always come live from the shop (never from the page cache).
+      if (hasSession(request) || url.searchParams.has("search")) return await live(request, ctx);
       return await cached(request, url, env, ctx);
     } catch (error) {
       return fetch(request);
     }
   },
 };
+
+// Live search suggestions: the shop's own search, first 8 matches as JSON.
+async function suggest(url, ctx) {
+  const q = (url.searchParams.get("q") || "").trim().slice(0, 60);
+  const json = (data, maxAge) =>
+    new Response(JSON.stringify(data), {
+      headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": `public, max-age=${maxAge}`, "X-Robots-Tag": "noindex" },
+    });
+  if (q.length < 2) return json({ q, total: 0, items: [] }, 300);
+  const key = `https://www.ecbtechkenya.com/__ecb/suggest/${encodeURIComponent(q.toLowerCase())}`;
+  const hit = await caches.default.match(key);
+  if (hit) return hit;
+  const res = await fetch(`${SITE}/category?search=${encodeURIComponent(q)}&pageby=8`, { headers: { "User-Agent": "Mozilla/5.0 (ECB search)" } });
+  const html = await res.text();
+  const total = Number(((html.match(/class="ecb-cat-count">\s*(?:<strong>)?\s*(\d[\d,]*)/) || [])[1] || "0").replace(/,/g, ""));
+  const items = [];
+  for (const card of html.split('<div class="ecb-fp-card"').slice(1)) {
+    const link = card.match(/href="(https:\/\/www\.ecbtechkenya\.com\/item\/[A-Za-z0-9-]+)"/);
+    const name = card.match(/class="ecb-fp-name">\s*([^<]+?)\s*</);
+    const price = card.match(/class="ecb-fp-price">\s*([^<]+?)\s*</);
+    const img = card.match(/(?:data-o|src)="(https:\/\/www\.ecbtechkenya\.com\/assets\/images\/[^"]+)"/);
+    if (!link || !name) continue;
+    const path = img ? imagePath(img[1]) : null;
+    items.push({
+      url: link[1],
+      name: name[1].replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#0?39;/g, "'"),
+      price: price ? price[1].replace(/^KSH\s*/i, "KSh ") : "",
+      img: path ? resized(path, 96) : "",
+    });
+    if (items.length >= 8) break;
+  }
+  const out = json({ q, total: total || items.length, items }, 60);
+  ctx.waitUntil(caches.default.put(key, out.clone()));
+  return out;
+}
 
 function ogImage() {
   const bin = Uint8Array.from(atob(OG_PNG_BASE64), (c) => c.charCodeAt(0));
@@ -212,10 +249,11 @@ function kvSeconds(url) {
   return 0;
 }
 
-function toVisitor(body, at, how) {
+function toVisitor(body, at, how, robots) {
   return new Response(body, {
     status: 200,
     headers: {
+      "X-Robots-Tag": robots || "index, follow",
       "Content-Type": "text/html; charset=UTF-8",
       "Cache-Control": "no-cache, private",
       "X-ECB-Speed": VERSION,
@@ -231,7 +269,7 @@ async function cached(request, url, env, ctx) {
   if (hit) {
     const at = Number(hit.headers.get("X-ECB-At")) || 0;
     if (Date.now() - at > FRESH_SECONDS * 1000) ctx.waitUntil(refresh(url, key, env, ctx));
-    return toVisitor(hit.body, at, "HIT");
+    return toVisitor(hit.body, at, "HIT", hit.headers.get("X-ECB-Robots"));
   }
 
   const kvTtl = kvSeconds(url);
@@ -241,7 +279,7 @@ async function cached(request, url, env, ctx) {
       const at = (metadata && metadata.at) || 0;
       ctx.waitUntil(store(cache, key, value, at));
       if (Date.now() - at > FRESH_SECONDS * 1000) ctx.waitUntil(refresh(url, key, env, ctx));
-      return toVisitor(value, at, "GLOBAL");
+      return toVisitor(value, at, "GLOBAL", /<meta name="robots" content="noindex/.test(value) ? "noindex, follow" : "index, follow");
     }
   }
 
@@ -283,7 +321,12 @@ function store(cache, key, html, at) {
   return cache.put(
     key,
     new Response(html, {
-      headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "public, max-age=604800", "X-ECB-At": String(at) },
+      headers: {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Cache-Control": "public, max-age=604800",
+        "X-ECB-At": String(at),
+        "X-ECB-Robots": /<meta name="robots" content="noindex/.test(html) ? "noindex, follow" : "index, follow",
+      },
     })
   );
 }
@@ -436,6 +479,8 @@ function fixHtml(html, url) {
       .replace('<main class="ecb-about-page"', '<main class="ecb-about-page ecb-guide-page"')
       .replace(/<span class="ecb-about-lead-eyebrow">[\s\S]*?<\/span>\s*<h1 class="ecb-about-lead-title">[\s\S]*?<\/h1>/, "");
   }
+  // The shop is closed on Sundays.
+  html = html.replace(/(<span class="ecb-visit-detail-sub">)\s*Sunday:[^<]*/, "$1Sunday: Closed");
   if (path.startsWith("/category") && [...url.searchParams.keys()].some((k) => NOINDEX_PARAMS.test(k))) noindex = true;
   return { html, title, description, noindex, crumb: crumb ? crumb.replace(/&amp;/g, "&") : "" };
 }
@@ -475,6 +520,8 @@ function rewrite(response, url, bundle, hints) {
     "og:description": escapeHtml(seo.description || ""),
     "og:image": shareImage,
     "twitter:card": "summary_large_image",
+    "twitter:site": X_HANDLE,
+    "twitter:creator": X_HANDLE,
     "twitter:title": escapeHtml(seo.title || ""),
     "twitter:description": escapeHtml(seo.description || ""),
     "twitter:image": shareImage,
@@ -555,6 +602,31 @@ function rewrite(response, url, bundle, hints) {
         if ((e.getAttribute("href") || "").replace(/\D/g, "").endsWith("717040531")) e.setAttribute("href", "tel:+254717040531");
       },
     })
+    .on("div.ecb-footer-main", {
+      element(e) {
+        if (SKIN) e.setInnerContent(nothingFooter(), { html: true });
+      },
+    })
+    .on("div.ecb-footer-bottom", {
+      element(e) {
+        if (SKIN) e.remove();
+      },
+    })
+    .on("div.ecb-footer-socials", {
+      element(e) {
+        e.setInnerContent(socialLinks("ecb-footer-social"), { html: true });
+      },
+    })
+    .on("a.ecb-topbar__social-link, a.ecb-trust-social", {
+      element(e) {
+        const name = (e.getAttribute("aria-label") || e.getAttribute("class") || "").toLowerCase();
+        const href = /insta/.test(name) ? SOCIALS.instagram : /tiktok/.test(name) ? SOCIALS.tiktok : /\bx\b|twitter/.test(name) ? SOCIALS.x : null;
+        if (!href) return e.remove(); // Facebook / YouTube: no profile yet
+        e.setAttribute("href", href);
+        e.setAttribute("target", "_blank");
+        e.setAttribute("rel", "noopener me");
+      },
+    })
     .on("div.ecb-footer-bottom-links", {
       element(e) {
         // The top bar is hidden in the skin; staff logins move here.
@@ -616,13 +688,13 @@ function rewrite(response, url, bundle, hints) {
         }
         if (hints.heroBgs && hints.heroBgs.length) {
           const rules = hints.heroBgs
-            .map((p, i) => `.ecb-hero-slide:nth-child(${i + 1}) .ecb-hero-img-bg{background-image:url('${resized(p, 1200)}')!important}`)
+            .map((p, i) => `.ecb-hero-slide:nth-child(${i + 1}) .ecb-hero-img-bg{background-image:url('${resized(p, 1920)}')!important}`)
             .join("");
           e.append(`<style>@media (min-width:992px){${rules}}</style>`, { html: true });
           // The first slide's photo is the largest thing on screen: fetch it early.
           e.prepend(
-            `<link rel="preload" as="image" href="${resized(hints.heroBgs[0], 750)}" media="(max-width:991px)" fetchpriority="high">` +
-              `<link rel="preload" as="image" href="${resized(hints.heroBgs[0], 1200)}" media="(min-width:992px)" fetchpriority="high">`,
+            `<link rel="preload" as="image" href="${resized(hints.heroBgs[0], 1000)}" media="(max-width:991px)" fetchpriority="high">` +
+              `<link rel="preload" as="image" href="${resized(hints.heroBgs[0], 1920)}" media="(min-width:992px)" fetchpriority="high">`,
             { html: true }
           );
         }
@@ -637,7 +709,14 @@ function rewrite(response, url, bundle, hints) {
         e.onEndTag((end) => {
           const desc = isHome ? HOME_DESCRIPTION : hints.description;
           if (!hasDescription && desc) end.before(`<meta name="description" content="${desc}">`, { html: true });
-          if (hints.noindex) end.before(`<meta name="robots" content="noindex, follow">`, { html: true });
+          end.before(
+            hints.noindex
+              ? `<meta name="robots" content="noindex, follow">`
+              : `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">`,
+            { html: true }
+          );
+          if (seo.published) end.before(`<meta property="article:published_time" content="${seo.published}">`, { html: true });
+          if (seo.modified) end.before(`<meta property="article:modified_time" content="${seo.modified}"><meta property="og:updated_time" content="${seo.modified}">`, { html: true });
           if (seo.canonical) end.before(`<link rel="canonical" href="${seo.canonical}">`, { html: true });
           const missing = Object.entries(social)
             .filter(([k, v]) => v && !seen.has(k))
@@ -658,6 +737,7 @@ function rewrite(response, url, bundle, hints) {
       element(e) {
         e.append(TOKEN_SCRIPT, { html: true });
         e.append(waFloat(product, seo.canonical), { html: true });
+        e.append(SUGGEST_SCRIPT, { html: true });
         if (useSubset) e.append(fullCssLoader(bundle), { html: true });
       },
     })
@@ -703,7 +783,7 @@ function rewrite(response, url, bundle, hints) {
         if (!path) return;
         if (!(await exists(new URL(path, "https://www.ecbtechkenya.com/").toString()))) e.removeAttribute("style");
         // Phones/tablets get 750px; the <head> CSS below swaps in 1200px on desktop.
-        else e.setAttribute("style", style.replace(m[0], `url('${resized(path, 750)}')`));
+        else e.setAttribute("style", style.replace(m[0], `url('${resized(path, 1000)}')`));
       },
     })
     .on("section.gs-breadcrumb-section[data-background]", {
@@ -729,6 +809,7 @@ function rewrite(response, url, bundle, hints) {
   const out = rw.transform(response);
   const res = new Response(out.body, out);
   res.headers.set("X-ECB-Speed", VERSION);
+  res.headers.set("X-Robots-Tag", hints.noindex ? "noindex, follow" : "index, follow");
   res.headers.delete("Content-Length");
   return res;
 }
