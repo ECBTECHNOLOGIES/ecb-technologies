@@ -125,9 +125,63 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - Product pages render in standards mode now. The layout is the same
   except a few pixels of spacing.
 
+## 2026-11-15: full SEO and conversion layer (Worker v12, `seo.js`)
+- **One version of the site:**
+  - `ecbtechkenya.com` redirects (301) to `www`. `sitemap.xml`, `robots.txt`
+    and the brand logos stay on both hosts.
+  - Always Use HTTPS is on; minimum TLS is 1.2.
+  - Every page has a canonical URL that keeps only `page`. Search, sort
+    and filter pages are `noindex, follow` with a canonical to the plain
+    category.
+- **Titles and descriptions:**
+  - Home: "Laptops & Phones Shop in Nairobi CBD | ECB Technologies".
+  - Products: "<name> Price in Kenya".
+  - Categories: "<Category> Prices in Kenya | ECB Technologies".
+  - About, Contact, FAQ, Privacy, Terms and All products each have their
+    own title and description.
+- **One H1 per page:**
+  - Home: the slider headings became h2, and a new H1 + answer-first intro
+    (address, payment, delivery, hours) sits below the slider, with
+    WhatsApp / Call / Shop buttons.
+  - Categories: the banner heading is the H1 at the same size, plus an
+    intro line ("Shop 348 Laptops at ECB Technologies…").
+  - About: the second H1 became h2.
+- **Structured data (JSON-LD):**
+  - Every page: ElectronicsStore (address, phone, hours, payment) and
+    WebSite with site search.
+  - Products: Product with brand, SKU, images, category, and an Offer with
+    the KES price and stock status, plus BreadcrumbList.
+  - Categories: CollectionPage + ItemList + BreadcrumbList.
+  - Other pages: BreadcrumbList.
+  - No FAQ/HowTo schema, as Google no longer shows them for most sites.
+- **Social cards:** og:url, og:type (product/website), og:site_name,
+  og:locale, X/Twitter cards, and product price tags. The share image
+  `/ecb-assets/og.png` (1200x630) now says "Open Mon–Sat 9am–7pm"; it said
+  "daily" before.
+- **Internal links:**
+  - Product breadcrumbs include the category (catalog-map.js, 677 products).
+  - Menu items Phones, Gaming and Printers go to the real category pages
+    instead of search results.
+- **Conversion:**
+  - "Order on WhatsApp" on every product page, with a message that includes
+    the product name, price and link.
+  - A floating WhatsApp chat button on public pages.
+  - The phone link is `tel:+254717040531`.
+  - Clicks are sent to Google Analytics as `whatsapp_click`.
+- **Old product addresses:** the 600 changed product URLs redirect (301) from
+  the Worker, so Bulk Redirects is no longer needed.
+- **Private pages:** account, cart, checkout, agent and rider pages send
+  `X-Robots-Tag: noindex`, and robots.txt disallows them. AI and search
+  crawlers are allowed everywhere else; Cloudflare AI-bot blocking is off.
+- **`/llms.txt`:** a short summary of the shop, its categories and pages for
+  AI assistants.
+- **Checked:**
+  - 138 internal links from the main pages all return 200.
+  - Heading sizes are identical to before.
+  - Cart and forms still work.
+  - Lighthouse: desktop 99–100, phone 91–100.
+
 ## Still open
-- Upload `cloudflare-redirects.csv` to Bulk Redirects. The current token
-  lacks the lists/redirect-rules permissions.
 - Theme code, needs hosting (file) access: about 1 MB of render-blocking
   CSS (Bootstrap and the theme), jQuery UI JS loaded on every page, and two
   Google Analytics tags.

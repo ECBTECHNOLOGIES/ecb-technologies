@@ -16,6 +16,9 @@
 //   ecbtechkenya.com/assets/images/brands/*, www.ecbtechkenya.com/assets/images/brands/*
 
 const CACHE_SECONDS = 6 * 60 * 60;
+// Every URL in the sitemap uses the canonical host (the bare domain redirects
+// to www), whichever host the sitemap is requested on.
+const SITE = "https://www.ecbtechkenya.com";
 
 // Paths on the shop that are not useful public pages for search engines.
 const EXCLUDE = /^\/(admin|user|rider|agent|vendor|carts?|checkout|addcart|addtonumcart|removecart|compare|item\/compare|item\/show|wishlist|assets|login|register|logout|currency|language)(\/|$)/i;
@@ -32,7 +35,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(request.url, { method: "GET" });
+  const key = new Request(`${request.url}?v=2`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -69,7 +72,7 @@ function xmlEscape(s) {
 }
 
 async function buildSitemap(url) {
-  const origin = `${url.protocol}//${url.host}`;
+  const origin = SITE;
   try {
     const [home, all] = await Promise.all([getText(`${origin}/`), getText(`${origin}/category?pageby=10000`)]);
 
@@ -78,10 +81,10 @@ async function buildSitemap(url) {
       if (!["compare", "show"].includes(m[1])) products.add(`/item/${m[1]}`);
     }
 
-    const pages = new Set(["/", "/category"]);
+    const pages = new Set(["/", "/category", "/about", "/contact", "/faq"]);
     for (const m of (home + all).matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com(\/[^"#?]*)"/g)) {
       const path = m[1].replace(/\/+$/, "") || "/";
-      if (path.startsWith("/item/") || EXCLUDE.test(path)) continue;
+      if (path.startsWith("/item/") || EXCLUDE.test(path) || /^\/category\/TV-and-Home-Appliances$/i.test(path)) continue;
       if (/\.(png|jpe?g|webp|gif|svg|css|js|ico|woff2?|pdf)$/i.test(path)) continue;
       pages.add(path);
     }
@@ -118,14 +121,26 @@ async function buildSitemap(url) {
 }
 
 async function robots(url) {
-  const origin = `${url.protocol}//${url.host}`;
-  let text = "User-agent: *\nDisallow:\n";
-  try {
-    const res = await fetch(`${origin}/robots.txt`, { headers: { "User-Agent": "Mozilla/5.0" } });
-    if (res.ok) text = await res.text();
-  } catch {}
-  text = text.replace(/^\s*Sitemap:.*$/gim, "").trimEnd();
-  text += `\n\nSitemap: https://ecbtechkenya.com/sitemap.xml\n`;
+  // All crawlers, search engines and AI assistants included, may read every
+  // public page. Only account, cart, checkout, agent/rider and admin areas
+  // are kept out (they are also marked noindex).
+  const text = [
+    "User-agent: *",
+    "Disallow: /admin",
+    "Disallow: /user/",
+    "Disallow: /rider/",
+    "Disallow: /agent/",
+    "Disallow: /vendor/",
+    "Disallow: /carts",
+    "Disallow: /checkout",
+    "Disallow: /wishlist",
+    "Disallow: /item/compare",
+    "Allow: /",
+    "",
+    "Sitemap: https://ecbtechkenya.com/sitemap.xml",
+    "Sitemap: https://www.ecbtechkenya.com/sitemap.xml",
+    "",
+  ].join("\n");
   return new Response(text, {
     headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" },
   });

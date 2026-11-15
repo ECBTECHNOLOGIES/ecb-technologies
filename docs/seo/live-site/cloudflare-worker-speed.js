@@ -33,12 +33,24 @@
 //    get a meta description, search/sort/filter pages get noindex, and the
 //    product price intro shows above the spec table.
 //
-// Admin, agent, rider, user, cart and checkout pages pass through unchanged.
+// G. SEO and conversion (seo.js): one www canonical per page (the bare
+//    domain redirects to www), structured data, social cards, one H1 per page,
+//    answer-first intros, category breadcrumbs, WhatsApp ordering, /llms.txt,
+//    and 301s from old product addresses (catalog-map.js).
+//
+// Admin, agent, rider, user, cart and checkout pages pass through unchanged
+// (apart from a noindex header).
 
 import { USED_FOR, USED_CSS } from "./used-css.js";
 import { BUNDLE_HASH, BUNDLE_CSS, THEME_VERSION } from "./bundle-css.js";
+import { REDIRECTS } from "./catalog-map.js";
+import { OG_PNG_BASE64 } from "./og-image.js";
+import {
+  SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
+  waOrderButton, waFloat, llmsTxt,
+} from "./seo.js";
 
-const VERSION = "8";
+const VERSION = "12";
 const SKIP = /^\/(admin|agent|rider|user|vendor|cart|carts|checkout|assets|login|register|logout|addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlist|compare|currency|language|subscriber)(\/|$)/i;
 const FRESH_SECONDS = 300;
 const KV_FRESH_SECONDS = { "/": 600 }; // pages also kept in the global store
@@ -108,8 +120,21 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     try {
+      if (url.pathname === "/llms.txt") {
+        return new Response(llmsTxt(), { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" } });
+      }
+      if (url.pathname === "/ecb-assets/og.png") return ogImage();
       if (url.pathname.startsWith("/ecb-assets/")) return serveBundle(url);
-      if (request.method !== "GET" || SKIP.test(url.pathname)) return fetch(request);
+      const isRead = request.method === "GET" || request.method === "HEAD";
+      // One version of the site: the bare domain redirects to www.
+      if (isRead && url.hostname === "ecbtechkenya.com") {
+        return Response.redirect(`${SITE}${url.pathname}${url.search}`, 301);
+      }
+      // Product addresses that changed when the shop regenerated them.
+      const old = isRead && url.pathname.startsWith("/item/") && REDIRECTS[url.pathname.slice(6)];
+      if (old) return Response.redirect(`${SITE}/item/${old}${url.search}`, 301);
+      if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
+      if (request.method !== "GET") return fetch(request);
       if (hasSession(request)) return await live(request, ctx);
       return await cached(request, url, env, ctx);
     } catch (error) {
@@ -117,6 +142,22 @@ export default {
     }
   },
 };
+
+function ogImage() {
+  const bin = Uint8Array.from(atob(OG_PNG_BASE64), (c) => c.charCodeAt(0));
+  return new Response(bin, { headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800" } });
+}
+
+// Account, cart, checkout, agent and rider pages: unchanged, but kept out of
+// search results.
+const PRIVATE = /^\/(user|vendor|rider|agent|cart|carts|checkout|wishlist|compare|login|register)(\/|$)/i;
+async function privatePage(request, url) {
+  const res = await fetch(request);
+  if (!PRIVATE.test(url.pathname) || !(res.headers.get("Content-Type") || "").includes("text/html")) return res;
+  const out = new Response(res.body, res);
+  out.headers.set("X-Robots-Tag", "noindex, follow");
+  return out;
+}
 
 function hasSession(request) {
   return /(^|;\s*)(laravel_session|XSRF-TOKEN)=/.test(request.headers.get("Cookie") || "");
@@ -290,7 +331,21 @@ function scan(html) {
 
 // ---------- F. titles, descriptions, product intro ----------
 
+const HOME_TITLE = "Laptops &amp; Phones Shop in Nairobi CBD | ECB Technologies";
+
+const PAGE_TITLES = {
+  "/faq": "Frequently Asked Questions | ECB Technologies",
+  "/privacy": "Privacy Policy | ECB Technologies",
+  "/terms": "Terms and Conditions | ECB Technologies",
+  "/contact": "Contact Us &amp; Shop Location, Nairobi CBD | ECB Technologies",
+  "/about": "About ECB Technologies | Laptops &amp; Phones Shop in Nairobi",
+};
+
 const PAGE_DESCRIPTIONS = {
+  "/faq":
+    "Common questions about buying from ECB Technologies: ordering, payment by M-Pesa or card, delivery across Kenya and visiting our shop in Nairobi CBD.",
+  "/privacy": "How ECB Technologies collects, uses and protects your personal information when you shop with us.",
+  "/terms": "The terms and conditions for buying laptops, phones and accessories from ECB Technologies in Nairobi, Kenya.",
   "/about":
     "ECB Technologies sells genuine laptops, phones and accessories from our shop on Moi Avenue, Nairobi CBD, with delivery across Kenya.",
   "/contact":
@@ -326,15 +381,21 @@ function fixHtml(html, url) {
       /(<div class="ecb-pd-description-body">)\s*(<h2 class="ecb-price-intro">[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>)/,
       '<div class="ecb-pd-intro">$2</div>$1'
     );
-  } else if (/^\/category\/[^/]+$/.test(path) && crumb) {
+  } else if (path === "/") {
+    title = HOME_TITLE;
+    description = HOME_DESCRIPTION;
+  } else if (path === "/category" && !url.search) {
+    title = "Shop All Laptops, Phones &amp; Accessories | ECB Technologies";
+    description = "All laptops, smartphones, printers, gaming gear and accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya.";
+  } else if (/^\/category\/[^/]+(\/[^/]+)?$/.test(path) && crumb) {
     title = fitTitle(crumb, " Prices in Kenya");
     description = `Shop ${crumb} at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, pay by M-Pesa or card, delivery across Kenya.`;
   } else if (path !== "/" && !path.startsWith("/category") && crumb) {
-    title = fitTitle(crumb, "");
+    title = PAGE_TITLES[path] || fitTitle(crumb, "");
     description = PAGE_DESCRIPTIONS[path] || null;
   }
   if (path.startsWith("/category") && [...url.searchParams.keys()].some((k) => NOINDEX_PARAMS.test(k))) noindex = true;
-  return { html, title, description, noindex };
+  return { html, title, description, noindex, crumb: crumb ? crumb.replace(/&amp;/g, "&") : "" };
 }
 
 async function rewriteText(res, url) {
@@ -344,6 +405,8 @@ async function rewriteText(res, url) {
   hints.title = fixed.title;
   hints.description = fixed.description;
   hints.noindex = fixed.noindex;
+  hints.seo = extractSeo(html, url, fixed);
+  if (hints.seo.type === "category" && hints.seo.category && hints.seo.category.count === 0) hints.noindex = true;
   const bundle = hints.themeVersion === THEME_VERSION ? BUNDLE_PATH : null;
   if (hints.banner && /["'()<>\s]/.test(hints.banner)) hints.banner = null;
   if (hints.mainImg && /["'()<>\s]/.test(hints.mainImg)) hints.mainImg = null;
@@ -356,6 +419,26 @@ function rewrite(response, url, bundle, hints) {
   let hasDescription = false;
   let bundleAdded = false;
   let brandMissing = false;
+  let h1Seen = 0;
+  const seen = new Set();
+  const seo = hints.seo || { graph: [], type: "page" };
+  const product = seo.product && seo.product.name ? seo.product : null;
+  const shareImage = (product && product.image) || SHARE_IMAGE;
+  const social = {
+    "og:type": seo.type === "product" ? "product" : "website",
+    "og:site_name": "ECB Technologies",
+    "og:locale": "en_KE",
+    "og:url": seo.canonical,
+    "og:title": escapeHtml(seo.title || ""),
+    "og:description": escapeHtml(seo.description || ""),
+    "og:image": shareImage,
+    "twitter:card": "summary_large_image",
+    "twitter:title": escapeHtml(seo.title || ""),
+    "twitter:description": escapeHtml(seo.description || ""),
+    "twitter:image": shareImage,
+  };
+  if (!product) Object.assign(social, { "og:image:width": "1200", "og:image:height": "630" });
+  if (product && product.price) Object.assign(social, { "product:price:amount": String(product.price), "product:price:currency": "KES" });
   const isHome = url.pathname === "/";
   const pageType = isHome ? "home" : /^\/item\//.test(url.pathname) ? "item" : /^\/category(\/|$)/.test(url.pathname) ? "category" : null;
   const useSubset = !!(bundle && pageType && USED_FOR && USED_CSS[pageType] && bundle.includes(`bundle-${USED_FOR}.css`));
@@ -376,6 +459,64 @@ function rewrite(response, url, bundle, hints) {
     .on('meta[name="description"]', {
       element() {
         hasDescription = true;
+      },
+    })
+    .on('meta[property^="og:"], meta[name^="twitter:"], meta[property^="product:"]', {
+      element(e) {
+        const key = e.getAttribute("property") || e.getAttribute("name");
+        if (seen.has(key)) return e.remove();
+        seen.add(key);
+        if (social[key]) e.setAttribute("content", social[key]);
+      },
+    })
+    .on('link[rel="canonical"]', {
+      element(e) {
+        e.remove();
+      },
+    })
+    .on("h1", {
+      element(e) {
+        h1Seen++;
+        // Home: the slider headings become h2; the real H1 is in the intro.
+        if (isHome || h1Seen > 1) e.tagName = "h2";
+      },
+    })
+    .on("h2.breadcrumb-title", {
+      element(e) {
+        if (!isHome && seo.h1Count === 0) e.tagName = "h1";
+      },
+    })
+    .on("div.ecb-hero-outer", {
+      element(e) {
+        if (isHome) e.after(homeIntro(), { html: true });
+      },
+    })
+    .on("section.gs-breadcrumb-section", {
+      element(e) {
+        if (seo.type === "category" && !url.search) e.after(categoryIntro(seo.category), { html: true });
+      },
+    })
+    .on("ul.bread-menu > li:first-child", {
+      element(e) {
+        if (product && product.category) {
+          e.after(`<li><a href="${SITE}/category/${product.category[0]}">${escapeHtml(product.category[1])}</a></li>`, { html: true });
+        }
+      },
+    })
+    .on("div.ecb-pd-cta-row", {
+      element(e) {
+        if (product) e.after(waOrderButton(product, seo.canonical), { html: true });
+      },
+    })
+    .on('a[href^="tel:"]', {
+      element(e) {
+        if ((e.getAttribute("href") || "").replace(/\D/g, "").endsWith("717040531")) e.setAttribute("href", "tel:+254717040531");
+      },
+    })
+    .on("a[href]", {
+      element(e) {
+        const to = NAV_FIXES[e.getAttribute("href")];
+        if (to) e.setAttribute("href", to);
       },
     })
     .on("link[rel=stylesheet]", {
@@ -402,7 +543,7 @@ function rewrite(response, url, bundle, hints) {
     })
     .on("head", {
       element(e) {
-        e.append(`<style>${RESERVE_CSS}${INTRO_CSS}</style>`, { html: true });
+        e.append(`<style>${RESERVE_CSS}${INTRO_CSS}${SEO_CSS}</style>`, { html: true });
         if (hints.banner) {
           const pri = hints.mainImg ? "auto" : "high";
           e.prepend(
@@ -423,6 +564,13 @@ function rewrite(response, url, bundle, hints) {
           const desc = isHome ? HOME_DESCRIPTION : hints.description;
           if (!hasDescription && desc) end.before(`<meta name="description" content="${desc}">`, { html: true });
           if (hints.noindex) end.before(`<meta name="robots" content="noindex, follow">`, { html: true });
+          if (seo.canonical) end.before(`<link rel="canonical" href="${seo.canonical}">`, { html: true });
+          const missing = Object.entries(social)
+            .filter(([k, v]) => v && !seen.has(k))
+            .map(([k, v]) => (k.startsWith("twitter:") ? `<meta name="${k}" content="${v}">` : `<meta property="${k}" content="${v}">`))
+            .join("");
+          end.before(missing, { html: true });
+          if (seo.graph && seo.graph.length) end.before(jsonLdTag(seo.graph), { html: true });
         });
       },
     })
@@ -434,6 +582,7 @@ function rewrite(response, url, bundle, hints) {
     .on("body", {
       element(e) {
         e.append(TOKEN_SCRIPT, { html: true });
+        e.append(waFloat(product, seo.canonical), { html: true });
         if (useSubset) e.append(fullCssLoader(bundle), { html: true });
       },
     })
