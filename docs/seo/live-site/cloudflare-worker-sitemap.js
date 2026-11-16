@@ -39,7 +39,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=7`, { method: "GET" });
+  const key = new Request(`${request.url}?v=8`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -184,9 +184,16 @@ async function robots(url) {
     "Disallow: /checkout",
     "Disallow: /wishlist",
     "Disallow: /item/compare",
+    "Disallow: /item/quick/",
+    "Disallow: /item/show/",
+    "Disallow: /addcart/",
+    "Disallow: /addnumcart",
+    "Disallow: /addtonumcart",
+    "Disallow: /addbyone",
+    "Disallow: /reducebyone",
+    "Disallow: /removecart/",
     "Allow: /",
     "",
-    "Sitemap: https://ecbtechkenya.com/sitemap.xml",
     "Sitemap: https://www.ecbtechkenya.com/sitemap.xml",
     "",
   ].join("\n");

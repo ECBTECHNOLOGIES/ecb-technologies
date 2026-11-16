@@ -629,3 +629,16 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - every other page: the published date.
 - Cart, checkout, login and 404 pages are private (`X-Robots-Tag: noindex`),
   so they carry no dates or hreflang.
+
+## 2026-11-16: Search Console "Redirect error" (Worker v48)
+- Redirects took up to 4 hops (5 with http), for example: bare domain + trailing
+  slash + old product URL + merged duplicate. They now take one 301 to the
+  final URL (`finalUrl()`): www, no trailing slash, and old and merged
+  addresses resolved all the way. All 637 old product addresses: 1 hop to a
+  200 page. All 679 sitemap URLs: 200 with no redirect.
+- `/item/quick/view/*`, `/item/show/*` and the cart actions (`/addcart`,
+  `/addnumcart`, `/addtonumcart`, `/addbyone`, `/reducebyone`, `/removecart`)
+  are disallowed in robots.txt and sent with `X-Robots-Tag: noindex, nofollow`.
+  These URLs sit in data attributes on product cards. Several return 500 at
+  the origin, and quick view was an indexable copy of each product.
+- robots.txt lists only the www sitemap.

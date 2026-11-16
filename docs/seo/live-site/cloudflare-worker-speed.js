@@ -72,7 +72,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "47";
+const VERSION = "48";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -161,14 +161,13 @@ export default {
       if (url.pathname === "/ecb-indexnow" && request.method === "POST") return await indexNow(Object.assign(url, { request }), env);
       if (url.pathname.startsWith("/ecb-assets/")) return serveBundle(url);
       const isRead = request.method === "GET" || request.method === "HEAD";
-      // One version of the site: the bare domain redirects to www.
-      if (isRead && url.hostname === "ecbtechkenya.com") {
-        return Response.redirect(`${SITE}${url.pathname}${url.search}`, 301);
+      // One hop to the final address: www, no trailing slash, and old or
+      // merged product addresses resolved all the way (Google reports long
+      // chains as "Redirect error").
+      if (isRead) {
+        const target = finalUrl(url);
+        if (target) return Response.redirect(target, 301);
       }
-      // Product addresses that changed when the shop regenerated them.
-      const slug = url.pathname.startsWith("/item/") ? url.pathname.slice(6) : "";
-      const old = isRead && slug && (REDIRECTS[slug] || DUPE_REDIRECTS[slug]);
-      if (old) return Response.redirect(`${SITE}/item/${old}${url.search}`, 301);
       // Markdown: /page.md, /index.md, /api/md/<path>, or Accept: text/markdown.
       if (isRead) {
         let mdPath = null;
@@ -190,6 +189,13 @@ export default {
       if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
       if (isRead && /^\/(best|compare|series|laptops)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
       if (isRead && GUIDE_PATH.test(url.pathname.replace(/\/+$/, ""))) return agentHeaders(await guidePage(request, url, env, ctx), url);
+      // Cart actions and quick-view copies: never indexed.
+      if (isRead && (/^\/item\/(quick|show)\//.test(url.pathname) || /^\/(addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart)(\/|$)/.test(url.pathname))) {
+        const res = await fetch(request);
+        const out = new Response(res.body, res);
+        out.headers.set("X-Robots-Tag", "noindex, nofollow");
+        return out;
+      }
       if (request.method === "GET" && SKIP.test(url.pathname)) return privatePage(request, url);
       if (request.method === "HEAD") return agentHeaders(await fetch(request), url);
       if (request.method !== "GET") return fetch(request);
@@ -655,6 +661,22 @@ async function privatePage(request, url) {
       },
     })
     .transform(out);
+}
+
+export function finalUrl(url) {
+  let path = url.pathname;
+  if (path.length > 1 && path.endsWith("/") && !path.startsWith("/admin")) path = path.replace(/\/+$/, "") || "/";
+  if (path.startsWith("/item/")) {
+    let slug = path.slice(6);
+    const seen = new Set();
+    while ((REDIRECTS[slug] || DUPE_REDIRECTS[slug]) && !seen.has(slug)) {
+      seen.add(slug);
+      slug = REDIRECTS[slug] || DUPE_REDIRECTS[slug];
+    }
+    path = `/item/${slug}`;
+  }
+  if (url.hostname === "www.ecbtechkenya.com" && path === url.pathname) return null;
+  return `${SITE}${path}${url.search}`;
 }
 
 function hasSession(request) {
