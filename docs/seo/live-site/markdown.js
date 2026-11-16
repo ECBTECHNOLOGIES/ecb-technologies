@@ -35,15 +35,13 @@ export const INFO_PAGES = {
   "/contact": ["Contact ECB Technologies", "Address, phone, WhatsApp, email and opening hours of the shop on Moi Avenue, Nairobi CBD."],
   "/faq": ["Frequently asked questions", "Answers about ordering, accounts, returns and support at ECB Technologies."],
   "/delivery": ["Delivery across Kenya", "How ECB Technologies delivers: riders in Nairobi, courier to all 47 counties, free pickup in Nairobi CBD."],
-  "/laptop-prices-in-kenya": ["Laptop prices in Kenya", "Laptop prices at ECB Technologies by budget, brand and processor."],
-  "/student-laptops-kenya": ["Student laptops under KSh 40,000 in Kenya", "Laptops with an 8th-gen or newer Core i5/i7 at KSh 40,000 or less."],
   "/hp-vs-dell-vs-lenovo-laptops-kenya": ["HP vs Dell vs Lenovo laptops in Kenya", "Models, starting prices and series of HP, Dell and Lenovo laptops at ECB Technologies."],
   "/privacy": ["Privacy policy", "How ECB Technologies collects and uses personal information."],
   "/terms": ["Terms and conditions", "The terms for buying from ECB Technologies."],
 };
 const CORE = ["/", "/about", "/contact", "/delivery", "/faq"];
 // Order of llms-full.txt: core pages, guides, legal.
-const GUIDES = ["/laptop-prices-in-kenya", "/student-laptops-kenya", "/hp-vs-dell-vs-lenovo-laptops-kenya"];
+const GUIDES = ["/hp-vs-dell-vs-lenovo-laptops-kenya"]; // student page and laptop prices are generated (llms.txt guide/research sections)
 const LEGAL = ["/privacy", "/terms"];
 export const CORE_PAGES = [...CORE, ...GUIDES, ...LEGAL];
 // Categories with products (the TVs category is empty and noindex).

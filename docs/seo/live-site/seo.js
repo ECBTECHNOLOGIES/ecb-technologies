@@ -36,14 +36,14 @@ const SITE_SINCE = new Date(1789718740 * 1000).toISOString();
 // Pages written on a known date.
 const PAGE_PUBLISHED = {
   "/delivery": "2026-11-15T10:00:00+03:00",
-  "/laptop-prices-in-kenya": "2026-11-15T10:00:00+03:00",
+  "/research/laptop-prices-kenya": "2026-11-15T10:00:00+03:00",
   "/student-laptops-kenya": "2026-11-15T10:00:00+03:00",
   "/hp-vs-dell-vs-lenovo-laptops-kenya": "2026-11-15T10:00:00+03:00",
 };
 // Pages last edited on a known date (content, not template).
 const PAGE_MODIFIED = {
   "/delivery": "2026-11-15T10:00:00+03:00",
-  "/laptop-prices-in-kenya": "2026-11-15T10:00:00+03:00",
+  "/research/laptop-prices-kenya": "2026-11-15T10:00:00+03:00",
   "/student-laptops-kenya": "2026-11-15T10:00:00+03:00",
   "/hp-vs-dell-vs-lenovo-laptops-kenya": "2026-11-15T10:00:00+03:00",
   "/contact": "2026-11-15T10:00:00+03:00",
@@ -367,7 +367,7 @@ export function productQaHtml(p) {
 export function categoryIntro(c) {
   if (!c || !c.count) return "";
   const guides = /^laptops$/i.test((c.parts || [])[0] || "")
-    ? ' · <a href="/laptop-prices-in-kenya">Price guide</a> · <a href="/student-laptops-kenya">Student picks</a> · <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a> · <a href="/guides">All laptop guides</a> · <a href="/categories">All categories</a>'
+    ? ' · <a href="/research/laptop-prices-kenya">Price guide</a> · <a href="/student-laptops-kenya">Student picks</a> · <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a> · <a href="/guides">All laptop guides</a> · <a href="/categories">All categories</a>'
     : "";
   const research = /^laptops$/i.test((c.parts || [])[0] || "") ? ' · <a href="/research/laptop-prices-kenya">Laptop price statistics</a>' : ' · <a href="/research/tech-prices-kenya">Price statistics</a>';
   return (
@@ -387,7 +387,7 @@ export function nothingFooter() {
     ["WhatsApp 0717 040 531", whatsappLink("Hello ECB Technologies, I'd like to ask about a product."), WA_TILE],
     ["Visit: Moi Avenue, Nairobi CBD", "/contact", PIN_TILE],
     ["Delivery across Kenya", "/delivery", BOX_TILE],
-    ["Buying guides", "/laptop-prices-in-kenya", INFO_TILE],
+    ["Buying guides", "/research/laptop-prices-kenya", INFO_TILE],
     ["Mon – Sat · 9am – 7pm", "/contact", CLOCK_TILE],
   ];
   const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["All categories", "/categories"], ["Visit the shop", "/laptop-shop-nairobi"], ["Research", "/research"], ["Laptop guides", "/guides"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
@@ -474,7 +474,7 @@ ${cats}
 
 ## Buying guides
 
-- [Laptop prices in Kenya](${SITE}/laptop-prices-in-kenya)
+- [Laptop prices in Kenya](${SITE}/research/laptop-prices-kenya)
 - [Student laptops under KSh 40,000](${SITE}/student-laptops-kenya)
 - [HP vs Dell vs Lenovo laptops in Kenya](${SITE}/hp-vs-dell-vs-lenovo-laptops-kenya)
 

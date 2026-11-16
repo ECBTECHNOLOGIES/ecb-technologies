@@ -39,7 +39,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=10`, { method: "GET" });
+  const key = new Request(`${request.url}?v=11`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -85,8 +85,7 @@ async function buildSitemap(url, env) {
       if (!["compare", "show"].includes(m[1]) && !SKIP_ITEMS.has(m[1])) products.add(`/item/${m[1]}`);
     }
 
-    const pages = new Set(["/", "/category", "/about", "/contact", "/faq", "/delivery", "/laptop-prices-in-kenya",
-      "/student-laptops-kenya", "/hp-vs-dell-vs-lenovo-laptops-kenya"]);
+    const pages = new Set(["/", "/category", "/about", "/contact", "/faq", "/delivery", "/hp-vs-dell-vs-lenovo-laptops-kenya"]);
     for (const m of (home + all).matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com(\/[^"#?]*)"/g)) {
       const path = m[1].replace(/\/+$/, "") || "/";
       if (path.startsWith("/item/") || EXCLUDE.test(path) || SKIP_PAGES.test(path)) continue;
@@ -113,7 +112,7 @@ async function buildSitemap(url, env) {
       if (gs && Array.isArray(gs.urls) && gs.urls.length) {
         for (const u of ["https://www.ecbtechkenya.com/guides", ...gs.urls]) {
           const path = u.replace("https://www.ecbtechkenya.com", "");
-          if (/^\/(guides|laptop-shop-nairobi|best|compare|series|laptops)(\/[a-z0-9-]+)?$/.test(path)) {
+          if (/^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best|compare|series|laptops|phones)(\/[a-z0-9-]+)?$/.test(path)) {
             pages.add(path);
             dated.add(path);
           }

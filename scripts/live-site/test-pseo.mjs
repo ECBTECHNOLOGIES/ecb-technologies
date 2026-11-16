@@ -76,9 +76,15 @@ test("near-duplicate lists are merged, not published twice", () => {
       assert.ok(shared / Math.min(la.length, lb.length) <= G.MAX_OVERLAP, `${a.url} ~ ${b.url}`);
     }
 });
-test("existing guides are not duplicated", () => {
-  assert.ok(!built.pages.some((d) => d.url.endsWith("/best/student-laptops-kenya")));
-  assert.ok(built.skipped.some((s) => s.url && s.url.endsWith("/best/student-laptops-kenya")));
+test("one page per keyword cluster: duplicates merge with a target", () => {
+  // HP vs Dell is covered by the existing three-way guide.
+  assert.ok(built.skipped.some((s) => s.url && s.url.endsWith("/compare/hp-vs-dell-kenya") && /existing guide/.test(s.reason)));
+  // Every merged page names the page it merged into, and that page is live.
+  const live = new Set(built.pages.map((d) => d.url));
+  for (const s of built.skipped.filter((x) => x.mergedInto)) assert.ok(live.has(s.mergedInto), `${s.url} -> ${s.mergedInto}`);
+  // Primary keywords are unique across published pages.
+  const kws = built.pages.map((d) => d.seo.primary_keyword.toLowerCase());
+  assert.equal(new Set(kws).size, kws.length);
 });
 test("public JSON has exactly the requested keys", () => {
   const d = G.publicJson(built.pages[0]);

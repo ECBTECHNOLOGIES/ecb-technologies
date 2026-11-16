@@ -743,3 +743,55 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - re-upload the compressed category images and banners;
   - check banner links;
   - find out why the database was restored.
+
+## 2026-11-16: keyword map (Worker v70)
+- **`docs/seo/live-site/keyword-map.js`** (source) holds 60 keyword clusters,
+  each assigned to one page. Each has a primary keyword, cluster terms, AI
+  prompts, intent, status and a note.
+  - Volume and KD are left empty: they come from Keyword Planner or Semrush
+    and are never estimated.
+  - Collecting real Google suggestions automatically was blocked, so the
+    clusters come from the catalogue and common Kenyan query phrasing.
+  - Review by 2027-02-16 (every 3 months).
+- **`scripts/live-site/keyword-map.mjs`** audits every target page live:
+  - is the primary keyword in the title, H1, description and opening text;
+  - cannibalization: another page of the same intent with the keyword in
+    its title, unless that page's keyword is just more specific.
+  It writes `docs/seo/keyword-map/keyword-map.csv` (Semrush template
+  columns plus the audit) and `README.md`.
+  - First run: 43 mapped, 9 to optimize, 5 cannibalization flags.
+  - Now: 52 mapped, 0 to optimize, 6 to create, 0 cannibalization.
+- **Cannibalization fixes:**
+  - `/laptop-prices-in-kenya` (a static copy with stale numbers) now 301s to
+    `/research/laptop-prices-kenya` (live).
+  - The student page is rebuilt live from the catalogue (`pseo.js`) and
+    takes the under-40k cluster. `/best/best-laptops-under-40k-kenya`
+    301s to it. Merged guide pages now 301 to the page they merged into,
+    instead of 302 to the hub.
+  - Homepage title is now brand-first ("ECB Technologies | Genuine Laptops &
+    Phones, Honest Prices"). "Laptop shop in Nairobi" belongs to
+    `/laptop-shop-nairobi`.
+- **Optimized:**
+  - Category H1s, titles and descriptions now come from the map: "Laptops
+    in Kenya", "Phones & Tablets in Kenya", "Computer Accessories",
+    "Gaming Monitors & Laptops", "Printer Prices"…
+  - Subcategory titles are fixed ("Student Laptop Deals in Kenya",
+    "Monitors Price in Kenya…").
+  - Directory H1s say "… laptop prices in Kenya".
+  - The design guide's title includes "Graphic Design".
+  - Guide descriptions lead with their keyword.
+  - /delivery is titled "Laptop and Phone Delivery Across Kenya".
+  - Category descriptions no longer state the unconfirmed "M-Pesa or card".
+- **Anchors:** the categories hub and the guides use the map's keywords
+  ("Laptops in Kenya (349)", "Laptop prices in Kenya", "Budget laptops in
+  Kenya").
+- **To create:**
+  - iPhone, Samsung, Google Pixel and iPad price pages: code is in
+    `pseo.js`, but they fail the 600-word minimum at 440–515 words (10–17
+    models; listings carry only name, storage and price). They publish
+    automatically once they pass.
+  - ProBook and MacBook (word gate).
+- **Restore fallout fixed on the way:**
+  - /delivery and /hp-vs-dell-vs-lenovo `.md` are rendered from the saved
+    copies.
+  - Worker-inserted links point to the research page.

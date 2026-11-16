@@ -47,7 +47,7 @@ import { REDIRECTS, CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
 import { DUPE_REDIRECTS } from "./dupes.js";
 import { SKIN_CSS, SKIN_FONTS } from "./skin.js";
 import {
-  isContentPath, wantsMarkdown, mdPathFor, renderPath, markdownPage, notFoundMd, productCards,
+  isContentPath, wantsMarkdown, mdPathFor, renderPath, markdownPage, notFoundMd, productCards, htmlToMd,
   llmsTxt as llmsSpec, llmsFullTxt, aiTxt, INFO_PAGES, CORE_PAGES, LISTED_CATEGORIES,
 } from "./markdown.js";
 import {
@@ -55,6 +55,7 @@ import {
   lowerName,
 } from "./research.js";
 import { STATIC_PAGES } from "./static-pages.js";
+import { CATEGORY_SEO } from "./keyword-map.js";
 import { specsOf, specLine } from "./pseo.js";
 import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
@@ -74,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "61";
+const VERSION = "67";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -184,6 +185,7 @@ export default {
         if (mdPath !== null) {
           mdPath = mdPath.replace(/\/+$/, "") || "/";
           if (mdPath === "/index") mdPath = "/";
+          if (PAGE_REDIRECTS[mdPath]) return Response.redirect(`${SITE}${mdPathFor(PAGE_REDIRECTS[mdPath])}`, 301);
           if (mdPath === "/research" || mdPath.startsWith("/research/")) return await serveResearchMd(request, mdPath, negotiated, env, ctx);
           if (GUIDE_PATH.test(mdPath)) return await serveGuideMd(request, mdPath, negotiated, env, ctx);
           return await serveMarkdown(request, url, mdPath, negotiated, ctx);
@@ -231,7 +233,9 @@ async function categorySummary(hints, url) {
   const raw = c.name.replace(/&amp;/g, "&");
   // Shop category names are inconsistent ("SmartPhones", "Gaming"); use plain nouns.
   const NOUN = { smartphones: "Phones & Tablets", gaming: "Gaming Products", printers: "Printers", laptops: "Laptops" };
-  const name = NOUN[parts[1].toLowerCase()] || raw;
+  // Keyword map: the category's main keyword noun ("Computer Accessories").
+  const mapped = (CATEGORY_SEO[`/category/${parts[1]}`.toLowerCase()] || {}).noun;
+  const name = mapped || NOUN[parts[1].toLowerCase()] || raw;
   const t = `${c.count} ${name} in Kenya with Prices (${year})`;
   if (t.length <= 60) hints.title = t.replace(/&/g, "&amp;");
   // Listing names can be cut off ("…"): drop the partial last word and keep the part before a comma.
@@ -323,6 +327,11 @@ async function productList(ctx) {
 
 // Renders one path to markdown from the shop's own page. Returns { status, md, canonical }.
 async function renderMarkdown(path, url) {
+  // Pages lost in the 16 Nov restore: render the saved copy.
+  if (STATIC_PAGES[path]) {
+    const p = STATIC_PAGES[path];
+    return { status: 200, md: markdownPage({ title: p.title, summary: p.meta, body: htmlToMd(p.body) }, SITE + path), canonical: SITE + path };
+  }
   if (!isContentPath(path)) return { status: 404, md: notFoundMd(path) };
   const q = new URL(SITE + path);
   const page = url.searchParams.get("page");
@@ -566,8 +575,8 @@ async function staticPage(request, url, env, ctx) {
 
 // Subcategories the shop's menu links to (path, name).
 const SUBCATEGORIES = {
-  laptops: [["/category/laptops/Gaming", "Gaming laptops"], ["/category/laptops/Student-Deals", "Student laptop deals"], ["/category/laptops/Budget", "Budget laptops"]],
-  "Computing-Accessories": [["/category/Computing-Accessories/monitors", "Monitors"]],
+  laptops: [["/category/laptops/Gaming", "Gaming laptops for sale"], ["/category/laptops/Student-Deals", "Student laptop deals"], ["/category/laptops/Budget", "Budget laptops in Kenya"]],
+  "Computing-Accessories": [["/category/Computing-Accessories/monitors", "Monitors price in Kenya"]],
 };
 
 // A plain list of links: every category, its subcategories and the hubs.
@@ -586,7 +595,8 @@ async function categoriesPage(request, url, env, ctx) {
     cats
       .map(([slug, name]) => {
         const subs = SUBCATEGORIES[slug] || [];
-        return `<h2><a href="/category/${slug}">${escapeHtml(name)}</a></h2><ul><li><a href="/category/${slug}">All ${escapeHtml(name.toLowerCase().replace(/^pc /, "PC "))} (${counts[slug]})</a></li>${subs.map(([href, t]) => `<li><a href="${href}">${escapeHtml(t)}</a></li>`).join("")}</ul>`;
+        const kwName = (CATEGORY_SEO[`/category/${slug}`.toLowerCase()] || {}).h1 || `All ${name.toLowerCase()}`;
+        return `<h2><a href="/category/${slug}">${escapeHtml(name)}</a></h2><ul><li><a href="/category/${slug}">${escapeHtml(kwName)} (${counts[slug]})</a></li>${subs.map(([href, t]) => `<li><a href="${href}">${escapeHtml(t)}</a></li>`).join("")}</ul>`;
       })
       .join("") +
     `<h2>Guides and research</h2><ul><li><a href="/guides">Laptop buying guides</a></li><li><a href="/research">Price research</a></li><li><a href="/delivery">Delivery across Kenya</a></li></ul></div>`;
@@ -638,7 +648,10 @@ async function serveGuide(request, url, env, ctx) {
   const doc = built.pages.find((d) => d.url === SITE + path);
   if (!doc) {
     // A guide that no longer has enough products goes to the hub, never a 404.
-    if (built.skipped.some((s) => s.url === SITE + path)) return Response.redirect(`${SITE}/guides`, 302);
+    const sk = built.skipped.find((s) => s.url === SITE + path);
+    // Merged into another page (same products): that page, permanently.
+    if (sk && sk.mergedInto) return Response.redirect(sk.mergedInto, 301);
+    if (sk) return Response.redirect(`${SITE}/guides`, 302);
     return fetch(new Request(`${SITE}/ecb-not-found-${Date.now()}`, request));
   }
   const ld = `<script type="application/ld+json">${JSON.stringify(doc.schema.structured_data).replace(/</g, "\\u003c")}</script>`;
@@ -843,9 +856,15 @@ export function liveSlugFor(slug) {
   return null;
 }
 
+// Pages merged into another (keyword map: one page per keyword cluster).
+const PAGE_REDIRECTS = {
+  "/laptop-prices-in-kenya": "/research/laptop-prices-kenya",
+};
+
 export function finalUrl(url) {
   let path = url.pathname;
   if (path.length > 1 && path.endsWith("/") && !path.startsWith("/admin")) path = path.replace(/\/+$/, "") || "/";
+  if (PAGE_REDIRECTS[path]) path = PAGE_REDIRECTS[path];
   if (path.startsWith("/item/")) {
     const to = liveSlugFor(path.slice(6));
     if (to) path = `/item/${to}`;
@@ -1036,7 +1055,9 @@ function scan(html) {
 
 // ---------- F. titles, descriptions, product intro ----------
 
-const HOME_TITLE = "Laptops &amp; Phones Shop in Nairobi CBD | ECB Technologies";
+// Keyword map: the homepage targets the brand; "laptop shop in Nairobi" is
+// /laptop-shop-nairobi and "laptops in Kenya" is /category/laptops.
+const HOME_TITLE = "ECB Technologies | Genuine Laptops &amp; Phones, Honest Prices";
 
 const PAGE_TITLES = {
   "/faq": "Frequently Asked Questions | ECB Technologies",
@@ -1141,7 +1162,14 @@ function fixHtml(html, url) {
       html = html.replace(/(<h2 class="breadcrumb-title">)\s*[^<]*?\s*(<\/h2>)/, `$1${crumb}$2`);
     }
     title = fitTitle(crumb, " Prices in Kenya");
-    description = `Shop ${crumb} at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, pay by M-Pesa or card, delivery across Kenya.`;
+    // Keyword map: the H1 carries the page's main keyword ("Laptops in
+    // Kenya", not just "Laptops"); subcategories also get a mapped title.
+    const kw = CATEGORY_SEO[path.toLowerCase()];
+    if (kw) {
+      html = html.replace(/(<h2 class="breadcrumb-title">)\s*[^<]*?\s*(<\/h2>)/, `$1${kw.h1}$2`);
+      if (kw.title) title = kw.title.replace(/&/g, "&amp;");
+    }
+    description = `Shop ${kw ? (kw.noun || kw.h1.replace(/ (Prices )?in Kenya$/, "")).toLowerCase().replace(/^(\w)/, (m) => m.toUpperCase()) + " in Kenya" : crumb} at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya and free pickup in Nairobi CBD.`;
   } else if (path !== "/" && !path.startsWith("/category") && crumb) {
     title = PAGE_TITLES[path] || fitTitle(crumb, "");
     description = PAGE_DESCRIPTIONS[path] || null;
