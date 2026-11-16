@@ -58,6 +58,7 @@ import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMar
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
 let SKIN = false;
+let ENV = null; // set per request (KV for the catalogue's last-change date)
 // Short fingerprint of the skin, part of the page-cache key, so editing the
 // skin refreshes cached pages.
 const SKIN_ID = (() => {
@@ -71,7 +72,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "46";
+const VERSION = "47";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -145,6 +146,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     SKIN = !!(env && env.SKIN === "1");
+    ENV = env || null;
     try {
       // ---- AI-readable files (markdown.js) ----
       if (request.method === "OPTIONS" && isAgentPath(url.pathname)) return new Response(null, { status: 204, headers: corsHeaders() });
@@ -948,6 +950,17 @@ function fixHtml(html, url) {
   return { html, title, description, noindex, crumb: crumb ? crumb.replace(/&amp;/g, "&") : "" };
 }
 
+// When prices or products last changed (written by researchState, read-only here).
+async function catalogueChangedAt() {
+  if (!ENV || !ENV.PAGES) return null;
+  try {
+    const st = await ENV.PAGES.get("research-state", { type: "json", cacheTtl: 300 });
+    return st && st.changedAt ? st.changedAt : null;
+  } catch {
+    return null;
+  }
+}
+
 async function rewriteText(res, url, extra) {
   const fixed = fixHtml(await res.text(), url);
   const html = fixed.html;
@@ -957,6 +970,11 @@ async function rewriteText(res, url, extra) {
   hints.noindex = fixed.noindex;
   hints.seo = extractSeo(html, url, fixed);
   if (extra && extra.title) hints.title = escAttr(extra.title);
+  // Home, categories and products change when the catalogue does.
+  if (!(extra && extra.modified) && /^\/($|category|item\/)/.test(url.pathname)) {
+    const changedAt = await catalogueChangedAt();
+    if (changedAt && new Date(changedAt) > new Date(hints.seo.published)) extra = { ...(extra || {}), modified: changedAt };
+  }
   if (extra && extra.modified) {
     hints.seo.modified = extra.modified;
     for (const g of hints.seo.graph) if (g.dateModified) g.dateModified = extra.modified;
@@ -1227,6 +1245,8 @@ function rewrite(response, url, bundle, hints) {
           }
           if (seo.modified) end.before(`<meta property="article:modified_time" content="${seo.modified}"><meta property="og:updated_time" content="${seo.modified}">`, { html: true });
           if (seo.canonical) end.before(`<link rel="canonical" href="${seo.canonical}">`, { html: true });
+          // One language, one region: each page is its own en-KE and x-default version.
+          if (seo.canonical && !hints.noindex) end.before(`<link rel="alternate" hreflang="en-KE" href="${seo.canonical}"><link rel="alternate" hreflang="x-default" href="${seo.canonical}">`, { html: true });
           const missing = Object.entries(social)
             .filter(([k, v]) => v && !seen.has(k))
             .map(([k, v]) => (k.startsWith("twitter:") ? `<meta name="${k}" content="${v}">` : `<meta property="${k}" content="${v}">`))

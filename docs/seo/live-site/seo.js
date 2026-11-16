@@ -40,6 +40,14 @@ const PAGE_PUBLISHED = {
   "/student-laptops-kenya": "2026-11-15T10:00:00+03:00",
   "/hp-vs-dell-vs-lenovo-laptops-kenya": "2026-11-15T10:00:00+03:00",
 };
+// Pages last edited on a known date (content, not template).
+const PAGE_MODIFIED = {
+  "/delivery": "2026-11-15T10:00:00+03:00",
+  "/laptop-prices-in-kenya": "2026-11-15T10:00:00+03:00",
+  "/student-laptops-kenya": "2026-11-15T10:00:00+03:00",
+  "/hp-vs-dell-vs-lenovo-laptops-kenya": "2026-11-15T10:00:00+03:00",
+  "/contact": "2026-11-15T10:00:00+03:00",
+};
 const ADDRESS = "Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD";
 
 const BRANDS = [
@@ -178,7 +186,9 @@ export function extractSeo(html, url, base) {
   // set up. "Modified" is when this copy of the page was built from the shop.
   const photoTime = (html.match(/assets\/images\/(?:products|thumbnails)\/(1[6-9]\d{8})/) || [])[1];
   out.published = path.startsWith("/item/") && photoTime ? new Date(Number(photoTime) * 1000).toISOString() : PAGE_PUBLISHED[path] || SITE_SINCE;
-  out.modified = new Date().toISOString();
+  // Never "now": the last real edit we know of, else the published date.
+  // (Catalogue pages get the catalogue's last change from the Worker.)
+  out.modified = PAGE_MODIFIED[path] || out.published;
   const webPage = (type) => ({
     "@type": type,
     "@id": `${canonical}#webpage`,

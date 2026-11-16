@@ -616,3 +616,16 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 ## 2026-11-16: shorter hero headline (Worker v46)
 - "Genuine laptops. / Honest prices." and "The latest phones. / Honest prices."
   Bigger type (80/60/36 px) now that the lines are short.
+
+## 2026-11-16: hreflang and honest modified dates (Worker v47)
+- Every indexable page has `<link rel="alternate" hreflang="en-KE">` and
+  `hreflang="x-default"`, both pointing to its canonical URL (single-language
+  site). Pages marked noindex get none.
+- `article:modified_time`, `og:updated_time` and JSON-LD `dateModified` were
+  "now" on every request. They now show:
+  - home, categories and products: when the catalogue last changed (KV
+    `research-state`, written only when a product or price changes);
+  - pages we edited: the edit date (`PAGE_MODIFIED` in seo.js);
+  - every other page: the published date.
+- Cart, checkout, login and 404 pages are private (`X-Robots-Tag: noindex`),
+  so they carry no dates or hreflang.
