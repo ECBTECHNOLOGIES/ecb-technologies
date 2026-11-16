@@ -612,3 +612,7 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   need. / At a price that makes sense." and "The phone you want. / At a price
   that makes sense." The first is the page h1. Text is in `HERO_HEADLINES`
   (cloudflare-worker-speed.js); sizes are in skin.js.
+
+## 2026-11-16: shorter hero headline (Worker v46)
+- "Genuine laptops. / Honest prices." and "The latest phones. / Honest prices."
+  Bigger type (80/60/36 px) now that the lines are short.

@@ -71,7 +71,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "45";
+const VERSION = "46";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -971,8 +971,8 @@ async function rewriteText(res, url, extra) {
 }
 
 const HERO_HEADLINES = [
-  "The laptop you need.<br>At a price that makes sense.",
-  "The phone you want.<br>At a price that makes sense.",
+  "Genuine laptops.<br>Honest prices.",
+  "The latest phones.<br>Honest prices.",
 ];
 
 function rewrite(response, url, bundle, hints) {
