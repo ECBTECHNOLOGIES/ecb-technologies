@@ -39,7 +39,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=8`, { method: "GET" });
+  const key = new Request(`${request.url}?v=9`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -104,7 +104,7 @@ async function buildSitemap(url, env) {
       const st = env && env.PAGES ? await env.PAGES.get("research-state", { type: "json" }) : null;
       if (st && st.changedAt) researchDate = st.changedAt.slice(0, 10);
     } catch {}
-    for (const p of ["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]) pages.add(p);
+    for (const p of ["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya", "/categories"]) pages.add(p);
     // Laptop guides: only the pages that passed the quality gates (the speed
     // Worker writes the list), dated by the catalogue change behind them.
     const dated = new Set(["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]);

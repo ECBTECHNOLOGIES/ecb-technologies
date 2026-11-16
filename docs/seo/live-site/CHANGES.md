@@ -642,3 +642,35 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   These URLs sit in data attributes on product cards. Several return 500 at
   the origin, and quick view was an indexable copy of each product.
 - robots.txt lists only the www sitemap.
+
+## 2026-11-16: internal linking (hubs, depth, anchors)
+- **Audit:** crawl from the homepage, before and after
+  (`scratchpad/linkgraph.py`).
+  - Before: no orphans and no links to wrong versions of a URL, but 104
+    products were 4–6 clicks deep, there were 700 generic anchors
+    ("View All", "Shop Now"), and `/categories` returned 500.
+  - After: every sitemap page is at most 3 clicks deep; 51 generic anchors
+    remain at first (those 49 "Shop Now" are fixed below).
+- **Categories hub `/categories`:** served by the Worker in place of the
+  origin's 500. It is a plain list of links: every category with its count,
+  its subcategories, and the guides and research hubs. Linked from the
+  homepage ("All categories and subcategories"), the footer and the laptop
+  category intro. Listed in the sitemap.
+- **Pagination:** links every page (laptops 1–29) instead of 1–10, with
+  labelled previous/next arrows.
+- **Anchors:**
+  - hero "Shop Now" now says "Shop laptops" or "Shop phones";
+  - "View All" now says "All products";
+  - on product pages, related products link "More <Category>" to the
+    product's own category;
+  - the "Shop Now" button on content pages (about, delivery, research,
+    guides) now says "Shop laptops" and links /category/laptops instead of
+    the homepage.
+- **Guides:** the money page is linked as "Laptops in Kenya: all prices".
+  Guides also link /categories.
+- **Every internal link** is rewritten to its final URL (www, no trailing
+  slash, old and merged product addresses resolved), so no click lands on a
+  301.
+- **Not built:** a locations hub. There is one shop; /delivery covers all 47
+  counties, and per-town pages would be doorway pages. The blog hub
+  already exists as /guides.

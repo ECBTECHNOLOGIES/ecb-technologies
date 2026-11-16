@@ -537,6 +537,8 @@ export const SKIN_CSS = [
   `.ecb-cats-title{${display};font-size:34px!important;text-align:center;margin:0 0 28px!important;color:${T.ink}!important}`,
   `@media (max-width:767px){.ecb-cats-title{font-size:24px!important;margin-bottom:18px!important}}`,
   `.ecb-cats-strip{padding-top:64px!important}`,
+  `.ecb-cats-all{text-align:center;margin:22px 0 0!important}.ecb-cats-all a{${label};font-size:11px!important;color:${T.ink}!important;text-decoration:underline!important}`,
+  `.gs-pagination li span{display:flex;width:49px;height:48px;align-items:center;justify-content:center;color:#bbb}`,
   `@media (max-width:767px){.ecb-cats-strip{padding-top:40px!important}}`,
   `h1.ecb-hero-eyebrow{font-size:11px!important;line-height:1.4!important;margin:0!important;font-weight:400!important}`,
   // Home: categories, 8 products, visit. Promos and best sellers go.

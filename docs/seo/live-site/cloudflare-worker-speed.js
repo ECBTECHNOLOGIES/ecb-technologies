@@ -72,7 +72,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "48";
+const VERSION = "50";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -188,6 +188,7 @@ export default {
       }
       if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
       if (isRead && /^\/(best|compare|series|laptops)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
+      if (isRead && url.pathname === "/categories") return agentHeaders(await categoriesPage(request, url, env, ctx), url);
       if (isRead && GUIDE_PATH.test(url.pathname.replace(/\/+$/, ""))) return agentHeaders(await guidePage(request, url, env, ctx), url);
       // Cart actions and quick-view copies: never indexed.
       if (isRead && (/^\/item\/(quick|show)\//.test(url.pathname) || /^\/(addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart)(\/|$)/.test(url.pathname))) {
@@ -505,6 +506,44 @@ async function serveResearchMd(request, path, negotiated, env, ctx) {
   return new Response(request.method === "HEAD" ? null : md, { headers });
 }
 
+// ---------- categories hub ----------
+
+// Subcategories the shop's menu links to (path, name).
+const SUBCATEGORIES = {
+  laptops: [["/category/laptops/Gaming", "Gaming laptops"], ["/category/laptops/Student-Deals", "Student laptop deals"], ["/category/laptops/Budget", "Budget laptops"]],
+  "Computing-Accessories": [["/category/Computing-Accessories/monitors", "Monitors"]],
+};
+
+// A plain list of links: every category, its subcategories and the hubs.
+async function categoriesPage(request, url, env, ctx) {
+  const products = await productList(ctx);
+  const counts = {};
+  for (const p of products) {
+    const ci = CATEGORY_OF[p.slug];
+    if (ci !== undefined) counts[CATEGORIES[ci][0]] = (counts[CATEGORIES[ci][0]] || 0) + 1;
+  }
+  const cats = LISTED_CATEGORIES.filter(([slug]) => counts[slug]);
+  const total = cats.reduce((a, [slug]) => a + counts[slug], 0);
+  const content =
+    `<style>${RESEARCH_CSS}${PSEO_CSS}</style><div class="ecb-rs ecb-pg">` +
+    `<p class="ecb-rs-lead"><strong>Every product category at ECB Technologies, Nairobi CBD: ${total.toLocaleString("en-US")} products in ${cats.length} categories.</strong></p>` +
+    cats
+      .map(([slug, name]) => {
+        const subs = SUBCATEGORIES[slug] || [];
+        return `<h2><a href="/category/${slug}">${escapeHtml(name)}</a></h2><ul><li><a href="/category/${slug}">All ${escapeHtml(name.toLowerCase().replace(/^pc /, "PC "))} (${counts[slug]})</a></li>${subs.map(([href, t]) => `<li><a href="${href}">${escapeHtml(t)}</a></li>`).join("")}</ul>`;
+      })
+      .join("") +
+    `<h2>Guides and research</h2><ul><li><a href="/guides">Laptop buying guides</a></li><li><a href="/research">Price research</a></li><li><a href="/delivery">Delivery across Kenya</a></li></ul></div>`;
+  return shellPage(request, url, {
+    h1: "All categories",
+    title: "All Product Categories | ECB Technologies Nairobi",
+    description: `Every category at ECB Technologies: laptops, phones, PC and mobile accessories, printers, gaming and audio. ${total} products, prices in KSh, delivery across Kenya.`,
+    content,
+    crumbs: [],
+    modified: (await researchState(env, ctx)).changedAt,
+  });
+}
+
 // ---------- laptop guides (pseo.js) ----------
 
 // Built from the same catalogue snapshot as the research pages. The list of
@@ -661,6 +700,30 @@ async function privatePage(request, url) {
       },
     })
     .transform(out);
+}
+
+// Every page of a category listing (12 products per page).
+const PER_PAGE = 12;
+function paginationHtml(url, seo) {
+  const count = seo.type === "category" && seo.category && seo.category.count;
+  if (!count) return null;
+  const pages = Math.ceil(count / PER_PAGE);
+  if (pages <= 1) return null;
+  const cur = Math.min(Math.max(parseInt(url.searchParams.get("page") || "1", 10) || 1, 1), pages);
+  const href = (n) => {
+    const u = new URL(url.pathname, SITE);
+    for (const [k, v] of url.searchParams) if (k !== "page") u.searchParams.set(k, v);
+    if (n > 1) u.searchParams.set("page", String(n));
+    return u.toString();
+  };
+  const name = escapeHtml((seo.category.name || "products").replace(/&amp;/g, "&"));
+  const li = [];
+  li.push(cur > 1 ? `<li><a href="${href(cur - 1)}" rel="prev" aria-label="Previous page of ${name}">‹</a></li>` : `<li class="disabled"><span aria-hidden="true">‹</span></li>`);
+  for (let n = 1; n <= pages; n++) {
+    li.push(n === cur ? `<li class="active" aria-current="page"><a href="${href(n)}">${n}</a></li>` : `<li><a href="${href(n)}" aria-label="${name}, page ${n}">${n}</a></li>`);
+  }
+  li.push(cur < pages ? `<li><a href="${href(cur + 1)}" rel="next" aria-label="Next page of ${name}">›</a></li>` : `<li class="disabled"><span aria-hidden="true">›</span></li>`);
+  return li.join("");
 }
 
 export function finalUrl(url) {
@@ -1026,6 +1089,8 @@ function rewrite(response, url, bundle, hints) {
   const seen = new Set();
   const seo = hints.seo || { graph: [], type: "page" };
   const product = seo.product && seo.product.name ? seo.product : null;
+  let heroHref = "";
+  let viewAllText = "All products";
   const shareImage = (product && product.image) || SHARE_IMAGE;
   const social = {
     "og:type": seo.type === "product" ? "product" : "website",
@@ -1115,6 +1180,65 @@ function rewrite(response, url, bundle, hints) {
         if (product) e.after(waOrderButton(product, seo.canonical), { html: true });
       },
     })
+    // Internal links go straight to the final address (no 301 per click):
+    // bare domain, http, trailing slashes, old and merged product addresses.
+    .on('a[href*="ecbtechkenya.com"], a[href^="/"]', {
+      element(e) {
+        const href = e.getAttribute("href") || "";
+        if (href.startsWith("//") && !href.startsWith("//ecbtechkenya.com") && !href.startsWith("//www.ecbtechkenya.com")) return;
+        let u;
+        try {
+          u = new URL(href, SITE);
+        } catch {
+          return;
+        }
+        if (!/^(www\.)?ecbtechkenya\.com$/.test(u.hostname) || /^\/(admin|assets|cdn-cgi)/.test(u.pathname)) return;
+        if (u.protocol === "http:") u.protocol = "https:";
+        const target = finalUrl(u) || (href.startsWith("http://") ? u.toString() : null);
+        if (target && target !== href) e.setAttribute("href", target);
+      },
+    })
+    // Descriptive anchor text instead of "Shop Now" / "View All".
+    .on("a.ecb-hero-btn", {
+      text(t) {
+        if (!/Shop Now/i.test(t.text)) return;
+        const href = heroHref;
+        t.replace(t.text.replace(/Shop Now/i, /smartphones/.test(href) ? "Shop phones" : /laptops/.test(href) ? "Shop laptops" : "Shop all products"));
+      },
+      element(e) {
+        heroHref = e.getAttribute("href") || "";
+      },
+    })
+    // Content pages: the call to action sends people (and link weight) to
+    // the money page, not back to the homepage.
+    .on("a.ecb-about-cta-btn--primary", {
+      element(e) {
+        if (/^https?:\/\/(www\.)?ecbtechkenya\.com\/?$/.test(e.getAttribute("href") || "")) e.setAttribute("href", `${SITE}/category/laptops`);
+      },
+      text(t) {
+        if (/Shop Now/i.test(t.text)) t.replace(t.text.replace(/Shop Now/i, "Shop laptops"));
+      },
+    })
+    .on("a.ecb-brands-viewall, a.ecb-bestsell-viewall, a.ecb-featured-viewall", {
+      element(e) {
+        // Product pages: "more like this" goes to the product's own category.
+        if (product && product.category) {
+          e.setAttribute("href", `${SITE}/category/${product.category[0]}`);
+          viewAllText = `More ${product.category[1]}`;
+        } else viewAllText = "All products";
+      },
+      text(t) {
+        if (/View All/i.test(t.text)) t.replace(t.text.replace(/View All/i, escapeHtml(viewAllText)));
+      },
+    })
+    // Pagination: link every page (not just 1-10), so no product is more
+    // than three clicks from the homepage; label the arrows.
+    .on("ul.gs-pagination", {
+      element(e) {
+        const html = paginationHtml(url, seo);
+        if (html) e.setInnerContent(html, { html: true });
+      },
+    })
     .on('a[href^="tel:"]', {
       element(e) {
         if ((e.getAttribute("href") || "").replace(/\D/g, "").endsWith("717040531")) e.setAttribute("href", "tel:+254717040531");
@@ -1140,6 +1264,7 @@ function rewrite(response, url, bundle, hints) {
     .on("div.ecb-cats-grid", {
       element(e) {
         if (isHome && SKIN) e.before('<h2 class="ecb-cats-title">Shop by category</h2>', { html: true });
+        if (isHome && SKIN) e.after('<p class="ecb-cats-all"><a href="/categories">All categories and subcategories</a></p>', { html: true });
       },
     })
     .on("div.ecb-footer-main", {

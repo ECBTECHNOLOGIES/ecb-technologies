@@ -332,7 +332,7 @@ export function homeIntro() {
 export function categoryIntro(c) {
   if (!c || !c.count) return "";
   const guides = /^laptops$/i.test((c.parts || [])[0] || "")
-    ? ' · <a href="/laptop-prices-in-kenya">Price guide</a> · <a href="/student-laptops-kenya">Student picks</a> · <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a> · <a href="/guides">All laptop guides</a>'
+    ? ' · <a href="/laptop-prices-in-kenya">Price guide</a> · <a href="/student-laptops-kenya">Student picks</a> · <a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a> · <a href="/guides">All laptop guides</a> · <a href="/categories">All categories</a>'
     : "";
   const research = /^laptops$/i.test((c.parts || [])[0] || "") ? ' · <a href="/research/laptop-prices-kenya">Laptop price statistics</a>' : ' · <a href="/research/tech-prices-kenya">Price statistics</a>';
   return (
@@ -355,7 +355,7 @@ export function nothingFooter() {
     ["Buying guides", "/laptop-prices-in-kenya", INFO_TILE],
     ["Mon – Sat · 9am – 7pm", "/contact", CLOCK_TILE],
   ];
-  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["Research", "/research"], ["Laptop guides", "/guides"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
+  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["All categories", "/categories"], ["Research", "/research"], ["Laptop guides", "/guides"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
   const social = [["Instagram", SOCIALS.instagram], ["TikTok", SOCIALS.tiktok], ["X", SOCIALS.x]];
   return (
     '<div class="nf-wrap">' +

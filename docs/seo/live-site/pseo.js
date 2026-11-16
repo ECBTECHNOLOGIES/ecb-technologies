@@ -585,8 +585,9 @@ function writePage(p, all, { year, changedAt }) {
   // Links.
   const guideLinks = [...sib, ...cross].map((a) => ({ url: SITE + a.path, title: a.h1 }));
   const extra = [
-    { url: parent, title: "All laptops" },
+    { url: parent, title: "Laptops in Kenya: all prices" },
     { url: `${SITE}/guides`, title: "All laptop guides" },
+    { url: `${SITE}/categories`, title: "All product categories" },
     { url: `${SITE}/research/laptop-prices-kenya`, title: "Laptop price statistics" },
     { url: `${SITE}/laptop-prices-in-kenya`, title: "Laptop prices in Kenya" },
   ];
