@@ -91,7 +91,9 @@ test("HP x360 page lists HP laptops only", () => {
 });
 
 test("local page states the shop facts and links every audience guide", () => {
-  const d = built.pages.find((x) => x.url.endsWith("/laptop-shop-nairobi"));
+  // Needs the whole catalogue (phones, accessories), not just laptops.
+  const everything = Object.keys(CATEGORY_OF).map((slug, i) => ({ slug, name: slug.replace(/-/g, " ").slice(0, 40), url: `https://www.ecbtechkenya.com/item/${slug}`, price: 15000 + (i % 60) * 3500 }));
+  const d = G.buildPages(everything, { changedAt: "2026-11-15T00:00:00Z" }).pages.find((x) => x.url.endsWith("/laptop-shop-nairobi"));
   assert.ok(d, "local page published");
   assert.match(d.content.introduction, /Moi Avenue, Nairobi CBD/);
   assert.match(d.content.introduction, /Monday to Saturday, 9am to 7pm/);
