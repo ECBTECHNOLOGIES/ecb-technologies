@@ -537,6 +537,7 @@ export const SKIN_CSS = [
   `.ecb-cats-title{${display};font-size:34px!important;text-align:center;margin:0 0 28px!important;color:${T.ink}!important}`,
   `@media (max-width:767px){.ecb-cats-title{font-size:24px!important;margin-bottom:18px!important}}`,
   `.ecb-cats-strip{padding-top:64px!important}`,
+  `.ecb-pd-local-qa{padding-top:40px;padding-bottom:8px;max-width:860px}.ecb-pd-local-qa h2{${display};font-size:24px!important;margin:0 0 14px!important}.ecb-pd-local-qa h3{font-size:16px!important;margin:16px 0 4px!important;font-weight:500!important}.ecb-pd-local-qa p{margin:0;color:#333;line-height:1.6}.ecb-pd-local-qa p:last-child{margin-top:16px}.ecb-pd-local-qa a{${label};font-size:11px!important;color:${T.ink}!important;text-decoration:underline!important}`,
   `.ecb-cats-all{text-align:center;margin:22px 0 0!important}.ecb-cats-all a{${label};font-size:11px!important;color:${T.ink}!important;text-decoration:underline!important}`,
   `.gs-pagination li span{display:flex;width:49px;height:48px;align-items:center;justify-content:center;color:#bbb}`,
   `@media (max-width:767px){.ecb-cats-strip{padding-top:40px!important}}`,

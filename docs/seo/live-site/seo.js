@@ -142,10 +142,19 @@ export function escapeHtml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// Duplicate listings found in the live catalogue (copy slug -> oldest listing),
+// set by the Worker each time it loads the product list.
+let LIVE_DUPES = {};
+export function setLiveDupes(map) {
+  LIVE_DUPES = map || {};
+}
+
 export function canonicalFor(url, noindex) {
   let path = url.pathname.replace(/\/+$/, "") || "/";
-  // The same product listed again in a second category points to the original.
-  if (path.startsWith("/item/") && DUPE_CANONICAL[path.slice(6)]) path = `/item/${DUPE_CANONICAL[path.slice(6)]}`;
+  // The same product listed more than once points to the oldest listing.
+  const slug = path.startsWith("/item/") ? path.slice(6) : "";
+  if (slug && LIVE_DUPES[slug]) path = `/item/${LIVE_DUPES[slug]}`;
+  else if (slug && DUPE_CANONICAL[slug]) path = `/item/${DUPE_CANONICAL[slug]}`;
   const u = new URL(SITE + path);
   if (!noindex) for (const [k, v] of url.searchParams) if (KEEP_PARAMS.test(k)) u.searchParams.set(k, v);
   return u.toString();
@@ -250,6 +259,8 @@ export function extractSeo(html, url, base) {
     if (category) crumbs.push([category[1], `${SITE}/category/${category[0]}`]);
     crumbs.push([name, canonical]);
     out.graph.push(Object.assign(webPage("ItemPage"), { mainEntity: { "@id": `${canonical}#product` } }), product, breadcrumbList(crumbs));
+    const qa = productQa(out.product);
+    if (qa.length) out.graph.push({ "@type": "FAQPage", "@id": `${canonical}#faq`, mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) });
     return out;
   }
 
@@ -329,6 +340,30 @@ export function homeIntro() {
   );
 }
 
+// "Buying in Nairobi" questions for one product (price, where, delivery,
+// stock), answered only with facts from the page and the shop.
+export function productQa(p) {
+  if (!p || !p.name) return [];
+  const name = p.name.replace(/\s+/g, " ").trim();
+  const out = [];
+  if (p.price > 0 && p.price < 2000000 && !p.outStock) {
+    out.push([`How much is the ${name} in Kenya?`, `KSh ${p.price.toLocaleString("en-US")} at ECB Technologies in Nairobi CBD. The price on this page is the current price.`]);
+  }
+  out.push([
+    `Where can I buy the ${name} in Nairobi?`,
+    `At ECB Technologies, ${ADDRESS}, Monday to Saturday, 9am to 7pm. Order online or on WhatsApp (0717 040 531) and pick it up free, or have it delivered.`,
+  ]);
+  out.push([`Can the ${name} be delivered outside Nairobi?`, "Yes. Couriers deliver to all 47 counties and riders deliver within Nairobi; pickup at the shop is free."]);
+  if (p.outStock) out.push([`Is the ${name} in stock?`, "It is out of stock right now. Ask on WhatsApp (0717 040 531) about the next delivery or a similar model."]);
+  return out;
+}
+
+export function productQaHtml(p) {
+  const qa = productQa(p);
+  if (!qa.length) return "";
+  return `<section class="container ecb-pd-local-qa"><h2>Buying in Nairobi</h2>${qa.map(([q, a]) => `<h3>${escapeHtml(q)}</h3><p>${escapeHtml(a)}</p>`).join("")}<p><a href="/laptop-shop-nairobi">About the shop: address, hours and delivery</a></p></section>`;
+}
+
 export function categoryIntro(c) {
   if (!c || !c.count) return "";
   const guides = /^laptops$/i.test((c.parts || [])[0] || "")
@@ -355,7 +390,7 @@ export function nothingFooter() {
     ["Buying guides", "/laptop-prices-in-kenya", INFO_TILE],
     ["Mon – Sat · 9am – 7pm", "/contact", CLOCK_TILE],
   ];
-  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["All categories", "/categories"], ["Research", "/research"], ["Laptop guides", "/guides"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
+  const small = [["About", "/about"], ["Contact", "/contact"], ["FAQ", "/faq"], ["All categories", "/categories"], ["Visit the shop", "/laptop-shop-nairobi"], ["Research", "/research"], ["Laptop guides", "/guides"], ["Privacy", "/privacy"], ["Terms", "/terms"], ["Agent login", "/user/vendor-login"], ["Rider login", "/rider/login"]];
   const social = [["Instagram", SOCIALS.instagram], ["TikTok", SOCIALS.tiktok], ["X", SOCIALS.x]];
   return (
     '<div class="nf-wrap">' +

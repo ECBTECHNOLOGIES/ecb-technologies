@@ -674,3 +674,72 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - **Not built:** a locations hub. There is one shop; /delivery covers all 47
   counties, and per-town pages would be doorway pages. The blog hub
   already exists as /guides.
+
+## 2026-11-16: AEO pages, then emergency fixes after the shop's database was restored (Worker v61)
+### AEO (AI search prompts)
+- **`docs/seo/aeo/`:** 31 prompts based on real queries, filled in for ECB
+  (laptop/phone shop, Nairobi CBD, students/business/programmers/designers/
+  gamers). Each names the page that should be cited and the fact it should
+  quote. `aeo-prompts.csv` is the monthly tracking sheet (ChatGPT,
+  Perplexity, Gemini, Google AI Overview, Copilot). The agency-only template
+  ("optimize for AI search") is not used.
+- **`/laptop-shop-nairobi`:** a local page for the one real shop. It has
+  - shop facts (address, hours, phone, delivery, checkout);
+  - what it stocks, with live counts;
+  - which laptop suits which buyer (links to each guide);
+  - how to buy, and the newest laptops in stock;
+  - an FAQ answering the "who/where/which shop" prompts with facts only
+    (no "best" claim);
+  - structured data: `WebPage` about `#store`, plus `FAQPage`.
+  It is in the guides hub, the sitemap, llms.txt ("Cite this site for") and
+  the footer ("Visit the shop").
+- **Product pages:** a "Buying in Nairobi" Q&A (price in Kenya, where to buy,
+  delivery outside Nairobi, stock), plus `FAQPage` JSON-LD.
+- Guide pages' publisher now points to `#store` (the `#organization` node
+  did not exist).
+
+### The shop's database was restored on 16 Nov (around 15:50 EAT)
+- **What changed at the origin:**
+  - products are back on their old slugs (600 of 678);
+  - the 4 admin pages created on 15 Nov are gone (/delivery and the 3
+    guides);
+  - product meta descriptions, keywords and the "price in Kenya" intros are
+    empty;
+  - product `<title>` is just "ECB Technologies";
+  - duplicate listings are active again;
+  - 8 prices have cents again;
+  - category images are back to 1.7–1.9 MB;
+  - category assignments changed (Gaming 36 → 71).
+- **Worker fixes:**
+  - **Redirects:** product redirects are made only when the requested slug
+    is not live and a related slug is, in either direction (old ↔ new) or
+    a merged duplicate (`liveSlugFor`). Before this fix, the Worker sent
+    every live old slug to a 404.
+  - **Product list:** `productList` keeps the last good list in KV
+    (`products-last-good-v2`) and rejects a list smaller than 300 or 80%
+    of the last good one. It retries 3 times. It no longer drops products
+    whose slug is in the redirect table.
+  - **Categories:** CATEGORY_OF maps both slugs of each product. It was
+    rebuilt from the live categories (677/678 mapped). catalog-map.py now
+    retries cut-off pages.
+  - **Lost pages:** /delivery and the 3 guides are served by the Worker from
+    `static-pages.js` (from pages/pages.json), with the unconfirmed M-Pesa
+    claims removed. The page template now comes from /about, with its
+    about-only sections removed.
+  - **Product titles:** taken from the product H1 when the theme gives none.
+  - **Product descriptions:** an empty one is filled from the page (name,
+    live price, specs, shop, delivery). The shop's own text is never
+    replaced. Empty keyword tags are removed.
+  - **Duplicate listings:** found from the live list (same slug base and
+    price). Each copy's canonical points to the oldest listing (19 copies).
+- **After the fixes:** all 738 sitemap pages return 200, each with a real
+  title, a description and one H1. All old and new product addresses
+  resolve to a live page. 35 guides are published.
+- **Still to redo in the admin** (needs the owner or admin access):
+  - recreate /delivery and the 3 guide pages;
+  - product meta and intros (scripts/live-site);
+  - deactivate the duplicates;
+  - round the 8 prices;
+  - re-upload the compressed category images and banners;
+  - check banner links;
+  - find out why the database was restored.

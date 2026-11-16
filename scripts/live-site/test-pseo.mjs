@@ -37,7 +37,7 @@ test("slugs and primary keywords are unique", () => {
 });
 test("every published page meets the quality gates", () => {
   for (const d of built.pages) {
-    const min = /Comparisons|Profiles/.test(d.playbook_type) ? 900 : 600;
+    const min = /Comparisons|Profiles|Locations/.test(d.playbook_type) ? 900 : 600;
     assert.ok(G.wordCount(d) >= min, `${d.url} words`);
     assert.ok(d.content.faq.length >= 3, `${d.url} faq`);
     assert.ok(d.internal_links.length >= 5, `${d.url} links`);
@@ -88,6 +88,16 @@ test("public JSON has exactly the requested keys", () => {
 test("HP x360 page lists HP laptops only", () => {
   const d = built.pages.find((x) => x.url.endsWith("/series/x360-kenya"));
   if (d) for (const u of d.internal_links.filter((x) => x.includes("/item/"))) assert.ok(/\/item\/hp-/.test(u), u);
+});
+
+test("local page states the shop facts and links every audience guide", () => {
+  const d = built.pages.find((x) => x.url.endsWith("/laptop-shop-nairobi"));
+  assert.ok(d, "local page published");
+  assert.match(d.content.introduction, /Moi Avenue, Nairobi CBD/);
+  assert.match(d.content.introduction, /Monday to Saturday, 9am to 7pm/);
+  assert.ok(d.internal_links.some((u) => u.endsWith("/student-laptops-kenya")) || d.content.sections.some((s) => s.body.includes("/student-laptops-kenya")));
+  assert.ok(!/best (laptop )?shop/i.test(d.content.introduction), "no unprovable 'best' claim");
+  assert.equal(d.schema.structured_data["@graph"][0].mainEntity["@id"], "https://www.ecbtechkenya.com/#store");
 });
 
 console.log(`\n${passed} tests passed`);

@@ -11,6 +11,16 @@ Usage: python3 -I catalog-map.py <repo-root>
 """
 import csv
 import json
+
+ALIAS_JS = """
+// The shop has used two slugs for most products (new ones from 14 Nov, the
+// old ones again from 16 Nov). Map both, so a product keeps its category
+// whichever slug is live.
+for (const [a, b] of Object.entries(REDIRECTS)) {
+  if (CATEGORY_OF[a] === undefined && CATEGORY_OF[b] !== undefined) CATEGORY_OF[a] = CATEGORY_OF[b];
+  if (CATEGORY_OF[b] === undefined && CATEGORY_OF[a] !== undefined) CATEGORY_OF[b] = CATEGORY_OF[a];
+}
+"""
 import re
 import sys
 import urllib.request
@@ -28,10 +38,17 @@ CATEGORIES = [
 ]
 
 
-def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (ECB catalog map)", "Cookie": "laravel_session=x"})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        return r.read().decode("utf-8", "replace")
+def get(url, tries=4):
+    # The shop sometimes cuts large pages short; retry.
+    for attempt in range(tries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (ECB catalog map)", "Cookie": "laravel_session=x"})
+            with urllib.request.urlopen(req, timeout=120) as r:
+                return r.read().decode("utf-8", "replace")
+        except Exception as e:  # IncompleteRead, timeouts
+            if attempt == tries - 1:
+                raise
+            print("retry", url, type(e).__name__, file=sys.stderr)
 
 
 def main(root):
@@ -59,6 +76,7 @@ def main(root):
         fh.write(f"export const CATEGORIES = {json.dumps(CATEGORIES)};\n")
         fh.write(f"export const CATEGORY_OF = {json.dumps(category_of, separators=(',', ':'))};\n")
         fh.write(f"export const REDIRECTS = {json.dumps(redirects, separators=(',', ':'))};\n")
+        fh.write(ALIAS_JS)
     print(f"{len(category_of)} products mapped, {len(redirects)} redirects")
 
 

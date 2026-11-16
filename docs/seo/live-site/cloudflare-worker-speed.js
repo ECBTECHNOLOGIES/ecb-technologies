@@ -54,6 +54,8 @@ import {
   STUDIES, studyHtml, studyJsonLd, studyMarkdown, hubHtml, hubMarkdown, citeSection, RESEARCH_CSS, median as medianOf,
   lowerName,
 } from "./research.js";
+import { STATIC_PAGES } from "./static-pages.js";
+import { specsOf, specLine } from "./pseo.js";
 import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
@@ -69,10 +71,10 @@ const SKIN_ID = (() => {
 import { OG_PNG_BASE64 } from "./og-image.js";
 import {
   SITE, SHARE_IMAGE, NAV_FIXES, SEO_CSS, extractSeo, jsonLdTag, escapeHtml, homeIntro, categoryIntro,
-  waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, socialLinks, nothingFooter,
+  waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "50";
+const VERSION = "61";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -165,6 +167,7 @@ export default {
       // merged product addresses resolved all the way (Google reports long
       // chains as "Redirect error").
       if (isRead) {
+        if (url.pathname.startsWith("/item/")) await loadLive(ctx);
         const target = finalUrl(url);
         if (target) return Response.redirect(target, 301);
       }
@@ -189,6 +192,7 @@ export default {
       if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
       if (isRead && /^\/(best|compare|series|laptops)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
       if (isRead && url.pathname === "/categories") return agentHeaders(await categoriesPage(request, url, env, ctx), url);
+      if (isRead && STATIC_PAGES[url.pathname]) return agentHeaders(await staticPage(request, url, env, ctx), url);
       if (isRead && GUIDE_PATH.test(url.pathname.replace(/\/+$/, ""))) return agentHeaders(await guidePage(request, url, env, ctx), url);
       // Cart actions and quick-view copies: never indexed.
       if (isRead && (/^\/item\/(quick|show)\//.test(url.pathname) || /^\/(addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart)(\/|$)/.test(url.pathname))) {
@@ -279,14 +283,40 @@ function textFile(request, body, maxAge, type = "text/plain") {
 }
 
 // Every product (name, URL, price) from the shop's full listing, cached 6 hours.
+// The live product list. The origin sometimes returns a cut-off page (once
+// 73 of 640 products), so a list is only accepted if it is at least 80% of
+// the last good one; otherwise the last good list (kept in KV) is used.
+const MIN_SHARE_OF_LAST_GOOD = 0.8;
+const MIN_PRODUCTS_ABSOLUTE = 300; // the catalogue has had 600+ products since November 2026
 async function productList(ctx) {
-  const key = `${SITE}/__ecb/products/v1`;
+  const key = `${SITE}/__ecb/products/v3`;
   const hit = await caches.default.match(key);
   if (hit) return hit.json();
-  const html = await (await fetch(`${SITE}/category?pageby=10000`, { headers: { "User-Agent": "Mozilla/5.0 (ECB llms)" } })).text();
-  const list = productCards(html).filter((p) => !REDIRECTS[p.slug] && !DUPE_REDIRECTS[p.slug]);
-  if (list.length > 10) {
-    ctx.waitUntil(caches.default.put(key, new Response(JSON.stringify(list), { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=21600" } })));
+  let lastGood = null;
+  try {
+    if (ENV && ENV.PAGES) lastGood = await ENV.PAGES.get("products-last-good-v2", { type: "json", cacheTtl: 300 });
+  } catch {}
+  if (lastGood && lastGood.length >= MIN_PRODUCTS_ABSOLUTE && !ctx.refreshing) {
+    // Serve the saved list now; refresh it in the background.
+    ctx.waitUntil(productList(Object.assign(Object.create(ctx), { refreshing: true, waitUntil: (p) => ctx.waitUntil(p) })).catch(() => {}));
+    return lastGood;
+  }
+  const floor = Math.max(MIN_PRODUCTS_ABSOLUTE, Math.floor((lastGood ? lastGood.length : 0) * MIN_SHARE_OF_LAST_GOOD));
+  let list = [];
+  for (let attempt = 0; attempt < 3 && list.length < floor; attempt++) {
+    try {
+      const html = await (await fetch(`${SITE}/category?pageby=10000&_=${attempt}`, { headers: { "User-Agent": "Mozilla/5.0 (ECB llms)" } })).text();
+      const got = productCards(html);
+      if (got.length > list.length) list = got;
+    } catch {}
+  }
+  if (list.length < floor) {
+    if (lastGood && lastGood.length) return lastGood;
+    return list;
+  }
+  ctx.waitUntil(caches.default.put(key, new Response(JSON.stringify(list), { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=21600" } })));
+  if (ENV && ENV.PAGES && (!lastGood || lastGood.length !== list.length || JSON.stringify(lastGood) !== JSON.stringify(list))) {
+    ctx.waitUntil(ENV.PAGES.put("products-last-good-v2", JSON.stringify(list)));
   }
   return list;
 }
@@ -313,7 +343,8 @@ async function renderMarkdown(path, url) {
 async function serveMarkdown(request, url, path, negotiated, ctx) {
   // Product addresses that changed or were merged.
   const slug = path.startsWith("/item/") ? path.slice(6) : "";
-  const moved = slug && (REDIRECTS[slug] || DUPE_REDIRECTS[slug]);
+  if (slug) await loadLive(ctx);
+  const moved = slug && liveSlugFor(slug);
   if (moved) return Response.redirect(`${SITE}/item/${moved}.md`, 301);
   const page = url.searchParams.get("page");
   const key = `${SITE}/__ecb/md/v${VERSION}${path}${page && /^\d+$/.test(page) ? `?page=${page}` : ""}`;
@@ -458,8 +489,18 @@ async function serveResearch(request, url, env, ctx) {
 // borrowed from /delivery.
 const escAttr = (t) => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 async function shellPage(request, url, { h1, title, description, content, crumbs, modified }) {
-  const shellRes = await fetch(`${SITE}/delivery`, { headers: { "User-Agent": "Mozilla/5.0 (ECB pages)", Cookie: request.headers.get("Cookie") || "" } });
-  let html = await shellRes.text();
+  await loadLive(NOOP_CTX);
+  // The template comes from /about (the admin page /delivery used before was
+  // lost in the 16 Nov restore); its about-only sections are removed.
+  const shellRes = await fetch(`${SITE}/about`, { headers: { "User-Agent": "Mozilla/5.0 (ECB pages)", Cookie: request.headers.get("Cookie") || "" } });
+  let html = await new HTMLRewriter()
+    .on(".ecb-about-split, .ecb-about-stats, .ecb-about-features, .ecb-about-lead-eyebrow, .ecb-about-lead-title, .ecb-about-values-list", {
+      element(e) {
+        e.remove();
+      },
+    })
+    .transform(shellRes)
+    .text();
   const trail = [...crumbs.map(([t, href]) => `<a href="${href}">${escAttr(t)}</a></li><li>`), escAttr(h1)].join("");
   html = html
     .replace(/<meta name="keywords"[^>]*>/, "")
@@ -504,6 +545,21 @@ async function serveResearchMd(request, path, negotiated, env, ctx) {
   };
   if (negotiated) headers.Vary = "Accept";
   return new Response(request.method === "HEAD" ? null : md, { headers });
+}
+
+// ---------- pages lost in the 16 Nov restore (static-pages.js) ----------
+
+async function staticPage(request, url, env, ctx) {
+  const p = STATIC_PAGES[url.pathname];
+  const published = "2026-11-15T10:00:00+03:00";
+  return shellPage(request, url, {
+    h1: p.title,
+    title: `${p.title} | ECB Technologies`.length <= 60 ? `${p.title} | ECB Technologies` : p.title,
+    description: p.meta,
+    content: `<style>${RESEARCH_CSS}${PSEO_CSS}</style><div class="ecb-rs ecb-pg ecb-guide-page">${p.body}</div>`,
+    crumbs: [],
+    modified: published,
+  });
 }
 
 // ---------- categories hub ----------
@@ -637,6 +693,13 @@ async function guidesJson(request, env, ctx) {
   });
 }
 
+// "Where to buy" facts for the cite section (from /laptop-shop-nairobi).
+function localCite(built) {
+  const d = built.pages.find((x) => x.url === `${SITE}/laptop-shop-nairobi`);
+  if (!d) return [];
+  return [`- [Where to buy laptops and phones in Nairobi](${d.url}.md)`, `  - ${d.content.introduction} (${d.url})`, ...d.content.faq.slice(0, 3).map((f) => `  - ${f.question} ${f.answer} (${d.url}#faq)`)];
+}
+
 async function llmsWithResearch(env, ctx) {
   const { studies: all, products } = await studies(env, ctx).then(async (r) => ({ ...r, products: await productList(ctx) }));
   const base = llmsSpec(products);
@@ -646,6 +709,7 @@ async function llmsWithResearch(env, ctx) {
     ...Object.entries(all).map(([slug, s]) => `- [${STUDIES[slug].title(s, new Date().getFullYear())}](${SITE}/research/${slug}.md): ${s.findings[0] ? s.findings[0].text : STUDIES[slug].question}`),
     "",
     citeSection(all),
+    ...localCite(await guides(env, ctx)),
     "",
     "## Laptop guides (built from the live catalogue)",
     `- [All guides](${SITE}/guides.md)`,
@@ -726,17 +790,65 @@ function paginationHtml(url, seo) {
   return li.join("");
 }
 
+// Product addresses: the shop has switched between two sets of slugs (new
+// ones on 14 Nov, the old ones back on 16 Nov), so a redirect is only made
+// when the requested slug is NOT live and a related slug (either direction,
+// or a merged duplicate's kept listing) IS live. Without a live list, no
+// product redirects are made at all.
+let LIVE = null;
+let LIVE_AT = 0;
+const REVERSE = {};
+for (const [a, b] of Object.entries(REDIRECTS)) REVERSE[b] = a;
+async function loadLive(ctx) {
+  if (LIVE && Date.now() - LIVE_AT < 600000) return LIVE;
+  const list = await productList(ctx || NOOP_CTX);
+  if (list.length >= MIN_PRODUCTS_ABSOLUTE) {
+    LIVE = new Set(list.map((p) => p.slug));
+    LIVE_AT = Date.now();
+    setLiveDupes(liveDupes(list));
+  }
+  return LIVE;
+}
+// Same product listed twice: the slug without its random suffix and the
+// price match. The list is newest first, so the last one is the oldest.
+export function liveDupes(list) {
+  const groups = {};
+  for (const p of list) {
+    const base = p.slug.replace(/-[a-z0-9]{9,10}$/, "");
+    const g = (groups[`${base}|${p.price}`] = groups[`${base}|${p.price}`] || []);
+    if (!g.includes(p.slug)) g.push(p.slug);
+  }
+  const map = {};
+  for (const slugs of Object.values(groups)) {
+    if (slugs.length < 2) continue;
+    const keep = slugs[slugs.length - 1];
+    for (const s of slugs.slice(0, -1)) map[s] = keep;
+  }
+  return map;
+}
+
+export function liveSlugFor(slug) {
+  if (!LIVE || LIVE.has(slug)) return null;
+  const seen = new Set([slug]);
+  const queue = [slug];
+  while (queue.length) {
+    const s = queue.shift();
+    for (const n of [REDIRECTS[s], REVERSE[s], DUPE_REDIRECTS[s]]) {
+      if (!n || seen.has(n)) continue;
+      if (LIVE.has(n)) return n;
+      seen.add(n);
+      queue.push(n);
+    }
+  }
+  return null;
+}
+
 export function finalUrl(url) {
   let path = url.pathname;
   if (path.length > 1 && path.endsWith("/") && !path.startsWith("/admin")) path = path.replace(/\/+$/, "") || "/";
   if (path.startsWith("/item/")) {
-    let slug = path.slice(6);
-    const seen = new Set();
-    while ((REDIRECTS[slug] || DUPE_REDIRECTS[slug]) && !seen.has(slug)) {
-      seen.add(slug);
-      slug = REDIRECTS[slug] || DUPE_REDIRECTS[slug];
-    }
-    path = `/item/${slug}`;
+    const to = liveSlugFor(path.slice(6));
+    if (to) path = `/item/${to}`;
   }
   if (url.hostname === "www.ecbtechkenya.com" && path === url.pathname) return null;
   return `${SITE}${path}${url.search}`;
@@ -984,7 +1096,9 @@ function fixHtml(html, url) {
     // The theme's title is "<name> | ECB Technologies Kenya"; names can contain "|".
     const raw = pre ? pre[1].trim() : "";
     const cut = raw.lastIndexOf(" | ");
-    const name = (cut > 0 ? raw.slice(0, cut) : raw).trim();
+    // Since the 16 Nov restore the theme no longer prints the product title
+    // before <!DOCTYPE>; fall back to the product heading.
+    const name = (cut > 0 ? raw.slice(0, cut) : raw).trim() || decode((html.match(/<h1 class="ecb-pd-name">([^<]*)</) || [])[1] || "").replace(/\s+/g, " ").trim();
     // Keep the price in the meta description and the intro equal to the
     // current price (descriptions were written with the price of the day).
     const pm = html.match(/id="sizeprice">\s*([^<]+)</i);
@@ -995,6 +1109,16 @@ function fixHtml(html, url) {
       html = html.replace(/(<h2 class="ecb-price-intro">[\s\S]{0,900}?<strong>)KSh [\d,]+(<\/strong>)/, `$1${ksh}$2`);
     }
     if (name) title = productTitle(name, live > 0 && live < 2000000 ? live : 0);
+    // Product descriptions written in the admin were lost in the 16 Nov
+    // restore: write one from the page itself when the shop's is empty.
+    if (name && !/<meta name="description"\s+content="[^"]+"/.test(html)) {
+      const sp = specLine(specsOf(url.pathname.slice(6)));
+      const price = live > 0 && live < 2000000 ? ` for KSh ${live.toLocaleString("en-US")}` : "";
+      const clean = decode(name).replace(/\s+/g, " ").trim();
+      let d = `${clean}${price} at ECB Technologies, Moi Avenue, Nairobi CBD.${sp ? ` ${sp}.` : ""} Delivery to all 47 counties; free pickup.`;
+      if (d.length > 158) d = `${clean.slice(0, 70).replace(/\s+\S*$/, "")}${price} at ECB Technologies, Nairobi CBD.${sp ? ` ${sp}.` : ""} Delivery across Kenya.`;
+      description = d.slice(0, 160);
+    }
     // The theme turns <strong>Label</strong> pairs in the description into a
     // spec table and hides the rest, which garbled the price intro. Show the
     // intro above the table instead.
@@ -1127,8 +1251,15 @@ function rewrite(response, url, bundle, hints) {
       },
     })
     .on('meta[name="description"]', {
-      element() {
+      element(e) {
         hasDescription = true;
+        // Fill an empty description (never replace the shop's own text).
+        if (!(e.getAttribute("content") || "").trim() && hints.description) e.setAttribute("content", hints.description);
+      },
+    })
+    .on('meta[name="keywords"]', {
+      element(e) {
+        if (!(e.getAttribute("content") || "").trim()) e.remove();
       },
     })
     .on('meta[property^="og:"], meta[name^="twitter:"], meta[property^="product:"]', {
@@ -1173,6 +1304,11 @@ function rewrite(response, url, bundle, hints) {
         if (product && product.category) {
           e.after(`<li><a href="${SITE}/category/${product.category[0]}">${escapeHtml(product.category[1])}</a></li>`, { html: true });
         }
+      },
+    })
+    .on("section.ecb-pd-related-section, div.ecb-pd-related-section", {
+      element(e) {
+        if (product) e.before(productQaHtml(product), { html: true });
       },
     })
     .on("div.ecb-pd-cta-row", {

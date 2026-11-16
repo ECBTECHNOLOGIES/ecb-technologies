@@ -60,7 +60,7 @@ export function isContentPath(path) {
     /^\/category\/[A-Za-z0-9-]+(\/[A-Za-z0-9-]+)?$/.test(path) ||
     /^\/item\/[A-Za-z0-9-]+$/.test(path) ||
     /^\/research(\/[a-z0-9-]+)?$/.test(path) ||
-    /^\/(guides|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+)$/.test(path)
+    /^\/(guides|laptop-shop-nairobi|categories|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+)$/.test(path)
   );
 }
 
