@@ -840,3 +840,22 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - **Guide, research and shop pages:** the typewriter-style label font is
   replaced by the theme font. Prices are in brand red, the call-to-action
   box and finding links in brand blue.
+
+## 2026-11-20: automatic backups
+- **`scripts/backup/backup.py`** runs every day at 02:17 Nairobi time in a
+  scheduled cloud session and commits to the `backups` branch:
+  - the markdown of all sitemap pages (684);
+  - the catalogue as CSV and JSON (678 products);
+  - llms.txt, llms-full.txt, robots.txt and the sitemaps;
+  - Cloudflare: both Workers as deployed with their bindings, routes, KV
+    data keys, zone settings, rulesets, and DNS (JSON and BIND export).
+  It refuses to overwrite a good catalogue with a cut-off one (fewer than
+  300 products).
+- **Not covered:** the shop's files and database, and ecb.lumina.co.ke. The
+  DirectAdmin panel (port 2222) can't be reached from the cloud sandbox,
+  whose proxy only allows 443. `docs/backups.md` has the steps to schedule
+  full server backups and to restore the POS site.
+- `docs/lumina-placeholder/` (`index.html` + `.htaccess`) is a branded
+  "being restored" page that replaces the empty "Index of /" until the POS
+  site is restored.
+- `/categories.md` now exists (it was a 404 found by the first backup run).

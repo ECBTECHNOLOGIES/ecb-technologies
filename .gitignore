@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 catalogue-export.csv
+
+# Daily backups live on the "backups" branch (scripts/backup/backup.py)
+backups/

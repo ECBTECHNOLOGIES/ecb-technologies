@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "71";
+const VERSION = "72";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -188,6 +188,7 @@ export default {
           if (PAGE_REDIRECTS[mdPath]) return Response.redirect(`${SITE}${mdPathFor(PAGE_REDIRECTS[mdPath])}`, 301);
           if (mdPath === "/research" || mdPath.startsWith("/research/")) return await serveResearchMd(request, mdPath, negotiated, env, ctx);
           if (GUIDE_PATH.test(mdPath)) return await serveGuideMd(request, mdPath, negotiated, env, ctx);
+          if (mdPath === "/categories") return await categoriesMd(request, ctx);
           return await serveMarkdown(request, url, mdPath, negotiated, ctx);
         }
       }
@@ -607,6 +608,27 @@ async function categoriesPage(request, url, env, ctx) {
     content,
     crumbs: [],
     modified: (await researchState(env, ctx)).changedAt,
+  });
+}
+
+// Markdown copy of the categories hub (same links, same counts).
+async function categoriesMd(request, ctx) {
+  const products = await productList(ctx);
+  const counts = {};
+  for (const p of products) {
+    const ci = CATEGORY_OF[p.slug];
+    if (ci !== undefined) counts[CATEGORIES[ci][0]] = (counts[CATEGORIES[ci][0]] || 0) + 1;
+  }
+  const lines = ["# All categories", "", "> Every product category at ECB Technologies, Nairobi CBD.", "", `Canonical: ${SITE}/categories`, ""];
+  for (const [slug, name] of LISTED_CATEGORIES.filter(([slug]) => counts[slug])) {
+    lines.push(`## ${name}`, "", `- [${(CATEGORY_SEO[`/category/${slug}`.toLowerCase()] || {}).h1 || name} (${counts[slug]})](${SITE}/category/${slug}.md)`);
+    for (const [href, t] of SUBCATEGORIES[slug] || []) lines.push(`- [${t}](${SITE}${href}.md)`);
+    lines.push("");
+  }
+  lines.push("## Guides and research", "", `- [Laptop buying guides](${SITE}/guides.md)`, `- [Price research](${SITE}/research.md)`, `- [Delivery across Kenya](${SITE}/delivery.md)`, "");
+  const md = lines.join("\n");
+  return new Response(request.method === "HEAD" ? null : md, {
+    headers: { "Content-Type": "text/markdown; charset=utf-8", "X-Robots-Tag": "noindex, follow", Link: `<${SITE}/categories>; rel="canonical"`, "Cache-Control": "public, max-age=3600", ...corsHeaders() },
   });
 }
 
