@@ -988,3 +988,29 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   a duplicate only gets a 301 once the page it merges into is live.
 - About 140 pages pass with the current ~680 products; the rest are skipped
   as too few laptops (142), duplicates (107) or too short.
+
+## 2026-11-20: full SEO checklist audit (see docs/seo/seo-checklist.md)
+- Security: server errors no longer show Laravel's debug trace (the shop runs
+  with APP_DEBUG on); the Worker returns a plain error page instead.
+- Headings: "Product Details" banner is no longer a heading above the H1;
+  product section headings h4 → h2, category sidebar h6 → h2, contact modal
+  h4 → h3. Same look (sizes copied into CSS). "Buying in Nairobi" Q&A styled
+  (it rendered at 48px without the skin).
+- Titles: short product titles include the price (50–60 characters); other
+  short titles get "| ECB Technologies" when it fits.
+- Meta descriptions over 160 characters are cut at a sentence or word;
+  "Lorem Ipsum" descriptions replaced.
+- Terms and Privacy (software template text): noindex, out of the sitemap.
+- Duplicates: copies whose address is the other's, trimmed (same price) are
+  merged (2 monitor pairs had identical titles).
+- /hp-vs-dell-vs-lenovo-laptops-kenya: built from live data (was a 15 Nov
+  snapshot with a dead product link), with FAQs and FAQPage schema.
+- Guides: byline, "About this guide" box, author in structured data; cache
+  key includes the catalogue version and release day, so pages never keep
+  links to guides that are no longer live.
+- Product pages: six similar-price products from the same category (360
+  products had only one internal link).
+- Tracking pixels get an empty alt.
+- IndexNow: 695 URLs (Yandex accepted; Bing rate-limited, already has them).
+- New: scripts/live-site/gsc-opportunities.mjs (low CTR, page 2, losing
+  pages, question queries from a Search Console export).

@@ -2,8 +2,8 @@
 
 Updated 2026-11-16. Next review by 2027-02-16 (every 3 months, or sooner after adding, merging or removing important pages).
 
-- **60 keyword clusters**, each assigned to one page.
-- Status: 52 mapped, 0 to optimize, 6 to create, 2 not targeted, 0 broken.
+- **61 keyword clusters**, each assigned to one page.
+- Status: 53 mapped, 0 to optimize, 6 to create, 2 not targeted, 0 broken.
 - Volume and KD% are empty on purpose. Fill them from Google Keyword Planner (Kenya) or Semrush; nothing here is estimated.
 
 Files:

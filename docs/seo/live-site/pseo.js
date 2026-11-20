@@ -981,7 +981,7 @@ function writePage(p, all, ctxAll) {
   const structured = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": p.kind === "list" || p.kind === "phones" || p.kind === "model" ? "CollectionPage" : p.kind === "local" ? "WebPage" : "Article", "@id": `${url}#page`, url, name: title, headline: title, description, inLanguage: "en-KE", dateModified: changedAt, isPartOf: { "@id": `${SITE}/#website` }, about: p.kind === "local" ? { "@id": `${SITE}/#store` } : p.kw, mainEntity: p.kind === "local" ? { "@id": `${SITE}/#store` } : itemList, publisher: { "@id": `${SITE}/#store` } },
+      { "@type": p.kind === "list" || p.kind === "phones" || p.kind === "model" ? "CollectionPage" : p.kind === "local" ? "WebPage" : "Article", "@id": `${url}#page`, url, name: title, headline: title, description, inLanguage: "en-KE", dateModified: changedAt, author: { "@id": `${SITE}/#store` }, isPartOf: { "@id": `${SITE}/#website` }, about: p.kind === "local" ? { "@id": `${SITE}/#store` } : p.kw, mainEntity: p.kind === "local" ? { "@id": `${SITE}/#store` } : itemList, publisher: { "@id": `${SITE}/#store` } },
       { "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faq.map((q) => ({ "@type": "Question", name: q.question, acceptedAnswer: { "@type": "Answer", text: q.answer } })) }
       // (The shop's own template already adds the BreadcrumbList.)
     ],
@@ -1013,7 +1013,7 @@ function writePage(p, all, ctxAll) {
       "specs read from product addresses (processor, generation, RAM, SSD, touch, 2-in-1, graphics)",
       ...(p.kind === "profile" ? ["SERIES_FACTS timeline (pseo.js)"] : []),
     ],
-    _view: { sections, kind: p.kind, wa: wa(`Hi ECB, I saw "${p.h1}" on your site.`) },
+    _view: { sections, kind: p.kind, wa: wa(`Hi ECB, I saw "${p.h1}" on your site.`), updated: new Date(changedAt || Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" }) },
   };
 }
 
@@ -1075,7 +1075,9 @@ export function pageHtml(doc) {
     .join("");
   const faq = `<h2 id="faq">Questions</h2>${c.faq.map((f) => `<h3 id="${slugId(f.question)}">${escH(f.question)}</h3><p>${escH(f.answer)}</p>`).join("")}`;
   return (
-    `<div class="ecb-rs ecb-pg"><p class="ecb-rs-lead"><strong>${escH(c.introduction)}</strong></p>${body}${faq}` +
+    `<div class="ecb-rs ecb-pg"><p class="ecb-rs-meta">By <a href="/about">ECB Technologies</a>, laptop and phone shop on <a href="/laptop-shop-nairobi">Moi Avenue, Nairobi CBD</a> · Updated ${escH(v.updated || "")}</p>` +
+    `<p class="ecb-rs-lead"><strong>${escH(c.introduction)}</strong></p>${body}${faq}` +
+    `<p class="ecb-pg-about"><strong>About this guide.</strong> We sell these laptops at our shop on Moi Avenue, where you can see any of them before paying. Prices, specs and stock come from our live listings, the ranking formula is published on this page, and the guide updates itself when prices change. Questions or corrections: <a href="${v.wa}" rel="nofollow">WhatsApp ${PHONE}</a>.</p>` +
     `<p class="ecb-pg-cta">${escH(c.call_to_action)} <a href="${v.wa}" rel="nofollow">WhatsApp us</a></p>` +
     `<p class="ecb-rs-meta">Built from the live catalogue · <a href="${doc.url.replace(SITE, "")}.md">Markdown</a> · <a href="/guides">All guides</a></p></div>`
   );
@@ -1128,7 +1130,54 @@ export function hubMarkdown(built) {
 export const PSEO_CSS =
   ".ecb-pg h2{margin:34px 0 12px}.ecb-pg h3{font-size:16px;margin:18px 0 6px}.ecb-pg-items{padding-left:22px}.ecb-pg-items li{margin:0 0 18px}" +
   ".ecb-pg-name{margin:0 0 2px;font-size:16px}.ecb-pg-price{font-family:inherit;white-space:nowrap;margin-left:6px;color:#e8191a;font-weight:700}" +
+  ".ecb-pg-about{margin:24px 0 8px;padding:14px 16px;background:#f4f7fb;border-radius:8px;font-size:14px;line-height:1.6;color:#4a5568}" +
   ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #1683ff;border-radius:12px;background:#f4f8ff}" +
   ".ecb-pg ul{padding-left:20px}.ecb-pg li{line-height:1.6}";
 
 export const GUIDE_PATH = /^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+|phones\/[a-z0-9-]+)$/;
+
+// ---------- /hp-vs-dell-vs-lenovo-laptops-kenya (live numbers) ----------
+// The three-brand page used to be a static snapshot (15 Nov); counts, prices
+// and product links went stale when listings changed. Built from the live
+// catalogue now, with the same facts and links as the guides.
+export function brandsComparison(products, { changedAt } = {}) {
+  const L = laptopsOf(products);
+  const asOf = new Date(changedAt || Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
+  const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  const rows = ["HP", "Dell", "Lenovo"].map((b) => {
+    const xs = L.filter((r) => brandOf(r.slug) === b).sort((x, y) => x.price - y.price);
+    const series = Object.entries(SERIES_FACTS).filter(([k, f]) => f.maker === b && k !== "x360").map(([, f]) => f).map((f) => [f.name.replace(`${b} `, ""), xs.filter((r) => f.match.test(`-${r.slug}-`)).length]).filter((s) => s[1]).sort((x, y) => y[1] - x[1]).slice(0, 3);
+    const best = [...xs].sort(byScore)[0];
+    return { b, xs, n: xs.length, from: xs[0], med: median(xs.map((r) => r.price)), max: xs[xs.length - 1], series, best };
+  }).filter((r) => r.n);
+  if (rows.length < 3) return null;
+  const most = [...rows].sort((x, y) => y.n - x.n)[0];
+  const cheap = [...rows].sort((x, y) => x.from.price - y.from.price)[0];
+  const lowMed = [...rows].sort((x, y) => x.med - y.med)[0];
+  const th = (t) => `<th style="text-align:left;padding:8px 10px;background:#1a2840;color:#fff">${t}</th>`;
+  const td = (t) => `<td style="padding:8px 10px;border-bottom:1px solid #e3e8f0">${t}</td>`;
+  const a = (r) => `<a href="${SITE}/item/${r.slug}">${esc(r.short || shortName(r.name))}</a>`;
+  const brandUrl = (b) => `${SITE}/laptops/${b.toLowerCase()}-laptops-kenya`;
+  const faq = [
+    [`Which brand has the cheapest laptop at ECB Technologies?`, `${cheap.b}: the ${cheap.from.short} at ${ksh(cheap.from.price)}, as of ${asOf}.`],
+    [`Which brand is cheapest on average?`, `${lowMed.b}, with a median laptop price of ${ksh(lowMed.med)}. HP's median is ${ksh(rows.find((r) => r.b === "HP").med)}, Dell's ${ksh(rows.find((r) => r.b === "Dell").med)} and Lenovo's ${ksh(rows.find((r) => r.b === "Lenovo").med)}.`],
+    [`Which brand has the most laptops in stock?`, `${most.b}, with ${most.n} of the ${rows.reduce((s, r) => s + r.n, 0)} HP, Dell and Lenovo laptops listed.`],
+    [`Are business laptops like ThinkPad, EliteBook and Latitude good for students?`, `Yes, for most courses. They are built for daily use, have good keyboards, and spare batteries and chargers are easy to find in Nairobi. Check the processor generation: 8th gen or newer runs Windows 11.`],
+  ];
+  const body = [
+    `<p><strong>At ECB Technologies, ${most.b} has the most laptops (${most.n}), ${cheap.b === lowMed.b ? `and ${cheap.b} has both the cheapest laptop (${ksh(cheap.from.price)}) and the lowest median price (${ksh(lowMed.med)})` : `${cheap.b} has the cheapest (${ksh(cheap.from.price)}) and ${lowMed.b} is cheapest on average (median ${ksh(lowMed.med)})`}.</strong> The table compares the HP, Dell and Lenovo laptops in stock, with prices from the live shop on ${asOf}.</p>`,
+    `<h2>HP vs Dell vs Lenovo: models and prices</h2>`,
+    `<table style="width:100%;border-collapse:collapse;margin:12px 0 20px"><thead><tr>${["Brand", "Laptops", "From", "Typical (median)", "Up to", "Most common series"].map(th).join("")}</tr></thead><tbody>`,
+    ...rows.map((r) => `<tr>${[`<a href="${brandUrl(r.b)}">${r.b}</a>`, r.n, ksh(r.from.price), ksh(r.med), ksh(r.max.price), r.series.map(([s, c]) => `${s} (${c})`).join(", ") || "–"].map(td).join("")}</tr>`),
+    `</tbody></table>`,
+    `<h2>Cheapest of each brand</h2><ul>${rows.map((r) => `<li><strong>${r.b}:</strong> ${a(r.from)} – ${ksh(r.from.price)}</li>`).join("")}</ul>`,
+    `<h2>Best specified of each brand</h2><p>Ranked by the same spec score as our <a href="${SITE}/guides">laptop guides</a> (processor, generation, RAM, storage).</p><ul>${rows.map((r) => `<li><strong>${r.b}:</strong> ${a(r.best)} – ${ksh(r.best.price)} (${specLine(r.best.sp)})</li>`).join("")}</ul>`,
+    `<h2>Which series is which?</h2><ul><li><strong>HP EliteBook and ProBook, Dell Latitude, Lenovo ThinkPad</strong> are business laptop lines, built for daily office use.</li><li><strong>HP OMEN and Victus</strong> are HP's gaming laptops; see <a href="${SITE}/category/laptops/Gaming">gaming laptops</a>.</li><li><strong>Dell XPS, HP Spectre and Envy, Lenovo Yoga</strong> are thin and light premium laptops.</li><li><strong>HP ZBook and Dell Precision</strong> are workstations for design, engineering and video work.</li></ul>`,
+    `<h2>Questions</h2>`,
+    ...faq.map(([q, ans]) => `<h3>${esc(q)}</h3><p>${esc(ans)}</p>`),
+    `<p><strong>Need help choosing?</strong> Chat with us on WhatsApp on <a href="https://wa.me/254717040531">0717 040 531</a>, call us, or visit the shop at Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm). Free pickup at the shop, rider delivery in Nairobi and courier delivery to all 47 counties.</p>`,
+    `<p>See also: ${rows.map((r) => `<a href="${brandUrl(r.b)}">${r.b} laptops in Kenya</a>`).join(" · ")} · <a href="${SITE}/research/laptop-prices-kenya">laptop prices in Kenya</a> · <a href="${SITE}/laptop-shop-nairobi">our shop in Nairobi CBD</a>.</p>`,
+  ].join("");
+  const meta = `HP vs Dell vs Lenovo laptops in Kenya: ${rows.map((r) => `${r.b} ${r.n} from ${ksh(r.from.price)}`).join(", ")}. Live prices, Nairobi CBD.`;
+  return { body, meta: meta.length > 158 ? meta.slice(0, 155).replace(/\s+\S*$/, "") + "…" : meta, faq };
+}

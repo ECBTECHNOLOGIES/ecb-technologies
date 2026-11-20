@@ -56,7 +56,7 @@ import {
 } from "./research.js";
 import { STATIC_PAGES } from "./static-pages.js";
 import { CATEGORY_SEO } from "./keyword-map.js";
-import { specsOf, specLine, shortName } from "./pseo.js";
+import { specsOf, specLine, shortName, brandsComparison } from "./pseo.js";
 import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "81";
+const VERSION = "85";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -113,6 +113,14 @@ const RESERVE_CSS =
   ".ecb-uniq-slider:not(.slick-initialized){height:316px}}";
 
 const INTRO_CSS =
+  // Headings whose tag changed keep the theme's sizes (see rewriteText).
+  "div.breadcrumb-title{font-size:48px;font-weight:700;line-height:120%}@media (max-width:1199.97px){div.breadcrumb-title{font-size:32px}}" +
+  ".ecb-pd-desc-header h2{margin:0;font-size:16px;font-weight:700;color:#fff;letter-spacing:.2px;line-height:130%}@media (max-width:575px){.ecb-pd-desc-header h2{font-size:14px}}" +
+  ".modal-header h3.title{font-size:32px;font-weight:600;line-height:130%}@media (max-width:1199.97px){.modal-header h3.title{font-size:24px}}" +
+  // "Buying in Nairobi" Q&A on product pages (only the skin styled it).
+  ".ecb-pd-local-qa{padding-top:32px;padding-bottom:8px;max-width:860px}.ecb-pd-local-qa h2{font-size:22px;font-weight:700;line-height:1.3;margin:0 0 12px;color:#1a2840}.ecb-pd-local-qa h3{font-size:16px;font-weight:600;line-height:1.4;margin:16px 0 4px;color:#1a2840}.ecb-pd-local-qa p{font-size:14.5px;line-height:1.6;color:#4a5568;margin:0 0 8px}" +
+  "h2.ecb-cat-widget-title{line-height:130%;letter-spacing:.3px;text-transform:uppercase}" +
+  ".ecb-pd-similar{padding-top:8px;padding-bottom:8px;max-width:860px}.ecb-pd-similar h2{font-size:22px;font-weight:700;line-height:1.3;margin:16px 0 10px;color:#1a2840}.ecb-pd-similar ul{list-style:none;padding:0;margin:0 0 8px}.ecb-pd-similar li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #e8edf5;font-size:14.5px;line-height:1.4}.ecb-pd-similar li span{white-space:nowrap;font-weight:600;color:#1a2840}.ecb-pd-similar p{font-size:14.5px;margin:8px 0}" +
   ".ecb-pd-intro{padding:18px 22px 6px}.ecb-pd-intro h2{font-size:17px;font-weight:600;margin:0 0 6px;color:#1a2840}" +
   ".ecb-pd-intro p{margin:0 0 10px;font-size:14px;line-height:1.55;color:#4a5568}";
 
@@ -146,6 +154,32 @@ const IMAGE_RULES = [
 ];
 
 export default {
+  async fetch(request, env, ctx) {
+    const res = await handle(request, env, ctx);
+    return res.status >= 500 ? await scrubError(res) : res;
+  },
+};
+
+// The shop runs with Laravel's debug mode on, so any server error returns a
+// full stack trace (file paths, code, sometimes settings). Until APP_DEBUG is
+// set to false in the server's .env, replace those bodies with a plain error.
+async function scrubError(res) {
+  const type = res.headers.get("Content-Type") || "";
+  if (!/json|html|text/.test(type)) return res;
+  const body = await res.text();
+  if (!/"exception"|"trace"|Whoops|Illuminate\\|vendor\/laravel|Symfony\\|ignition/i.test(body)) {
+    return new Response(body, res);
+  }
+  const headers = new Headers({ "Cache-Control": "no-store", "X-Robots-Tag": "noindex" });
+  if (/json/.test(type)) {
+    headers.set("Content-Type", "application/json");
+    return new Response(JSON.stringify({ message: "Server Error" }), { status: res.status, headers });
+  }
+  headers.set("Content-Type", "text/html; charset=utf-8");
+  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Something went wrong | ECB Technologies</title></head><body style="font-family:system-ui,sans-serif;max-width:560px;margin:15vh auto;padding:0 16px;color:#1a2840"><h1 style="font-size:24px">Something went wrong</h1><p>Please try again in a minute, or order on WhatsApp: <a href="https://wa.me/254717040531">0717 040 531</a>.</p><p><a href="${SITE}/">Back to the shop</a></p></body></html>`, { status: res.status, headers });
+}
+
+const handler = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     SKIN = !!(env && env.SKIN === "1");
@@ -504,7 +538,7 @@ async function serveResearch(request, url, env, ctx) {
 // Our own content inside the shop's page template (header, footer, skin),
 // borrowed from /delivery.
 const escAttr = (t) => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-async function shellPage(request, url, { h1, title, description, content, crumbs, modified }) {
+async function shellPage(request, url, { h1, title, description, content, crumbs, modified, faq }) {
   await loadLive(NOOP_CTX);
   // The template comes from /about (the admin page /delivery used before was
   // lost in the 16 Nov restore); its about-only sections are removed.
@@ -525,6 +559,10 @@ async function shellPage(request, url, { h1, title, description, content, crumbs
     .replace(/(<ul class="bread-menu">[\s\S]*?<li>[\s\S]*?<\/li>\s*<li>)[\s\S]*?(<\/li>\s*<\/ul>)/, `$1${trail}$2`)
     .replace(/(<div class="ecb-about-lead-body">)[\s\S]*?(<\/div>)/, `$1${content}$2`);
   if (!/<meta name="description"/.test(html)) html = html.replace("</head>", `<meta name="description" content="${escAttr(description)}"></head>`);
+  if (faq && faq.length) {
+    const ld = { "@context": "https://schema.org", "@type": "FAQPage", "@id": `${SITE}${url.pathname}#faq`, mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+    html = html.replace("</head>", `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script></head>`);
+  }
   const res = new Response(html, { status: 200, headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private" } });
   return rewriteText(res, url, { modified, title });
 }
@@ -566,15 +604,29 @@ async function serveResearchMd(request, path, negotiated, env, ctx) {
 // ---------- pages lost in the 16 Nov restore (static-pages.js) ----------
 
 async function staticPage(request, url, env, ctx) {
-  const p = STATIC_PAGES[url.pathname];
-  const published = "2026-11-15T10:00:00+03:00";
+  let p = STATIC_PAGES[url.pathname];
+  let modified = "2026-11-15T10:00:00+03:00";
+  let faq = null;
+  if (url.pathname === "/hp-vs-dell-vs-lenovo-laptops-kenya") {
+    // Live numbers and product links (the static copy went stale).
+    try {
+      const { products, changedAt } = await researchState(env, ctx);
+      const live = brandsComparison(products, { changedAt });
+      if (live) {
+        p = { ...p, body: live.body, meta: live.meta };
+        faq = live.faq;
+        modified = changedAt || modified;
+      }
+    } catch {}
+  }
   return shellPage(request, url, {
     h1: p.title,
     title: `${p.title} | ECB Technologies`.length <= 60 ? `${p.title} | ECB Technologies` : p.title,
     description: p.meta,
     content: `<style>${RESEARCH_CSS}${PSEO_CSS}</style><div class="ecb-rs ecb-pg ecb-guide-page">${p.body}</div>`,
-    crumbs: [],
-    modified: published,
+    crumbs: [["Guides", `${SITE}/guides`]],
+    modified,
+    faq,
   });
 }
 
@@ -782,7 +834,11 @@ async function serveGuide(request, url, env, ctx) {
 
 async function guidePage(request, url, env, ctx) {
   if (hasSession(request)) return serveGuide(request, url, env, ctx);
-  const key = `${SITE}/__ecb/guides/v${VERSION}${SKIN ? "s" + SKIN_ID : ""}${url.pathname.replace(/\/+$/, "")}`;
+  // Keyed by catalogue version and release day: which guides are live (and so
+  // linked) changes with both.
+  await guides(env, ctx);
+  const sig = guidesMemo ? `${Date.parse(guidesMemo.changedAt) || 0}-${guidesMemo.today}` : "0";
+  const key = `${SITE}/__ecb/guides/v${VERSION}-${sig}${SKIN ? "s" + SKIN_ID : ""}${url.pathname.replace(/\/+$/, "")}`;
   const hit = await caches.default.match(key);
   if (hit) return new Response(hit.body, { headers: { "Content-Type": "text/html; charset=UTF-8", "Cache-Control": "no-cache, private", "X-Robots-Tag": "index, follow", "X-ECB-Cache": "HIT" } });
   const res = await serveGuide(request, url, env, ctx);
@@ -976,6 +1032,22 @@ export function liveDupes(list) {
     if (slugs.length < 2) continue;
     const keep = slugs[slugs.length - 1];
     for (const s of slugs.slice(0, -1)) map[s] = keep;
+  }
+  // Same price, and one address is the other cut short (the shop trims long
+  // names), e.g. "...-fhd-at-288hz-dual-tqt676ow6" and
+  // "...-fhd-at-288hz-dual-mode-gaming-kka726pdc": the same product twice.
+  // At least 6 words in common so short generic names never match.
+  const byPrice = {};
+  for (const p of list) (byPrice[p.price] = byPrice[p.price] || []).push(p.slug);
+  for (const slugs of Object.values(byPrice)) {
+    if (slugs.length < 2) continue;
+    const bases = slugs.map((x) => [x, x.replace(/-[a-z0-9]{9,10}$/, "")]);
+    for (const [a, ba] of bases) {
+      for (const [b, bb] of bases) {
+        if (a === b || map[a] || map[b] || bb.length <= ba.length) continue;
+        if (bb.startsWith(ba + "-") && ba.split("-").length >= 6) map[a] = b; // keep the fuller name
+      }
+    }
   }
   return map;
 }
@@ -1298,13 +1370,55 @@ function fitTitle(name, suffix) {
   return name;
 }
 
+// Six products from the same category, closest in price: links every
+// product from its neighbours (many were reachable only from one list page).
+async function similarProducts(url) {
+  const slug = (url.pathname.match(/^\/item\/([^/]+)/) || [])[1];
+  if (!slug) return null;
+  const list = await productList(NOOP_CTX);
+  const self = list.find((p) => p.slug === slug);
+  if (!self || !self.price) return null;
+  const dupes = liveDupes(list);
+  const cat = CATEGORY_OF[slug];
+  const pool = list.filter((p) => p.slug !== slug && !dupes[p.slug] && p.price > 0 && (cat === undefined || CATEGORY_OF[p.slug] === cat));
+  pool.sort((a, b) => Math.abs(a.price - self.price) - Math.abs(b.price - self.price) || (a.slug < b.slug ? -1 : 1));
+  const picks = pool.slice(0, 6).sort((a, b) => a.price - b.price);
+  return picks.length >= 3 ? { items: picks, cat: cat === undefined ? null : CATEGORIES[cat] } : null;
+}
+
+function similarHtml(sim) {
+  if (!sim) return "";
+  const heading = sim.cat ? `${sim.cat[1]} at a similar price` : "At a similar price";
+  const more = sim.cat ? `<p><a href="${SITE}/category/${sim.cat[0]}">All ${escapeHtml(sim.cat[1])}</a></p>` : "";
+  return `<section class="container ecb-pd-similar"><h2>${escapeHtml(heading)}</h2><ul>${sim.items.map((p) => `<li><a href="${SITE}/item/${p.slug}">${escapeHtml(listName(p.name))}</a> <span>KSh ${Number(p.price).toLocaleString("en-US")}</span></li>`).join("")}</ul>${more}</section>`;
+}
+
+// Titles under 50 characters get the brand when it fits in 60.
+function padTitle(t) {
+  const len = t.replace(/&[a-z#0-9]+;/gi, "x").length;
+  if (len >= 50 || /ECB Technologies/.test(t)) return t;
+  const padded = `${t} | ECB Technologies`;
+  return padded.replace(/&[a-z#0-9]+;/gi, "x").length <= 60 ? padded : t;
+}
+
 // Product <title>: "<name> Price in Kenya | ECB Technologies" when it fits in
 // 60 characters; otherwise the name (minus any "Price in Kenya – …" the shop
 // typed into it), shortened at a word boundary.
 function productTitle(name, price) {
   const len = (t) => t.replace(/&[a-z#0-9]+;/gi, "x").length;
   const n = name.replace(/\s*Price in Kenya\b[\s\S]*$/i, "").replace(/\s+/g, " ").trim() || name;
-  for (const t of [`${n} Price in Kenya | ECB Technologies`, `${n} Price in Kenya`]) if (len(t) <= 60) return t;
+  // Prefer 50-60 characters (long enough to say what the page is, short
+  // enough not to be cut off); the price helps short names reach it.
+  const kshP = price ? `KSh ${price.toLocaleString("en-US")}` : "";
+  const options = [
+    `${n} Price in Kenya | ECB Technologies`,
+    kshP && `${n} Price in Kenya: ${kshP} | ECB Technologies`,
+    `${n} Price in Kenya, Nairobi | ECB Technologies`,
+    kshP && `${n} Price in Kenya (${kshP})`,
+    `${n} Price in Kenya`,
+  ].filter(Boolean);
+  const fits = options.filter((t) => len(t) <= 60);
+  if (fits.length) return fits.find((t) => len(t) >= 50) || fits[0];
   // Long names: shorten, and add the price so variants (touch / non-touch,
   // 8GB / 16GB…) that share the start of their name still differ.
   const suffix = price ? ` – KSh ${price.toLocaleString("en-US")}` : "";
@@ -1392,9 +1506,15 @@ function fixHtml(html, url) {
       .replace('<main class="ecb-about-page"', '<main class="ecb-about-page ecb-guide-page"')
       .replace(/<span class="ecb-about-lead-eyebrow">[\s\S]*?<\/span>\s*<h1 class="ecb-about-lead-title">[\s\S]*?<\/h1>/, "");
   }
+  // Tracking pixels inside <noscript> (not parsed as elements): empty alt.
+  html = html.replace(/<img height="1" width="1" style="display:none"(?![^>]*\balt=)/g, '<img alt="" height="1" width="1" style="display:none"');
   // The shop is closed on Sundays.
   html = html.replace(/(<span class="ecb-visit-detail-sub">)\s*Sunday:[^<]*/, "$1Sunday: Closed");
   if (path.startsWith("/category") && [...url.searchParams.keys()].some((k) => NOINDEX_PARAMS.test(k))) noindex = true;
+  // Terms and privacy are the shop software's stock text ("Genius Shop",
+  // shared by every store on it): kept for visitors, not indexed, until the
+  // owner replaces them with ECB's own.
+  if (/^\/(terms|privacy)$/.test(path)) noindex = true;
   return { html, title, description, noindex, crumb: crumb ? crumb.replace(/&amp;/g, "&") : "" };
 }
 
@@ -1438,6 +1558,11 @@ async function rewriteText(res, url, extra) {
   // Category pages: count + year in the title and a quotable first sentence.
   if (hints.seo.type === "category" && hints.seo.category && hints.seo.category.count && !url.search) await categorySummary(hints, url);
   if (hints.seo.type === "category" && hints.seo.category && hints.seo.category.count === 0) hints.noindex = true;
+  if (hints.seo.type === "product") {
+    try {
+      hints.similar = await similarProducts(url);
+    } catch {}
+  }
   const bundle = hints.themeVersion === THEME_VERSION ? BUNDLE_PATH : null;
   if (hints.banner && /["'()<>\s]/.test(hints.banner)) hints.banner = null;
   if (hints.mainImg && /["'()<>\s]/.test(hints.mainImg)) hints.mainImg = null;
@@ -1497,14 +1622,23 @@ function rewrite(response, url, bundle, hints) {
       element(e) {
         titles++;
         if (titles > 1) return e.remove();
-        if (hints.title) e.setInnerContent(hints.title, { html: true });
+        if (hints.title) e.setInnerContent(padTitle(hints.title), { html: true });
       },
     })
     .on('meta[name="description"]', {
       element(e) {
         hasDescription = true;
         // Fill an empty description (never replace the shop's own text).
-        if (!(e.getAttribute("content") || "").trim() && hints.description) e.setAttribute("content", hints.description);
+        // (placeholder "Lorem Ipsum" text counts as empty)
+        if ((!(e.getAttribute("content") || "").trim() || /lorem ipsum/i.test(e.getAttribute("content"))) && hints.description) e.setAttribute("content", hints.description);
+        // Over 160 characters (the shop pastes whole policies in): cut at a
+        // sentence or word so the snippet isn't truncated mid-word.
+        const c = (e.getAttribute("content") || "").replace(/\s+/g, " ").trim();
+        if (c.length > 160) {
+          const cut = c.slice(0, 158);
+          const sentence = cut.match(/^(.{70,}[.!?])\s/);
+          e.setAttribute("content", sentence ? sentence[1] : cut.replace(/\s+\S*$/, "").replace(/[,;:–-]+$/, "") + "…");
+        }
       },
     })
     .on('meta[name="keywords"]', {
@@ -1535,6 +1669,26 @@ function rewrite(response, url, bundle, hints) {
     .on("h2.breadcrumb-title", {
       element(e) {
         if (!isHome && seo.h1Count === 0) e.tagName = "h1";
+        // Otherwise it is a generic banner label ("Product Details") above
+        // the real H1: not a heading. Same look (HEADING_CSS).
+        else e.tagName = "div";
+      },
+    })
+    // Product page sections under the H1: h4 -> h2 (the outline skipped h2
+    // and h3). The contact modal title: h4 -> h3 (it follows an h2).
+    .on(".ecb-pd-desc-header h4", {
+      element(e) {
+        e.tagName = "h2";
+      },
+    })
+    .on("h6.ecb-cat-widget-title", {
+      element(e) {
+        e.tagName = "h2";
+      },
+    })
+    .on(".modal-header h4.title", {
+      element(e) {
+        e.tagName = "h3";
       },
     })
     .on("div.ecb-hero-outer", {
@@ -1559,7 +1713,7 @@ function rewrite(response, url, bundle, hints) {
     })
     .on("section.ecb-pd-related-section, div.ecb-pd-related-section", {
       element(e) {
-        if (product) e.before(productQaHtml(product), { html: true });
+        if (product) e.before(productQaHtml(product) + similarHtml(hints.similar), { html: true });
       },
     })
     .on("div.ecb-pd-cta-row", {
@@ -1842,6 +1996,8 @@ function rewrite(response, url, bundle, hints) {
     .on("img", {
       element(e) {
         images++;
+        // Hidden tracking pixels: decorative, so an empty alt.
+        if (!e.hasAttribute("alt")) e.setAttribute("alt", "");
         if (images > EAGER_IMAGES && !e.getAttribute("loading")) {
           e.setAttribute("loading", "lazy");
           e.setAttribute("decoding", "async");
@@ -1910,4 +2066,8 @@ function rewrite(response, url, bundle, hints) {
   res.headers.set("X-Robots-Tag", hints.noindex ? "noindex, follow" : "index, follow");
   res.headers.delete("Content-Length");
   return res;
+}
+
+function handle(request, env, ctx) {
+  return handler.fetch(request, env, ctx);
 }
