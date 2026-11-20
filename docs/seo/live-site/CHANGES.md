@@ -873,3 +873,13 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - **Password reset:** the owner resets it in phpMyAdmin (`admins` table,
   bcrypt `$2y$` hash) or with "Forgot password?". No credential is stored
   in the repo.
+
+## 2026-11-20: old sitemap addresses in Search Console
+- Search Console still lists old sitemaps from the WordPress era
+  (`sitemap_index.xml` on both hosts, `product-sitemap.xml`), all "Couldn't
+  fetch".
+  - `/sitemap_index.xml` now serves the new sitemap index.
+  - `/product-sitemap.xml` now serves the product sitemap (new routes on
+    both hosts).
+- The homepage URL was also submitted as a sitemap (Nov 17: "1 error"). It
+  is to be removed in Search Console; `sitemap.xml` is to be submitted.

@@ -32,7 +32,10 @@ const EXCLUDE = /^\/(admin|user|rider|agent|vendor|carts?|checkout|addcart|addto
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === "/sitemap.xml") return cached(request, ctx, () => buildIndex(env));
+    // Old WordPress sitemap addresses still registered in Search Console
+    // answer with the new sitemaps, so they stop failing.
+    if (url.pathname === "/sitemap.xml" || url.pathname === "/sitemap_index.xml") return cached(request, ctx, () => buildIndex(env));
+    if (url.pathname === "/product-sitemap.xml") return cached(request, ctx, () => buildSitemap("/sitemap-products.xml", env));
     if (SITEMAPS[url.pathname]) return cached(request, ctx, () => buildSitemap(url.pathname, env));
     if (url.pathname === "/robots.txt") return robots(url);
     if (url.pathname.startsWith("/assets/images/brands/")) return brandLogo(request, ctx);
