@@ -856,6 +856,6 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   whose proxy only allows 443. `docs/backups.md` has the steps to schedule
   full server backups and to restore the POS site.
 - `docs/lumina-placeholder/` (`index.html` + `.htaccess`) is a branded
-  "being restored" page that replaces the empty "Index of /" until the POS
+  "being restored" page for the POS software site that replaces the empty "Index of /" until the POS
   site is restored.
 - `/categories.md` now exists (it was a 404 found by the first backup run).

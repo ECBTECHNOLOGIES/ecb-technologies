@@ -47,7 +47,7 @@ be undone.
 5. Also ask the host how long they keep their own server backups, and how to
    request a restore.
 
-### Bring back ecb.lumina.co.ke (the POS shop)
+### Bring back ecb.lumina.co.ke (the POS software site)
 
 The site's folder is empty ("Index of /"), so the files are gone.
 
