@@ -930,3 +930,39 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   the error on. Background refreshes already kept the old copy on errors.
 - `/sitemap`, `/sitemap/` and `/sitemap.html` now 301 to `/site-map` (they
   were a 404).
+
+## 2026-11-20: programmatic SEO system (model template, batches, pruning)
+- **New template, "{model} price in Kenya"** (`/laptops/<model>-price-kenya`,
+  `pseo.js`):
+  - The model is read from the product address: brand, series and model
+    number, up to the first processor or memory word.
+  - One page per model with **3 or more distinct configurations** in stock
+    (27 models on 20 Nov).
+  - "Useful at a glance": a configuration table (processor, RAM, storage,
+    screen, price) and which configuration to buy (cheapest, best specs
+    for the money, most memory, what the dearer one adds), plus series
+    background, buying in Nairobi, FAQ and CollectionPage, ItemList and
+    FAQPage structured data.
+  - Configurations are labelled by what differs, because listing names are
+    cut off and often identical.
+  - Word minimum 300 ("glance" type); the other gates still apply.
+- **Release in batches:**
+  - At most 15 new model pages go live per day (most configurations first);
+    the rest are listed as "Queued" and 302 to /guides until their day.
+  - KV `guides-first-seen` records each guide's first publication date. The
+    existing guides were backfilled with 2026-11-15.
+  - Day 1: 15 model pages live, 12 queued.
+- **Pruning (step 8):**
+  - `scripts/live-site/prune-guides.mjs <Pages.csv> [--apply]` reads a
+    Search Console Performance → Pages export and lists guides that have
+    been live for 90+ days with 0 impressions. It also lists the
+    top-performing guides, so the winning page types can be doubled down
+    on.
+  - `--apply` writes KV `guides-pruned`. Those pages are then served with
+    noindex and left out of the sitemap and llms.txt, but kept for visitors
+    and links.
+- `/guides/pages.json` adds `first_published` and `pruned`.
+- `/guides` has a "Laptop models: prices by configuration" section.
+- `test-pseo.mjs`: 16 tests (model keys and names, daily batches, pruning
+  flags, model pages list only their model).
+- Sitemap: 700 URLs, all 200, indexable, self-canonical.

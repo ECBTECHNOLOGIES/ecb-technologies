@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "79";
+const VERSION = "80";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -699,11 +699,32 @@ async function categoriesMd(request, ctx) {
 let guidesMemo = null;
 async function guides(env, ctx) {
   const { products, changedAt } = await researchState(env, ctx);
-  if (guidesMemo && guidesMemo.changedAt === changedAt) return guidesMemo.built;
-  const built = buildPages(products, { changedAt });
-  guidesMemo = { changedAt, built };
+  // Batches advance by day (Nairobi time), so the day is part of the memo.
+  const today = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 10);
+  if (guidesMemo && guidesMemo.changedAt === changedAt && guidesMemo.today === today) return guidesMemo.built;
+  let firstSeen = {};
+  let pruned = [];
   if (env && env.PAGES) {
-    const urls = built.pages.map((d) => d.url);
+    try {
+      firstSeen = (await env.PAGES.get("guides-first-seen", { type: "json", cacheTtl: 60 })) || {};
+      pruned = (await env.PAGES.get("guides-pruned", { type: "json", cacheTtl: 300 })) || [];
+      // First run: the guides already published went live on 15 Nov.
+      if (!Object.keys(firstSeen).length) {
+        const prev = await env.PAGES.get("guides-state", { type: "json" });
+        for (const u of (prev && prev.urls) || []) firstSeen[u] = "2026-11-15";
+      }
+    } catch {}
+  }
+  const built = buildPages(products, { changedAt, firstSeen, pruned, today });
+  built.firstSeen = { ...firstSeen, ...built.newlySeen };
+  built.pruned = pruned;
+  guidesMemo = { changedAt, today, built };
+  if (env && env.PAGES) {
+    if (Object.keys(built.newlySeen).length || !Object.keys(firstSeen).length) {
+      (ctx || NOOP_CTX).waitUntil(env.PAGES.put("guides-first-seen", JSON.stringify(built.firstSeen)));
+    }
+    // The sitemap lists published, unpruned guides only.
+    const urls = built.pages.filter((d) => !d._pruned).map((d) => d.url);
     try {
       const prev = await env.PAGES.get("guides-state", { type: "json", cacheTtl: 300 });
       if (!prev || prev.changedAt !== changedAt || prev.urls.join() !== urls.join()) {
@@ -737,7 +758,7 @@ async function serveGuide(request, url, env, ctx) {
     return fetch(new Request(`${SITE}/ecb-not-found-${Date.now()}`, request));
   }
   const ld = `<script type="application/ld+json">${JSON.stringify(doc.schema.structured_data).replace(/</g, "\\u003c")}</script>`;
-  return shellPage(request, url, {
+  const page = await shellPage(request, url, {
     h1: doc.content.h1,
     title: doc.seo.title,
     description: doc.seo.meta_description,
@@ -745,6 +766,18 @@ async function serveGuide(request, url, env, ctx) {
     crumbs: [["Guides", "/guides"]],
     modified: built.changedAt,
   });
+  if (!doc._pruned) return page;
+  // Pruned (no impressions after 90 days): still there for visitors, noindex.
+  const out = new HTMLRewriter()
+    .on('meta[name="robots"]', {
+      element(e) {
+        e.setAttribute("content", "noindex, follow");
+      },
+    })
+    .transform(page);
+  const res = new Response(out.body, out);
+  res.headers.set("X-Robots-Tag", "noindex, follow");
+  return res;
 }
 
 async function guidePage(request, url, env, ctx) {
@@ -782,7 +815,7 @@ async function serveGuideMd(request, path, negotiated, env, ctx) {
 // Every guide in the pSEO JSON format, plus every candidate that was rejected.
 async function guidesJson(request, env, ctx) {
   const built = await guides(env, ctx);
-  const body = JSON.stringify({ site: SITE, generated: built.changedAt, count: built.pages.length, pages: built.pages.map(publicJson), skipped: built.skipped }, null, 1);
+  const body = JSON.stringify({ site: SITE, generated: built.changedAt, count: built.pages.length, first_published: built.firstSeen, pruned: built.pruned, pages: built.pages.map(publicJson), skipped: built.skipped }, null, 1);
   return new Response(request.method === "HEAD" ? null : body, {
     headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=600, s-maxage=3600", "X-Robots-Tag": "noindex", ...corsHeaders() },
   });
@@ -808,7 +841,7 @@ async function llmsWithResearch(env, ctx) {
     "",
     "## Laptop guides (built from the live catalogue)",
     `- [All guides](${SITE}/guides.md)`,
-    ...(await guides(env, ctx)).pages.map((d) => `- [${d.content.h1}](${d.url}.md): ${d.seo.meta_description}`),
+    ...(await guides(env, ctx)).pages.filter((d) => !d._pruned).map((d) => `- [${d.content.h1}](${d.url}.md): ${d.seo.meta_description}`),
     "",
   ].join("\n");
   return base.replace("## Core pages", `${research}\n## Core pages`);

@@ -67,6 +67,9 @@ export const KEYWORD_MAP = [
   L("Laptop brands", "Core Ultra", "/laptops/core-ultra-laptops-kenya", "Intel Core Ultra laptop price in Kenya", ["core ultra 7 laptop kenya", "ai laptop kenya"], "commercial", "Mapped"),
   L("Laptop brands", "AMD Ryzen", "/laptops/amd-ryzen-laptops-kenya", "AMD Ryzen laptop price in Kenya", ["ryzen 5 laptop price in kenya", "ryzen 7 laptop kenya"], "commercial", "Mapped"),
 
+  // ---------- Laptop models (template, generated) ----------
+  L("Laptop models", "{model} price in Kenya (template)", "/laptops/hp-elitebook-830-g7-price-kenya", "HP EliteBook 830 G7 price in Kenya", ["{model} price in kenya", "{model} specs", "{model} 16gb price kenya"], "commercial", "Mapped", [], "One page per model with 3+ distinct configurations in stock (27 on 20 Nov), released 15 a day. Example row; every model page follows the same pattern."),
+
   // ---------- Comparisons ----------
   L("Comparisons", "ThinkPad vs EliteBook", "/compare/thinkpad-vs-elitebook-kenya", "ThinkPad vs EliteBook", ["thinkpad or elitebook", "elitebook vs thinkpad which is better"], "commercial", "Mapped"),
   L("Comparisons", "EliteBook vs Latitude", "/compare/elitebook-vs-latitude-kenya", "EliteBook vs Latitude", ["latitude vs elitebook"], "commercial", "Mapped"),

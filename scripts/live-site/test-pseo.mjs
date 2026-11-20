@@ -37,7 +37,7 @@ test("slugs and primary keywords are unique", () => {
 });
 test("every published page meets the quality gates", () => {
   for (const d of built.pages) {
-    const min = /Comparisons|Profiles|Locations/.test(d.playbook_type) ? 900 : 600;
+    const min = /-price-kenya$/.test(d.url) && /\/laptops\//.test(d.url) ? 300 : /Comparisons|Profiles|Locations/.test(d.playbook_type) ? 900 : 600;
     assert.ok(G.wordCount(d) >= min, `${d.url} words`);
     assert.ok(d.content.faq.length >= 3, `${d.url} faq`);
     assert.ok(d.internal_links.length >= 5, `${d.url} links`);
@@ -106,6 +106,44 @@ test("local page states the shop facts and links every audience guide", () => {
   assert.ok(d.internal_links.some((u) => u.endsWith("/student-laptops-kenya")) || d.content.sections.some((s) => s.body.includes("/student-laptops-kenya")));
   assert.ok(!/best (laptop )?shop/i.test(d.content.introduction), "no unprovable 'best' claim");
   assert.equal(d.schema.structured_data["@graph"][0].mainEntity["@id"], "https://www.ecbtechkenya.com/#store");
+});
+
+test("model keys and names", () => {
+  assert.equal(G.modelKey("hp-elitebook-840-g6-i5-8th-gen-8gb-ram-256gb-non-touch-jzv2433lv5"), "hp elitebook 840 g6");
+  assert.equal(G.modelKey("lenovo-thinkpad-x280-i5-8th-gen-16-256-gb-non-touch-jfj18032zy"), "lenovo thinkpad x280");
+  assert.equal(G.modelKey("dell-latitude-i5-8gb-abcdefghij"), null); // no model number
+  assert.equal(G.modelName("hp elitebook 840 g6"), "HP EliteBook 840 G6");
+  assert.equal(G.modelName("lenovo thinkpad t480s"), "Lenovo ThinkPad T480s");
+});
+test("new model pages are released in daily batches; published ones stay", () => {
+  const isModel = (u) => /\/laptops\/.*-price-kenya$/.test(u);
+  const day1 = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-20T00:00:00Z" });
+  const released = day1.pages.filter((d) => isModel(d.url));
+  assert.ok(released.length <= G.DAILY_RELEASE);
+  const queued = day1.skipped.filter((s) => s.queued);
+  // Day 2: day 1's pages are remembered, the next batch goes out.
+  const seen = Object.fromEntries(Object.entries(day1.newlySeen));
+  const day2 = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-21T00:00:00Z", firstSeen: seen });
+  for (const d of released) assert.ok(day2.pages.some((x) => x.url === d.url), `kept ${d.url}`);
+  const day2Models = day2.pages.filter((d) => isModel(d.url)).length;
+  assert.ok(day2Models <= released.length + G.DAILY_RELEASE && (queued.length === 0 || day2Models > released.length));
+  // Non-model pages are never held back.
+  assert.equal(day1.pages.filter((d) => !isModel(d.url)).length, day2.pages.filter((d) => !isModel(d.url)).length);
+});
+test("pruned pages are flagged (noindex), not deleted", () => {
+  const anyUrl = built.pages[0].url;
+  const b = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-15T00:00:00Z", pruned: [anyUrl] });
+  const d = b.pages.find((x) => x.url === anyUrl);
+  assert.ok(d && d._pruned === true);
+  assert.ok(!("_pruned" in G.publicJson(d)));
+});
+test("model pages list only that model, at least MIN_CONFIGS configurations", () => {
+  for (const d of built.pages.filter((x) => /\/laptops\/.*-price-kenya$/.test(x.url))) {
+    const key = d.url.match(/\/laptops\/(.*)-price-kenya$/)[1].replace(/-/g, " ");
+    const items = d.schema.structured_data["@graph"][0].mainEntity.itemListElement;
+    assert.ok(items.length >= G.MIN_CONFIGS, d.url);
+    for (const it of items) assert.equal(G.modelKey(it.url.split("/item/")[1]), key, `${d.url}: ${it.url}`);
+  }
 });
 
 console.log(`\n${passed} tests passed`);

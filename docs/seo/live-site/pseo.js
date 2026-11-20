@@ -31,7 +31,11 @@ export const MIN_PRODUCTS = 10;
 export const MIN_SIDE = 8;
 export const LIST_SIZE = 10;
 export const MAX_OVERLAP = 0.6; // share of listed products another page may repeat
-export const MIN_WORDS = { utility: 600, informational: 900 };
+export const MIN_WORDS = { utility: 600, informational: 900, glance: 300 };
+// Model pages are "useful at a glance" (a configuration table, not an essay).
+export const MIN_CONFIGS = 3;
+// New templates go live in batches, not all at once.
+export const DAILY_RELEASE = 15;
 const WHATSAPP = "254717040531";
 const PHONE = "0717 040 531";
 
@@ -308,14 +312,54 @@ const statsOf = (rows) => {
 };
 const share = (rows, f) => pct(rows.filter(f).length, rows.length);
 
-export function buildPages(products, { changedAt = new Date().toISOString() } = {}) {
+// ---------- model pages ("{model} price in Kenya") ----------
+
+const MODEL_STOP = /^(i3|i5|i7|i9|core|ultra|ryzen|amd|intel|celeron|pentium|m[1-5]|snapdragon|price|\d+(gb|tb)|\d+(st|nd|rd|th))$/;
+// "hp-elitebook-840-g6-i5-8th-gen-…" -> "hp elitebook 840 g6": brand, series
+// and model number, up to the first processor or memory word.
+export function modelKey(slug) {
+  const out = [];
+  for (const w of slug.replace(/-[a-z0-9]{9,10}$/, "").split("-")) {
+    if (MODEL_STOP.test(w)) break;
+    out.push(w);
+    if (out.length >= 6) break;
+  }
+  return out.length >= 3 && out.some((w) => /\d/.test(w)) ? out.join(" ") : null;
+}
+const CASE = { hp: "HP", xps: "XPS", thinkpad: "ThinkPad", elitebook: "EliteBook", probook: "ProBook", zbook: "ZBook", ideapad: "IdeaPad", omnibook: "OmniBook", macbook: "MacBook", latitude: "Latitude", dell: "Dell", lenovo: "Lenovo", victus: "Victus", omen: "OMEN", folio: "Folio", yoga: "Yoga", slim: "Slim", flip: "Flip", spectre: "Spectre", envy: "Envy", precision: "Precision", inspiron: "Inspiron", surface: "Surface" };
+export function modelName(key) {
+  return key.split(" ").map((w) => CASE[w] || (/^[a-z]\d/.test(w) ? w[0].toUpperCase() + w.slice(1) : /^\d+[a-z]$/.test(w) ? w : w[0].toUpperCase() + w.slice(1))).join(" ");
+}
+function modelCandidates(L) {
+  const groups = {};
+  for (const r of L) {
+    const k = modelKey(r.slug);
+    if (k) (groups[k] = groups[k] || []).push(r);
+  }
+  return Object.entries(groups)
+    .map(([key, rows]) => {
+      // One row per distinct listing (same address stem and price = a copy).
+      const seen = new Set();
+      const uniq = rows.filter((r) => {
+        const id = `${r.slug.replace(/-[a-z0-9]{9,10}$/, "")}|${r.price}`;
+        return seen.has(id) ? false : (seen.add(id), true);
+      });
+      const name = modelName(key);
+      const slug = key.replace(/ /g, "-");
+      return { kind: "model", playbook: "Directory", type: "glance", slug: `model-${slug}`, path: `/laptops/${slug}-price-kenya`, kw: `${name} price in Kenya`, h1: `${name} price in Kenya`, name, key, rows: uniq };
+    })
+    .filter((c) => c.rows.length >= MIN_CONFIGS)
+    .sort((a, b) => b.rows.length - a.rows.length || (a.key < b.key ? -1 : 1));
+}
+
+export function buildPages(products, { changedAt = new Date().toISOString(), firstSeen = {}, pruned = [], today = null } = {}) {
   const L = laptopsOf(products);
   const year = new Date(changedAt).getFullYear();
   const accepted = [];
   const skipped = [];
   const usedSlugs = new Set();
   const usedKw = new Set();
-  for (const c of candidates()) {
+  for (const c of [...candidates(), ...modelCandidates(L)]) {
     const skip = (reason) => skipped.push({ status: "SKIPPED", url: SITE + c.path, playbook_type: c.playbook, reason });
     const covered = Object.entries(EXISTING).find(([path, kw]) => kw.toLowerCase() === c.kw.toLowerCase() || (path === "/hp-vs-dell-vs-lenovo-laptops-kenya" && c.kind === "compare" && /^HP vs (Dell|Lenovo)/.test(c.kw)));
     if (covered) {
@@ -327,7 +371,9 @@ export function buildPages(products, { changedAt = new Date().toISOString() } = 
       continue;
     }
     let page;
-    if (c.kind === "phones") {
+    if (c.kind === "model") {
+      page = { ...c, pool: c.rows, stats: statsOf(c.rows), listed: c.rows.map((r) => r.slug) };
+    } else if (c.kind === "phones") {
       const pool = cleanRows(products)
         .filter((r) => CATEGORY_OF[r.slug] !== undefined && CATEGORIES[CATEGORY_OF[r.slug]][0] === "smartphones" && c.match(r.slug))
         .filter((r, i, a) => a.findIndex((x) => x.slug === r.slug) === i)
@@ -374,6 +420,27 @@ export function buildPages(products, { changedAt = new Date().toISOString() } = 
     usedKw.add(c.kw.toLowerCase());
     accepted.push(page);
   }
+  // Release in batches: new model pages go live at most DAILY_RELEASE a day
+  // (in order of how many configurations they have). The Worker keeps
+  // firstSeen (url -> date first published) in KV.
+  const day = (today || changedAt).slice(0, 10);
+  let releasedToday = Object.values(firstSeen).filter((d) => d === day).length;
+  const newlySeen = {};
+  const releasable = [];
+  for (const p of accepted) {
+    const url = SITE + p.path;
+    if (firstSeen[url]) releasable.push(p);
+    else if (p.kind !== "model" || Object.keys(firstSeen).length === 0 && p.kind !== "model") {
+      releasable.push(p);
+      newlySeen[url] = day;
+    } else if (releasedToday < DAILY_RELEASE) {
+      releasedToday++;
+      releasable.push(p);
+      newlySeen[url] = day;
+    } else skipped.push({ status: "SKIPPED", url, playbook_type: p.playbook, reason: `Queued: new pages are released ${DAILY_RELEASE} a day; this one goes live on a later day.`, queued: true });
+  }
+  accepted.length = 0;
+  accepted.push(...releasable);
   // Links need every accepted page, so content is written in a second pass.
   const out = [];
   for (const p of accepted) {
@@ -390,6 +457,9 @@ export function buildPages(products, { changedAt = new Date().toISOString() } = 
       continue;
     }
     doc._words = words;
+    doc._firstSeen = firstSeen[doc.url] || newlySeen[doc.url] || null;
+    // Pruned (no impressions after 90 days): kept for visitors, noindex.
+    doc._pruned = pruned.includes(doc.url);
     out.push(doc);
   }
   // A page that failed the gate must not be linked from the others.
@@ -399,7 +469,7 @@ export function buildPages(products, { changedAt = new Date().toISOString() } = 
     d.related_pages = d.related_pages.filter((r) => live.has(r.url));
     for (const s of d.content.sections) s.body = s.body.replace(/\[([^\]]+)\]\((https:\/\/www\.ecbtechkenya\.com\/(?:best|compare|series|laptops|phones)\/[^)]+|laptop-shop-nairobi|student-laptops-kenya)\)/g, (m, t, u) => (live.has(u) ? m : t));
   }
-  return { pages: out, skipped: [...skipped, ...PLAYBOOK_SKIPS.map((s) => ({ status: "SKIPPED", ...s }))], changedAt };
+  return { pages: out, skipped: [...skipped, ...PLAYBOOK_SKIPS.map((s) => ({ status: "SKIPPED", ...s }))], changedAt, newlySeen };
 }
 const isGuideUrl = (u) => /^https:\/\/www\.ecbtechkenya\.com\/(best\/|compare\/|series\/|laptops\/|phones\/|laptop-shop-nairobi$|student-laptops-kenya$)/.test(u);
 
@@ -587,6 +657,53 @@ function writePage(p, all, { year, changedAt }) {
       { question: "Do you deliver outside Nairobi?", answer: `Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.` },
     );
     schemaItems = p.sides.flatMap((sd) => sd.rows.slice(0, 3).map((r) => ({ name: r.short, url: `${SITE}/item/${r.slug}`, price: r.price })));
+  } else if (p.kind === "model") {
+    const rows = [...p.pool].sort((a, b) => a.price - b.price || b.score - a.score);
+    const st = p.stats;
+    const cheapest = rows[0];
+    const dearest = rows[rows.length - 1];
+    const value = [...rows].sort((a, b) => b.score / b.price - a.score / a.price)[0];
+    const mostRam = [...rows].filter((r) => r.sp.ram).sort((a, b) => b.sp.ram - a.sp.ram || a.price - b.price)[0];
+    const screen = (sp) => (sp.convertible ? "2-in-1 touch" : sp.touch ? "Touchscreen" : "Standard");
+    const cpu = (sp) => (sp.cpu ? (sp.gen && /^Core i/.test(sp.cpu) ? `${sp.cpu} ${ordinal(sp.gen)} gen` : sp.cpu) : "see listing");
+    // Listing names are cut off and often identical: label each configuration
+    // by what differs (memory/storage, screen, and processor if it varies).
+    const cpus = new Set(rows.map((r) => cpu(r.sp)));
+    const label = (r) => [p.name, r.sp.ram || r.sp.ssd ? `${r.sp.ram ? `${r.sp.ram} GB` : "?"} / ${r.sp.ssd ? (r.sp.ssd >= 1024 ? `${r.sp.ssd / 1024} TB` : `${r.sp.ssd} GB`) : "?"}` : null, screen(r.sp).toLowerCase(), cpus.size > 1 ? cpu(r.sp) : null, /white/.test(r.slug) ? "white" : null].filter(Boolean).join(" · ");
+    title = `${p.name} Price in Kenya (${year}): ${rows.length} Configurations`;
+    intro = `ECB Technologies has ${rows.length} configurations of the ${p.name} in stock, from ${ksh(st.from)} to ${ksh(st.max)}. The cheapest is ${ksh(cheapest.price)} (${specLine(cheapest.sp) || "see listing"}). Prices as of ${asOf}, at the shop on Moi Avenue, Nairobi CBD, with delivery across Kenya.`;
+    description = `${p.name} price in Kenya: ${rows.length} configurations from ${ksh(st.from)} to ${ksh(st.max)} at ECB Technologies, Nairobi CBD. Compare RAM, storage and processor. ${asOf}.`;
+    sections.push({
+      heading: `${p.name} prices by configuration`,
+      body: tableMd(["Configuration", "Processor", "RAM", "Storage", "Screen", "Price"], rows.map((r) => [link(label(r), `${SITE}/item/${r.slug}`), cpu(r.sp), r.sp.ram ? `${r.sp.ram} GB` : "see listing", r.sp.ssd ? (r.sp.ssd >= 1024 ? `${r.sp.ssd / 1024} TB` : `${r.sp.ssd} GB`) : "see listing", screen(r.sp), ksh(r.price)])),
+    });
+    // What the price difference buys, from the spec differences.
+    const diffs = [];
+    if ((dearest.sp.ram || 0) > (cheapest.sp.ram || 0)) diffs.push(`${dearest.sp.ram} GB RAM instead of ${cheapest.sp.ram || "unstated"}`);
+    if ((dearest.sp.ssd || 0) > (cheapest.sp.ssd || 0)) diffs.push(`a ${dearest.sp.ssd >= 1024 ? `${dearest.sp.ssd / 1024} TB` : `${dearest.sp.ssd} GB`} SSD`);
+    if ((dearest.sp.tier || 0) > (cheapest.sp.tier || 0)) diffs.push(`a ${dearest.sp.cpu} instead of a ${cheapest.sp.cpu}`);
+    if (dearest.sp.touch && !cheapest.sp.touch) diffs.push("a touchscreen");
+    const picks = [
+      `- **Lowest price:** ${link(label(cheapest), `${SITE}/item/${cheapest.slug}`)} at ${ksh(cheapest.price)}.`,
+      value !== cheapest ? `- **Best specs for the money:** ${link(label(value), `${SITE}/item/${value.slug}`)} at ${ksh(value.price)} (spec score ${value.score}/${SCORE_MAX}).` : null,
+      mostRam && mostRam.sp.ram > (cheapest.sp.ram || 0) ? `- **Most memory:** ${link(label(mostRam), `${SITE}/item/${mostRam.slug}`)} with ${mostRam.sp.ram} GB RAM at ${ksh(mostRam.price)}.` : null,
+      `- **Top configuration:** ${link(label(dearest), `${SITE}/item/${dearest.slug}`)} at ${ksh(dearest.price)}${diffs.length ? `: the extra ${ksh(dearest.price - cheapest.price)} buys ${diffs.join(", ")}` : ""}.`,
+    ].filter(Boolean);
+    sections.push({ heading: "Which configuration to buy", body: picks.join("\n") });
+    const seriesKey = Object.keys(SERIES_FACTS).find((k) => SERIES_FACTS[k].match.test(`-${p.pool[0].slug}-`));
+    if (seriesKey) {
+      const f = SERIES_FACTS[seriesKey];
+      sections.push({ heading: `About the ${f.name} line`, body: `${f.about} ${f.timeline.map(([y, t]) => `${y}: ${t}`).join("; ")}. See all ${link(`${f.name} laptops in Kenya`, `${SITE}/series/${seriesKey}-kenya`)}.` });
+    }
+    sections.push({ heading: "Buying in Nairobi", body: `See it at the shop (Techmart Iconic Business Plaza, 3rd floor, room T12, Moi Avenue, Nairobi CBD; Monday to Saturday, 9am to 7pm) or order online with delivery across Kenya. Ask on WhatsApp (${PHONE}) about stock, photos or warranty for a configuration.` });
+    const has16 = rows.filter((r) => r.sp.ram >= 16);
+    faq.push(
+      { question: `How much is the ${p.name} in Kenya?`, answer: `At ECB Technologies the ${p.name} costs ${ksh(st.from)} to ${ksh(st.max)} depending on configuration (${rows.length} in stock, ${asOf}).` },
+      { question: `What is the cheapest ${p.name}?`, answer: `The ${label(cheapest)} configuration at ${ksh(cheapest.price)}${specLine(cheapest.sp) ? ` (${specLine(cheapest.sp)})` : ""}.` },
+      { question: `Is there a ${p.name} with 16 GB RAM?`, answer: has16.length ? `Yes: ${has16.length} configuration${has16.length > 1 ? "s" : ""} with 16 GB or more, from ${ksh(Math.min(...has16.map((r) => r.price)))}.` : "Not in stock right now; the listed configurations have less memory. Ask on WhatsApp about upgrades." },
+      { question: `Can the ${p.name} be delivered outside Nairobi?`, answer: "Yes. Couriers deliver to all 47 counties, riders deliver within Nairobi, and pickup at the shop is free." },
+    );
+    schemaItems = rows.map((r) => ({ name: label(r), url: `${SITE}/item/${r.slug}`, price: r.price }));
   } else if (p.kind === "phones") {
     const rows = [...p.pool].sort((a, b) => a.price - b.price || (a.slug < b.slug ? -1 : 1));
     const st = p.stats;
@@ -778,7 +895,7 @@ function writePage(p, all, { year, changedAt }) {
   const structured = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": p.kind === "list" || p.kind === "phones" ? "CollectionPage" : p.kind === "local" ? "WebPage" : "Article", "@id": `${url}#page`, url, name: title, headline: title, description, inLanguage: "en-KE", dateModified: changedAt, isPartOf: { "@id": `${SITE}/#website` }, about: p.kind === "local" ? { "@id": `${SITE}/#store` } : p.kw, mainEntity: p.kind === "local" ? { "@id": `${SITE}/#store` } : itemList, publisher: { "@id": `${SITE}/#store` } },
+      { "@type": p.kind === "list" || p.kind === "phones" || p.kind === "model" ? "CollectionPage" : p.kind === "local" ? "WebPage" : "Article", "@id": `${url}#page`, url, name: title, headline: title, description, inLanguage: "en-KE", dateModified: changedAt, isPartOf: { "@id": `${SITE}/#website` }, about: p.kind === "local" ? { "@id": `${SITE}/#store` } : p.kw, mainEntity: p.kind === "local" ? { "@id": `${SITE}/#store` } : itemList, publisher: { "@id": `${SITE}/#store` } },
       { "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faq.map((q) => ({ "@type": "Question", name: q.question, acceptedAnswer: { "@type": "Answer", text: q.answer } })) }
       // (The shop's own template already adds the BreadcrumbList.)
     ],
@@ -786,6 +903,7 @@ function writePage(p, all, { year, changedAt }) {
   const secondary = [];
   if (p.kind === "list") secondary.push(`${p.kw.replace(/ in Kenya$/, "")} price`, `${p.kw.replace(/ in Kenya$/, "")} Nairobi`);
   if (p.kind === "compare") secondary.push(`${p.sides[0].label} price in Kenya`, `${p.sides[1].label} price in Kenya`, `${p.kw} Nairobi`);
+  if (p.kind === "model") secondary.push(`${p.name} price`, `${p.name} Nairobi`, `${p.name} specs`);
   if (p.kind === "phones") secondary.push(`${p.label} prices in Kenya`, `${p.label} shop Nairobi`, `buy ${p.label} Nairobi CBD`);
   if (p.kind === "local") secondary.push("laptop shop Nairobi CBD", "where to buy a laptop in Nairobi", "phone shop Moi Avenue", "electronics shop Nairobi");
   if (p.kind === "profile") secondary.push(`${SERIES_FACTS[p.key].name} Nairobi`, `${SERIES_FACTS[p.key].name} models`, `used ${SERIES_FACTS[p.key].name} price`);
@@ -797,15 +915,15 @@ function writePage(p, all, { year, changedAt }) {
       meta_description: description.length > 158 ? description.slice(0, 155).replace(/\s+\S*$/, "") + "…" : description,
       primary_keyword: p.kw,
       secondary_keywords: secondary,
-      search_intent: p.kind === "phones" ? "commercial (price check before buying)" : p.kind === "local" ? "local (find a shop to buy from)" : p.kind === "compare" ? "commercial investigation (comparison)" : p.kind === "profile" ? "informational + commercial (series research)" : "commercial (shortlist to buy)",
+      search_intent: p.kind === "model" ? "commercial (model price check)" : p.kind === "phones" ? "commercial (price check before buying)" : p.kind === "local" ? "local (find a shop to buy from)" : p.kind === "compare" ? "commercial investigation (comparison)" : p.kind === "profile" ? "informational + commercial (series research)" : "commercial (shortlist to buy)",
     },
     content: { h1: p.h1, introduction: intro, sections: sections.map(({ heading, body }) => ({ heading, body })), faq, call_to_action: cta },
-    schema: { type: p.kind === "list" || p.kind === "phones" ? "CollectionPage + ItemList + FAQPage" : p.kind === "local" ? "WebPage (about the ElectronicsStore) + FAQPage" : "Article + ItemList + FAQPage", structured_data: structured },
+    schema: { type: p.kind === "list" || p.kind === "phones" || p.kind === "model" ? "CollectionPage + ItemList + FAQPage" : p.kind === "local" ? "WebPage (about the ElectronicsStore) + FAQPage" : "Article + ItemList + FAQPage", structured_data: structured },
     internal_links,
     related_pages: guideLinks.slice(0, 4).map((l) => ({ url: l.url, title: l.title })),
     data_requirements_used: [
       `live product list (name, price, address) as of ${changedAt}`,
-      p.kind === "compare" ? `${p.sides.map((s) => `${s.rows.length} ${s.label}`).join(" and ")} laptops` : p.kind === "local" ? `${p.allProducts.length} products, ${p.pool.length} laptops; shop facts (address, hours, phone, delivery)` : p.kind === "phones" ? `${p.pool.length} ${p.plural} (name, price, storage read from the address)` : `${p.pool.length} matching laptops`,
+      p.kind === "compare" ? `${p.sides.map((s) => `${s.rows.length} ${s.label}`).join(" and ")} laptops` : p.kind === "local" ? `${p.allProducts.length} products, ${p.pool.length} laptops; shop facts (address, hours, phone, delivery)` : p.kind === "phones" ? `${p.pool.length} ${p.plural} (name, price, storage read from the address)` : p.kind === "model" ? `${p.pool.length} configurations of the ${p.name} (name, price, specs read from the address)` : `${p.pool.length} matching laptops`,
       "specs read from product addresses (processor, generation, RAM, SSD, touch, 2-in-1, graphics)",
       ...(p.kind === "profile" ? ["SERIES_FACTS timeline (pseo.js)"] : []),
     ],
@@ -820,7 +938,7 @@ export function wordCount(doc) {
 
 // The JSON the prompt asks for (internal fields removed).
 export function publicJson(doc) {
-  const { _view, _words, ...rest } = doc;
+  const { _view, _words, _firstSeen, _pruned, ...rest } = doc;
   return rest;
 }
 
@@ -895,13 +1013,15 @@ export function pageMarkdown(doc) {
   ].join("\n");
 }
 
-const GROUPS = ["Locations", "Curation", "Personas", "Comparisons", "Directory", "Profiles"];
+const GROUPS = ["Locations", "Curation", "Personas", "Comparisons", "Directory", "Models", "Profiles"];
+// Model pages are Directory pages with their own hub section.
+export const groupOf = (d) => (/\/laptops\/[a-z0-9-]+-price-kenya$/.test(d.url) ? "Models" : d.playbook_type);
 export function hubHtml(built) {
   return (
     `<div class="ecb-rs ecb-pg"><p class="ecb-rs-lead"><strong>Laptop buying guides built from the live catalogue: ${built.pages.length} pages, each checked for enough real products before it is published.</strong> Prices update when the shop's prices change.</p>` +
     GROUPS.map((g) => {
-      const ps = built.pages.filter((d) => d.playbook_type === g);
-      return ps.length ? `<h2>${g === "Locations" ? "Visit the shop" : g === "Profiles" ? "Laptop series" : g === "Directory" ? "By brand and processor" : g === "Curation" ? "Best laptops by budget and feature" : g === "Personas" ? "Best laptops for you" : g}</h2><ul>${ps.map((d) => `<li><a href="${d.url.replace(SITE, "")}">${escH(d.content.h1)}</a></li>`).join("")}</ul>` : "";
+      const ps = built.pages.filter((d) => groupOf(d) === g);
+      return ps.length ? `<h2>${g === "Locations" ? "Visit the shop" : g === "Models" ? "Laptop models: prices by configuration" : g === "Profiles" ? "Laptop series" : g === "Directory" ? "By brand and processor" : g === "Curation" ? "Best laptops by budget and feature" : g === "Personas" ? "Best laptops for you" : g}</h2><ul>${ps.map((d) => `<li><a href="${d.url.replace(SITE, "")}">${escH(d.content.h1)}</a></li>`).join("")}</ul>` : "";
     }).join("") +
     `<h2>More</h2><ul><li><a href="/research">Price research</a></li><li><a href="/student-laptops-kenya">Best laptops for students</a></li><li><a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a></li><li><a href="/research/laptop-prices-kenya">Laptop prices in Kenya</a></li></ul></div>`
   );
@@ -913,7 +1033,7 @@ export function hubMarkdown(built) {
     `> ${built.pages.length} laptop buying guides built from ECB Technologies' live catalogue.`,
     "",
     ...GROUPS.flatMap((g) => {
-      const ps = built.pages.filter((d) => d.playbook_type === g);
+      const ps = built.pages.filter((d) => groupOf(d) === g);
       return ps.length ? [`## ${g}`, "", ...ps.map((d) => `- [${d.content.h1}](${d.url}.md)`), ""] : [];
     }),
   ].join("\n");
