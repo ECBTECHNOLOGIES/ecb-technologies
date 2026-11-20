@@ -47,7 +47,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=17`, { method: "GET" });
+  const key = new Request(`${request.url}?v=18`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
