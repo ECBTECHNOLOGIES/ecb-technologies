@@ -1,0 +1,49 @@
+;;
+;; Domain:     ecbtechkenya.com.
+;; Exported:   2026-11-20 03:37:15
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+;; SOA Record
+ecbtechkenya.com	3600	IN	SOA	rodrigo.ns.cloudflare.com. dns.cloudflare.com. 2054681243 10000 2400 604800 3600
+
+;; NS Records
+ecbtechkenya.com.	86400	IN	NS	rodrigo.ns.cloudflare.com.
+ecbtechkenya.com.	86400	IN	NS	sharon.ns.cloudflare.com.
+
+;; A Records
+app.ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+ftp.ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+mail.ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+pop.ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+smtp.ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+www.ecbtechkenya.com.	1	IN	A	217.20.120.93 ; cf_tags=cf-proxied:true
+
+;; MX Records
+ecbtechkenya.com.	1	IN	MX	10 mail.ecbtechkenya.com.
+
+;; TXT Records
+_acme-challenge.ecbtechkenya.com.	1	IN	TXT	"persistent-record"
+ecbtechkenya.com.	3600	IN	TXT	"google-site-verification=hgjjosJZtObIZXc0yDrYKCc0P_G-4m6KzuVSf6oCEe4"
+ecbtechkenya.com.	1	IN	TXT	"v=spf1 a mx ip4:217.20.120.93 ip6:2a00:c98:400f:120:1c00:3bff:fe00:17b7 ~all"
+openai-business-claim.ecbtechkenya.com.	1	IN	TXT	"openai-business-claim=I9aIgMo6yfjFb-3NI23N5Bb7S6Fbet7cd-scB9Siwo0"

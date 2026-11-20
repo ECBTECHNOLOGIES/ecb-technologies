@@ -1,0 +1,42 @@
+# ECB Technologies - robots.txt
+# Keep in sync with /llms.txt and /ai.txt.
+# Site guide for AI: https://www.ecbtechkenya.com/llms.txt
+# AI usage policy: https://www.ecbtechkenya.com/ai.txt
+# Every public page also has a markdown version at <page>.md (noindex; the HTML page is canonical).
+
+# AI search and user-fetch crawlers are welcome on all public pages, as are
+# search engines. Training crawlers (GPTBot, ClaudeBot, Google-Extended,
+# Applebot-Extended, CCBot, Bytespider) are currently allowed by the * group.
+# Named AI crawlers share the * rules (same group), so private paths stay
+# blocked for them too.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: *
+Disallow: /admin
+Disallow: /user/
+Disallow: /rider/
+Disallow: /agent/
+Disallow: /vendor/
+Disallow: /carts
+Disallow: /checkout
+Disallow: /wishlist
+Disallow: /item/compare
+Disallow: /item/quick/
+Disallow: /item/show/
+Disallow: /addcart/
+Disallow: /addnumcart
+Disallow: /addtonumcart
+Disallow: /addbyone
+Disallow: /reducebyone
+Disallow: /removecart/
+Allow: /
+
+Sitemap: https://www.ecbtechkenya.com/sitemap.xml

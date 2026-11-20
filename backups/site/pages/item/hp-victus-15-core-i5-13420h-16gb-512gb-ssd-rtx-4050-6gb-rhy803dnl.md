@@ -1,0 +1,49 @@
+# HP Victus 15 | Core i5-13420H | 16GB | 512GB SSD | RTX 4050 6GB
+
+> HP Victus 15 | Core i5-13420H | 16GB | 512GB SSD | RTX 4050 for KSh 125,500 at ECB Technologies, Nairobi CBD. Core i5 · 16 GB RAM · 512 GB SSD · dedicated graph
+
+Canonical: https://www.ecbtechkenya.com/item/hp-victus-15-core-i5-13420h-16gb-512gb-ssd-rtx-4050-6gb-rhy803dnl
+Last updated: 2026-11-20
+
+| | |
+| --- | --- |
+| Price | KSh 125,500 |
+| Availability | In stock |
+| Category | [Laptops](https://www.ecbtechkenya.com/category/laptops) |
+| SKU | MkU2620KlQ |
+| Seller | ECB Technologies, Moi Avenue, Nairobi CBD |
+
+
+
+## Specifications
+
+| Spec | Value |
+| --- | --- |
+| Processor | Intel Core i5-13420H 13th Gen |
+| Memory/RAM | 16GB |
+| Storage | 512GB SSD |
+| Display | 15.6-inch Full HD Display |
+| Graphics | NVIDIA GeForce RTX 4050 6GB Dedicated Graphics |
+| Operating System | Windows 11 |
+| Connectivity | Wi-Fi & Bluetooth |
+| Camera | HD Webcam |
+| Audio | Integrated Stereo Speakers |
+| Ports | USB-C, USB-A, HDMI & Audio Ports |
+| Keyboard | Backlit Keyboard |
+| Design | Performance Gaming Laptop |
+| Model | HP Victus 15 |
+| Description | The HP Victus 15 is designed for gaming, creative work, and demanding everyday performance. Powered by a 13th Gen Intel Core i5-13420H processor, 16GB RAM, 512GB SSD, and NVIDIA GeForce RTX 4050 6GB dedicated graphics, it delivers responsive multitasking and strong graphics performance. The fast SSD provides quick loading times, while the dedicated RTX graphics are well suited for modern gaming, video editing, 3D applications, and other graphics-intensive workloads. |
+
+## Photo
+
+![HP Victus 15 | Core i5-13420H | 16GB | 512GB SSD | RTX 4050 6GB](https://www.ecbtechkenya.com/assets/images/products/1790082761DiwtUe9V.png)
+
+## How to buy
+
+- Order online on the product page, or on WhatsApp: +254717040531
+- Pay by M-Pesa or card
+- Free pickup in Nairobi CBD, rider delivery in Nairobi, courier to all 47 counties
+
+## Related
+- [More Laptops](https://www.ecbtechkenya.com/category/laptops)
+- [Delivery across Kenya](https://www.ecbtechkenya.com/delivery)

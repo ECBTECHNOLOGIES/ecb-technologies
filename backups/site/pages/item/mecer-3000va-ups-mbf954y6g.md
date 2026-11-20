@@ -1,0 +1,47 @@
+# Mecer 3000VA UPS
+
+> Mecer 3000VA UPS for KSh 36,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
+
+Canonical: https://www.ecbtechkenya.com/item/mecer-3000va-ups-mbf954y6g
+Last updated: 2026-11-20
+
+| | |
+| --- | --- |
+| Price | KSh 36,000 |
+| Availability | In stock |
+| Category | [PC Accessories](https://www.ecbtechkenya.com/category/Computing-Accessories) |
+| SKU | 9Ci6510ZZV |
+| Seller | ECB Technologies, Moi Avenue, Nairobi CBD |
+
+
+
+## Specifications
+
+| Spec | Value |
+| --- | --- |
+| UPS Type | Line-Interactive UPS |
+| Capacity | 3000VA |
+| Output Power | Suitable for Servers, Workstations, Networking Equipment & Critical Electronics |
+| Voltage Protection | Automatic Voltage Regulation (AVR) |
+| Protection | Surge, Overload & Short-Circuit Protection |
+| Battery | Rechargeable Sealed Lead-Acid Battery |
+| Backup Function | Battery Backup During Power Outages |
+| Indicators | LED Status Indicators |
+| Connectivity | Multiple AC Power Outlets |
+| Design | Professional and Durable Design |
+| Use | Offices, Servers, Networking, Data Systems & Business Equipment |
+| Description | The Mecer 3000VA UPS delivers high-capacity backup power and protection for servers, workstations, networking equipment and other critical electronic devices. AVR helps regulate voltage fluctuations, while surge, overload and short-circuit protection helps safeguard connected equipment. Its high-capacity design is suitable for demanding professional and business environments. |
+
+## Photo
+
+![Mecer 3000VA UPS](https://www.ecbtechkenya.com/assets/images/products/1790116608ddYvzJKc.png)
+
+## How to buy
+
+- Order online on the product page, or on WhatsApp: +254717040531
+- Pay by M-Pesa or card
+- Free pickup in Nairobi CBD, rider delivery in Nairobi, courier to all 47 counties
+
+## Related
+- [More PC Accessories](https://www.ecbtechkenya.com/category/Computing-Accessories)
+- [Delivery across Kenya](https://www.ecbtechkenya.com/delivery)

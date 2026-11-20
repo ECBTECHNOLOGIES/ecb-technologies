@@ -1,0 +1,86 @@
+[
+ {
+  "id": "07ecaffad4714d119f80b10c522bd460",
+  "pattern": "www.ecbtechkenya.com/robots.txt",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "a3d93df442c34f3c8d65c0aed7baffcd",
+  "pattern": "ecbtechkenya.com/robots.txt",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "3c7de749495f491b9376cbfcb302f726",
+  "pattern": "www.ecbtechkenya.com/assets/images/brands/*",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "8800570e26bc42bebc5cf73f90e3ddb9",
+  "pattern": "ecbtechkenya.com/assets/images/brands/*",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "0e142e29e27748aebace872a6b08ca38",
+  "pattern": "ecbtechkenya.com/sitemap.xml",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "8313046a892043f5a975afba3d9202a9",
+  "pattern": "www.ecbtechkenya.com/sitemap.xml",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "a54e671fcbf94005a8ad9757a47d0d92",
+  "pattern": "www.ecbtechkenya.com/admin*",
+  "script": null,
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "056fd12dd9ff4a1dabe992ffb9c20a8f",
+  "pattern": "ecbtechkenya.com/assets/*",
+  "script": null,
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "e9434c133a574e18937a13fe905ce068",
+  "pattern": "ecbtechkenya.com/*",
+  "script": "ecb-speed",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "e4d549a425944eac9601c54ae43061dc",
+  "pattern": "ecbtechkenya.com/admin*",
+  "script": null,
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "f3a5e0fda433475e8a03133a3f42380a",
+  "pattern": "www.ecbtechkenya.com/*",
+  "script": "ecb-speed",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "160eb76031284a74a9b4f7a4128d6782",
+  "pattern": "www.ecbtechkenya.com/assets/*",
+  "script": null,
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "60caf9fa88254bd8ac670363fce32d25",
+  "pattern": "ecbtechkenya.com/sitemap*",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "2e920698b55d4ef2b3ed54c105bfb892",
+  "pattern": "www.ecbtechkenya.com/sitemap*",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ }
+]

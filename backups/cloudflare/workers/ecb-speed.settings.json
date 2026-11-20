@@ -1,0 +1,28 @@
+{
+ "placement": {},
+ "compatibility_date": "2025-01-01",
+ "compatibility_flags": [],
+ "usage_model": "standard",
+ "tags": [],
+ "tail_consumers": [],
+ "logpush": false,
+ "annotations": {
+  "workers/triggered_by": "upload"
+ },
+ "bindings": [
+  {
+   "name": "INDEXNOW_TOKEN",
+   "type": "secret_text"
+  },
+  {
+   "name": "PAGES",
+   "namespace_id": "afab40b84f974ada97e6f8c469cab40c",
+   "type": "kv_namespace"
+  },
+  {
+   "name": "SKIN",
+   "text": "0",
+   "type": "plain_text"
+  }
+ ]
+}
