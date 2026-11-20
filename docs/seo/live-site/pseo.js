@@ -25,6 +25,7 @@
 
 import { CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
 import { median, ksh, pct, compare, brandOf, cpuOf, genOf, cleanRows, LAPTOP_BANDS } from "./research.js";
+import { INTROS } from "./intros.js";
 
 const SITE = "https://www.ecbtechkenya.com";
 export const MIN_PRODUCTS = 10;
@@ -415,15 +416,52 @@ function modelCandidates(L) {
     .sort((a, b) => b.rows.length - a.rows.length || (a.key < b.key ? -1 : 1));
 }
 
-export function buildPages(products, { changedAt = new Date().toISOString(), firstSeen = {}, pruned = [], today = null } = {}) {
+// "<model> alternatives in Kenya": other laptops within 20% of the model's
+// median price, ranked by spec score and compared with the model itself.
+// Same gates as every list (10+ laptops, <= 60% overlap, unique keyword);
+// alternatives for neighbouring models mostly list the same laptops, so
+// those merge into the first one instead of being published twice.
+const ALT_BAND = 0.2;
+function alternativeCandidates(L) {
+  return modelCandidates(L).map((m) => {
+    const med = median(m.rows.map((r) => r.price));
+    const lo = Math.round((med * (1 - ALT_BAND)) / 500) * 500;
+    const hi = Math.round((med * (1 + ALT_BAND)) / 500) * 500;
+    const slug = m.key.replace(/ /g, "-");
+    return {
+      kind: "list", combo: true, playbook: "Curation", type: "utility", slug: `alt-${slug}`, path: `/laptops/${slug}-alternatives-kenya`,
+      kw: `${m.name} alternatives in Kenya`, h1: `${m.name} alternatives in Kenya`, noun: `alternative to the ${m.name}`,
+      title: (n, y) => fit(`${m.name} Alternatives`, y),
+      filter: (r) => r.price >= lo && r.price <= hi && modelKey(r.slug) !== m.key,
+      vs: { ...m, med, lo, hi, url: `${SITE}${m.path}` },
+      angle: (st) => `Looking at the ${m.name}? At ECB Technologies it sells for a median ${ksh(med)}. These are the ${st.n} best-specified other laptops between ${ksh(lo)} and ${ksh(hi)} (within ${Math.round(ALT_BAND * 100)}% of that price), out of ${st.pool} in stock, ranked by a published formula.`,
+    };
+  });
+}
+
+// Template ids, for turning a template off and for comparing how each
+// template performs in search (gsc-opportunities.mjs).
+export const TEMPLATES = ["list", "combo", "alternatives", "model", "compare", "profile", "phones", "local"];
+export function templateOf(c) {
+  if (c.vs) return "alternatives";
+  if (c.combo) return "combo";
+  return c.kind;
+}
+
+export function buildPages(products, { changedAt = new Date().toISOString(), firstSeen = {}, pruned = [], today = null, disabled = [] } = {}) {
   const L = laptopsOf(products);
   const year = new Date(changedAt).getFullYear();
   const accepted = [];
   const skipped = [];
   const usedSlugs = new Set();
   const usedKw = new Set();
-  for (const c of [...candidates(), ...comboCandidates(), ...modelCandidates(L)]) {
+  for (const c of [...candidates(), ...comboCandidates(), ...modelCandidates(L), ...alternativeCandidates(L)]) {
     const skip = (reason) => skipped.push({ status: "SKIPPED", url: SITE + c.path, playbook_type: c.playbook, reason });
+    // A template turned off (KV "guides-disabled") publishes nothing.
+    if (disabled.includes(templateOf(c))) {
+      skip(`Template "${templateOf(c)}" is turned off.`);
+      continue;
+    }
     const covered = Object.entries(EXISTING).find(([path, kw]) => kw.toLowerCase() === c.kw.toLowerCase() || (path === "/hp-vs-dell-vs-lenovo-laptops-kenya" && c.kind === "compare" && /^HP vs (Dell|Lenovo)/.test(c.kw)));
     if (covered) {
       skip(`Covered by the existing guide ${SITE}${covered[0]}; a second page would compete with it for the same search.`);
@@ -521,6 +559,7 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
       continue;
     }
     doc._words = words;
+    doc._template = templateOf(p);
     doc._firstSeen = firstSeen[doc.url] || newlySeen[doc.url] || null;
     // Pruned (no impressions after 90 days): kept for visitors, noindex.
     doc._pruned = pruned.includes(doc.url);
@@ -661,6 +700,33 @@ function writePage(p, all, ctxAll) {
       const r16 = pct(p.pool.filter((r) => r.sp.ram >= 16).length, p.pool.length);
       const recentShare = pct(p.pool.filter((r) => recency(r.sp) >= 4).length, p.pool.length);
       if (lines.length) sections.push({ heading: "How this group compares", body: lines.join("\n") + `\n- **Specs:** ${r16}% have 16 GB RAM or more and ${recentShare}% have a 10th-gen or newer processor (or Core Ultra / Apple M).` });
+    }
+    if (p.vs) {
+      // Compared with the model the reader started from.
+      const m = p.vs;
+      const mBest = [...m.rows].sort(byScore)[0];
+      const better = p.pool.filter((r) => r.score > mBest.score && r.price <= mBest.price);
+      const m16 = pct(m.rows.filter((r) => r.sp.ram >= 16).length, m.rows.length);
+      const a16 = pct(p.pool.filter((r) => r.sp.ram >= 16).length, p.pool.length);
+      const mNew = pct(m.rows.filter((r) => recency(r.sp) >= 4).length, m.rows.length);
+      const aNew = pct(p.pool.filter((r) => recency(r.sp) >= 4).length, p.pool.length);
+      sections.push({
+        heading: `Compared with the ${m.name}`,
+        body: [
+          `- **Price:** the ${m.rows.length} ${m.name} configurations in stock have a median of ${ksh(m.med)}; the ${p.pool.length} alternatives have a median of ${ksh(s.median)}.`,
+          `- **Best ${m.name} configuration:** ${link(mBest.short || mBest.name, `${SITE}/item/${mBest.slug}`)} at ${ksh(mBest.price)} (${specLine(mBest.sp)}), score ${mBest.score}/${SCORE_MAX}.`,
+          `- **Better specs for the same money or less:** ${better.length} of the alternatives ${better.length === 1 ? "scores" : "score"} higher than that configuration at the same price or lower.`,
+          `- **Memory:** ${a16}% of the alternatives have 16 GB RAM or more, against ${m16}% of ${m.name} configurations.`,
+          `- **Processor age:** ${aNew}% of the alternatives have a 10th-gen or newer processor (or Core Ultra / Apple M), against ${mNew}% of ${m.name} configurations.`,
+          `- All ${m.name} configurations, with prices: ${link(`${m.name} price in Kenya`, m.url)}.`,
+        ].join("\n"),
+      });
+      faq.push({
+        question: `Is there a better laptop than the ${m.name} for the same price?`,
+        answer: better.length
+          ? `Yes: ${better.length} ${better.length === 1 ? "laptop in stock scores" : "laptops in stock score"} higher on specs for ${ksh(mBest.price)} or less. The top one is the ${[...better].sort(byScore)[0].name} at ${ksh([...better].sort(byScore)[0].price)}.`
+          : `Not on specs: none of the laptops in this price range scores higher than the best ${m.name} configuration (${ksh(mBest.price)}) at the same price or lower. The alternatives differ in brand, size or features instead.`,
+      });
     }
     sections.push({ heading: "How we ranked them", body: `${SCORE_TEXT} Specs are read from each product's listing as the shop typed it; where a listing does not state the memory or storage, the laptop scores 1 point for it and the con says so, so check the product page or ask us.` });
     if (p.persona) {
@@ -1024,7 +1090,7 @@ export function wordCount(doc) {
 
 // The JSON the prompt asks for (internal fields removed).
 export function publicJson(doc) {
-  const { _view, _words, _firstSeen, _pruned, ...rest } = doc;
+  const { _view, _words, _firstSeen, _pruned, _template, ...rest } = doc;
   return rest;
 }
 
@@ -1076,6 +1142,7 @@ export function pageHtml(doc) {
   const faq = `<h2 id="faq">Questions</h2>${c.faq.map((f) => `<h3 id="${slugId(f.question)}">${escH(f.question)}</h3><p>${escH(f.answer)}</p>`).join("")}`;
   return (
     `<div class="ecb-rs ecb-pg"><p class="ecb-rs-meta">By <a href="/about">ECB Technologies</a>, laptop and phone shop on <a href="/laptop-shop-nairobi">Moi Avenue, Nairobi CBD</a> · Updated ${escH(v.updated || "")}</p>` +
+    (INTROS[doc.url.replace(SITE, "")] ? `<div class="ecb-pg-about"><strong>From the shop.</strong> ${INTROS[doc.url.replace(SITE, "")].split(/\n\s*\n/).map(escH).join("</p><p>")}</div>` : "") +
     `<p class="ecb-rs-lead"><strong>${escH(c.introduction)}</strong></p>${body}${faq}` +
     `<p class="ecb-pg-about"><strong>About this guide.</strong> We sell these laptops at our shop on Moi Avenue, where you can see any of them before paying. Prices, specs and stock come from our live listings, the ranking formula is published on this page, and the guide updates itself when prices change. Questions or corrections: <a href="${v.wa}" rel="nofollow">WhatsApp ${PHONE}</a>.</p>` +
     `<p class="ecb-pg-cta">${escH(c.call_to_action)} <a href="${v.wa}" rel="nofollow">WhatsApp us</a></p>` +
@@ -1101,15 +1168,15 @@ export function pageMarkdown(doc) {
   ].join("\n");
 }
 
-const GROUPS = ["Locations", "Curation", "Personas", "Comparisons", "Directory", "Models", "Profiles"];
+const GROUPS = ["Locations", "Curation", "Personas", "Comparisons", "Directory", "Models", "Alternatives", "Profiles"];
 // Model pages are Directory pages with their own hub section.
-export const groupOf = (d) => (/\/laptops\/[a-z0-9-]+-price-kenya$/.test(d.url) ? "Models" : d.playbook_type);
+export const groupOf = (d) => (/\/laptops\/[a-z0-9-]+-price-kenya$/.test(d.url) ? "Models" : /-alternatives-kenya$/.test(d.url) ? "Alternatives" : d.playbook_type);
 export function hubHtml(built) {
   return (
     `<div class="ecb-rs ecb-pg"><p class="ecb-rs-lead"><strong>Laptop buying guides built from the live catalogue: ${built.pages.length} pages, each checked for enough real products before it is published.</strong> Prices update when the shop's prices change.</p>` +
     GROUPS.map((g) => {
       const ps = built.pages.filter((d) => groupOf(d) === g);
-      return ps.length ? `<h2>${g === "Locations" ? "Visit the shop" : g === "Models" ? "Laptop models: prices by configuration" : g === "Profiles" ? "Laptop series" : g === "Directory" ? "By brand and processor" : g === "Curation" ? "Best laptops by budget and feature" : g === "Personas" ? "Best laptops for you" : g}</h2><ul>${ps.map((d) => `<li><a href="${d.url.replace(SITE, "")}">${escH(d.content.h1)}</a></li>`).join("")}</ul>` : "";
+      return ps.length ? `<h2>${g === "Locations" ? "Visit the shop" : g === "Models" ? "Laptop models: prices by configuration" : g === "Alternatives" ? "Alternatives to popular models" : g === "Profiles" ? "Laptop series" : g === "Directory" ? "By brand and processor" : g === "Curation" ? "Best laptops by budget and feature" : g === "Personas" ? "Best laptops for you" : g}</h2><ul>${ps.map((d) => `<li><a href="${d.url.replace(SITE, "")}">${escH(d.content.h1)}</a></li>`).join("")}</ul>` : "";
     }).join("") +
     `<h2>More</h2><ul><li><a href="/research">Price research</a></li><li><a href="/student-laptops-kenya">Best laptops for students</a></li><li><a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a></li><li><a href="/research/laptop-prices-kenya">Laptop prices in Kenya</a></li></ul></div>`
   );

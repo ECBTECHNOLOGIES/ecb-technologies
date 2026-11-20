@@ -143,6 +143,26 @@ test("combo pages compare against both parent groups and carry FAQ schema", () =
     assert.ok(!/\b(Under|Laptops)\b/.test(d.content.h1.replace(/^Best /, "")), d.content.h1);
   }
 });
+test("a template turned off publishes nothing; others are unaffected", () => {
+  const prices = (i) => 15000 + (i % 60) * 3500;
+  const all = G.buildPages(make(prices), { changedAt: "2026-11-15T00:00:00Z" });
+  const off = G.buildPages(make(prices), { changedAt: "2026-11-15T00:00:00Z", disabled: ["list"] });
+  assert.ok(off.pages.every((d) => d._template !== "list"));
+  assert.ok(off.skipped.some((s) => /Template "list" is turned off/.test(s.reason)));
+  assert.ok(off.pages.length > 0 && off.pages.length < all.pages.length);
+});
+test("alternatives pages never list the model itself and link back to it", () => {
+  const prices = (i) => 15000 + (i % 60) * 3500;
+  const pre = G.buildPages(make(prices), { changedAt: "2026-11-15T00:00:00Z" });
+  const seen = Object.fromEntries([...pre.pages.map((d) => d.url), ...pre.skipped.filter((s) => s.queued).map((s) => s.url)].map((u) => [u, "2026-11-01"]));
+  const b = G.buildPages(make(prices), { changedAt: "2026-11-15T00:00:00Z", firstSeen: seen });
+  for (const d of b.pages.filter((x) => x._template === "alternatives")) {
+    const key = d.url.match(/\/laptops\/(.+)-alternatives-kenya$/)[1].replace(/-/g, " ");
+    assert.ok(d.content.sections.some((s) => s.heading.startsWith("Compared with the")), d.url);
+    const listed = d._view.sections.flatMap((s) => s.items || []);
+    assert.ok(listed.length > 0 && listed.every((it) => G.modelKey(it.url.split("/item/")[1]) !== key), d.url);
+  }
+});
 test("pruned pages are flagged (noindex), not deleted", () => {
   const anyUrl = built.pages[0].url;
   const b = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-15T00:00:00Z", pruned: [anyUrl] });

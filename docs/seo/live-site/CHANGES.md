@@ -1014,3 +1014,23 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - IndexNow: 695 URLs (Yandex accepted; Bing rate-limited, already has them).
 - New: scripts/live-site/gsc-opportunities.mjs (low CTR, page 2, losing
   pages, question queries from a Search Console export).
+
+## 2026-11-20: programmatic SEO guide, remaining steps
+- Checked: every sitemap page is within 2 clicks of the homepage (47 at one
+  click, 647 at two).
+- New template "<model> alternatives in Kenya" (/laptops/<model>-alternatives-kenya):
+  laptops within 20% of the model's median price, ranked by spec score, with a
+  "Compared with the <model>" section (price, best configuration, how many
+  alternatives beat it for the same money, RAM and processor age) and a FAQ.
+  Same gates and daily release as combo pages; of 27 models, 23 alternatives
+  pages repeat a neighbour's list and are merged, 4 are queued.
+- Hub: new "Alternatives to popular models" section.
+- Templates can be turned off without a deploy (KV "guides-disabled"):
+  `node scripts/live-site/guide-templates.mjs --disable combo` (and
+  `--enable`). Without arguments, or with a Search Console Pages.csv, the
+  script reports pages, impressions, clicks, CTR, position and pages with no
+  impressions per template. /guides/pages.json now lists each page's template.
+- Hand-written intros: `docs/seo/live-site/intros.js` (path → text), shown
+  above the generated summary as "From the shop". Empty until the shop fills it.
+- Guide data is rebuilt at least every 5 minutes, so KV changes (pruning,
+  templates) apply without a price change.
