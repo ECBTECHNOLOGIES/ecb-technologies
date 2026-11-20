@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "68";
+const VERSION = "71";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -1253,6 +1253,8 @@ function rewrite(response, url, bundle, hints) {
   const seo = hints.seo || { graph: [], type: "page" };
   const product = seo.product && seo.product.name ? seo.product : null;
   let heroHref = "";
+  let heroEyebrowState = 0; // 0 before, 1 inside, 2 after the first hero label
+  let heroEyebrowText = "";
   let viewAllText = "All products";
   const shareImage = (product && product.image) || SHARE_IMAGE;
   const social = {
@@ -1330,7 +1332,8 @@ function rewrite(response, url, bundle, hints) {
       element(e) {
         // With the skin, the home goes straight from the hero to the categories;
         // the H1 moves into the first slide's label instead.
-        if (isHome && !SKIN) e.after(homeIntro(), { html: true });
+        // The owner wants the original homepage: no extra intro block. The
+        // H1 is the first hero slide's own heading (see .ecb-hero-title).
       },
     })
     .on("section.gs-breadcrumb-section", {
@@ -1423,11 +1426,30 @@ function rewrite(response, url, bundle, hints) {
     // one-word title. The first slide's headline is the page's h1.
     .on("p.ecb-hero-eyebrow", {
       element(e) {
-        if (isHome && SKIN) e.remove();
+        if (isHome && SKIN) return e.remove();
+        // Original theme: the first slide's label moves into its H1 (same look).
+        if (isHome && heroEyebrowState === 0) {
+          heroEyebrowState = 1;
+          e.removeAndKeepContent();
+          e.onEndTag(() => {
+            heroEyebrowState = 2;
+          });
+        }
+      },
+      text(t) {
+        if (heroEyebrowState !== 1) return;
+        heroEyebrowText += t.text;
+        t.remove();
       },
     })
     .on(".ecb-hero-title", {
       element(e) {
+        if (isHome && !SKIN && heroLabels++ === 0) {
+          e.tagName = "h1";
+          const label = heroEyebrowText.replace(/\s+/g, " ").trim().replace(/Accesories/i, "Accessories").replace(/,(?=\S)/g, ", ");
+          if (label) e.prepend(`<span class="ecb-hero-eyebrow" style="display:block;margin-bottom:10px">${label}</span>`, { html: true });
+          return;
+        }
         if (!isHome || !SKIN) return;
         const i = heroLabels++;
         const line = HERO_HEADLINES[i];

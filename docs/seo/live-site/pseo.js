@@ -921,8 +921,8 @@ export function hubMarkdown(built) {
 
 export const PSEO_CSS =
   ".ecb-pg h2{margin:34px 0 12px}.ecb-pg h3{font-size:16px;margin:18px 0 6px}.ecb-pg-items{padding-left:22px}.ecb-pg-items li{margin:0 0 18px}" +
-  ".ecb-pg-name{margin:0 0 2px;font-size:16px}.ecb-pg-price{font-family:'Space Mono',ui-monospace,monospace;white-space:nowrap;margin-left:6px}" +
-  ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #000;border-radius:12px}" +
+  ".ecb-pg-name{margin:0 0 2px;font-size:16px}.ecb-pg-price{font-family:inherit;white-space:nowrap;margin-left:6px;color:#e8191a;font-weight:700}" +
+  ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #1683ff;border-radius:12px;background:#f4f8ff}" +
   ".ecb-pg ul{padding-left:20px}.ecb-pg li{line-height:1.6}";
 
 export const GUIDE_PATH = /^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+|phones\/[a-z0-9-]+)$/;

@@ -448,9 +448,9 @@ export function citeSection(studies) {
 }
 
 export const RESEARCH_CSS =
-  ".ecb-rs-meta{font-family:'Space Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5e5e}" +
+  ".ecb-rs-meta{font-family:inherit;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#5c5e5e}" +
   ".ecb-rs-findings{padding-left:22px}.ecb-rs-findings li{margin:0 0 18px}.ecb-rs-findings li p{margin:0 0 4px;font-size:16px;line-height:1.6;color:#000}" +
-  ".ecb-rs-anchor{font-family:'Space Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5c5e5e!important;text-decoration:none!important}" +
+  ".ecb-rs-anchor{font-family:inherit;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#1683ff!important;text-decoration:none!important}" +
   ".ecb-rs-anchor:hover{color:#000!important;text-decoration:underline!important}" +
   ".ecb-rs-note{font-size:13px;color:#5c5e5e}.ecb-rs-faq{margin:0 0 20px}.ecb-rs-faq p{margin:0 0 4px}" +
   ".ecb-rs-hub{list-style:none;padding:0}.ecb-rs-hub li{border-top:1px solid #e2e2e2;padding:18px 0}.ecb-rs-hub h2{font-size:22px!important;margin:0 0 6px!important}" +

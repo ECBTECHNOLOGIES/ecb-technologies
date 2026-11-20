@@ -821,3 +821,22 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - **Submitted:** IndexNow accepted all 684 at Yandex (202). Bing and
   api.indexnow.org rate-limit Cloudflare's IPs (429). Google is submitted in
   Search Console (owner).
+
+## 2026-11-20: original design back, brand colours (Worker v78)
+- **The owner asked for the old homepage design and the brand colours.**
+  The monochrome "Nothing" skin is off: the Worker's `SKIN` variable is now
+  "0" (the deploy script binding). The skin code is still there; set
+  `SKIN` to "1" to bring it back.
+- **The site uses the theme's own design:** red ECB logo, brand blue
+  `#1683ff` (buttons, links, menu), red `#e8191a` (prices, Deals), navy
+  hero. Every SEO, speed and content change still applies.
+- **Homepage:**
+  - The extra intro block under the hero ("Laptops, Phones & Accessories
+    Shop in Nairobi CBD" with the WhatsApp / Call / Shop laptops buttons)
+    is gone, as asked on 15 Nov.
+  - The H1 is the first hero slide's own heading: its label moves inside
+    the H1 and looks the same ("Laptops, Phones & Accessories / In Kenya";
+    the theme's "ACCESORIES" typo is fixed).
+- **Guide, research and shop pages:** the typewriter-style label font is
+  replaced by the theme font. Prices are in brand red, the call-to-action
+  box and finding links in brand blue.
