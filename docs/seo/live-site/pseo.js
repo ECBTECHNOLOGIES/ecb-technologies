@@ -24,7 +24,7 @@
 // product address as the shop typed it; the pages say so.
 
 import { CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
-import { median, ksh, pct, brandOf, cpuOf, genOf, cleanRows, LAPTOP_BANDS } from "./research.js";
+import { median, ksh, pct, compare, brandOf, cpuOf, genOf, cleanRows, LAPTOP_BANDS } from "./research.js";
 
 const SITE = "https://www.ecbtechkenya.com";
 export const MIN_PRODUCTS = 10;
@@ -312,6 +312,69 @@ const statsOf = (rows) => {
 };
 const share = (rows, f) => pct(rows.filter(f).length, rows.length);
 
+// ---------- two-dimension guide pages ----------
+// Real catalogue dimensions; each pair becomes a candidate list page. The
+// usual gates decide what is published: 10+ products, top picks not >60%
+// shared with an accepted page (else merged with a 301), unique keyword,
+// 600+ words, 3+ FAQs, 5+ internal links.
+const kk = (n) => `${n / 1000}k`;
+const DIMS = {
+  brand: [["HP", (r) => brandOf(r.slug) === "HP"], ["Lenovo", (r) => brandOf(r.slug) === "Lenovo"], ["Dell", (r) => brandOf(r.slug) === "Dell"]],
+  series: Object.entries(SERIES_FACTS).filter(([k]) => k !== "macbook").map(([k, f]) => [f.name.replace(/^(Lenovo|HP|Dell) /, ""), (r) => f.match.test(`-${r.slug}-`), k]),
+  cpu: [["Core i3", (r) => r.sp.cpu === "Core i3"], ["Core i5", (r) => r.sp.cpu === "Core i5"], ["Core i7", (r) => r.sp.cpu === "Core i7"], ["Core Ultra", (r) => r.sp.cpu === "Core Ultra"], ["AMD Ryzen", (r) => r.sp.cpu === "AMD Ryzen"]],
+  gen: [8, 10, 11, 12, 13].map((g) => [`${ordinal(g)} Gen`, (r) => r.sp.gen === g]),
+  ram: [["8GB RAM", (r) => r.sp.ram === 8], ["16GB RAM", (r) => r.sp.ram === 16], ["32GB RAM", (r) => r.sp.ram >= 32]],
+  ssd: [["256GB SSD", (r) => r.sp.ssd === 256], ["512GB SSD", (r) => r.sp.ssd === 512], ["1TB SSD", (r) => r.sp.ssd >= 1024]],
+  feature: [["Touchscreen", (r) => r.sp.touch && !r.sp.convertible], ["2-in-1", (r) => r.sp.convertible], ["Gaming", (r) => r.sp.gpu]],
+  budget: [25000, 30000, 40000, 50000, 60000, 70000, 80000, 100000].map((b) => [`Under KSh ${b.toLocaleString("en-US")}`, (r) => r.price <= b, b]),
+  persona: [
+    ["Business", (r) => /-(thinkpad|elitebook|latitude|probook)-/.test(`-${r.slug}-`) && recency(r.sp) >= 3],
+    ["Programming", (r) => r.sp.ram >= 16 && (r.sp.tier || 0) >= 3 && recency(r.sp) >= 4],
+  ],
+};
+const slugOf = (t) => t.toLowerCase().replace(/ksh /g, "").replace(/,000/g, "k").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+// Title within 60 characters: drop the year, then "in Kenya", if needed.
+const fit = (core, y) => [`${core} in Kenya (${y})`, `${core} in Kenya`, core].find((t) => t.length <= 60) || core.slice(0, 60);
+// [first, second, noun phrase builder]
+const PAIRS = [
+  ["brand", "budget", (a, b) => `${a} Laptops ${b}`],
+  ["series", "budget", (a, b) => `${a} Laptops ${b}`],
+  ["cpu", "budget", (a, b) => `${a} Laptops ${b}`],
+  ["ram", "budget", (a, b) => `${a} Laptops ${b}`],
+  ["feature", "budget", (a, b) => `${a} Laptops ${b}`],
+  ["persona", "budget", (a, b) => `${a} Laptops ${b}`],
+  ["brand", "cpu", (a, b) => `${a} ${b} Laptops`],
+  ["series", "cpu", (a, b) => `${a} ${b} Laptops`],
+  ["cpu", "gen", (a, b) => `${a} ${b} Laptops`],
+  ["series", "gen", (a, b) => `${a} ${b} Laptops`],
+  ["brand", "ram", (a, b) => `${a} Laptops with ${b}`],
+  ["brand", "feature", (a, b) => `${a} ${b} Laptops`],
+  ["ram", "ssd", (a, b) => `Laptops with ${a} and ${b}`],
+  ["cpu", "ram", (a, b) => `${a} Laptops with ${b}`],
+];
+function comboCandidates() {
+  const out = [];
+  for (const [da, db, phrase] of PAIRS) {
+    for (const [la, fa] of DIMS[da]) {
+      for (const [lb, fb] of DIMS[db]) {
+        if (da === "cpu" && db === "gen" && !/Core i[57]/.test(la)) continue;
+        const core = phrase(la, lb);
+        const slug = slugOf(core);
+        const sc = core.replace(/Laptops/, "laptops").replace(/Under/, "under");
+        out.push({
+          kind: "list", combo: true, playbook: "Curation", type: "utility", slug, path: `/best/${slug}-kenya`,
+          kw: `${core.toLowerCase()} in Kenya`, h1: `Best ${sc} in Kenya`, noun: sc.replace(/ laptops/, " laptop").replace(/^laptops/, "laptop"),
+          title: (n, y) => fit(`Best ${core}`, y),
+          filter: (r) => fa(r) && fb(r),
+          parents: [[la, fa], [lb, fb]],
+          angle: (s) => `ECB Technologies has ${s.pool} ${sc}, from ${ksh(s.from)} to ${ksh(s.max)} (median ${ksh(s.median)}). These are the ${s.n} with the best specs for the money, ranked by a published formula.`,
+        });
+      }
+    }
+  }
+  return out;
+}
+
 // ---------- model pages ("{model} price in Kenya") ----------
 
 const MODEL_STOP = /^(i3|i5|i7|i9|core|ultra|ryzen|amd|intel|celeron|pentium|m[1-5]|snapdragon|price|\d+(gb|tb)|\d+(st|nd|rd|th))$/;
@@ -359,7 +422,7 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   const skipped = [];
   const usedSlugs = new Set();
   const usedKw = new Set();
-  for (const c of [...candidates(), ...modelCandidates(L)]) {
+  for (const c of [...candidates(), ...comboCandidates(), ...modelCandidates(L)]) {
     const skip = (reason) => skipped.push({ status: "SKIPPED", url: SITE + c.path, playbook_type: c.playbook, reason });
     const covered = Object.entries(EXISTING).find(([path, kw]) => kw.toLowerCase() === c.kw.toLowerCase() || (path === "/hp-vs-dell-vs-lenovo-laptops-kenya" && c.kind === "compare" && /^HP vs (Dell|Lenovo)/.test(c.kw)));
     if (covered) {
@@ -430,7 +493,7 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   for (const p of accepted) {
     const url = SITE + p.path;
     if (firstSeen[url]) releasable.push(p);
-    else if (p.kind !== "model" || Object.keys(firstSeen).length === 0 && p.kind !== "model") {
+    else if (p.kind !== "model" && !p.combo) {
       releasable.push(p);
       newlySeen[url] = day;
     } else if (releasedToday < DAILY_RELEASE) {
@@ -454,6 +517,7 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
     if (doc.related_pages.length < 2) problems.push(`${doc.related_pages.length} related pages (minimum 2)`);
     if (problems.length) {
       skipped.push({ status: "SKIPPED", url: SITE + p.path, playbook_type: p.playbook, reason: `Failed quality gate: ${problems.join(", ")}.` });
+      delete newlySeen[SITE + p.path]; // don't use up a release slot
       continue;
     }
     doc._words = words;
@@ -464,6 +528,13 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   }
   // A page that failed the gate must not be linked from the others.
   const live = new Set(out.map((d) => d.url));
+  // Merged into a page that is still queued: no 301 yet (it would land on a
+  // page that isn't live); the Worker sends these to /guides until it is.
+  for (const s2 of skipped) if (s2.mergedInto && !live.has(s2.mergedInto)) {
+    s2.reason += " (that page is queued, so this redirects to /guides until it goes live)";
+    s2.waitingFor = s2.mergedInto;
+    delete s2.mergedInto;
+  }
   for (const d of out) {
     d.internal_links = d.internal_links.filter((u) => !isGuideUrl(u) || live.has(u));
     d.related_pages = d.related_pages.filter((r) => live.has(r.url));
@@ -526,7 +597,8 @@ function featureRows(rows) {
   };
 }
 
-function writePage(p, all, { year, changedAt }) {
+function writePage(p, all, ctxAll) {
+  const { year, changedAt } = ctxAll;
   const url = SITE + p.path;
   const asOf = new Date(changedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
   const { sib, cross } = relatedOf(p, all);
@@ -547,7 +619,7 @@ function writePage(p, all, { year, changedAt }) {
     intro = `${p.angle(s)} The best specified is the ${top.name} at ${ksh(top.price)} (${top.specs}). The cheapest on the list is the ${cheapest.name} at ${ksh(cheapest.price)}. Prices as of ${asOf}, from the live shop.`;
     // Keyword map: the description leads with the page's main keyword.
     const lead = p.h1.replace(/^Best /, "best ").replace(/^(\w)/, (m) => m.toUpperCase());
-    description = `${lead}: ${s.pool} checked, top ${items.length} ranked by specs, from ${ksh(Math.min(...items.map((i) => i.price)))}. Prices as of ${asOf}. ECB Technologies, Nairobi CBD.`;
+    description = `${lead}: ${s.pool} in stock from ${ksh(s.from)}, top ${items.length} ranked by specs. Prices as of ${asOf}. ECB Technologies, Nairobi CBD.`;
     if (p.persona) {
       sections.push({ heading: `What ${p.persona} need`, body: `People in this group usually need ${p.pain.slice(0, -1).join(", ")} and ${p.pain[p.pain.length - 1]}. The filter for this page turns those needs into rules a listing either meets or does not: ${p.angle(s)}` });
     }
@@ -576,6 +648,20 @@ function writePage(p, all, { year, changedAt }) {
           [`Under ${ksh(f.median)} (the median)`, String(p.pool.filter((r) => r.price < f.median).length)],
         ]),
     });
+    if (p.parents) {
+      // How this group compares with each of its two parent groups.
+      const lines = p.parents.map(([label, fp]) => {
+        const parent = all.length ? (ctxAll.laptops || []).filter(fp) : [];
+        if (!parent.length) return null;
+        const pm = median(parent.map((r) => r.price));
+        const sh = pct(p.pool.length, parent.length);
+        const rel = compare(s.median, pm);
+        return `- **${label}:** ${p.pool.length} of the ${parent.length} ${label} laptops in stock (${sh}%) are on this page. Their median price is ${ksh(s.median)}, ${rel === "same" ? "about the same as" : `${ksh(Math.abs(s.median - pm))} ${rel === "more" ? "above" : "below"}`} the ${label} median of ${ksh(pm)}.`;
+      }).filter(Boolean);
+      const r16 = pct(p.pool.filter((r) => r.sp.ram >= 16).length, p.pool.length);
+      const recentShare = pct(p.pool.filter((r) => recency(r.sp) >= 4).length, p.pool.length);
+      if (lines.length) sections.push({ heading: "How this group compares", body: lines.join("\n") + `\n- **Specs:** ${r16}% have 16 GB RAM or more and ${recentShare}% have a 10th-gen or newer processor (or Core Ultra / Apple M).` });
+    }
     sections.push({ heading: "How we ranked them", body: `${SCORE_TEXT} Specs are read from each product's listing as the shop typed it; where a listing does not state the memory or storage, the laptop scores 1 point for it and the con says so, so check the product page or ask us.` });
     if (p.persona) {
       const best = (f2) => items.find(f2);
@@ -590,7 +676,7 @@ function writePage(p, all, { year, changedAt }) {
       { question: `Which ${p.noun || p.h1.replace(/^Best /, "").replace(/ in Kenya$/, "").replace(/s\b(?=[^s]*$)/, "")} has the best specs?`, answer: `By our spec score, the ${top.name} at ${ksh(top.price)} (${top.specs}), as of ${asOf}.` },
       { question: `What is the cheapest option on this list?`, answer: `The ${cheapest.name} at ${ksh(cheapest.price)}${cheapest.specs ? ` (${cheapest.specs})` : ""}.` },
       { question: `How many laptops match?`, answer: `${s.pool} laptops at ECB Technologies match, priced from ${ksh(s.from)} to ${ksh(s.max)} with a median of ${ksh(s.median)}.` },
-      { question: "Can I see one before paying?", answer: `Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (${PHONE}). We deliver across Kenya and you can pay by M-Pesa or card.` },
+      { question: "Can I see one before paying?", answer: `Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (${PHONE}). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.` },
     );
     schemaItems = items.map((it) => ({ name: it.name, url: it.url, price: it.price }));
   } else if (p.kind === "compare") {

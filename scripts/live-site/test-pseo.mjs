@@ -115,20 +115,33 @@ test("model keys and names", () => {
   assert.equal(G.modelName("hp elitebook 840 g6"), "HP EliteBook 840 G6");
   assert.equal(G.modelName("lenovo thinkpad t480s"), "Lenovo ThinkPad T480s");
 });
-test("new model pages are released in daily batches; published ones stay", () => {
-  const isModel = (u) => /\/laptops\/.*-price-kenya$/.test(u);
-  const day1 = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-20T00:00:00Z" });
-  const released = day1.pages.filter((d) => isModel(d.url));
-  assert.ok(released.length <= G.DAILY_RELEASE);
+test("new model and combo pages are released in daily batches; published ones stay", () => {
+  const prices = (i) => 15000 + (i % 60) * 3500;
+  const day1 = G.buildPages(make(prices), { changedAt: "2026-11-20T00:00:00Z" });
   const queued = day1.skipped.filter((s) => s.queued);
+  assert.ok(Object.keys(day1.newlySeen).length > 0);
   // Day 2: day 1's pages are remembered, the next batch goes out.
-  const seen = Object.fromEntries(Object.entries(day1.newlySeen));
-  const day2 = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-21T00:00:00Z", firstSeen: seen });
-  for (const d of released) assert.ok(day2.pages.some((x) => x.url === d.url), `kept ${d.url}`);
-  const day2Models = day2.pages.filter((d) => isModel(d.url)).length;
-  assert.ok(day2Models <= released.length + G.DAILY_RELEASE && (queued.length === 0 || day2Models > released.length));
-  // Non-model pages are never held back.
-  assert.equal(day1.pages.filter((d) => !isModel(d.url)).length, day2.pages.filter((d) => !isModel(d.url)).length);
+  const seen = { ...day1.newlySeen };
+  const day2 = G.buildPages(make(prices), { changedAt: "2026-11-21T00:00:00Z", firstSeen: seen });
+  for (const d of day1.pages) assert.ok(day2.pages.some((x) => x.url === d.url), `kept ${d.url}`);
+  const added = day2.pages.length - day1.pages.length;
+  assert.ok(added <= G.DAILY_RELEASE && (queued.length === 0 || added > 0), `added ${added}`);
+  // A day-2 batch never exceeds the cap.
+  assert.ok(Object.keys(day2.newlySeen).length <= G.DAILY_RELEASE);
+  // Nothing redirects to a page that is not live.
+  const live = new Set(day2.pages.map((d) => d.url));
+  for (const s of day2.skipped.filter((x) => x.mergedInto)) assert.ok(live.has(s.mergedInto));
+});
+test("combo pages compare against both parent groups and carry FAQ schema", () => {
+  const all = Object.fromEntries([...built.pages.map((d) => [d.url, "2026-11-01"]), ...built.skipped.filter((s) => s.queued).map((s) => [s.url, "2026-11-01"])]);
+  const b = G.buildPages(make((i) => 15000 + (i % 60) * 3500), { changedAt: "2026-11-15T00:00:00Z", firstSeen: all });
+  const combos = b.pages.filter((d) => d.content.sections.some((s) => s.heading === "How this group compares"));
+  assert.ok(combos.length > 0);
+  for (const d of combos) {
+    assert.ok(d.seo.title.length <= 60, d.seo.title);
+    assert.ok(d.schema.structured_data["@graph"].some((g) => g["@type"] === "FAQPage"), d.url);
+    assert.ok(!/\b(Under|Laptops)\b/.test(d.content.h1.replace(/^Best /, "")), d.content.h1);
+  }
 });
 test("pruned pages are flagged (noindex), not deleted", () => {
   const anyUrl = built.pages[0].url;

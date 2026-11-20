@@ -966,3 +966,25 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - `test-pseo.mjs`: 16 tests (model keys and names, daily batches, pruning
   flags, model pages list only their model).
 - Sitemap: 700 URLs, all 200, indexable, self-canonical.
+
+## 2026-11-20: scaling guide pages without thin or duplicate pages
+- New "combo" pages cross two filters the shop can actually fill (brand,
+  series, processor, generation, RAM, SSD, feature, use, and budget), e.g.
+  `/best/dell-core-i5-laptops-kenya`, `/best/hp-laptops-with-32gb-ram-kenya`,
+  `/best/laptops-with-16gb-ram-and-512gb-ssd-kenya`.
+- Each one must pass the same checks as every guide page: at least 10
+  matching laptops, at most 60% overlap with any page already accepted, a
+  keyword no other page uses, 600+ words, 3+ FAQs, 5+ internal links and 2+
+  related pages. Pages that fail are skipped with a reason; near-duplicates
+  301 to the page they merge into.
+- Content beyond the ranked list: "How this group compares" shows the share
+  and median price against both parent groups (e.g. all HP laptops, all
+  laptops under KSh 40,000), plus RAM and processor age. Every page has
+  CollectionPage + ItemList + FAQPage structured data, a title of 60
+  characters or less and its own meta description.
+- Release: model and combo pages go live 15 a day (88 queued at deploy).
+  Queued pages redirect (302) to /guides and stay out of the sitemap until
+  released. A page that fails a check no longer uses up a release slot, and
+  a duplicate only gets a 301 once the page it merges into is live.
+- About 140 pages pass with the current ~680 products; the rest are skipped
+  as too few laptops (142), duplicates (107) or too short.
