@@ -35,6 +35,8 @@ export default {
     // Old WordPress sitemap addresses still registered in Search Console
     // answer with the new sitemaps, so they stop failing.
     if (url.pathname === "/sitemap.xml" || url.pathname === "/sitemap_index.xml") return cached(request, ctx, () => buildIndex(env));
+    // People typing /sitemap get the visitor site map page.
+    if (url.pathname === "/sitemap" || url.pathname === "/sitemap/" || url.pathname === "/sitemap.html") return Response.redirect(`${SITE}/site-map`, 301);
     if (url.pathname === "/product-sitemap.xml") return cached(request, ctx, () => buildSitemap("/sitemap-products.xml", env));
     if (SITEMAPS[url.pathname]) return cached(request, ctx, () => buildSitemap(url.pathname, env));
     if (url.pathname === "/robots.txt") return robots(url);

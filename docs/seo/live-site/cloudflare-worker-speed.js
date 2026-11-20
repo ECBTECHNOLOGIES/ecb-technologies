@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "78";
+const VERSION = "79";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -1111,7 +1111,14 @@ async function cached(request, url, env, ctx) {
 
   // Not cached here yet: the visitor gets the live page (with their new
   // session), and an anonymous copy is saved for the next visitor.
-  const res = await fetch(request);
+  // The shop's server sometimes answers 500/502/503 under load; these clear
+  // within a second, so retry twice before passing an error on (Google
+  // slows crawling and drops pages that keep returning 5xx).
+  let res = await fetch(request.clone());
+  for (let i = 0; i < 2 && res.status >= 500 && res.status <= 504; i++) {
+    await new Promise((r) => setTimeout(r, 400 * (i + 1)));
+    res = await fetch(request.clone());
+  }
   if (!isHtml(res)) return res;
   const out = await rewriteText(res, url);
   const [a, b] = out.body.tee();

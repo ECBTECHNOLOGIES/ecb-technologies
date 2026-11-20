@@ -918,3 +918,15 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   (302), `/wishlists`, `/track-order`, `/search`.
 - **403s:** these are the server refusing directory listings
   (`/assets/…/`). That is correct; they are not pages.
+
+## 2026-11-20: sitemap check, 5xx retry
+- **Checked:** all 7 sitemap files (index, the 4 sitemaps, and the old
+  `sitemap_index.xml` / `product-sitemap.xml` addresses) are valid XML, with
+  no duplicate URLs. All 685 URLs return 200, are indexable and have a
+  self-referencing canonical.
+- **5xx:** the shop's server sometimes returns 500 under load; 3 product
+  URLs did during the check, and all were fine on retry. The speed Worker
+  now retries 5xx twice (400 ms, 800 ms) on a cache miss before passing
+  the error on. Background refreshes already kept the old copy on errors.
+- `/sitemap`, `/sitemap/` and `/sitemap.html` now 301 to `/site-map` (they
+  were a 404).
