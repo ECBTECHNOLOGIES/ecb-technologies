@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "67";
+const VERSION = "68";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -810,6 +810,7 @@ function paginationHtml(url, seo) {
 // product redirects are made at all.
 let LIVE = null;
 let LIVE_AT = 0;
+let LAST_DUPES_SIG = null;
 const REVERSE = {};
 for (const [a, b] of Object.entries(REDIRECTS)) REVERSE[b] = a;
 async function loadLive(ctx) {
@@ -818,7 +819,17 @@ async function loadLive(ctx) {
   if (list.length >= MIN_PRODUCTS_ABSOLUTE) {
     LIVE = new Set(list.map((p) => p.slug));
     LIVE_AT = Date.now();
-    setLiveDupes(liveDupes(list));
+    const dupes = liveDupes(list);
+    setLiveDupes(dupes);
+    // The sitemap Worker leaves these copies out (their canonical is elsewhere).
+    const sig = Object.keys(dupes).sort().join(",");
+    if (ENV && ENV.PAGES && sig !== LAST_DUPES_SIG) {
+      LAST_DUPES_SIG = sig;
+      try {
+        const prev = await ENV.PAGES.get("dupes-live", { type: "json", cacheTtl: 300 });
+        if (!prev || Object.keys(prev).sort().join(",") !== sig) await ENV.PAGES.put("dupes-live", JSON.stringify(dupes));
+      } catch {}
+    }
   }
   return LIVE;
 }

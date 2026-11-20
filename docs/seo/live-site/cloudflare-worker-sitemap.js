@@ -1,8 +1,10 @@
 // Cloudflare Worker for www.ecbtechkenya.com / ecbtechkenya.com (the GeniusCart shop).
 //
-// - /sitemap.xml: built live from the shop itself, listing the home page, main
-//   pages, every category and every product. Cached for 6 hours, so new and
-//   removed products show up automatically.
+// - /sitemap.xml: a sitemap index of /sitemap-pages.xml, /sitemap-categories.xml,
+//   /sitemap-guides.xml and /sitemap-products.xml, built live from the shop and
+//   the speed Worker's KV (guides that passed their gates, live duplicates).
+//   Only indexable URLs: no duplicates, empty categories or redirects. Cached
+//   for 6 hours, so new and removed products show up automatically.
 // - /robots.txt: the shop's own robots.txt, with the Sitemap line added.
 // - /assets/images/brands/*: the theme asks for brand logos that don't exist,
 //   and the shop answers each with a full 62 KB "not found" page. Missing ones
@@ -10,8 +12,8 @@
 // - Everything else passes straight through to the shop, unchanged.
 //
 // Deploy: Cloudflare dashboard → Workers & Pages → Create → Worker → paste this →
-// Deploy. Then add routes so it only handles these two paths:
-//   ecbtechkenya.com/sitemap.xml, www.ecbtechkenya.com/sitemap.xml,
+// Deploy. Then add routes so it only handles these paths:
+//   ecbtechkenya.com/sitemap*, www.ecbtechkenya.com/sitemap*,
 //   ecbtechkenya.com/robots.txt, www.ecbtechkenya.com/robots.txt,
 //   ecbtechkenya.com/assets/images/brands/*, www.ecbtechkenya.com/assets/images/brands/*
 
@@ -30,7 +32,8 @@ const EXCLUDE = /^\/(admin|user|rider|agent|vendor|carts?|checkout|addcart|addto
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === "/sitemap.xml") return cached(request, ctx, () => buildSitemap(url, env));
+    if (url.pathname === "/sitemap.xml") return cached(request, ctx, () => buildIndex(env));
+    if (SITEMAPS[url.pathname]) return cached(request, ctx, () => buildSitemap(url.pathname, env));
     if (url.pathname === "/robots.txt") return robots(url);
     if (url.pathname.startsWith("/assets/images/brands/")) return brandLogo(request, ctx);
     return fetch(request);
@@ -39,7 +42,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=11`, { method: "GET" });
+  const key = new Request(`${request.url}?v=12`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -75,75 +78,103 @@ function xmlEscape(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-async function buildSitemap(url, env) {
+// Every indexable URL, sorted into the sitemaps of the index. Left out:
+// duplicate product copies (their canonical is another listing; the speed
+// Worker keeps the live list in KV "dupes-live"), empty categories (noindex),
+// private paths and pages that redirect.
+async function collect(env) {
   const origin = SITE;
+  const [home, all] = await Promise.all([getText(`${origin}/`), getText(`${origin}/category?pageby=10000`)]);
+  let dupes = {};
   try {
-    const [home, all] = await Promise.all([getText(`${origin}/`), getText(`${origin}/category?pageby=10000`)]);
-
-    const products = new Set();
-    for (const m of all.matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com\/item\/([A-Za-z0-9-]+)"/g)) {
-      if (!["compare", "show"].includes(m[1]) && !SKIP_ITEMS.has(m[1])) products.add(`/item/${m[1]}`);
-    }
-
-    const pages = new Set(["/", "/category", "/about", "/contact", "/faq", "/delivery", "/hp-vs-dell-vs-lenovo-laptops-kenya"]);
-    for (const m of (home + all).matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com(\/[^"#?]*)"/g)) {
-      const path = m[1].replace(/\/+$/, "") || "/";
-      if (path.startsWith("/item/") || EXCLUDE.test(path) || SKIP_PAGES.test(path)) continue;
-      if (/\.(png|jpe?g|webp|gif|svg|css|js|ico|woff2?|pdf)$/i.test(path)) continue;
-      pages.add(path);
-    }
-
-    if (products.size < 10) throw new Error(`only ${products.size} products found`);
-
-    // Honest dates only: research pages carry the date the catalogue last
-    // changed (kept in KV by the ecb-speed Worker); other pages have no lastmod
-    // rather than a made-up "today".
-    let researchDate = null;
-    try {
-      const st = env && env.PAGES ? await env.PAGES.get("research-state", { type: "json" }) : null;
-      if (st && st.changedAt) researchDate = st.changedAt.slice(0, 10);
-    } catch {}
-    for (const p of ["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya", "/categories"]) pages.add(p);
-    // Laptop guides: only the pages that passed the quality gates (the speed
-    // Worker writes the list), dated by the catalogue change behind them.
-    const dated = new Set(["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]);
-    try {
-      const gs = env && env.PAGES ? await env.PAGES.get("guides-state", { type: "json" }) : null;
-      if (gs && Array.isArray(gs.urls) && gs.urls.length) {
-        for (const u of ["https://www.ecbtechkenya.com/guides", ...gs.urls]) {
-          const path = u.replace("https://www.ecbtechkenya.com", "");
-          if (/^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best|compare|series|laptops|phones)(\/[a-z0-9-]+)?$/.test(path)) {
-            pages.add(path);
-            dated.add(path);
-          }
-        }
+    dupes = (env && env.PAGES ? await env.PAGES.get("dupes-live", { type: "json" }) : null) || {};
+  } catch {}
+  const products = new Set();
+  for (const m of all.matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com\/item\/([A-Za-z0-9-]+)"/g)) {
+    if (!["compare", "show"].includes(m[1]) && !SKIP_ITEMS.has(m[1]) && !dupes[m[1]]) products.add(`/item/${m[1]}`);
+  }
+  if (products.size < 300) throw new Error(`only ${products.size} products found`);
+  const categories = new Set();
+  const pages = new Set(["/", "/about", "/contact", "/faq", "/delivery", "/hp-vs-dell-vs-lenovo-laptops-kenya", "/categories"]);
+  for (const m of (home + all).matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com(\/[^"#?]*)"/g)) {
+    const path = m[1].replace(/\/+$/, "") || "/";
+    if (path.startsWith("/item/") || EXCLUDE.test(path) || SKIP_PAGES.test(path) || REDIRECTED.test(path)) continue;
+    if (/\.(png|jpe?g|webp|gif|svg|css|js|ico|woff2?|pdf)$/i.test(path)) continue;
+    (path === "/category" || path.startsWith("/category/") ? categories : pages).add(path);
+  }
+  const guides = new Set(["/research", "/research/laptop-prices-kenya", "/research/tech-prices-kenya"]);
+  let changedAt = null;
+  try {
+    const st = env && env.PAGES ? await env.PAGES.get("research-state", { type: "json" }) : null;
+    if (st && st.changedAt) changedAt = st.changedAt.slice(0, 10);
+    // Laptop guides: only the pages that passed the quality gates.
+    const gs = env && env.PAGES ? await env.PAGES.get("guides-state", { type: "json" }) : null;
+    if (gs && Array.isArray(gs.urls)) {
+      for (const u of [`${SITE}/guides`, ...gs.urls]) {
+        const path = u.replace(SITE, "");
+        if (/^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best|compare|series|laptops|phones)(\/[a-z0-9-]+)?$/.test(path)) guides.add(path);
       }
-    } catch {}
-    const entry = (path, priority) =>
-      `  <url><loc>${xmlEscape(origin + path)}</loc>${dated.has(path) && researchDate ? `<lastmod>${researchDate}</lastmod>` : ""}<priority>${priority}</priority></url>`;
-    const body = [
-      '<?xml version="1.0" encoding="UTF-8"?>',
-      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      ...[...pages].map((p) => entry(p, p === "/" ? "1.0" : p.startsWith("/category") ? "0.8" : "0.5")),
-      ...[...products].map((p) => entry(p, "0.7")),
-      "</urlset>",
-      "",
-    ].join("\n");
+    }
+  } catch {}
+  for (const g of guides) pages.delete(g);
+  return { pages, categories, guides, products, changedAt };
+}
+// Pages that now redirect (keyword map merges): never list them.
+const REDIRECTED = /^\/(laptop-prices-in-kenya|best\/best-laptops-under-40k-kenya|best\/best-laptops-under-100k-kenya|laptops\/apple-laptops-kenya)$/;
 
-    return new Response(body, {
-      status: 200,
-      headers: {
-        "Content-Type": "application/xml; charset=utf-8",
-        "Cache-Control": `public, max-age=${CACHE_SECONDS}`,
-        "X-Robots-Tag": "noindex",
-      },
-    });
+// Static pages have no honest change date, so they carry no lastmod; the
+// catalogue-driven sitemaps carry the date the catalogue last changed.
+const SITEMAPS = {
+  "/sitemap-pages.xml": { pick: (c) => c.pages, dated: false, priority: (p) => (p === "/" ? "1.0" : "0.5") },
+  "/sitemap-categories.xml": { pick: (c) => c.categories, dated: true, priority: () => "0.8" },
+  "/sitemap-guides.xml": { pick: (c) => c.guides, dated: true, priority: () => "0.6" },
+  "/sitemap-products.xml": { pick: (c) => c.products, dated: true, priority: () => "0.7" },
+};
+
+const xml = (body) =>
+  new Response(body, {
+    status: 200,
+    headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": `public, max-age=${CACHE_SECONDS}`, "X-Robots-Tag": "noindex" },
+  });
+const unavailable = (error) =>
+  // Never serve an empty sitemap; tell crawlers to retry later instead.
+  new Response(`Sitemap temporarily unavailable: ${error.message}`, { status: 503, headers: { "Retry-After": "3600", "Content-Type": "text/plain" } });
+
+// /sitemap.xml: the index of the four sitemaps (each lists its own pages).
+async function buildIndex(env) {
+  try {
+    const c = await collect(env);
+    const lastmod = c.changedAt ? `<lastmod>${c.changedAt}</lastmod>` : "";
+    return xml(
+      [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...Object.entries(SITEMAPS).map(([path, s]) => `  <sitemap><loc>${SITE}${path}</loc>${s.dated ? lastmod : ""}</sitemap>`),
+        "</sitemapindex>",
+        "",
+      ].join("\n"),
+    );
   } catch (error) {
-    // Never serve an empty sitemap; tell crawlers to retry later instead.
-    return new Response(`Sitemap temporarily unavailable: ${error.message}`, {
-      status: 503,
-      headers: { "Retry-After": "3600", "Content-Type": "text/plain" },
-    });
+    return unavailable(error);
+  }
+}
+
+async function buildSitemap(path, env) {
+  try {
+    const c = await collect(env);
+    const s = SITEMAPS[path];
+    const lastmod = s.dated && c.changedAt ? `<lastmod>${c.changedAt}</lastmod>` : "";
+    return xml(
+      [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...[...s.pick(c)].sort().map((p) => `  <url><loc>${xmlEscape(SITE + p)}</loc>${lastmod}<priority>${s.priority(p)}</priority></url>`),
+        "</urlset>",
+        "",
+      ].join("\n"),
+    );
+  } catch (error) {
+    return unavailable(error);
   }
 }
 

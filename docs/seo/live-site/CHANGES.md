@@ -795,3 +795,29 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   - /delivery and /hp-vs-dell-vs-lenovo `.md` are rendered from the saved
     copies.
   - Worker-inserted links point to the research page.
+
+## 2026-11-20: sitemap index (only indexable URLs)
+- **`/sitemap.xml` is now a sitemap index** of four sitemaps (new Worker
+  routes `/sitemap*` on both hosts):
+  - `/sitemap-pages.xml` (9)
+  - `/sitemap-categories.xml` (10)
+  - `/sitemap-guides.xml` (40)
+  - `/sitemap-products.xml` (625)
+  Search Console reports indexing per sitemap, so each page type can be
+  checked on its own.
+- **Only indexable URLs:** every listed URL returns 200, is indexable and
+  has a self-referencing canonical (checked: 684/684).
+- **Left out:**
+  - 53 duplicate product copies whose canonical is another listing. They
+    were the "Alternate page with proper canonical tag" entries. The speed
+    Worker writes the live duplicate map to KV `dupes-live`, which the
+    sitemap Worker reads; the old hand-made skip list used pre-restore
+    slugs.
+  - Merged pages that redirect.
+  - Empty categories. Student-Deals and monitors have 0 products since the
+    restore, so they are noindex.
+- **lastmod:** catalogue-driven sitemaps carry the date the catalogue last
+  changed. Static pages carry none.
+- **Submitted:** IndexNow accepted all 684 at Yandex (202). Bing and
+  api.indexnow.org rate-limit Cloudflare's IPs (429). Google is submitted in
+  Search Console (owner).
