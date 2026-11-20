@@ -45,7 +45,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=13`, { method: "GET" });
+  const key = new Request(`${request.url}?v=14`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -225,6 +225,12 @@ async function robots(url) {
     "Disallow: /addbyone",
     "Disallow: /reducebyone",
     "Disallow: /removecart/",
+    "Disallow: /subscriber/",
+    "Disallow: /currency/",
+    "Disallow: /language/",
+    "Disallow: /wishlists",
+    "Disallow: /track-order",
+    "Disallow: /search",
     "Allow: /",
     "",
     "Sitemap: https://www.ecbtechkenya.com/sitemap.xml",

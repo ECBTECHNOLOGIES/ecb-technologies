@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "77";
+const VERSION = "78";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -168,6 +168,11 @@ export default {
       // merged product addresses resolved all the way (Google reports long
       // chains as "Redirect error").
       if (isRead) {
+        // Old WordPress addresses, query-string copies of the homepage and
+        // the broken /search route: one 301 to the real page (or 410 Gone).
+        const legacy = await legacyTarget(url, ctx);
+        if (legacy === 410) return new Response("Gone", { status: 410, headers: { "Content-Type": "text/plain", "X-Robots-Tag": "noindex", "Cache-Control": "public, max-age=86400" } });
+        if (legacy) return Response.redirect(legacy, 301);
         if (url.pathname.startsWith("/item/")) await loadLive(ctx);
         const target = finalUrl(url);
         if (target) return Response.redirect(target, 301);
@@ -958,6 +963,70 @@ export function liveSlugFor(slug) {
   return null;
 }
 
+// ---------- legacy addresses (the site was WordPress/WooCommerce before) ----------
+
+const CAT_WORDS = [
+  [/laptop|notebook|thinkpad|elitebook|probook|latitude|zbook|xps|macbook|ideapad|yoga|surface|omen|victus|chromebook|computer/, "laptops"],
+  [/iphone|samsung|galaxy|pixel|phone|smartphone|tablet|ipad|tecno|infinix|oppo|redmi|xiaomi|nokia/, "smartphones"],
+  [/printer|ecosys|laserjet|epson|canon|kyocera|toner|ink/, "printers"],
+  [/monitor|odyssey|gaming|playstation|ps5|xbox|console|controller/, "gaming"],
+  [/earbud|headphone|headset|speaker|audio|airpod|buds|jbl/, "Audio-Accessories"],
+  [/charger|cable|case|cover|power-?bank|mobile-accessor|screen-protector|watch/, "Mobile-Accessories"],
+  [/keyboard|mouse|accessor|bag|hdd|ssd|flash|ram|router|adapter|dock|webcam/, "Computing-Accessories"],
+];
+const BRAND_PAGES = { hp: "/laptops/hp-laptops-kenya", lenovo: "/laptops/lenovo-laptops-kenya", dell: "/laptops/dell-laptops-kenya" };
+const tokensOf = (slug) => new Set(slug.toLowerCase().replace(/-[a-z0-9]{9,10}$/, "").split(/[^a-z0-9]+/).filter((w) => w && !["price", "in", "kenya", "the", "with", "and", "gb", "for"].includes(w)));
+function bestProduct(oldSlug) {
+  if (!LIVE) return null;
+  const want = tokensOf(oldSlug);
+  if (want.size < 2) return null;
+  let best = null;
+  let bestScore = 0;
+  for (const slug of LIVE) {
+    const have = tokensOf(slug);
+    let shared = 0;
+    for (const w of want) if (have.has(w)) shared++;
+    const score = shared / (want.size + have.size - shared);
+    if (score > bestScore) [best, bestScore] = [slug, score];
+  }
+  return bestScore >= 0.5 ? best : null;
+}
+const categoryFor = (text) => {
+  const hit = CAT_WORDS.find(([re]) => re.test(text.toLowerCase()));
+  return hit ? `/category/${hit[1]}` : "/category";
+};
+const STATIC_LEGACY = {
+  "/shop": "/category", "/store": "/category", "/products": "/category", "/blog": "/guides", "/news": "/guides",
+  "/about-us": "/about", "/contact-us": "/contact", "/home": "/", "/index.php": "/", "/cart": "/carts", "/my-account": "/user/login",
+  "/wishlist": "/carts", "/delivery-information": "/delivery", "/shipping": "/delivery", "/privacy-policy": "/privacy", "/terms-and-conditions": "/terms",
+  "/sitemap": "/site-map", "/sitemap.html": "/site-map",
+};
+
+// Returns a full URL to 301 to, 410 for dead WordPress internals, or null.
+async function legacyTarget(url, ctx) {
+  const path = url.pathname.replace(/\/+$/, "") || "/";
+  const q = url.searchParams;
+  if (path === "/" && q.has("s")) return `${SITE}/category?search=${encodeURIComponent(q.get("s") || "")}`;
+  if (path === "/" && (q.has("p") || q.has("page_id") || q.has("post_type") || q.has("product") || q.has("add-to-cart"))) return `${SITE}/`;
+  if (path === "/search") return `${SITE}/category?search=${encodeURIComponent(q.get("q") || q.get("search") || "")}`;
+  if (STATIC_LEGACY[path]) return SITE + STATIC_LEGACY[path];
+  if (/^\/(wp-admin|wp-login\.php|wp-content|wp-includes|wp-json|xmlrpc\.php|feed|comments|author|tag)(\/|$)/.test(path)) return 410;
+  if (/^\/\d{4}\/\d{2}(\/|$)/.test(path) || /^\/page\/\d+$/.test(path)) return path.startsWith("/page/") ? `${SITE}/` : 410;
+  let m;
+  if ((m = path.match(/^\/product\/([^/]+)$/))) {
+    await loadLive(ctx);
+    const slug = decodeURIComponent(m[1]);
+    const hit = bestProduct(slug);
+    return SITE + (hit ? `/item/${hit}` : categoryFor(slug));
+  }
+  if ((m = path.match(/^\/product-(?:category|cat)\/(.+)$/))) return SITE + categoryFor(decodeURIComponent(m[1]));
+  if ((m = path.match(/^\/(?:product-tag|brand|product-brand)\/([^/]+)$/))) {
+    const t = decodeURIComponent(m[1]).toLowerCase();
+    return SITE + (BRAND_PAGES[t] || categoryFor(t));
+  }
+  return null;
+}
+
 // Pages merged into another (keyword map: one page per keyword cluster).
 const PAGE_REDIRECTS = {
   "/laptop-prices-in-kenya": "/research/laptop-prices-kenya",
@@ -1301,6 +1370,14 @@ async function catalogueChangedAt() {
 }
 
 async function rewriteText(res, url, extra) {
+  const raw = await res.text();
+  // Listing pages past the last one (e.g. ?page=99) are empty: a real 404,
+  // not an indexable empty page (Google's "Soft 404").
+  const pg = parseInt(url.searchParams.get("page") || "1", 10);
+  if (pg > 1 && /^\/category(\/|$)/.test(url.pathname) && !raw.includes('class="ecb-fp-card"') && !raw.includes("ecb-cat-list-view-btn")) {
+    return new Response(raw.replace("<head>", '<head><meta name="robots" content="noindex, follow">'), { status: 404, headers: { "Content-Type": "text/html; charset=UTF-8", "X-Robots-Tag": "noindex, follow", "Cache-Control": "no-cache, private" } });
+  }
+  res = new Response(raw, res);
   const fixed = fixHtml(await res.text(), url);
   const html = fixed.html;
   const hints = scan(html);

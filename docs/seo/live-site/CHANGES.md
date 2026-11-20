@@ -896,3 +896,25 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   Categories, Laptop Guides, Price Research, Visit Our Shop, Delivery Across
   Kenya and Site Map. The bottom row gets "Sitemap". These hub links had
   only been in the skin's footer.
+
+## 2026-11-20: indexing clean-up (Search Console: 1,138 Not found, 224 403, 180 other 4xx…)
+- **Old WordPress/WooCommerce addresses** now get one 301 to their real
+  equivalent (`legacyTarget()` in the speed Worker). Before, they took a
+  trailing-slash 301 and then a 404.
+  - `/product/<slug>/`: the closest live product by words in the slug
+    (Jaccard ≥ 0.5), else the matching category.
+  - `/product-category/…`, `/product-tag/…`: category or brand page.
+  - `/shop`, `/blog`, `/about-us`, `/contact-us`, `/cart`, `/my-account`,
+    `/home`, `/index.php`, `/page/N`: their equivalents.
+  - `/?s=` and `/search?q=` (was a 500): the search page.
+  - `/?p=…` and other WordPress query strings: `/`.
+  - `wp-admin`, `wp-content`, `feed`, `author`, `tag` and dated posts:
+    `410 Gone`, so Google drops them.
+- **Soft 404:** listing pages past the last page (e.g.
+  `/category/laptops?page=99`) were empty, 200 and indexable. They now
+  return a real 404 with noindex.
+- **robots.txt** also disallows the non-page endpoints that filled the 4xx
+  and redirect rows: `/subscriber/` (405), `/currency/`, `/language/`
+  (302), `/wishlists`, `/track-order`, `/search`.
+- **403s:** these are the server refusing directory listings
+  (`/assets/…/`). That is correct; they are not pages.
