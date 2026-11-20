@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "72";
+const VERSION = "73";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -787,7 +787,21 @@ function ogImage() {
 const PRIVATE = /^\/(user|vendor|rider|agent|cart|carts|checkout|wishlist|compare|login|register)(\/|$)/i;
 async function privatePage(request, url) {
   const res = await fetch(request);
-  if (!PRIVATE.test(url.pathname) || !(res.headers.get("Content-Type") || "").includes("text/html")) return res;
+  const isHtmlRes = (res.headers.get("Content-Type") || "").includes("text/html");
+  if (url.pathname === "/admin/login" && isHtmlRes) {
+    // The theme shows "Credentials Doesn't Match" below the fold, so a wrong
+    // password looked like "nothing happens". Pin messages to the top.
+    const out = new Response(res.body, res);
+    out.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return new HTMLRewriter()
+      .on("head", {
+        element(e) {
+          e.append('<style>.alert{position:fixed!important;top:16px!important;left:50%!important;transform:translateX(-50%)!important;z-index:99999!important;width:min(560px,92vw)!important;box-shadow:0 8px 24px rgba(0,0,0,.18)!important}</style>', { html: true });
+        },
+      })
+      .transform(out);
+  }
+  if (!PRIVATE.test(url.pathname) || !isHtmlRes) return res;
   const out = new Response(res.body, res);
   out.headers.set("X-Robots-Tag", "noindex, follow");
   if (!SKIN) return out;

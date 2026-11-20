@@ -859,3 +859,17 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   "being restored" page for the POS software site that replaces the empty "Index of /" until the POS
   site is restored.
 - `/categories.md` now exists (it was a 404 found by the first backup run).
+
+## 2026-11-20: admin login "nothing happens"
+- **Cause:**
+  - The shop's answer to Sign In is "Credentials Doesn't Match": the 16 Nov
+    restore brought back an older admin password.
+  - The theme draws that message below the fold, so it looked like nothing
+    happened.
+- **Fix:**
+  - `/admin/login` (both hosts) is now routed through ecb-speed. The Worker
+    pins alerts to the top of the screen, and the bare domain 301s to www.
+  - Sign-in POSTs still pass straight to the shop.
+- **Password reset:** the owner resets it in phpMyAdmin (`admins` table,
+  bcrypt `$2y$` hash) or with "Forgot password?". No credential is stored
+  in the repo.
