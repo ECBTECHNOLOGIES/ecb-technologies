@@ -883,3 +883,16 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
     both hosts).
 - The homepage URL was also submitted as a sitemap (Nov 17: "1 error"). It
   is to be removed in Search Console; `sitemap.xml` is to be submitted.
+
+## 2026-11-20: HTML site map and footer links
+- **`/site-map`:** an HTML sitemap for visitors, served by the Worker in the
+  site template. It lists:
+  - the main pages, the 7 categories and their subcategories;
+  - all guides and research, grouped;
+  - all 625 indexable products, grouped by category (duplicate listings
+    left out).
+  It links the XML sitemap and is listed in `sitemap-pages.xml`.
+- **Theme footer** (now that the skin is off): "Customer Care" gets All
+  Categories, Laptop Guides, Price Research, Visit Our Shop, Delivery Across
+  Kenya and Site Map. The bottom row gets "Sitemap". These hub links had
+  only been in the skin's footer.

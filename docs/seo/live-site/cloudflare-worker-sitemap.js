@@ -45,7 +45,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=12`, { method: "GET" });
+  const key = new Request(`${request.url}?v=13`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -98,7 +98,7 @@ async function collect(env) {
   }
   if (products.size < 300) throw new Error(`only ${products.size} products found`);
   const categories = new Set();
-  const pages = new Set(["/", "/about", "/contact", "/faq", "/delivery", "/hp-vs-dell-vs-lenovo-laptops-kenya", "/categories"]);
+  const pages = new Set(["/", "/about", "/contact", "/faq", "/delivery", "/hp-vs-dell-vs-lenovo-laptops-kenya", "/categories", "/site-map"]);
   for (const m of (home + all).matchAll(/href="https?:\/\/(?:www\.)?ecbtechkenya\.com(\/[^"#?]*)"/g)) {
     const path = m[1].replace(/\/+$/, "") || "/";
     if (path.startsWith("/item/") || EXCLUDE.test(path) || SKIP_PAGES.test(path) || REDIRECTED.test(path)) continue;

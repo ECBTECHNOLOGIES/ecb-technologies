@@ -56,7 +56,7 @@ import {
 } from "./research.js";
 import { STATIC_PAGES } from "./static-pages.js";
 import { CATEGORY_SEO } from "./keyword-map.js";
-import { specsOf, specLine } from "./pseo.js";
+import { specsOf, specLine, shortName } from "./pseo.js";
 import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "73";
+const VERSION = "76";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -195,6 +195,7 @@ export default {
       if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
       if (isRead && /^\/(best|compare|series|laptops)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
       if (isRead && url.pathname === "/categories") return agentHeaders(await categoriesPage(request, url, env, ctx), url);
+      if (isRead && url.pathname === "/site-map") return agentHeaders(await siteMapPage(request, url, env, ctx), url);
       if (isRead && STATIC_PAGES[url.pathname]) return agentHeaders(await staticPage(request, url, env, ctx), url);
       if (isRead && GUIDE_PATH.test(url.pathname.replace(/\/+$/, ""))) return agentHeaders(await guidePage(request, url, env, ctx), url);
       // Cart actions and quick-view copies: never indexed.
@@ -605,6 +606,52 @@ async function categoriesPage(request, url, env, ctx) {
     h1: "All categories",
     title: "All Product Categories | ECB Technologies Nairobi",
     description: `Every category at ECB Technologies: laptops, phones, PC and mobile accessories, printers, gaming and audio. ${total} products, prices in KSh, delivery across Kenya.`,
+    content,
+    crumbs: [],
+    modified: (await researchState(env, ctx)).changedAt,
+  });
+}
+
+// /site-map: an HTML sitemap for people. Every main page, category, guide and
+// product (duplicate listings left out), grouped. Linked from the footer.
+async function siteMapPage(request, url, env, ctx) {
+  const products = await productList(ctx);
+  const dupes = liveDupes(products);
+  const built = await guides(env, ctx);
+  const li = (href, text) => `<li><a href="${href}">${escapeHtml(text)}</a></li>`;
+  const byCat = {};
+  const seen = new Set();
+  for (const p of products) {
+    if (seen.has(p.slug) || dupes[p.slug]) continue;
+    seen.add(p.slug);
+    const ci = CATEGORY_OF[p.slug];
+    const key = ci === undefined ? "other" : CATEGORIES[ci][0];
+    (byCat[key] = byCat[key] || []).push(p);
+  }
+  const seoOf = (slug) => CATEGORY_SEO[`/category/${slug}`.toLowerCase()] || {};
+  const catName = (slug) => seoOf(slug).noun || seoOf(slug).h1 || (CATEGORIES.find(([s]) => s === slug) || [slug, "Other products"])[1];
+  const main = [
+    ["/", "Home"], ["/category", "All products"], ["/categories", "All categories"], ["/laptop-shop-nairobi", "Our shop in Nairobi CBD"],
+    ["/delivery", "Delivery across Kenya"], ["/contact", "Contact us"], ["/about", "About ECB Technologies"], ["/faq", "FAQ"], ["/privacy", "Privacy policy"], ["/terms", "Terms and conditions"],
+  ];
+  const groups = {};
+  for (const d of built.pages) (groups[d.playbook_type] = groups[d.playbook_type] || []).push(d);
+  const groupName = { Locations: "Visit the shop", Curation: "Best laptops by budget and feature", Personas: "Best laptops for you", Comparisons: "Comparisons", Directory: "By brand and processor", Profiles: "Laptop series" };
+  const total = [...seen].length;
+  const content =
+    `<style>${RESEARCH_CSS}${PSEO_CSS}.ecb-sm-cols{columns:2 300px;column-gap:40px}.ecb-sm-cols li{break-inside:avoid}</style><div class="ecb-rs ecb-pg">` +
+    `<p class="ecb-rs-lead"><strong>Every page on ECB Technologies: the main pages, ${LISTED_CATEGORIES.length} categories, ${built.pages.length + 3} guides and research pages, and ${total} products.</strong> Search engines use the <a href="/sitemap.xml">XML sitemap</a>.</p>` +
+    `<h2>Main pages</h2><ul class="ecb-sm-cols">${main.map(([h, t]) => li(h, t)).join("")}</ul>` +
+    `<h2>Categories</h2><ul class="ecb-sm-cols">${LISTED_CATEGORIES.map(([slug]) => li(`/category/${slug}`, catName(slug)) + (SUBCATEGORIES[slug] || []).map(([h, t]) => li(h, t)).join("")).join("")}</ul>` +
+    `<h2>Guides and research</h2><ul class="ecb-sm-cols">${li("/guides", "All laptop guides")}${li("/research", "Price research")}${li("/research/laptop-prices-kenya", "Laptop prices in Kenya")}${li("/research/tech-prices-kenya", "Tech prices in Kenya")}${li("/hp-vs-dell-vs-lenovo-laptops-kenya", "HP vs Dell vs Lenovo laptops")}</ul>` +
+    Object.entries(groupName).filter(([g]) => groups[g]).map(([g, t]) => `<h3>${t}</h3><ul class="ecb-sm-cols">${groups[g].map((d) => li(d.url.replace(SITE, ""), d.content.h1)).join("")}</ul>`).join("") +
+    `<h2>Products</h2>` +
+    [...LISTED_CATEGORIES.map(([slug]) => slug), "other"].filter((k) => byCat[k]).map((k) => `<h3>${escapeHtml(k === "other" ? "Other products" : catName(k))} (${byCat[k].length})</h3><ul class="ecb-sm-cols">${byCat[k].map((p) => li(`/item/${p.slug}`, shortName(p.name))).join("")}</ul>`).join("") +
+    `</div>`;
+  return shellPage(request, url, {
+    h1: "Site map",
+    title: "Site Map: All Pages & Products | ECB Technologies",
+    description: `Every page on ECB Technologies, Nairobi CBD: categories, laptop guides, price research and all ${total} products, grouped by category.`,
     content,
     crumbs: [],
     modified: (await researchState(env, ctx)).changedAt,
@@ -1289,6 +1336,7 @@ function rewrite(response, url, bundle, hints) {
   const seo = hints.seo || { graph: [], type: "page" };
   const product = seo.product && seo.product.name ? seo.product : null;
   let heroHref = "";
+  let footerLists = 0;
   let heroEyebrowState = 0; // 0 before, 1 inside, 2 after the first hero label
   let heroEyebrowText = "";
   let viewAllText = "All products";
@@ -1525,8 +1573,19 @@ function rewrite(response, url, bundle, hints) {
         e.setAttribute("rel", "noopener me");
       },
     })
+    // Theme footer: add the hubs and the site map to "Customer Care" (the
+    // second link list), in the theme's own markup.
+    .on("ul.ecb-footer-links", {
+      element(e) {
+        if (SKIN || footerLists++ !== 1) return;
+        const chevron = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+        const items = [["/categories", "All Categories"], ["/guides", "Laptop Guides"], ["/research", "Price Research"], ["/laptop-shop-nairobi", "Visit Our Shop"], ["/delivery", "Delivery Across Kenya"], ["/site-map", "Site Map"]];
+        e.append(items.map(([h, t]) => `<li><a href="${SITE}${h}">${chevron} ${t}</a></li>`).join(""), { html: true });
+      },
+    })
     .on("div.ecb-footer-bottom-links", {
       element(e) {
+        if (!SKIN) e.append(`<a href="${SITE}/site-map">Sitemap</a>`, { html: true });
         // The top bar is hidden in the skin; staff logins move here.
         if (SKIN) e.append('<a href="/user/vendor-login">Agent login</a><a href="/rider/login">Rider login</a>', { html: true });
       },
