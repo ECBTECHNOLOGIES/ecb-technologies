@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "76";
+const VERSION = "77";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -612,6 +612,14 @@ async function categoriesPage(request, url, env, ctx) {
   });
 }
 
+// The all-products listing cuts names at 40 characters, sometimes without
+// "…": drop the cut-off last word and any dangling separator.
+const listName = (n) => {
+  let x = n.replace(/…$/, "").trim();
+  if (n.endsWith("…") || x.length >= 39) x = x.replace(/\s+\S*$/, "");
+  return x.replace(/[\s,/|—–-]+$/, "").trim() || n;
+};
+
 // /site-map: an HTML sitemap for people. Every main page, category, guide and
 // product (duplicate listings left out), grouped. Linked from the footer.
 async function siteMapPage(request, url, env, ctx) {
@@ -646,7 +654,7 @@ async function siteMapPage(request, url, env, ctx) {
     `<h2>Guides and research</h2><ul class="ecb-sm-cols">${li("/guides", "All laptop guides")}${li("/research", "Price research")}${li("/research/laptop-prices-kenya", "Laptop prices in Kenya")}${li("/research/tech-prices-kenya", "Tech prices in Kenya")}${li("/hp-vs-dell-vs-lenovo-laptops-kenya", "HP vs Dell vs Lenovo laptops")}</ul>` +
     Object.entries(groupName).filter(([g]) => groups[g]).map(([g, t]) => `<h3>${t}</h3><ul class="ecb-sm-cols">${groups[g].map((d) => li(d.url.replace(SITE, ""), d.content.h1)).join("")}</ul>`).join("") +
     `<h2>Products</h2>` +
-    [...LISTED_CATEGORIES.map(([slug]) => slug), "other"].filter((k) => byCat[k]).map((k) => `<h3>${escapeHtml(k === "other" ? "Other products" : catName(k))} (${byCat[k].length})</h3><ul class="ecb-sm-cols">${byCat[k].map((p) => li(`/item/${p.slug}`, shortName(p.name))).join("")}</ul>`).join("") +
+    [...LISTED_CATEGORIES.map(([slug]) => slug), "other"].filter((k) => byCat[k]).map((k) => `<h3>${escapeHtml(k === "other" ? "Other products" : catName(k))} (${byCat[k].length})</h3><ul class="ecb-sm-cols">${byCat[k].map((p) => li(`/item/${p.slug}`, listName(p.name))).join("")}</ul>`).join("") +
     `</div>`;
   return shellPage(request, url, {
     h1: "Site map",
