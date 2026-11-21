@@ -26,6 +26,7 @@
 import { CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
 import { median, ksh, pct, compare, brandOf, cpuOf, genOf, cleanRows, LAPTOP_BANDS } from "./research.js";
 import { INTROS } from "./intros.js";
+import { ARTICLES } from "./articles.js";
 
 const SITE = "https://www.ecbtechkenya.com";
 export const MIN_PRODUCTS = 10;
@@ -185,7 +186,7 @@ function candidates() {
   // Students first: it takes the "under 40k" cluster too (same laptops),
   // so the budget page is merged into it instead of competing with it.
   // Students: the established URL, rebuilt live (was a static copy).
-  c.push({ kind: "list", playbook: "Personas", type: "utility", slug: "student-laptops", path: "/student-laptops-kenya", kw: "laptops for students in Kenya", h1: "Best laptops for students in Kenya under KSh 40,000",
+  c.push({ kind: "list", playbook: "Personas", type: "utility", slug: "student-laptops", path: "/student-laptops-kenya", kw: "laptops for students in Kenya", h1: "Best laptops for students in Kenya under KSh 40,000", noun: "student laptop under KSh 40,000",
     title: (n, y) => `Best Laptops for Students in Kenya (${y}): Under KSh 40,000`, persona: "university and college students",
     pain: ["a laptop that runs Windows 11, Microsoft Office and online classes smoothly", "a price under KSh 40,000", "a battery and size that suit carrying it around campus"],
     filter: (p) => p.price <= 40000 && (p.sp.tier || 0) >= 3 && recency(p.sp) >= 3,
@@ -439,23 +440,50 @@ function alternativeCandidates(L) {
   });
 }
 
+// Price premium of B over A, measured fairly: within the same model (or the
+// same processor tier), the median of (median B price - median A price).
+function premium(L, fa, fb, { sameModel = true, sameCpu = false } = {}) {
+  const groups = {};
+  for (const r of L) {
+    const k = sameModel ? modelKey(r.slug) : sameCpu ? r.sp.cpu : "all";
+    if (k) (groups[k] = groups[k] || []).push(r);
+  }
+  const diffs = [];
+  for (const rows of Object.values(groups)) {
+    const a = rows.filter(fa).map((r) => r.price);
+    const b = rows.filter(fb).map((r) => r.price);
+    if (a.length && b.length) diffs.push(median(b) - median(a));
+  }
+  const min = sameModel ? 3 : 1;
+  if (diffs.length < min) return null;
+  const d = median(diffs);
+  return d > 0 ? { diff: Math.round(d / 500) * 500, n: diffs.length } : null;
+}
+function articleCandidates() {
+  // Short-answer questions: held to the 600-word minimum of buying guides
+  // ("useful at a glance"), not the 900 words of long informational pages.
+  return ARTICLES.map((a) => ({ ...a, kind: "article", playbook: "Learn", type: "utility", h1: a.h1, title: () => a.title }));
+}
+
 // Template ids, for turning a template off and for comparing how each
 // template performs in search (gsc-opportunities.mjs).
-export const TEMPLATES = ["list", "combo", "alternatives", "model", "compare", "profile", "phones", "local"];
+export const TEMPLATES = ["list", "combo", "alternatives", "model", "compare", "profile", "phones", "local", "article"];
 export function templateOf(c) {
   if (c.vs) return "alternatives";
   if (c.combo) return "combo";
   return c.kind;
 }
 
-export function buildPages(products, { changedAt = new Date().toISOString(), firstSeen = {}, pruned = [], today = null, disabled = [] } = {}) {
+export function buildPages(products, { changedAt = new Date().toISOString(), firstSeen = {}, pruned = [], today = null, disabled = [], additions = {} } = {}) {
   const L = laptopsOf(products);
   const year = new Date(changedAt).getFullYear();
   const accepted = [];
   const skipped = [];
   const usedSlugs = new Set();
   const usedKw = new Set();
-  for (const c of [...candidates(), ...comboCandidates(), ...modelCandidates(L), ...alternativeCandidates(L)]) {
+  const asOfAll = new Date(changedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
+  const actx = { L, ksh, median, pct, link, tableMd, SITE, PHONE, asOf: asOfAll, ordinal, recency, modelKey, modelName, premium: (...a) => premium(...a) };
+  for (const c of [...candidates(), ...articleCandidates(), ...comboCandidates(), ...modelCandidates(L), ...alternativeCandidates(L)]) {
     const skip = (reason) => skipped.push({ status: "SKIPPED", url: SITE + c.path, playbook_type: c.playbook, reason });
     // A template turned off (KV "guides-disabled") publishes nothing.
     if (disabled.includes(templateOf(c))) {
@@ -486,6 +514,13 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
       page = { ...c, pool, stats: statsOf(pool), listed: pool.map((r) => r.slug) };
     } else if (c.kind === "local") {
       page = { ...c, pool: L, allProducts: cleanRows(products), listed: [] };
+    } else if (c.kind === "article") {
+      const out = c.write(actx);
+      if (!out) {
+        skip("Not enough laptops in stock to back the article's numbers.");
+        continue;
+      }
+      page = { ...c, out, pool: L, listed: [] };
     } else if (c.kind === "compare") {
       const sides = c.sides.map(([label, f]) => [label, L.filter(f)]);
       const thin = sides.find(([, rows]) => rows.length < MIN_SIDE);
@@ -545,7 +580,7 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   // Links need every accepted page, so content is written in a second pass.
   const out = [];
   for (const p of accepted) {
-    const doc = writePage(p, accepted, { year, changedAt, laptops: L });
+    const doc = writePage(p, accepted, { year, changedAt, laptops: L, additions });
     const words = wordCount(doc);
     const internal = doc.internal_links.filter((u) => u.startsWith(SITE) && !u.includes("/item/"));
     const problems = [];
@@ -577,11 +612,11 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   for (const d of out) {
     d.internal_links = d.internal_links.filter((u) => !isGuideUrl(u) || live.has(u));
     d.related_pages = d.related_pages.filter((r) => live.has(r.url));
-    for (const s of d.content.sections) s.body = s.body.replace(/\[([^\]]+)\]\((https:\/\/www\.ecbtechkenya\.com\/(?:best|compare|series|laptops|phones)\/[^)]+|laptop-shop-nairobi|student-laptops-kenya)\)/g, (m, t, u) => (live.has(u) ? m : t));
+    for (const s of d.content.sections) s.body = s.body.replace(/\[([^\]]+)\]\((https:\/\/www\.ecbtechkenya\.com\/(?:best|compare|series|laptops|phones|learn)\/[^)]+|laptop-shop-nairobi|student-laptops-kenya)\)/g, (m, t, u) => (live.has(u) ? m : t));
   }
   return { pages: out, skipped: [...skipped, ...PLAYBOOK_SKIPS.map((s) => ({ status: "SKIPPED", ...s }))], changedAt, newlySeen };
 }
-const isGuideUrl = (u) => /^https:\/\/www\.ecbtechkenya\.com\/(best\/|compare\/|series\/|laptops\/|phones\/|laptop-shop-nairobi$|student-laptops-kenya$)/.test(u);
+const isGuideUrl = (u) => /^https:\/\/www\.ecbtechkenya\.com\/(learn\/|best\/|compare\/|series\/|laptops\/|phones\/|laptop-shop-nairobi$|student-laptops-kenya$)/.test(u);
 
 // ---------- writing ----------
 
@@ -640,7 +675,9 @@ function writePage(p, all, ctxAll) {
   const { year, changedAt } = ctxAll;
   const url = SITE + p.path;
   const asOf = new Date(changedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
-  const { sib, cross } = relatedOf(p, all);
+  const { sib, cross } = p.related
+    ? { sib: all.filter((a) => a.kind === "article" && a !== p).slice(0, 2), cross: p.related.map((path) => all.find((a) => a.path === path)).filter(Boolean) }
+    : relatedOf(p, all);
   const parent = `${SITE}/category/laptops`;
   const sections = [];
   const faq = [];
@@ -898,6 +935,13 @@ function writePage(p, all, ctxAll) {
       { question: `Can I get a ${p.label} delivered outside Nairobi?`, answer: "Yes. Couriers deliver to all 47 counties, riders deliver within Nairobi, and pickup at the shop is free." },
     );
     schemaItems = rows.map((r) => ({ name: r.short, url: `${SITE}/item/${r.slug}`, price: r.price }));
+  } else if (p.kind === "article") {
+    title = p.title();
+    intro = p.out.intro;
+    description = p.out.description;
+    sections.push(...p.out.sections);
+    faq.push(...p.out.faq);
+    schemaItems = [];
   } else if (p.kind === "local") {
     const L = p.pool;
     const P = p.allProducts;
@@ -1027,6 +1071,14 @@ function writePage(p, all, ctxAll) {
     );
     schemaItems = best.map((it) => ({ name: it.name, url: it.url, price: it.price }));
   }
+  // Additions from Search Console work (KV "guides-additions", kept in
+  // docs/seo/live-site/additions.json): extra sections and FAQ entries for
+  // queries the page gets impressions for but didn't answer.
+  const add = (ctxAll.additions || {})[p.path];
+  if (add) {
+    for (const sec of add.sections || []) if (sec && sec.heading && sec.body) sections.push({ heading: String(sec.heading), body: String(sec.body) });
+    for (const q of add.faq || []) if (q && q.question && q.answer) faq.push({ question: String(q.question), answer: String(q.answer) });
+  }
   // Links.
   const guideLinks = [...sib, ...cross].map((a) => ({ url: SITE + a.path, title: a.h1 }));
   const extra = [
@@ -1038,7 +1090,7 @@ function writePage(p, all, ctxAll) {
   if (/student|budget|under/i.test(p.kw) || (p.budget && p.budget <= 50000)) extra.push({ url: `${SITE}/student-laptops-kenya`, title: "Best laptops for students" });
   if (/HP|Dell|Lenovo|ThinkPad|EliteBook|Latitude/.test(p.kw)) extra.push({ url: `${SITE}/hp-vs-dell-vs-lenovo-laptops-kenya`, title: "HP vs Dell vs Lenovo" });
   sections.push({ heading: "Related guides", body: [...guideLinks, ...extra].map((l) => `- ${link(l.title, l.url)}`).join("\n") });
-  const cta = `Ask about any laptop here on WhatsApp (${PHONE}) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.`;
+  const cta = `Ask about any laptop here on WhatsApp (${PHONE}) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.`;
   const internal_links = [...new Set([parent, ...guideLinks.map((l) => l.url), ...extra.map((l) => l.url)])];
   const itemList = {
     "@type": "ItemList", name: title, numberOfItems: schemaItems.length,
@@ -1057,6 +1109,7 @@ function writePage(p, all, ctxAll) {
   if (p.kind === "compare") secondary.push(`${p.sides[0].label} price in Kenya`, `${p.sides[1].label} price in Kenya`, `${p.kw} Nairobi`);
   if (p.kind === "model") secondary.push(`${p.name} price`, `${p.name} Nairobi`, `${p.name} specs`);
   if (p.kind === "phones") secondary.push(`${p.label} prices in Kenya`, `${p.label} shop Nairobi`, `buy ${p.label} Nairobi CBD`);
+  if (p.kind === "article") secondary.push(...(p.secondary || []));
   if (p.kind === "local") secondary.push("laptop shop Nairobi CBD", "where to buy a laptop in Nairobi", "phone shop Moi Avenue", "electronics shop Nairobi");
   if (p.kind === "profile") secondary.push(`${SERIES_FACTS[p.key].name} Nairobi`, `${SERIES_FACTS[p.key].name} models`, `used ${SERIES_FACTS[p.key].name} price`);
   return {
@@ -1067,7 +1120,7 @@ function writePage(p, all, ctxAll) {
       meta_description: description.length > 158 ? description.slice(0, 155).replace(/\s+\S*$/, "") + "…" : description,
       primary_keyword: p.kw,
       secondary_keywords: secondary,
-      search_intent: p.kind === "model" ? "commercial (model price check)" : p.kind === "phones" ? "commercial (price check before buying)" : p.kind === "local" ? "local (find a shop to buy from)" : p.kind === "compare" ? "commercial investigation (comparison)" : p.kind === "profile" ? "informational + commercial (series research)" : "commercial (shortlist to buy)",
+      search_intent: p.kind === "model" ? "commercial (model price check)" : p.kind === "phones" ? "commercial (price check before buying)" : p.kind === "local" ? "local (find a shop to buy from)" : p.kind === "compare" ? "commercial investigation (comparison)" : p.kind === "profile" ? "informational + commercial (series research)" : p.kind === "article" ? "informational (how-to / explainer)" : "commercial (shortlist to buy)",
     },
     content: { h1: p.h1, introduction: intro, sections: sections.map(({ heading, body }) => ({ heading, body })), faq, call_to_action: cta },
     schema: { type: p.kind === "list" || p.kind === "phones" || p.kind === "model" ? "CollectionPage + ItemList + FAQPage" : p.kind === "local" ? "WebPage (about the ElectronicsStore) + FAQPage" : "Article + ItemList + FAQPage", structured_data: structured },
@@ -1075,7 +1128,7 @@ function writePage(p, all, ctxAll) {
     related_pages: guideLinks.slice(0, 4).map((l) => ({ url: l.url, title: l.title })),
     data_requirements_used: [
       `live product list (name, price, address) as of ${changedAt}`,
-      p.kind === "compare" ? `${p.sides.map((s) => `${s.rows.length} ${s.label}`).join(" and ")} laptops` : p.kind === "local" ? `${p.allProducts.length} products, ${p.pool.length} laptops; shop facts (address, hours, phone, delivery)` : p.kind === "phones" ? `${p.pool.length} ${p.plural} (name, price, storage read from the address)` : p.kind === "model" ? `${p.pool.length} configurations of the ${p.name} (name, price, specs read from the address)` : `${p.pool.length} matching laptops`,
+      p.kind === "compare" ? `${p.sides.map((s) => `${s.rows.length} ${s.label}`).join(" and ")} laptops` : p.kind === "local" ? `${p.allProducts.length} products, ${p.pool.length} laptops; shop facts (address, hours, phone, delivery)` : p.kind === "phones" ? `${p.pool.length} ${p.plural} (name, price, storage read from the address)` : p.kind === "model" ? `${p.pool.length} configurations of the ${p.name} (name, price, specs read from the address)` : p.kind === "article" ? `${p.pool.length} laptops (prices, RAM, SSD, processor read from the address)` : `${p.pool.length} matching laptops`,
       "specs read from product addresses (processor, generation, RAM, SSD, touch, 2-in-1, graphics)",
       ...(p.kind === "profile" ? ["SERIES_FACTS timeline (pseo.js)"] : []),
     ],
@@ -1168,7 +1221,7 @@ export function pageMarkdown(doc) {
   ].join("\n");
 }
 
-const GROUPS = ["Locations", "Curation", "Personas", "Comparisons", "Directory", "Models", "Alternatives", "Profiles"];
+const GROUPS = ["Locations", "Learn", "Curation", "Personas", "Comparisons", "Directory", "Models", "Alternatives", "Profiles"];
 // Model pages are Directory pages with their own hub section.
 export const groupOf = (d) => (/\/laptops\/[a-z0-9-]+-price-kenya$/.test(d.url) ? "Models" : /-alternatives-kenya$/.test(d.url) ? "Alternatives" : d.playbook_type);
 export function hubHtml(built) {
@@ -1176,7 +1229,7 @@ export function hubHtml(built) {
     `<div class="ecb-rs ecb-pg"><p class="ecb-rs-lead"><strong>Laptop buying guides built from the live catalogue: ${built.pages.length} pages, each checked for enough real products before it is published.</strong> Prices update when the shop's prices change.</p>` +
     GROUPS.map((g) => {
       const ps = built.pages.filter((d) => groupOf(d) === g);
-      return ps.length ? `<h2>${g === "Locations" ? "Visit the shop" : g === "Models" ? "Laptop models: prices by configuration" : g === "Alternatives" ? "Alternatives to popular models" : g === "Profiles" ? "Laptop series" : g === "Directory" ? "By brand and processor" : g === "Curation" ? "Best laptops by budget and feature" : g === "Personas" ? "Best laptops for you" : g}</h2><ul>${ps.map((d) => `<li><a href="${d.url.replace(SITE, "")}">${escH(d.content.h1)}</a></li>`).join("")}</ul>` : "";
+      return ps.length ? `<h2>${g === "Locations" ? "Visit the shop" : g === "Models" ? "Laptop models: prices by configuration" : g === "Alternatives" ? "Alternatives to popular models" : g === "Learn" ? "Buying advice" : g === "Profiles" ? "Laptop series" : g === "Directory" ? "By brand and processor" : g === "Curation" ? "Best laptops by budget and feature" : g === "Personas" ? "Best laptops for you" : g}</h2><ul>${ps.map((d) => `<li><a href="${d.url.replace(SITE, "")}">${escH(d.content.h1)}</a></li>`).join("")}</ul>` : "";
     }).join("") +
     `<h2>More</h2><ul><li><a href="/research">Price research</a></li><li><a href="/student-laptops-kenya">Best laptops for students</a></li><li><a href="/hp-vs-dell-vs-lenovo-laptops-kenya">HP vs Dell vs Lenovo</a></li><li><a href="/research/laptop-prices-kenya">Laptop prices in Kenya</a></li></ul></div>`
   );
@@ -1201,7 +1254,7 @@ export const PSEO_CSS =
   ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #1683ff;border-radius:12px;background:#f4f8ff}" +
   ".ecb-pg ul{padding-left:20px}.ecb-pg li{line-height:1.6}";
 
-export const GUIDE_PATH = /^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+|phones\/[a-z0-9-]+)$/;
+export const GUIDE_PATH = /^\/(guides|laptop-shop-nairobi|student-laptops-kenya|learn\/[a-z0-9-]+|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+|phones\/[a-z0-9-]+)$/;
 
 // ---------- /hp-vs-dell-vs-lenovo-laptops-kenya (live numbers) ----------
 // The three-brand page used to be a static snapshot (15 Nov); counts, prices

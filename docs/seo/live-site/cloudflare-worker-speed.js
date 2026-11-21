@@ -75,7 +75,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "87";
+const VERSION = "88";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -232,7 +232,7 @@ const handler = {
         }
       }
       if (isRead && /^\/research(\/[a-z0-9-]+)?\/?$/.test(url.pathname)) return agentHeaders(await researchPage(request, url, env, ctx), url);
-      if (isRead && /^\/(best|compare|series|laptops)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
+      if (isRead && /^\/(best|compare|series|laptops|learn)\/?$/.test(url.pathname)) return Response.redirect(`${SITE}/guides`, 301);
       if (isRead && url.pathname === "/categories") return agentHeaders(await categoriesPage(request, url, env, ctx), url);
       if (isRead && url.pathname === "/site-map") return agentHeaders(await siteMapPage(request, url, env, ctx), url);
       if (isRead && STATIC_PAGES[url.pathname]) return agentHeaders(await staticPage(request, url, env, ctx), url);
@@ -759,11 +759,13 @@ async function guides(env, ctx) {
   let firstSeen = {};
   let pruned = [];
   let disabled = [];
+  let additions = {};
   if (env && env.PAGES) {
     try {
       firstSeen = (await env.PAGES.get("guides-first-seen", { type: "json", cacheTtl: 60 })) || {};
       pruned = (await env.PAGES.get("guides-pruned", { type: "json", cacheTtl: 300 })) || [];
       disabled = (await env.PAGES.get("guides-disabled", { type: "json", cacheTtl: 300 })) || [];
+      additions = (await env.PAGES.get("guides-additions", { type: "json", cacheTtl: 300 })) || {};
       // First run: the guides already published went live on 15 Nov.
       if (!Object.keys(firstSeen).length) {
         const prev = await env.PAGES.get("guides-state", { type: "json" });
@@ -771,7 +773,7 @@ async function guides(env, ctx) {
       }
     } catch {}
   }
-  const built = buildPages(products, { changedAt, firstSeen, pruned, today, disabled });
+  const built = buildPages(products, { changedAt, firstSeen, pruned, today, disabled, additions });
   built.disabled = disabled;
   built.firstSeen = { ...firstSeen, ...built.newlySeen };
   built.pruned = pruned;
@@ -779,6 +781,10 @@ async function guides(env, ctx) {
   if (env && env.PAGES) {
     if (Object.keys(built.newlySeen).length || !Object.keys(firstSeen).length) {
       (ctx || NOOP_CTX).waitUntil(env.PAGES.put("guides-first-seen", JSON.stringify(built.firstSeen)));
+      // Tell Bing/Yandex (IndexNow) about pages released today, once: only
+      // when firstSeen already existed (not on the first backfill run).
+      const fresh = Object.keys(built.newlySeen).filter((u) => built.pages.some((d) => d.url === u));
+      if (Object.keys(firstSeen).length && fresh.length) (ctx || NOOP_CTX).waitUntil(pingIndexNow(fresh));
     }
     // The sitemap lists published, unpruned guides only.
     const urls = built.pages.filter((d) => !d._pruned).map((d) => d.url);
@@ -909,6 +915,14 @@ async function llmsWithResearch(env, ctx) {
 }
 
 // Sends every sitemap URL to IndexNow. Needs ?token=<INDEXNOW_TOKEN>.
+// Submit URLs to IndexNow (Bing, Yandex and partners share submissions).
+async function pingIndexNow(urls) {
+  const body = JSON.stringify({ host: "www.ecbtechkenya.com", key: INDEXNOW_KEY, keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`, urlList: urls.slice(0, 10000) });
+  try {
+    await fetch("https://api.indexnow.org/indexnow", { method: "POST", headers: { "Content-Type": "application/json; charset=utf-8" }, body });
+  } catch {}
+}
+
 async function indexNow(url, env) {
   if (!env.INDEXNOW_TOKEN || url.searchParams.get("token") !== env.INDEXNOW_TOKEN) return new Response("Not found", { status: 404 });
   // The URL list comes in the POST body (the published sitemap); a Worker's

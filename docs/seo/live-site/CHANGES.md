@@ -1034,3 +1034,23 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   above the generated summary as "From the shop". Empty until the shop fills it.
 - Guide data is rebuilt at least every 5 minutes, so KV changes (pruning,
   templates) apply without a price change.
+
+## 2026-11-21: ranking without backlinks (low-competition pages + GSC loop)
+- 8 buying-advice articles under /learn/ (articles.js): processor
+  generations, how much RAM, 256 vs 512 GB SSD, used-laptop checklist,
+  ThinkPad / EliteBook / Latitude models explained, touchscreen worth it.
+  Each answers the question in the first paragraph and uses live numbers
+  (price premiums measured within the same model). Gates: 600+ words, 3+
+  FAQs, 5+ internal links; FAQPage schema; listed under "Buying advice" on
+  /guides; /learn redirects to /guides.
+- Search Console loop: scripts/live-site/gsc-page-gaps.mjs (one page's
+  missing queries and positions 10–30, with where to add each) and
+  scripts/live-site/page-additions.mjs (pushes docs/seo/live-site/
+  additions.json to KV "guides-additions": extra sections and FAQ entries,
+  no deploy). Routine in docs/seo/gsc-loop.md.
+- IndexNow is pinged automatically when new guide pages are released.
+- Backlink plan with 10 targets: docs/seo/backlinks.md.
+- Fixed the student page FAQ ("Which laptops for student … has" →
+  "Which student laptop under KSh 40,000 has").
+- Guide call to action no longer names M-Pesa or card (until Paystack is
+  back).
