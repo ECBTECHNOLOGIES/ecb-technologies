@@ -57,6 +57,7 @@ import {
 import { STATIC_PAGES } from "./static-pages.js";
 import { CATEGORY_SEO } from "./keyword-map.js";
 import { specsOf, specLine, shortName, brandsComparison } from "./pseo.js";
+import { groupOf as guideGroupOf } from "./pseo.js";
 import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
@@ -75,7 +76,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "88";
+const VERSION = "89";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -700,8 +701,8 @@ async function siteMapPage(request, url, env, ctx) {
     ["/delivery", "Delivery across Kenya"], ["/contact", "Contact us"], ["/about", "About ECB Technologies"], ["/faq", "FAQ"], ["/privacy", "Privacy policy"], ["/terms", "Terms and conditions"],
   ];
   const groups = {};
-  for (const d of built.pages) (groups[d.playbook_type] = groups[d.playbook_type] || []).push(d);
-  const groupName = { Locations: "Visit the shop", Curation: "Best laptops by budget and feature", Personas: "Best laptops for you", Comparisons: "Comparisons", Directory: "By brand and processor", Profiles: "Laptop series" };
+  for (const d of built.pages) (groups[guideGroupOf(d)] = groups[guideGroupOf(d)] || []).push(d);
+  const groupName = { Locations: "Visit the shop", Learn: "Buying advice", Curation: "Best laptops by budget and feature", Personas: "Best laptops for you", Comparisons: "Comparisons", Directory: "By brand and processor", Models: "Laptop models: prices by configuration", Alternatives: "Alternatives to popular models", Profiles: "Laptop series" };
   const total = [...seen].length;
   const content =
     `<style>${RESEARCH_CSS}${PSEO_CSS}.ecb-sm-cols{columns:2 300px;column-gap:40px}.ecb-sm-cols li{break-inside:avoid}</style><div class="ecb-rs ecb-pg">` +

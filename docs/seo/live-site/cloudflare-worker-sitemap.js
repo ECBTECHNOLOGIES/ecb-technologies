@@ -47,7 +47,7 @@ export default {
 
 async function cached(request, ctx, build) {
   const cache = caches.default;
-  const key = new Request(`${request.url}?v=19`, { method: "GET" });
+  const key = new Request(`${request.url}?v=20`, { method: "GET" });
   const hit = await cache.match(key);
   if (hit) return hit;
   const response = await build();
@@ -117,7 +117,7 @@ async function collect(env) {
     if (gs && Array.isArray(gs.urls)) {
       for (const u of [`${SITE}/guides`, ...gs.urls]) {
         const path = u.replace(SITE, "");
-        if (/^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best|compare|series|laptops|phones)(\/[a-z0-9-]+)?$/.test(path)) guides.add(path);
+        if (/^\/(guides|laptop-shop-nairobi|student-laptops-kenya|best|compare|series|laptops|phones|learn)(\/[a-z0-9-]+)?$/.test(path)) guides.add(path);
       }
     }
   } catch {}
