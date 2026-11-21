@@ -76,7 +76,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "89";
+const VERSION = "90";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -198,6 +198,8 @@ const handler = {
       if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
       if (url.pathname === "/ecb-indexnow" && request.method === "POST") return await indexNow(Object.assign(url, { request }), env);
       if (url.pathname.startsWith("/ecb-assets/")) return serveBundle(url);
+      // Short review link for WhatsApp/SMS after every sale: ecbtechkenya.com/review
+      if (/^\/reviews?\/?$/.test(url.pathname)) return new Response(null, { status: 302, headers: { Location: REVIEW_URL, "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
       const isRead = request.method === "GET" || request.method === "HEAD";
       // One hop to the final address: www, no trailing slash, and old or
       // merged product addresses resolved all the way (Google reports long
@@ -916,6 +918,11 @@ async function llmsWithResearch(env, ctx) {
 }
 
 // Sends every sitemap URL to IndexNow. Needs ?token=<INDEXNOW_TOKEN>.
+// Where /review sends customers. Replace with the profile's own review link:
+// Google Business Profile → "Ask for reviews" → copy (g.page/r/…/review),
+// which opens the review box directly. Until then: the profile itself.
+const REVIEW_URL = "https://share.google/56ymLkB3i6DS0HHvJ";
+
 // Submit URLs to IndexNow (Bing, Yandex and partners share submissions).
 async function pingIndexNow(urls) {
   const body = JSON.stringify({ host: "www.ecbtechkenya.com", key: INDEXNOW_KEY, keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`, urlList: urls.slice(0, 10000) });
@@ -1526,6 +1533,9 @@ function fixHtml(html, url) {
       .replace('<main class="ecb-about-page"', '<main class="ecb-about-page ecb-guide-page"')
       .replace(/<span class="ecb-about-lead-eyebrow">[\s\S]*?<\/span>\s*<h1 class="ecb-about-lead-title">[\s\S]*?<\/h1>/, "");
   }
+  // One spelling of the address everywhere (name, address and phone must
+  // match across the site, Google Business Profile and directories).
+  html = html.replace(/Iconic Business Centre,\s*T12/g, "Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD");
   // Tracking pixels inside <noscript> (not parsed as elements): empty alt.
   html = html.replace(/<img height="1" width="1" style="display:none"(?![^>]*\balt=)/g, '<img alt="" height="1" width="1" style="display:none"');
   // The shop is closed on Sundays.

@@ -322,9 +322,19 @@ export function waOrderButton(p, canonical) {
   return `<a class="ecb-wa-order" href="${escapeHtml(link)}" target="_blank" rel="noopener" onclick="${track("product")}">${WA_ICON}Order on WhatsApp</a>`;
 }
 
+// On phones: a tap-to-call button above the WhatsApp button, and outside
+// opening hours (Mon–Sat 9am–7pm, Nairobi time) a small note so nobody waits
+// for a call that won't be answered. Fixed position, so no layout shift.
+const PHONE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+const AFTER_HOURS_JS = `(function(){try{var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Africa/Nairobi',weekday:'short',hour:'numeric',hour12:false}).formatToParts(new Date());var d='',h=0;p.forEach(function(x){if(x.type==='weekday')d=x.value;if(x.type==='hour')h=+x.value%24});var open=d!=='Sun'&&h>=9&&h<19;if(open)return;var nxt=(d==='Sat'&&h>=19)||d==='Sun'?'Monday 9am':(h<9?'9am today':'9am tomorrow');var el=document.getElementById('ecb-closed');if(!el)return;el.querySelector('b').textContent='Closed now \u00b7 opens '+nxt+'.';el.hidden=false;el.onclick=function(){el.hidden=true}}catch(e){}})();`;
+export function contactFloats() {
+  return `<a class="ecb-call-float" href="tel:+254717040531" aria-label="Call ECB Technologies on 0717 040 531" onclick="if(window.gtag)gtag('event','call_click',{location:'float'})">${PHONE_ICON}</a>` +
+    `<div id="ecb-closed" class="ecb-closed" role="status" hidden><b></b> WhatsApp us and we'll reply when we open.</div><script>${AFTER_HOURS_JS}</script>`;
+}
+
 export function waFloat(p, canonical) {
   const text = p && p.name ? `Hello ECB Technologies, I have a question about: ${p.name}. ${canonical}` : "Hello ECB Technologies, I'd like to ask about a product.";
-  return `<a class="ecb-wa-float" href="${escapeHtml(whatsappLink(text))}" target="_blank" rel="noopener" aria-label="Chat with ECB Technologies on WhatsApp" onclick="${track("float")}">${WA_ICON.replace(/20/g, "28")}</a>`;
+  return contactFloats() + `<a class="ecb-wa-float" href="${escapeHtml(whatsappLink(text))}" target="_blank" rel="noopener" aria-label="Chat with ECB Technologies on WhatsApp" onclick="${track("float")}">${WA_ICON.replace(/20/g, "28")}</a>`;
 }
 
 export function homeIntro() {
@@ -438,7 +448,9 @@ export const SEO_CSS =
   ".ecb-wa-order{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:8px;background:#25d366;color:#fff!important;font-weight:700;font-size:14.5px;text-decoration:none;margin:0 0 16px}" +
   ".ecb-wa-order:hover{background:#1ebe5a}" +
   ".ecb-wa-float{position:fixed;right:16px;bottom:16px;z-index:1030;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22)}" +
-  "@media print{.ecb-wa-float{display:none}}" +
+  ".ecb-call-float{display:none}@media (max-width:767px){.ecb-call-float{position:fixed;right:20px;bottom:84px;z-index:1030;width:48px;height:48px;border-radius:50%;background:#1683ff;color:#fff!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22)}}" +
+  ".ecb-closed{position:fixed;left:12px;right:84px;bottom:20px;z-index:1029;background:#1a2840;color:#fff;font-size:13px;line-height:1.4;padding:9px 12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.2)}.ecb-closed[hidden]{display:none}@media (min-width:768px){.ecb-closed{left:auto;right:88px;max-width:340px}}" +
+  "@media print{.ecb-wa-float,.ecb-call-float,.ecb-closed{display:none}}" +
   // The banner heading became an h1; keep the theme's h2 sizes for it.
   ".ecb-guide-page .ecb-about-lead-body h2{font-size:24px;line-height:1.3;margin:30px 0 10px;color:#1a2840}" +
   ".ecb-guide-page .ecb-about-lead-body h3{font-size:18px;line-height:1.35;margin:22px 0 6px;color:#1a2840}" +

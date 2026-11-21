@@ -1054,3 +1054,18 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   "Which student laptop under KSh 40,000 has").
 - Guide call to action no longer names M-Pesa or card (until Paystack is
   back).
+
+## 2026-11-21: local SEO, 30-day plan (see docs/seo/local-30-days.md)
+- Address spelled one way everywhere: "Iconic Business Centre, T12" in the
+  footer and contact page → "Techmart Iconic Business Plaza, 3rd Floor, Room
+  T12, Moi Avenue, Nairobi CBD" (matches the structured data).
+- Phones: tap-to-call button above the WhatsApp button (GA event
+  `call_click`).
+- Outside Mon–Sat 9am–7pm (Nairobi): a dismissible "Closed now · opens …"
+  note pointing to WhatsApp.
+- /review (and /reviews): 302 to the Google Business Profile (REVIEW_URL;
+  swap in the profile's direct review link).
+- Owner pack: Google Business Profile categories, description, services,
+  review request messages, WhatsApp away/greeting messages, missed-call
+  auto-reply, AI-recommendation checklist; city pages only with real
+  per-town delivery facts (to avoid doorway pages).
