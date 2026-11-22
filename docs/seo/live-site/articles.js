@@ -542,6 +542,99 @@ export const ARTICLES = [
   },
 ];
 
+// Glossary playbook: one page of laptop terms (not one thin page per term),
+// each defined in plain words, with how many laptops in stock have it and a
+// link to the guide where the term matters.
+ARTICLES.push({
+  slug: "laptop-glossary",
+  path: "/learn/laptop-terms-explained",
+  kw: "laptop terms explained",
+  secondary: ["laptop specs explained", "what does x360 mean", "what is nvme ssd", "what is tpm 2.0", "what is ex-uk laptop"],
+  h1: "Laptop terms explained: a buyer's glossary",
+  title: "Laptop Terms Explained: A Buyer's Glossary of Specs",
+  related: ["/learn/laptop-processor-generations-kenya", "/learn/how-much-ram-laptop-kenya", "/learn/check-used-laptop-before-buying"],
+  write(x) {
+    const { L, ksh, median, pct, link, SITE, asOf, recency } = x;
+    if (L.length < 50) return null;
+    const n = (f) => L.filter(f).length;
+    const from = (f) => {
+      const ps = L.filter(f).map((r) => r.price);
+      return ps.length >= 3 ? ` (from ${ksh(Math.min(...ps))}, median ${ksh(median(ps))})` : "";
+    };
+    const stock = (f, what, url) => {
+      const c = n(f);
+      if (!c) return "";
+      return ` **In stock:** ${c} ${what}${from(f)}${url ? `; see ${link("the list", `${SITE}${url}`)}` : ""}.`;
+    };
+    const term = (t, def, extra = "") => `- **${t}:** ${def}${extra}`;
+    const groups = [
+      ["Processor (CPU)", [
+        term("Core i3, i5, i7, i9", "Intel's tiers, from basic (i3) to fastest (i9). For the same generation, an i5 handles office work and study comfortably; i7 adds speed for heavier work.", stock((r) => r.sp.cpu === "Core i5", "Core i5 laptops", "/laptops/core-i5-laptops-kenya")),
+        term("Processor generation", "The first digits of the model number (i5-8350U = 8th gen). Newer generations are faster and more efficient; 8th gen is the minimum for Windows 11. Read " + link("processor generations explained", `${SITE}/learn/laptop-processor-generations-kenya`) + ".", stock((r) => recency(r.sp) >= 3, "laptops 8th gen or newer")),
+        term("U, H, HQ, G7 suffixes", "Letters after the model number. U = low power for thin laptops (most business models), H/HQ = high performance for workstations and gaming, G7 = 11th gen with stronger built-in graphics."),
+        term("Intel Core Ultra", "Intel's naming since late 2023 (Core Ultra 5, 7, 9), with a built-in AI accelerator (NPU) and much better integrated graphics.", stock((r) => r.sp.cpu === "Core Ultra", "Core Ultra laptops", "/laptops/core-ultra-laptops-kenya")),
+        term("AMD Ryzen", "AMD's processors: Ryzen 3, 5, 7 and 9 match Intel's i3 to i9. Strong multi-core performance and integrated graphics for the price.", stock((r) => r.sp.cpu === "AMD Ryzen", "Ryzen laptops", "/laptops/amd-ryzen-laptops-kenya")),
+        term("Apple M-series (M1, M2, M3…)", "Apple's own chips in MacBooks: fast, cool and with very long battery life. They run macOS, not Windows.", stock((r) => r.sp.cpu === "Apple M-series", "MacBooks with Apple chips")),
+        term("Celeron and Pentium", "Intel's entry-level chips for basic tasks. Fine for browsing and documents on a tight budget; slow with many tabs.", stock((r) => r.sp.cpu === "Celeron / Pentium", "Celeron or Pentium laptops")),
+        term("Snapdragon (Windows on Arm)", "Qualcomm chips in some new Windows laptops: excellent battery life; a few older programs and games don't run on them."),
+        term("NPU", "A neural processing unit: a part of newer chips (Core Ultra, Snapdragon X, recent Ryzen) that runs AI features such as background blur and live captions efficiently."),
+        term("Cores and threads", "How many tasks the processor works on at once. 8th-gen business laptops jumped from 2 to 4 cores, which is why they feel much smoother than 7th gen."),
+      ]],
+      ["Memory and storage", [
+        term("RAM (memory)", "Short-term working memory. 8 GB is enough for study and office work; 16 GB for programming, many tabs and design. Read " + link("how much RAM you need", `${SITE}/learn/how-much-ram-laptop-kenya`) + ".", stock((r) => r.sp.ram >= 16, "laptops with 16 GB or more", "/best/16gb-ram-laptops-kenya")),
+        term("DDR4, DDR5, LPDDR", "Memory types. DDR5 is newer and faster than DDR4; LPDDR is low-power memory soldered to the board (it can't be upgraded)."),
+        term("Soldered vs slotted RAM", "Slotted memory can be upgraded later; soldered memory can't. Thin premium laptops and many 2-in-1s are soldered."),
+        term("SSD", "Solid-state drive: storage with no moving parts, much faster than a hard drive. Read " + link("256 GB vs 512 GB", `${SITE}/learn/laptop-ssd-size-kenya`) + ".", stock((r) => r.sp.ssd >= 512, "laptops with 512 GB or more")),
+        term("NVMe and M.2", "M.2 is the stick-shaped slot; NVMe is the fast way an SSD talks to the laptop (SATA is the older, slower way). Most business laptops from 8th gen on take NVMe drives."),
+        term("HDD", "A spinning hard drive: cheap per gigabyte but slow. Avoid it as the main drive."),
+        term("eMMC", "Slow soldered storage in some very cheap laptops and tablets; usually 64–128 GB and not upgradeable."),
+      ]],
+      ["Screen and design", [
+        term("Touchscreen", "A screen you can tap and scroll. Handy for signing and presenting; glossy, so it reflects more light.", stock((r) => r.sp.touch, "touchscreen laptops", "/best/touchscreen-laptops-kenya")),
+        term("2-in-1, x360, Yoga, Flip", "A laptop whose touchscreen folds 360° into a tablet or tent. HP calls it x360, Lenovo Yoga, others Flip. Read " + link("is a touchscreen worth it", `${SITE}/learn/touchscreen-laptop-worth-it-kenya`) + ".", stock((r) => r.sp.convertible, "2-in-1 laptops", "/best/2-in-1-laptops-kenya")),
+        term("Detachable", "A 2-in-1 whose keyboard comes off completely (like a Surface)."),
+        term("FHD, QHD, 4K", "Screen resolution: FHD = 1920×1080 (sharp on 13–15-inch screens), QHD = 2560×1440, 4K = 3840×2160. HD (1366×768) looks grainy; avoid it if you can."),
+        term("IPS and OLED", "Panel types. IPS has good colours and viewing angles; OLED has perfect blacks and vivid colour. Older budget panels (TN) wash out from the side."),
+        term("Nits", "Screen brightness. 250 nits is fine indoors; 300–400+ is better near windows or outdoors."),
+        term("Screen size", "Measured diagonally: 12.5–13.3 inches is easy to carry, 14 inches is the sweet spot, 15.6 inches gives a bigger screen and often a number pad."),
+      ]],
+      ["Graphics", [
+        term("Integrated graphics", "Graphics built into the processor (Intel UHD, Iris Xe, AMD Radeon). Fine for study, video and light photo work; Iris Xe (11th gen and newer) is noticeably stronger."),
+        term("Dedicated graphics (GPU)", "A separate graphics chip (NVIDIA GeForce GTX/RTX, Quadro/RTX A, AMD Radeon RX) for gaming, 3D, CAD and video editing.", stock((r) => r.sp.gpu, "laptops with a dedicated graphics card", "/best/gaming-laptops-kenya")),
+        term("Quadro / RTX A-series", "NVIDIA's workstation graphics, certified for engineering and design software; found in HP ZBook, Dell Precision and ThinkPad P."),
+      ]],
+      ["Business-laptop features", [
+        term("TrackPoint", "The red pointing nub in the middle of ThinkPad keyboards, with its own buttons; you can use it without lifting your hands."),
+        term("TPM 2.0", "A security chip that stores encryption keys. Windows 11 requires it; most business laptops from the 8th-gen era have it (check with Microsoft's PC Health Check)."),
+        term("vPro", "Intel's business management features (remote management by an IT department); it doesn't make the laptop faster for you."),
+        term("Thunderbolt and USB-C charging", "Thunderbolt is a fast USB-C port for docks and external screens. Many newer laptops charge over USB-C, so one charger fits several laptops."),
+        term("Fingerprint reader and IR camera", "Sign in to Windows Hello without a password; common on business laptops."),
+        term("Docking station", "One cable connects the laptop to monitors, keyboard, network and power at a desk; business laptops are built for it."),
+      ]],
+      ["Buying terms", [
+        term("Ex-UK laptop", "A laptop first used in the UK (often by a company) and resold in Kenya. Usually a business model built for years of use; check it like any used laptop."),
+        term("Refurbished", "A used laptop that has been checked, cleaned and fixed where needed before resale. Ask what was replaced and what the warranty covers."),
+        term("G number (G5, G8…)", "HP's generation of a model: an EliteBook 840 G5 has an 8th-gen processor, G8 11th gen. Read " + link("EliteBook models explained", `${SITE}/learn/hp-elitebook-models-explained`) + "."),
+        term("Battery health", "How much charge the battery holds compared with when new. Check with powercfg /batteryreport; 80%+ is good. See " + link("the used-laptop checklist", `${SITE}/learn/check-used-laptop-before-buying`) + "."),
+        term("BIOS password", "A lock on the laptop's settings. On a used laptop, don't buy if the seller can't remove it."),
+        term("Warranty", "What the seller fixes or replaces, and for how long. Get it in writing on the receipt."),
+      ]],
+    ];
+    const total = groups.reduce((a, [, ts]) => a + ts.length, 0);
+    return {
+      intro: `Laptop terms explained in plain English: ${total} words you'll meet in listings, from processor generations and NVMe SSDs to x360, TPM 2.0 and ex-UK, each with what it means for you. Where it helps, we add how many of the ${L.length} laptops we stock have it, with prices (${asOf}).`,
+      description: `${total} laptop terms explained in plain English: processors, RAM, SSD, NVMe, x360, touchscreen, GPU, TPM, ex-UK and more, with live Kenyan prices.`,
+      sections: groups.map(([heading, ts]) => ({ heading, body: ts.join("\n") })),
+      faq: [
+        { question: "What is the most important spec when buying a laptop?", answer: "The processor generation (8th gen or newer for Windows 11), then RAM (8 GB minimum, 16 GB for heavier work), then an SSD. Screen and battery come next." },
+        { question: "What does x360 mean on a laptop?", answer: "HP's name for a 2-in-1 whose touchscreen folds all the way back into a tablet. Lenovo calls the same idea Yoga." },
+        { question: "What is the difference between an SSD and NVMe?", answer: "NVMe is a type of SSD: it uses a faster connection than older SATA SSDs. Both are far faster than a hard drive." },
+        { question: "What does ex-UK mean?", answer: "The laptop was first used in the UK, usually by a company, and is resold in Kenya. Check its battery, BIOS and condition like any used laptop." },
+      ],
+    };
+  },
+});
+
 // Shared writer for the "models explained" articles.
 function seriesArticle(x, o) {
   const { L, ksh, median, tableMd, link, SITE, asOf } = x;

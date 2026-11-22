@@ -294,7 +294,7 @@ export const PLAYBOOK_SKIPS = [
   { playbook: "Examples", reason: "No dataset of examples (setups, builds or customer projects) exists to show." },
   { playbook: "Locations (per town)", reason: "Built one page for the real shop (/laptop-shop-nairobi). Per-county or per-town pages would differ only by the place name (same shop, same prices, same courier): doorway pages. /delivery already covers every county." },
   { playbook: "Integrations", reason: "The catalogue has no software or services that integrate with anything." },
-  { playbook: "Glossary", reason: "Term pages (what is a 2-in-1, what does 8th gen mean) would be general knowledge, not the shop's data; the spec explanations live on the list pages where they help a buyer decide." },
+  { playbook: "Glossary (one page per term)", reason: "Built as one page instead (/learn/laptop-terms-explained: about 40 terms, live stock counts, links to the guides). A page per term would be thin: most terms need a paragraph, not 600 words." },
   { playbook: "Translations", reason: "No native Swahili copy exists to build from, and machine-translated pages with hreflang would be thin duplicates. Revisit if the shop writes Swahili pages itself." },
 ];
 

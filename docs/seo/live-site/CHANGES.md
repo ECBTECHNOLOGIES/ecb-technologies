@@ -1087,3 +1087,12 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   support) where the articles cite them.
 - additions.json can now set a page's title and description (CTR tests,
   with a "since" date).
+
+## 2026-11-22: Glossary playbook
+- /learn/laptop-terms-explained: 39 laptop terms in plain English, grouped
+  (processor, memory and storage, screen, graphics, business features,
+  buying terms), with live stock counts and prices where the catalogue has
+  the data, and links to the guide where each term matters. One page, not
+  a thin page per term (the skip reason says so in /guides/pages.json).
+- Check: every URL used by the 90 published guides (329, including all
+  links in their content) returns 200.
