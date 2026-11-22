@@ -1069,3 +1069,21 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   review request messages, WhatsApp away/greeting messages, missed-call
   auto-reply, AI-recommendation checklist; city pages only with real
   per-town delivery facts (to avoid doorway pages).
+
+## 2026-11-22: Brian Dean playbook (see docs/seo/skyscraper-30-days.md)
+- Flagship page /student-laptops-kenya (flagship.js): Agree–Promise–Preview
+  opening; best laptop per course (business/law/medicine, computer science,
+  engineering, design) with realistic budget caps; budget tiers from KSh
+  25,000; where extra money goes (measured same-model RAM premium); 5-minute
+  pre-purchase check; 4 more FAQs. ~2,000 words, all from live stock.
+- On-page checklist: scripts/live-site/onpage-check.mjs (title, URL, first
+  100 words, H1, H2 variation, links near top, description). Fixes from its
+  first run: keyword opener when a guide's intro lacked it ("Looking for the
+  best laptops under KSh 25,000 in Kenya?"), keyword in directory-page H2s,
+  "Best" in the gaming and design titles, keyword-first article intros.
+  87 of 89 guides pass (2 deliberate exceptions).
+- "Related:" links near the top of every guide.
+- Outbound links to Microsoft (Windows 11 requirements, Windows 10 end of
+  support) where the articles cite them.
+- additions.json can now set a page's title and description (CTR tests,
+  with a "since" date).

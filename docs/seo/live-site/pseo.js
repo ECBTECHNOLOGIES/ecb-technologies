@@ -27,6 +27,7 @@ import { CATEGORIES, CATEGORY_OF } from "./catalog-map.js";
 import { median, ksh, pct, compare, brandOf, cpuOf, genOf, cleanRows, LAPTOP_BANDS } from "./research.js";
 import { INTROS } from "./intros.js";
 import { ARTICLES } from "./articles.js";
+import { studentFlagship } from "./flagship.js";
 
 const SITE = "https://www.ecbtechkenya.com";
 export const MIN_PRODUCTS = 10;
@@ -186,7 +187,7 @@ function candidates() {
   // Students first: it takes the "under 40k" cluster too (same laptops),
   // so the budget page is merged into it instead of competing with it.
   // Students: the established URL, rebuilt live (was a static copy).
-  c.push({ kind: "list", playbook: "Personas", type: "utility", slug: "student-laptops", path: "/student-laptops-kenya", kw: "laptops for students in Kenya", h1: "Best laptops for students in Kenya under KSh 40,000", noun: "student laptop under KSh 40,000",
+  c.push({ kind: "list", playbook: "Personas", type: "utility", slug: "student-laptops", path: "/student-laptops-kenya", kw: "laptops for students in Kenya", h1: "Best laptops for students in Kenya under KSh 40,000", noun: "student laptop under KSh 40,000", flagship: studentFlagship,
     title: (n, y) => `Best Laptops for Students in Kenya (${y}): Under KSh 40,000`, persona: "university and college students",
     pain: ["a laptop that runs Windows 11, Microsoft Office and online classes smoothly", "a price under KSh 40,000", "a battery and size that suit carrying it around campus"],
     filter: (p) => p.price <= 40000 && (p.sp.tier || 0) >= 3 && recency(p.sp) >= 3,
@@ -214,12 +215,12 @@ function candidates() {
       filter: (p) => p.sp.ram >= 16 && (p.sp.tier || 0) >= 3 && recency(p.sp) >= 4,
       angle: (s) => `Every pick has 16 GB of RAM or more and a 10th-gen or newer Core i5 class processor or better: the floor for running an IDE, a browser and containers together. ${s.pool} laptops qualify.` },
     { kind: "list", playbook: "Personas", type: "utility", slug: "design-laptops", path: "/best/laptops-for-graphic-design-and-video-editing-kenya", kw: "laptops for graphic design and video editing in Kenya", h1: "Laptops for graphic design and video editing in Kenya",
-      title: (n, y) => `Laptops for Graphic Design & Video Editing in Kenya (${y})`, noun: "laptop for design and video editing", persona: "graphic designers, video editors, architects and engineers",
+      title: (n, y) => `Best Laptops for Design & Video Editing in Kenya (${y})`, noun: "laptop for design and video editing", persona: "graphic designers, video editors, architects and engineers",
       pain: ["graphics power for Adobe apps, CAD and rendering", "16 GB of RAM or more for large files", "a fast processor for exports"],
       filter: (p) => p.sp.ram >= 16 && (p.sp.gpu || p.sp.cpu === "Apple M-series" || /-(zbook|precision)-/.test(`-${p.slug}-`)),
       angle: (s) => `Each pick has 16 GB of RAM or more and either a dedicated graphics card, a workstation chassis (ZBook, Precision) or an Apple M chip. ${s.pool} laptops qualify.` },
     { kind: "list", playbook: "Personas", type: "utility", slug: "gaming-laptops", path: "/best/gaming-laptops-kenya", kw: "gaming laptops in Kenya", h1: "Gaming laptops in Kenya",
-      title: (n, y) => `Gaming Laptops in Kenya (${y}): ${n} With Real Graphics Cards`, noun: "gaming laptop", persona: "gamers and students who also game",
+      title: (n, y) => `Best Gaming Laptops in Kenya (${y}): ${n} With Real GPUs`, noun: "gaming laptop", persona: "gamers and students who also game",
       pain: ["a dedicated graphics card (integrated graphics struggle with modern games)", "cooling that holds up in long sessions", "a price that leaves room for a headset and mouse"],
       filter: (p) => p.sp.gpu || /-(omen|victus|legion|rog|nitro|predator|alienware|gaming)-/.test(`-${p.slug}-`),
       angle: (s) => `Only laptops with a dedicated graphics card or a gaming line (OMEN, Victus, Legion and similar) are listed. ${s.pool} laptops qualify.` },
@@ -459,6 +460,16 @@ function premium(L, fa, fb, { sameModel = true, sameCpu = false } = {}) {
   const d = median(diffs);
   return d > 0 ? { diff: Math.round(d / 500) * 500, n: diffs.length } : null;
 }
+// Does the text use the keyword's main words? ("25k" = "KSh 25,000", "16GB" = "16 GB")
+function kwInText(kw, text) {
+  const norm = (t) => String(t).toLowerCase().replace(/(\d+),(\d{3})/g, "$1$2").replace(/\b(\d+)k\b/g, "$1000").replace(/(\d)(gb|tb)\b/g, "$1 $2").replace(/ksh\s*/g, "");
+  const stop = new Set("a an the in of for to and or is are with on at do i my what which how does vs kenya nairobi best price prices".split(" "));
+  const t = ` ${norm(text).replace(/[^a-z0-9]+/g, " ")} `;
+  const ws = norm(kw).replace(/[^a-z0-9]+/g, " ").trim().split(" ").filter((w) => w && !stop.has(w));
+  const hit = (w) => t.includes(` ${w} `) || t.includes(` ${w.replace(/s$/, "")} `) || t.includes(` ${w.replace(/s$/, "")}s `);
+  return !ws.length || ws.filter(hit).length / ws.length >= 0.75;
+}
+
 function articleCandidates() {
   // Short-answer questions: held to the 600-word minimum of buying guides
   // ("useful at a glance"), not the 900 words of long informational pages.
@@ -692,14 +703,21 @@ function writePage(p, all, ctxAll) {
     title = p.title(items.length, year, s);
     const top = [...items].sort((a, b) => b.score - a.score || a.price - b.price)[0];
     const cheapest = items.find((it) => it.url.endsWith(ctx.cheapest));
-    intro = `${p.angle(s)} The best specified is the ${top.name} at ${ksh(top.price)} (${top.specs}). The cheapest on the list is the ${cheapest.name} at ${ksh(cheapest.price)}. Prices as of ${asOf}, from the live shop.`;
+    const fl = p.flagship ? p.flagship({ L: ctxAll.laptops || [], ksh, median, link, tableMd, specLine, SITE, asOf, recency, premium }) : null;
+    const h = p.h1;
+    const opener = fl || kwInText(p.kw, p.angle(s)) ? "" : /^Best /.test(h) ? `Looking for the best ${h.slice(5)}? ` : `Looking for ${/^[A-Z][a-z]/.test(h) ? h[0].toLowerCase() + h.slice(1) : h}? `;
+    intro = `${opener}${fl ? fl.lead + " " : ""}${p.angle(s)} The best specified is the ${top.name} at ${ksh(top.price)} (${top.specs}). The cheapest on the list is the ${cheapest.name} at ${ksh(cheapest.price)}. Prices as of ${asOf}, from the live shop.`;
     // Keyword map: the description leads with the page's main keyword.
     const lead = p.h1.replace(/^Best /, "best ").replace(/^(\w)/, (m) => m.toUpperCase());
     description = `${lead}: ${s.pool} in stock from ${ksh(s.from)}, top ${items.length} ranked by specs. Prices as of ${asOf}. ECB Technologies, Nairobi CBD.`;
     if (p.persona) {
       sections.push({ heading: `What ${p.persona} need`, body: `People in this group usually need ${p.pain.slice(0, -1).join(", ")} and ${p.pain[p.pain.length - 1]}. The filter for this page turns those needs into rules a listing either meets or does not: ${p.angle(s)}` });
     }
-    sections.push({ heading: p.directory ? "The best pick in every budget" : `The ${items.length} best picks`, body: items.map(itemMd).join("\n"), items });
+    sections.push({ heading: p.directory ? `${(p.noun || "laptop").replace(/^\w/, (m) => m.toUpperCase())}s: the best pick in every budget` : `The ${items.length} best picks`, body: items.map(itemMd).join("\n"), items });
+    if (fl) {
+      sections.push(...fl.sections);
+      faq.push(...fl.faq);
+    }
     // Summary table.
     sections.push({
       heading: "Comparison summary",
@@ -710,7 +728,7 @@ function writePage(p, all, ctxAll) {
     for (const r of p.pool) brands[brandOf(r.slug)] = (brands[brandOf(r.slug)] || 0) + 1;
     const topBrands = Object.entries(brands).sort((a, b) => b[1] - a[1]);
     sections.push({
-      heading: p.directory ? "Filter the full range" : `All ${s.pool} matching laptops at a glance`,
+      heading: p.directory ? `All ${s.pool} ${(p.noun || "laptop")}s at a glance` : `All ${s.pool} matching laptops at a glance`,
       body:
         `Of the ${s.pool} laptops that match, ${f.ram16}% have 16 GB of RAM or more, ${f.ssd512}% have a 512 GB SSD or bigger, ${f.touch}% have a touchscreen and ${f.recent}% have a 10th-gen or newer processor (or an Apple M / Intel Core Ultra chip). ` +
         `Prices run from ${ksh(f.from)} to ${ksh(f.max)}, with half below ${ksh(f.median)}. ` +
@@ -1078,6 +1096,11 @@ function writePage(p, all, ctxAll) {
   if (add) {
     for (const sec of add.sections || []) if (sec && sec.heading && sec.body) sections.push({ heading: String(sec.heading), body: String(sec.body) });
     for (const q of add.faq || []) if (q && q.question && q.answer) faq.push({ question: String(q.question), answer: String(q.answer) });
+    // Click-through tests (Chapter 7): a new title or description for a page
+    // with low CTR for its position. Record "since" and compare CTR after
+    // 2-4 weeks; keep the winner (gsc-opportunities.mjs shows CTR by page).
+    if (add.title && String(add.title).length <= 60) title = String(add.title);
+    if (add.description && String(add.description).length <= 158) description = String(add.description);
   }
   // Links.
   const guideLinks = [...sib, ...cross].map((a) => ({ url: SITE + a.path, title: a.h1 }));
@@ -1196,7 +1219,10 @@ export function pageHtml(doc) {
   return (
     `<div class="ecb-rs ecb-pg"><p class="ecb-rs-meta">By <a href="/about">ECB Technologies</a>, laptop and phone shop on <a href="/laptop-shop-nairobi">Moi Avenue, Nairobi CBD</a> · Updated ${escH(v.updated || "")}</p>` +
     (INTROS[doc.url.replace(SITE, "")] ? `<div class="ecb-pg-about"><strong>From the shop.</strong> ${INTROS[doc.url.replace(SITE, "")].split(/\n\s*\n/).map(escH).join("</p><p>")}</div>` : "") +
-    `<p class="ecb-rs-lead"><strong>${escH(c.introduction)}</strong></p>${body}${faq}` +
+    `<p class="ecb-rs-lead"><strong>${escH(c.introduction)}</strong></p>` +
+    // On-page checklist: internal links near the top, not only at the end.
+    (doc.related_pages.length ? `<p class="ecb-pg-also">Related: ${doc.related_pages.slice(0, 3).map((r) => `<a href="${r.url.replace(SITE, "")}">${escH(r.title)}</a>`).join(" · ")}</p>` : "") +
+    `${body}${faq}` +
     `<p class="ecb-pg-about"><strong>About this guide.</strong> We sell these laptops at our shop on Moi Avenue, where you can see any of them before paying. Prices, specs and stock come from our live listings, the ranking formula is published on this page, and the guide updates itself when prices change. Questions or corrections: <a href="${v.wa}" rel="nofollow">WhatsApp ${PHONE}</a>.</p>` +
     `<p class="ecb-pg-cta">${escH(c.call_to_action)} <a href="${v.wa}" rel="nofollow">WhatsApp us</a></p>` +
     `<p class="ecb-rs-meta">Built from the live catalogue · <a href="${doc.url.replace(SITE, "")}.md">Markdown</a> · <a href="/guides">All guides</a></p></div>`
@@ -1250,6 +1276,7 @@ export function hubMarkdown(built) {
 export const PSEO_CSS =
   ".ecb-pg h2{margin:34px 0 12px}.ecb-pg h3{font-size:16px;margin:18px 0 6px}.ecb-pg-items{padding-left:22px}.ecb-pg-items li{margin:0 0 18px}" +
   ".ecb-pg-name{margin:0 0 2px;font-size:16px}.ecb-pg-price{font-family:inherit;white-space:nowrap;margin-left:6px;color:#e8191a;font-weight:700}" +
+  ".ecb-pg-also{font-size:14px;color:#4a5568;margin:-4px 0 18px}" +
   ".ecb-pg-about{margin:24px 0 8px;padding:14px 16px;background:#f4f7fb;border-radius:8px;font-size:14px;line-height:1.6;color:#4a5568}" +
   ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #1683ff;border-radius:12px;background:#f4f8ff}" +
   ".ecb-pg ul{padding-left:20px}.ecb-pg li{line-height:1.6}";

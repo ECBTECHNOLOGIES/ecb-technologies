@@ -74,9 +74,9 @@ export const ARTICLES = [
           {
             heading: "Windows 11 and older laptops",
             body: [
-              "Microsoft's official minimum for Windows 11 is an Intel 8th-gen processor or newer (plus a small number of 7th-gen chips), TPM 2.0 and Secure Boot. Business laptops from the 8th-gen era usually have TPM 2.0; you can check in Windows with the PC Health Check app.",
+              "Microsoft's official minimum for Windows 11 ([Windows 11 specifications](https://www.microsoft.com/en-us/windows/windows-11-specifications)) is an Intel 8th-gen processor or newer (plus a small number of 7th-gen chips), TPM 2.0 and Secure Boot. Business laptops from the 8th-gen era usually have TPM 2.0; you can check in Windows with the PC Health Check app.",
               "",
-              `Older laptops keep running Windows 10, but Windows 10 stopped getting regular free security updates in October 2025. For a laptop you will use online every day, that makes 8th gen the sensible minimum. At ECB Technologies, ${win11}% of laptops in stock are 8th gen or newer (or AMD Ryzen, Apple M or Intel Core Ultra).`,
+              `Older laptops keep running Windows 10, but Windows 10 stopped getting regular free security updates in October 2025 ([Microsoft: Windows 10 end of support](https://www.microsoft.com/en-us/windows/end-of-support)). For a laptop you will use online every day, that makes 8th gen the sensible minimum. At ECB Technologies, ${win11}% of laptops in stock are 8th gen or newer (or AMD Ryzen, Apple M or Intel Core Ultra).`,
             ].join("\n"),
           },
           {
@@ -116,7 +116,7 @@ export const ARTICLES = [
       const prem = x.premium(L, (r) => r.sp.ram === 8, (r) => r.sp.ram === 16, { sameModel: true });
       const prem32 = x.premium(L, (r) => r.sp.ram === 16, (r) => r.sp.ram >= 32, { sameModel: true });
       return {
-        intro: `8 GB of RAM is enough for documents, browsing and video calls; 16 GB is the better choice if you keep many browser tabs open, program, or edit photos; 32 GB is for video editing, virtual machines and heavy design work. At ECB Technologies, ${pct(r16.length + r32.length, L.length)}% of laptops have 16 GB or more. ${prem ? `For the same model, the 16 GB version costs a median of ${ksh(prem.diff)} more than the 8 GB version.` : ""} (${asOf})`,
+        intro: `How much RAM do you need in a laptop? 8 GB is enough for documents, browsing and video calls; 16 GB is the better choice if you keep many browser tabs open, program, or edit photos; 32 GB is for video editing, virtual machines and heavy design work. At ECB Technologies, ${pct(r16.length + r32.length, L.length)}% of laptops have 16 GB or more. ${prem ? `For the same model, the 16 GB version costs a median of ${ksh(prem.diff)} more than the 8 GB version.` : ""} (${asOf})`,
         description: `8 GB vs 16 GB vs 32 GB laptop RAM: what each is enough for, what the upgrade costs in Kenya for the same model, and whether you can add RAM later.`,
         sections: [
           {
@@ -271,7 +271,7 @@ export const ARTICLES = [
           {
             heading: "The 12 checks",
             body: [
-              "1. **Processor generation.** Settings → System → About. 8th gen or newer runs Windows 11; older models stay on Windows 10. " + `(${old}% of the laptops we list are 7th gen or older; their listings say so.)`,
+              "1. **Processor generation.** Settings → System → About. 8th gen or newer runs Windows 11 ([Microsoft's requirements](https://www.microsoft.com/en-us/windows/windows-11-specifications)); older models stay on Windows 10. " + `(${old}% of the laptops we list are 7th gen or older; their listings say so.)`,
               "2. **Battery health.** Open Command Prompt and run `powercfg /batteryreport`, then open the report it saves. Compare *Full charge capacity* with *Design capacity*: above 80% is good, below 60% means a replacement battery soon.",
               "3. **BIOS access.** Restart and press the setup key (F1 on Lenovo ThinkPads, F10 on HP, F2 on Dell). If it asks for a supervisor password you don't have, don't buy: you won't be able to change boot or security settings.",
               "4. **Windows activation.** Settings → System → Activation should say \"Windows is activated\".",
@@ -563,7 +563,7 @@ function seriesArticle(x, o) {
   const topModels = Object.entries(models).filter(([, ps]) => ps.length >= 2).sort((a, b) => b[1].length - a[1].length).slice(0, 8);
   const med = median(rows.map((r) => r.price));
   return {
-    intro: `${o.naming[0].replace(/\*\*/g, "")} ${o.naming[1].replace(/\*\*/g, "")} At ECB Technologies we have ${rows.length} ${o.brand} laptops from ${ksh(Math.min(...rows.map((r) => r.price)))} (median ${ksh(med)}, ${asOf}); the tables below show which models are in stock and what they cost.`,
+    intro: `${o.brand.replace(/^(Lenovo|HP|Dell) /, "")} models explained: ${o.naming[0].replace(/\*\*/g, "").replace(/^(\w)(?=[a-z])/, (m) => m.toLowerCase())} ${o.naming[1].replace(/\*\*/g, "")} At ECB Technologies we have ${rows.length} ${o.brand} laptops from ${ksh(Math.min(...rows.map((r) => r.price)))} (median ${ksh(med)}, ${asOf}); the tables below show which models are in stock and what they cost.`,
     description: `${o.brand} model names decoded: what the letters and numbers mean, which generation each model has, and what each costs in Kenya.`,
     sections: [
       { heading: `The ${o.brand} lines`, body: tableMd(["Line", "What it is"], o.roles) },

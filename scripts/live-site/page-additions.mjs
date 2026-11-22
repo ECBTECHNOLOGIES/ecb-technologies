@@ -29,7 +29,9 @@ for (const [path, v] of Object.entries(all)) {
     if (!q.question || !q.answer) problems.push(`${path}: FAQ needs question and answer`);
     if (/TODO/i.test(q.answer || "")) problems.push(`${path}: FAQ answer still says TODO`);
   }
-  next[path] = { sections: v.sections || [], faq: v.faq || [] };
+  if (v.title && v.title.length > 60) problems.push(`${path}: title over 60 characters`);
+  if (v.description && v.description.length > 158) problems.push(`${path}: description over 158 characters`);
+  next[path] = { sections: v.sections || [], faq: v.faq || [], ...(v.title ? { title: v.title } : {}), ...(v.description ? { description: v.description } : {}), ...(v.since ? { since: v.since } : {}) };
 }
 if (problems.length) {
   console.error(problems.join("\n"));

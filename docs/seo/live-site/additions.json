@@ -1,7 +1,20 @@
 {
   "_readme": "Extra sections and FAQ entries for guide pages, from Search Console work (see docs/seo/gsc-loop.md). Key: page path. Push with: node scripts/live-site/page-additions.mjs",
   "_example": {
-    "sections": [{ "heading": "A heading people search for", "body": "Markdown paragraph(s). Links: [text](https://www.ecbtechkenya.com/...)" }],
-    "faq": [{ "question": "A question from the Queries report?", "answer": "A direct answer in one to three sentences." }]
+    "sections": [
+      {
+        "heading": "A heading people search for",
+        "body": "Markdown paragraph(s). Links: [text](https://www.ecbtechkenya.com/...)"
+      }
+    ],
+    "faq": [
+      {
+        "question": "A question from the Queries report?",
+        "answer": "A direct answer in one to three sentences."
+      }
+    ],
+    "title": "Optional: a new title to test (60 characters max)",
+    "description": "Optional: a new meta description to test (158 characters max)",
+    "since": "YYYY-MM-DD the title/description went live (for the CTR comparison)"
   }
 }
