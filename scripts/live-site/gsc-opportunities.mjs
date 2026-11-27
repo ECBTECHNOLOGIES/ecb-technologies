@@ -15,6 +15,7 @@
 //   4. Queries with impressions but no page targeting them (needs Queries.csv):
 //      candidates for an FAQ entry or a new page.
 import fs from "node:fs";
+import { INTENTS, classify } from "./gsc-intents.mjs";
 
 const [pagesCsv, queriesCsv] = process.argv.slice(2);
 if (!pagesCsv) {
@@ -85,4 +86,26 @@ if (queriesCsv) {
     .slice(0, 30);
   for (const x of questions) console.log(`  "${x.q}"  ${x.imp} impressions, pos ${x.pos.toFixed(1)}`);
   if (!questions.length) console.log("  none");
+}
+
+if (queriesCsv) {
+  console.log(`\n5. Queries by intent (regex filters in gsc-intents.mjs)\n`);
+  const Q = readCsv(queriesCsv);
+  const q = { imp: cols(Q.head, "impressions"), clicks: cols(Q.head, "clicks"), pos: cols(Q.head, "position") };
+  const agg = {};
+  let unmatched = 0;
+  for (const r of Q.rows) {
+    const ids = classify(r[0]);
+    if (!ids.length) unmatched++;
+    for (const id of ids) {
+      const a = (agg[id] = agg[id] || { n: 0, imp: 0, clicks: 0, posw: 0, top: [] });
+      const imp = num(r[q.imp.cur]);
+      a.n++; a.imp += imp; a.clicks += num(r[q.clicks.cur]); a.posw += num(r[q.pos.cur]) * imp; a.top.push([r[0], imp]);
+    }
+  }
+  for (const x of INTENTS.filter((i) => agg[i.id]).sort((a, b) => agg[b.id].imp - agg[a.id].imp)) {
+    const a = agg[x.id];
+    console.log(`  ${x.label.padEnd(42)} ${String(a.n).padStart(5)} queries ${String(a.imp).padStart(7)} impr ${String(a.clicks).padStart(5)} clicks  pos ${(a.imp ? a.posw / a.imp : 0).toFixed(1)}  e.g. "${a.top.sort((m, n) => n[1] - m[1])[0][0]}"`);
+  }
+  console.log(`  (${unmatched} queries matched no intent)`);
 }

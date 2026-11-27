@@ -1220,3 +1220,12 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   accessories), chosen from live related pages or set per article.
 - docs/seo/money-pages.md: measurement (money pages in GSC, AI-referred
   sessions in GA4, conversions, quarterly Share of Model prompts).
+
+## 2026-11-27: Search Console regex filters
+- scripts/live-site/gsc-intents.mjs: 19 RE2 intent filters for ECB
+  (transactional, commercial, informational, problems, brand, questions,
+  8+ word AI-style queries, budgets, models, specs, condition, students,
+  business, repairs, trust, local, payment, marketplaces).
+- gsc-opportunities.mjs list 5: queries grouped by intent (impressions,
+  clicks, position, top query).
+- docs/seo/gsc-regex.md: copy-paste filters and useful combinations.
