@@ -1193,3 +1193,14 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - Articles can set their hub group (playbook); quality-gate test keys on template.
 - Google Business Profile plan: add the "Computer repair service" category and a repairs service.
 - Maps: 494 of 500 questions answered.
+
+## 2026-11-27: Paystack as the primary payment method (site side)
+- The shop's built-in Paystack integration exists (/checkout/payment/paystack-submit)
+  but is switched off in the admin; enabling it needs the admin login and
+  the Paystack keys (owner).
+- Checkout (Worker): when Paystack is offered, it's moved to the top of the
+  payment options and preselected; Cash on Delivery stays available. No-op
+  while Paystack is off.
+- Cart and checkout: stub for the theme's missing jQuery counterUp plugin
+  (it threw an error on every load); checkout now runs without script errors.
+- No Content-Security-Policy blocks Paystack's script or popup.

@@ -76,7 +76,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "105";
+const VERSION = "107";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -961,6 +961,8 @@ function ogImage() {
 // Account, cart, checkout, agent and rider pages: unchanged, but kept out of
 // search results.
 const PRIVATE = /^\/(user|vendor|rider|agent|cart|carts|checkout|wishlist|compare|login|register)(\/|$)/i;
+const PAYSTACK_FIRST_JS = `(function(){function go(){var opts=[].slice.call(document.querySelectorAll('.ecb-payment-option,[data-form]'));var ps=opts.filter(function(el){return /paystack/i.test((el.getAttribute('data-form')||'')+' '+el.textContent);})[0];if(!ps)return;var parent=ps.parentNode;if(parent&&parent.firstElementChild!==ps)parent.insertBefore(ps,parent.firstElementChild);if(!/selected|active/.test(ps.className)){ps.click();}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();})();`;
+
 async function privatePage(request, url) {
   const res = await fetch(request);
   const isHtmlRes = (res.headers.get("Content-Type") || "").includes("text/html");
@@ -980,6 +982,36 @@ async function privatePage(request, url) {
   if (!PRIVATE.test(url.pathname) || !isHtmlRes) return res;
   const out = new Response(res.body, res);
   out.headers.set("X-Robots-Tag", "noindex, follow");
+  // Theme bug: cart and checkout call jQuery's counterUp plugin without
+  // loading it, which throws on every page load. A no-op stub right after
+  // jQuery keeps later scripts (and the Paystack popup) error-free.
+  const COUNTER_STUB = '<script>if(window.jQuery&&!jQuery.fn.counterUp)jQuery.fn.counterUp=function(){return this};</script>';
+  if (/^\/(carts?|checkout)(\/|$)/.test(url.pathname)) {
+    return new HTMLRewriter()
+      .on('script[src*="jquery.min.js"]', {
+        element(e) {
+          e.after(COUNTER_STUB, { html: true });
+        },
+      })
+      .on("body", {
+        element(e) {
+          if (/^\/checkout(\/|$)/.test(url.pathname)) e.append(`<script>${PAYSTACK_FIRST_JS}</script>`, { html: true });
+        },
+      })
+      .transform(out);
+  }
+  if (/^\/checkout(\/|$)/.test(url.pathname)) {
+    // Paystack is the primary payment method: when the shop offers it (it's
+    // switched on in the admin), list it first and select it by default.
+    // Does nothing while Paystack is off, so Cash on Delivery stays as is.
+    return new HTMLRewriter()
+      .on("body", {
+        element(e) {
+          e.append(`<script>${PAYSTACK_FIRST_JS}</script>`, { html: true });
+        },
+      })
+      .transform(out);
+  }
   if (!SKIN) return out;
   // Same look on account, cart and checkout pages (styles only).
   return new HTMLRewriter()
