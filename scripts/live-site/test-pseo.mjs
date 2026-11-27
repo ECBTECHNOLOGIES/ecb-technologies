@@ -37,7 +37,7 @@ test("slugs and primary keywords are unique", () => {
 });
 test("every published page meets the quality gates", () => {
   for (const d of built.pages) {
-    const min = /-price-kenya$/.test(d.url) && /\/laptops\//.test(d.url) ? 300 : /Comparisons|Profiles|Locations/.test(d.playbook_type) ? 900 : 600;
+    const min = d._template === "model" ? 300 : d._template === "article" ? 600 : /Comparisons|Profiles|Locations/.test(d.playbook_type) ? 900 : 600;
     assert.ok(G.wordCount(d) >= min, `${d.url} words`);
     assert.ok(d.content.faq.length >= 3, `${d.url} faq`);
     assert.ok(d.internal_links.length >= 5, `${d.url} links`);

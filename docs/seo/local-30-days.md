@@ -32,7 +32,8 @@ must match the dropdown):
   **Computer accessories store**, **Used computer store**, **Printer store**
   or "Office equipment supplier", **Video game store** (if gaming gear is a
   real line).
-- Don't add services you don't offer (e.g. repairs) just for the category.
+- **Computer repair service** (the shop does repairs; confirmed 27 Nov 2026).
+- Don't add services you don't offer just for the category.
 
 **Name:** ECB Technologies (no extra keywords; Google suspends for that).
 
@@ -67,6 +68,7 @@ update the numbers from the website when they change):
 | Gaming and design laptops | Laptops with dedicated graphics cards for gaming, design and video editing. |
 | Phones and tablets | iPhones, Samsung phones, iPads and tablets, with prices in KSh. |
 | Printers and monitors | Printers, scanners and monitors for home and office. |
+| Laptop repairs | Laptop repairs at the shop on Moi Avenue: bring the laptop and charger for a diagnosis and quote, or WhatsApp 0717 040 531 first. ecbtechkenya.com/laptop-repair-nairobi |
 | Delivery across Kenya | Riders within Nairobi, couriers to all 47 counties; delivery cost shown at checkout. Free pickup at the shop. |
 
 **Also:** add 10+ real photos (shopfront and building entrance, inside the

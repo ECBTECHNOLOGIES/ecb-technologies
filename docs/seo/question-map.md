@@ -85,9 +85,9 @@ Every question from the brief, mapped to the page that answers it (live on www.e
 | 79 | Screen size? | `/learn/laptop-buying-guide-kenya` | Step 4 |
 | 80 | Should I buy a touchscreen? | `/learn/touchscreen-laptop-worth-it-kenya` | Article |
 | 81 | Battery drains fast? | `/learn/laptop-battery-and-overheating-fixes` | Article |
-| 82 | Battery replacement cost in Kenya? | — | Not answered: no verified price data (the shop's repair prices are unknown) |
-| 83 | Screen repair cost in Kenya? | — | Not answered: no verified price data |
-| 84 | Where to repair a laptop in Nairobi? | — | Not built: the shop hasn't confirmed it offers repairs. Add if it does |
+| 82 | Battery replacement cost in Kenya? | `/laptop-repair-nairobi` | Repair page: cost depends on model and part; diagnosis and quote (no invented price) |
+| 83 | Screen repair cost in Kenya? | `/laptop-repair-nairobi` | Same: quote after diagnosis |
+| 84 | Where to repair a laptop in Nairobi? | `/laptop-repair-nairobi` | New page (owner confirmed ECB does repairs) |
 | 85 | Faulty motherboard signs? | `/learn/laptop-battery-and-overheating-fixes` | Section |
 | 86 | Laptop overheats? | `/learn/laptop-battery-and-overheating-fixes` | Section |
 | 87 | RAM upgrade cost in Kenya? | `/learn/laptop-upgrade-ram-ssd` | How-to only; no verified prices |
@@ -97,7 +97,7 @@ Every question from the brief, mapped to the page that answers it (live on www.e
 | 91 | Genuine HP laptops in Kenya? | `/laptops/hp-laptops-kenya` | Live brand page |
 | 92 | Dell laptops in Nairobi? | `/laptops/dell-laptops-kenya` | Live brand page |
 | 93 | Affordable Lenovo laptops? | `/laptops/lenovo-laptops-kenya` | Live brand page + Lenovo budget combos |
-| 94 | Brand-new laptops in Kenya? | — | Not built: the catalogue doesn't label new vs used (only 2 listings say 'new'). Needs a condition field |
+| 94 | Brand-new laptops in Kenya? | `/laptop-shop-nairobi` | Owner confirmed ECB sells new, refurbished and ex-UK laptops; listings don't yet say which, so no "new only" list |
 | 95 | Refurbished laptops in Nairobi? | `/laptop-shop-nairobi` | See 62 |
 | 96 | Can I buy laptops online in Kenya? | `/laptop-shop-nairobi` | How to buy + /delivery |
 | 97 | Laptop shops with warranties? | `/laptop-shop-nairobi` | States what listings say (14 name a warranty); ask for the rest |
@@ -105,4 +105,4 @@ Every question from the brief, mapped to the page that answers it (live on www.e
 | 99 | Countrywide delivery? | `/delivery` | All 47 counties |
 | 100 | Most trusted laptop shop in Kenya? | `/laptop-shop-nairobi` | Facts only (address, hours, delivery); reviews are the owner's job (docs/seo/local-30-days.md) |
 
-**94 of 100 answered on live pages; 6 not answered**, each for a stated reason (no stock, no verified price data, or a business fact the shop hasn't confirmed).
+**98 of 100 answered on live pages; 2 not answered**: ASUS and Acer (not stocked).

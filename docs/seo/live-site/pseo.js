@@ -473,7 +473,7 @@ function kwInText(kw, text) {
 function articleCandidates() {
   // Short-answer questions: held to the 600-word minimum of buying guides
   // ("useful at a glance"), not the 900 words of long informational pages.
-  return ARTICLES.map((a) => ({ ...a, kind: "article", playbook: "Learn", type: "utility", h1: a.h1, title: () => a.title }));
+  return ARTICLES.map((a) => ({ ...a, kind: "article", playbook: a.playbook || "Learn", type: "utility", h1: a.h1, title: () => a.title }));
 }
 
 // Template ids, for turning a template off and for comparing how each
@@ -623,11 +623,11 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   for (const d of out) {
     d.internal_links = d.internal_links.filter((u) => !isGuideUrl(u) || live.has(u));
     d.related_pages = d.related_pages.filter((r) => live.has(r.url));
-    for (const s of d.content.sections) s.body = s.body.replace(/\[([^\]]+)\]\((https:\/\/www\.ecbtechkenya\.com\/(?:best|compare|series|laptops|phones|learn)\/[^)]+|laptop-shop-nairobi|student-laptops-kenya)\)/g, (m, t, u) => (live.has(u) ? m : t));
+    for (const s of d.content.sections) s.body = s.body.replace(/\[([^\]]+)\]\((https:\/\/www\.ecbtechkenya\.com\/(?:best|compare|series|laptops|phones|learn)\/[^)]+|laptop-shop-nairobi|laptop-repair-nairobi|student-laptops-kenya)\)/g, (m, t, u) => (live.has(u) ? m : t));
   }
   return { pages: out, skipped: [...skipped, ...PLAYBOOK_SKIPS.map((s) => ({ status: "SKIPPED", ...s }))], changedAt, newlySeen };
 }
-const isGuideUrl = (u) => /^https:\/\/www\.ecbtechkenya\.com\/(learn\/|best\/|compare\/|series\/|laptops\/|phones\/|laptop-shop-nairobi$|student-laptops-kenya$)/.test(u);
+const isGuideUrl = (u) => /^https:\/\/www\.ecbtechkenya\.com\/(learn\/|best\/|compare\/|series\/|laptops\/|phones\/|laptop-shop-nairobi$|laptop-repair-nairobi$|student-laptops-kenya$)/.test(u);
 
 // ---------- writing ----------
 
@@ -1281,7 +1281,7 @@ export const PSEO_CSS =
   ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #1683ff;border-radius:12px;background:#f4f8ff}" +
   ".ecb-pg ul{padding-left:20px}.ecb-pg li{line-height:1.6}";
 
-export const GUIDE_PATH = /^\/(guides|laptop-shop-nairobi|student-laptops-kenya|learn\/[a-z0-9-]+|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+|phones\/[a-z0-9-]+)$/;
+export const GUIDE_PATH = /^\/(guides|laptop-shop-nairobi|laptop-repair-nairobi|student-laptops-kenya|learn\/[a-z0-9-]+|best\/[a-z0-9-]+|compare\/[a-z0-9-]+|series\/[a-z0-9-]+|laptops\/[a-z0-9-]+|phones\/[a-z0-9-]+)$/;
 
 // ---------- /hp-vs-dell-vs-lenovo-laptops-kenya (live numbers) ----------
 // The three-brand page used to be a static snapshot (15 Nov); counts, prices

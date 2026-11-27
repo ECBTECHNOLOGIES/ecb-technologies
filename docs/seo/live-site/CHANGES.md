@@ -1180,3 +1180,16 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - Redirect: /learn/windows-11-home-vs-pro-and-reset-guide → /learn/windows-11-home-vs-pro
   (renamed on publication day).
 - Master map: 490 of 500 questions answered.
+
+## 2026-11-27: owner-confirmed facts: repairs; new, refurbished and ex-UK stock
+- New page /laptop-repair-nairobi (Visit the shop group): how repairs work
+  (diagnosis and quote), quick checks first, what to bring, typical repairs
+  and cost factors, repair or replace (live median of business laptops),
+  questions to ask; WhatsApp link with a prefilled repair message. No
+  prices, turnaround times or repair warranty quoted (not confirmed).
+- Stated on /laptop-shop-nairobi (section + 2 FAQs), the refurbished and
+  buying-safely guides: ECB sells new, refurbished and ex-UK laptops; ask
+  which a listing is. Troubleshooting pages link to repairs.
+- Articles can set their hub group (playbook); quality-gate test keys on template.
+- Google Business Profile plan: add the "Computer repair service" category and a repairs service.
+- Maps: 494 of 500 questions answered.

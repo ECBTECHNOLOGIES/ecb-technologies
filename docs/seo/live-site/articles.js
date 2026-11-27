@@ -2136,3 +2136,43 @@ ARTICLES.push({
     };
   },
 });
+
+// ---------- Repairs (confirmed by the owner, 27 Nov 2026) ----------
+// ECB Technologies does laptop repairs and sells new, refurbished and ex-UK
+// laptops. No repair prices, turnaround times or repair warranty have been
+// confirmed, so the page quotes none: diagnosis and a quote first.
+ARTICLES.push({
+  slug: "repairs",
+  playbook: "Locations",
+  path: "/laptop-repair-nairobi",
+  kw: "laptop repair in Nairobi",
+  secondary: ["laptop repair shop nairobi cbd", "where can i repair my laptop in nairobi", "laptop screen repair nairobi", "laptop battery replacement nairobi", "repair or replace laptop"],
+  h1: "Laptop repair in Nairobi CBD: ECB Technologies, Moi Avenue",
+  title: "Laptop Repair in Nairobi CBD | ECB Technologies, Moi Avenue",
+  related: ["/laptop-shop-nairobi", "/learn/laptop-hardware-problems-and-inspection", "/learn/laptop-slow-freezing-not-charging-fixes"],
+  write(x) {
+    const { L, ksh, median, link, SITE, PHONE, recency } = x;
+    if (L.length < 50) return null;
+    const biz8 = L.filter((r) => /-(thinkpad|elitebook|latitude|probook)-/.test(`-${r.slug}-`) && recency(r.sp) >= 3);
+    const wa = `https://wa.me/254717040531?text=${encodeURIComponent("Hello ECB Technologies, I need my laptop repaired. Model: __. Problem: __.")}`;
+    return {
+      intro: `For laptop repair in Nairobi, ECB Technologies repairs laptops at its shop on the 3rd floor of Techmart Iconic Business Plaza, room T12, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm). Bring the laptop and its charger for a diagnosis and a quote, or send the model and a description of the problem on WhatsApp (${PHONE}) first. If the repair isn't worth it, we also sell new, refurbished and ex-UK laptops, so you can compare on the spot.`,
+      description: "Laptop repair in Nairobi CBD at ECB Technologies, Moi Avenue: diagnosis and quote, what to bring, repair or replace, and common laptop problems to check first.",
+      sections: [
+        { heading: "How it works", body: `1. **Message or visit:** send the laptop model and the problem on [WhatsApp](${wa}) (${PHONE}), or bring it to the shop.\n2. **Diagnosis:** the laptop is checked to find the cause.\n3. **Quote:** you get the cost and an idea of the time before deciding.\n4. **Repair or replace:** if a repair isn't worth it on an older laptop, compare with a replacement in the shop.\n\nShop: Techmart Iconic Business Plaza, 3rd floor, room T12, Moi Avenue, Nairobi CBD. Monday to Saturday, 9am to 7pm; closed Sunday. ${link("Directions and shop details", `${SITE}/laptop-shop-nairobi`)}.` },
+        { heading: "Before you bring it in: quick checks", body: `Many problems are software and can be fixed at home in minutes:\n\n- Slow, freezing, restarting, not charging: ${link("common laptop problems and fixes", `${SITE}/learn/laptop-slow-freezing-not-charging-fixes`)}\n- Battery draining or overheating: ${link("battery and overheating fixes", `${SITE}/learn/laptop-battery-and-overheating-fixes`)}\n- Keyboard, screen flicker, hinges, water damage: ${link("hardware problems", `${SITE}/learn/laptop-hardware-problems-and-inspection`)}\n- Wi-Fi: ${link("Wi-Fi fixes", `${SITE}/learn/laptop-wifi-and-internet-guide`)}\n- Webcam, microphone, speakers: ${link("webcam and audio guide", `${SITE}/learn/laptop-webcam-microphone-and-audio-guide`)}` },
+        { heading: "What to bring and prepare", body: "- The laptop **and its charger** (many faults are charger-related).\n- A short description: what happens, since when, after a drop or spill?\n- **Back up your files** if the laptop still works (OneDrive or an external drive).\n- Your BitLocker recovery key if the drive is encrypted (in your Microsoft account).\n- Liquid spill? Switch it off, unplug it and bring it in without switching it on again." },
+        { heading: "Typical laptop repairs and what affects the cost", body: "Common laptop repairs include batteries, chargers and charging ports, keyboards, screens, hinges, fans and cleaning, and storage or memory upgrades (SSD, RAM), plus software problems. The cost depends on the laptop model, the part (screens vary a lot by size, resolution and touch), whether an original or compatible part is used, and part availability. That's why the quote comes after the diagnosis rather than as a fixed price list." },
+        { heading: "Repair or replace?", body: `Repairs usually make sense for batteries, chargers, keyboards, SSDs and RAM on 8th-gen or newer laptops. Replacing is usually better when the motherboard or screen fails on an older laptop, or the repair costs more than about half the price of a comparable laptop. For reference, 8th-gen or newer business laptops at ECB Technologies have a median price of ${biz8.length ? ksh(median(biz8.map((r) => r.price))) : "n/a"}: see ${link("best value laptops", `${SITE}/learn/best-value-laptops-kenya`)}.` },
+        { heading: "Questions to ask any repair shop", body: "- Is there a diagnosis fee, and is it deducted from the repair?\n- What exactly will be replaced, and is the part original or compatible?\n- How long will it take?\n- Is there a warranty on the repair, and how long?\n- Will my files be kept, and who will have access to them?\n\nGet the quote and the repair details on the receipt." },
+      ],
+      faq: [
+        { question: "Where can I repair my laptop in Nairobi?", answer: "At ECB Technologies, Techmart Iconic Business Plaza, 3rd floor, room T12, Moi Avenue, Nairobi CBD, Monday to Saturday, 9am to 7pm. Bring the laptop and charger, or WhatsApp 0717 040 531 first." },
+        { question: "How much does laptop repair cost in Kenya?", answer: "It depends on the model and the part; screens and motherboards vary the most. Get a diagnosis and a quote first." },
+        { question: "Can you replace a laptop battery or screen?", answer: "Batteries and screens are common laptop repairs; the cost depends on the exact model and part. Send the model on WhatsApp or bring the laptop in for a quote." },
+        { question: "Is it better to repair or replace my laptop?", answer: "Repair batteries, chargers, keyboards and storage on 8th-gen or newer laptops; replace when a motherboard or screen fails on an older laptop, or the repair costs more than about half a comparable laptop." },
+        { question: "What should I do before taking my laptop for repair?", answer: "Back up your files if it still works, bring the charger, note what happens and since when, and have your BitLocker recovery key ready if the drive is encrypted." },
+      ],
+    };
+  },
+});

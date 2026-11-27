@@ -4,13 +4,13 @@ One architecture, one keyword map. Every question from the four briefs is mapped
 
 | Batch | Questions | Map | Answered on live pages |
 |---|---|---|---|
-| 1 | Prices, best laptops, brands, specs, students, gaming, refurbished, buying, repairs, where to buy | [question-map.md](question-map.md) | 94 / 100 |
+| 1 | Prices, best laptops, brands, specs, students, gaming, refurbished, buying, repairs, where to buy | [question-map.md](question-map.md) | 98 / 100 |
 | 2 | Models, processors, upgrades, software, displays, professions, MacBooks, gaming GPUs, accessories, buying safely | [question-map-2.md](question-map-2.md) | 96 / 100 |
 | 3 | Budgets, troubleshooting, security, Wi-Fi, specs, small business, comparisons, maintenance, ports, refurbished | [question-map-3.md](question-map-3.md) | 100 / 100 |
 | 4 | Students, creative, displays, hardware compatibility, software, charging, verification, specialist software, product families, procurement | [question-map-4.md](question-map-4.md) | 100 / 100 |
 | 5 | Prices and deals, performance, AI PCs and processors, graphics, storage and backups, Windows editions and resets, webcams and audio, hardware inspection, home-office setups, enterprise purchasing | [question-map-5.md](question-map-5.md) | 100 / 100 |
 
-**490 of 500 answered.** The 10 not published: ASUS and Acer (not stocked), repair prices and repair services (not confirmed by the shop), brand-new stock (no condition data), and prices of parts the shop doesn't sell (RAM, SSD, battery, charger).
+**494 of 500 answered.** The 6 not published: ASUS and Acer (not stocked), and Kenyan prices of parts the shop doesn't sell (RAM, SSD, battery, charger). Repairs and new/refurbished/ex-UK stock were confirmed by the owner on 27 Nov 2026.
 
 ## Architecture
 

@@ -197,7 +197,12 @@
     ]
   },
   "/learn/laptop-battery-and-overheating-fixes": {
-    "sections": [],
+    "sections": [
+      {
+        "heading": "Laptop repairs at ECB Technologies",
+        "body": "If these steps don't fix it, ECB Technologies repairs laptops at its shop on Moi Avenue, Nairobi CBD: bring the laptop and charger for a diagnosis and quote, or WhatsApp 0717 040 531 first. See [laptop repair in Nairobi](https://www.ecbtechkenya.com/laptop-repair-nairobi)."
+      }
+    ],
     "faq": [
       {
         "question": "How long should a laptop battery last on a single charge?",
@@ -290,7 +295,12 @@
     ]
   },
   "/learn/refurbished-vs-used-laptops-kenya": {
-    "sections": [],
+    "sections": [
+      {
+        "heading": "What ECB Technologies sells",
+        "body": "ECB Technologies sells new, refurbished and ex-UK laptops, and repairs laptops at its shop on Moi Avenue. Condition isn't always stated in a listing's name, so ask which it is, plus the battery health and warranty, before paying, and see it at the shop if you can."
+      }
+    ],
     "faq": [
       {
         "question": "What is the difference between refurbished and renewed laptops?",
@@ -311,7 +321,12 @@
     ]
   },
   "/learn/buying-a-laptop-safely-kenya": {
-    "sections": [],
+    "sections": [
+      {
+        "heading": "New, refurbished or ex-UK at ECB Technologies",
+        "body": "ECB Technologies sells all three: new, refurbished and ex-UK laptops. Ask which one a listing is, what the warranty covers, and the battery health, and get it on the receipt. The shop also does repairs."
+      }
+    ],
     "faq": [
       {
         "question": "What questions should I ask a laptop seller before paying?",
@@ -421,5 +436,50 @@
         "answer": "From suppliers that can provide the same model in quantity with invoices listing serial numbers and written warranty terms. ECB Technologies takes quote requests on WhatsApp (0717 040 531) or at the shop on Moi Avenue, Nairobi CBD."
       }
     ]
+  },
+  "/laptop-shop-nairobi": {
+    "sections": [
+      {
+        "heading": "New, refurbished and ex-UK laptops, and repairs",
+        "body": "ECB Technologies sells new, refurbished and ex-UK laptops, and repairs laptops at the shop. Each listing's condition isn't always in its name, so ask about the condition, battery health and warranty of any laptop before you buy. Repairs: [laptop repair in Nairobi](https://www.ecbtechkenya.com/laptop-repair-nairobi). How the conditions differ: [refurbished vs used vs new laptops](https://www.ecbtechkenya.com/learn/refurbished-vs-used-laptops-kenya)."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Does ECB Technologies repair laptops?",
+        "answer": "Yes. Bring the laptop and its charger to the shop on Moi Avenue for a diagnosis and quote, or WhatsApp 0717 040 531 with the model and problem first."
+      },
+      {
+        "question": "Does ECB Technologies sell new or refurbished laptops?",
+        "answer": "Both: the shop sells new, refurbished and ex-UK laptops. Ask which a specific listing is before you buy, along with its battery health and warranty."
+      }
+    ]
+  },
+  "/learn/laptop-slow-freezing-not-charging-fixes": {
+    "sections": [
+      {
+        "heading": "Laptop repairs at ECB Technologies",
+        "body": "If these steps don't fix it, ECB Technologies repairs laptops at its shop on Moi Avenue, Nairobi CBD: bring the laptop and charger for a diagnosis and quote, or WhatsApp 0717 040 531 first. See [laptop repair in Nairobi](https://www.ecbtechkenya.com/laptop-repair-nairobi)."
+      }
+    ],
+    "faq": []
+  },
+  "/learn/laptop-hardware-problems-and-inspection": {
+    "sections": [
+      {
+        "heading": "Laptop repairs at ECB Technologies",
+        "body": "If these steps don't fix it, ECB Technologies repairs laptops at its shop on Moi Avenue, Nairobi CBD: bring the laptop and charger for a diagnosis and quote, or WhatsApp 0717 040 531 first. See [laptop repair in Nairobi](https://www.ecbtechkenya.com/laptop-repair-nairobi)."
+      }
+    ],
+    "faq": []
+  },
+  "/learn/laptop-maintenance-guide": {
+    "sections": [
+      {
+        "heading": "Laptop repairs at ECB Technologies",
+        "body": "If these steps don't fix it, ECB Technologies repairs laptops at its shop on Moi Avenue, Nairobi CBD: bring the laptop and charger for a diagnosis and quote, or WhatsApp 0717 040 531 first. See [laptop repair in Nairobi](https://www.ecbtechkenya.com/laptop-repair-nairobi)."
+      }
+    ],
+    "faq": []
   }
 }
