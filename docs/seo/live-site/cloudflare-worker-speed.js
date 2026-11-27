@@ -57,7 +57,8 @@ import {
 import { STATIC_PAGES } from "./static-pages.js";
 import { CATEGORY_SEO } from "./keyword-map.js";
 import { specsOf, specLine, shortName, brandsComparison } from "./pseo.js";
-import { groupOf as guideGroupOf } from "./pseo.js";
+import { groupOf as guideGroupOf, modelKey as pModelKey, modelName as pModelName, SERIES_FACTS as P_SERIES } from "./pseo.js";
+import { brandOf as rBrandOf } from "./research.js";
 import { buildPages, publicJson, pageHtml as guideHtml, pageMarkdown as guideMarkdown, hubHtml as guidesHubHtml, hubMarkdown as guidesHubMarkdown, PSEO_CSS, GUIDE_PATH } from "./pseo.js";
 
 // Monochrome skin (skin.js) on/off, from the Worker's SKIN variable.
@@ -76,7 +77,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "107";
+const VERSION = "109";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -1447,6 +1448,54 @@ async function similarProducts(url) {
   return picks.length >= 3 ? { items: picks, cat: cat === undefined ? null : CATEGORIES[cat] } : null;
 }
 
+// "Compare before you buy": links each laptop product page to the money
+// pages that help decide on it (model prices, alternatives, series, brand,
+// budget, explainer). Only guide pages that are live are linked.
+async function decisionLinks(url) {
+  const slug = (url.pathname.match(/^\/item\/([^/]+)/) || [])[1];
+  if (!slug) return null;
+  const cat = CATEGORY_OF[slug];
+  // Laptops, plus gaming laptops the shop files under "Gaming".
+  const gamingLaptop = cat !== undefined && CATEGORIES[cat][0] === "gaming" && /-(victus|omen|legion|loq|rog|tuf|nitro|predator|katana|alienware|thin-gf)-/.test(`-${slug}-`);
+  if (cat === undefined || (CATEGORIES[cat][0] !== "laptops" && !gamingLaptop) || /all-in-one|desktop/.test(slug)) return null;
+  const list = await productList(NOOP_CTX);
+  const self = list.find((p) => p.slug === slug);
+  const built = await guides(ENV, NOOP_CTX);
+  const live = new Set(built.pages.map((d) => d.url));
+  const out = [];
+  const add = (path, text) => {
+    if (live.has(SITE + path) && !out.some((o) => o.path === path)) out.push({ path, text });
+  };
+  const key = pModelKey(slug);
+  if (key) {
+    const name = pModelName(key);
+    const k = key.replace(/ /g, "-");
+    add(`/laptops/${k}-price-kenya`, `All ${name} configurations and prices`);
+    add(`/laptops/${k}-alternatives-kenya`, `Alternatives to the ${name}`);
+  }
+  for (const [k, f] of Object.entries(P_SERIES)) if (f.match.test(`-${slug}-`)) add(`/series/${k}-kenya`, `${f.name} laptops in Kenya`);
+  const brand = rBrandOf(slug);
+  if (["HP", "Dell", "Lenovo"].includes(brand)) add(`/laptops/${brand.toLowerCase()}-laptops-kenya`, `All ${brand} laptops in Kenya`);
+  if (self && self.price) {
+    if (self.price <= 40000) add("/student-laptops-kenya", "Best laptops for students under KSh 40,000");
+    const b = [25, 30, 50, 60, 70, 80, 150].find((n) => self.price <= n * 1000);
+    if (b) add(`/best/best-laptops-under-${b}k-kenya`, `Best laptops under KSh ${b},000`);
+  }
+  const explain = /-thinkpad-/.test(`-${slug}-`) ? ["/learn/thinkpad-models-explained", "ThinkPad models explained"] : /-elitebook-/.test(`-${slug}-`) ? ["/learn/hp-elitebook-models-explained", "HP EliteBook models explained"] : /-latitude-/.test(`-${slug}-`) ? ["/learn/dell-latitude-models-explained", "Dell Latitude models explained"] : /macbook/.test(slug) ? ["/learn/macbook-buying-guide-kenya", "Which MacBook to buy"] : null;
+  if (explain) add(explain[0], explain[1]);
+  if (gamingLaptop || /-(rtx|gtx)-?\d/.test(`-${slug}`)) {
+    add("/best/gaming-laptops-kenya", "Best gaming laptops in Kenya");
+    add("/learn/gaming-laptop-guide-kenya", "Gaming laptop buying guide");
+  }
+  add("/learn/check-used-laptop-before-buying", "How to check a laptop before buying");
+  return out.length >= 2 ? out.slice(0, 7) : null;
+}
+
+function decisionHtml(links) {
+  if (!links) return "";
+  return `<section class="container ecb-pd-similar ecb-pd-decide"><h2>Compare before you buy</h2><ul>${links.map((l) => `<li><a href="${SITE}${l.path}">${escapeHtml(l.text)}</a></li>`).join("")}</ul></section>`;
+}
+
 function similarHtml(sim) {
   if (!sim) return "";
   const heading = sim.cat ? `${sim.cat[1]} at a similar price` : "At a similar price";
@@ -1626,6 +1675,9 @@ async function rewriteText(res, url, extra) {
     try {
       hints.similar = await similarProducts(url);
     } catch {}
+    try {
+      hints.money = await decisionLinks(url);
+    } catch {}
   }
   const bundle = hints.themeVersion === THEME_VERSION ? BUNDLE_PATH : null;
   if (hints.banner && /["'()<>\s]/.test(hints.banner)) hints.banner = null;
@@ -1777,7 +1829,7 @@ function rewrite(response, url, bundle, hints) {
     })
     .on("section.ecb-pd-related-section, div.ecb-pd-related-section", {
       element(e) {
-        if (product) e.before(productQaHtml(product) + similarHtml(hints.similar), { html: true });
+        if (product) e.before(productQaHtml(product) + decisionHtml(hints.money) + similarHtml(hints.similar), { html: true });
       },
     })
     .on("div.ecb-pd-cta-row", {

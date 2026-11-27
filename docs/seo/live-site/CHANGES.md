@@ -1204,3 +1204,12 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - Cart and checkout: stub for the theme's missing jQuery counterUp plugin
   (it threw an error on every load); checkout now runs without script errors.
 - No Content-Security-Policy blocks Paystack's script or popup.
+
+## 2026-11-27: money pages
+- Laptop product pages (and gaming laptops filed under Gaming): "Compare
+  before you buy" block linking to the live model price page, alternatives,
+  series, brand, student/budget guide, gaming guides and model explainer,
+  plus the pre-purchase checklist. Only live guide pages are linked
+  (sampled: all links 200).
+- docs/seo/money-pages.md maps product, use-case, role, segment,
+  comparison, pricing and integration pages for ECB.
