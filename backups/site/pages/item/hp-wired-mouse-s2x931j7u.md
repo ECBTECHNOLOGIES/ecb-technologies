@@ -3,7 +3,7 @@
 > HP Wired Mouse for KSh 600 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-wired-mouse-s2x931j7u
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

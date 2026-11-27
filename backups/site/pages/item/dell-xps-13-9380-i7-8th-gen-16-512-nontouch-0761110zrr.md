@@ -3,7 +3,7 @@
 > Dell XPS 13 9380 i7 8th Gen, 16 /512 for KSh 42,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-9380-i7-8th-gen-16-512-nontouch-0761110zrr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Samsung Odyssey G9 OLED LS49DG932SMXUE 49” | 5K 5120×1440 | 1800R | for KSh 177,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-odyssey-g9-oled-ls49dg932smxue-49-5k-51201440-1800r-240hz-003ms-silver-eh8659uqj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

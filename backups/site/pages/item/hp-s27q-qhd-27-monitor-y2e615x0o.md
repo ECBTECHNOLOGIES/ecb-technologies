@@ -3,7 +3,7 @@
 > HP S27Q QHD 27" Monitor for KSh 37,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-s27q-qhd-27-monitor-y2e615x0o
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

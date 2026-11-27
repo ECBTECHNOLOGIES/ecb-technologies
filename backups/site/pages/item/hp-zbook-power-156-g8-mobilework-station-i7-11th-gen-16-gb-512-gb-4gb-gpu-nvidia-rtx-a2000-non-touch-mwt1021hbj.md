@@ -3,7 +3,7 @@
 > HP ZBOOK POWER 15.6 g8 mobilework station — i7 11th Gen, 16 GB / 512 for KSh 82,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 512 GB SSD
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-power-156-g8-mobilework-station-i7-11th-gen-16-gb-512-gb-4gb-gpu-nvidia-rtx-a2000-non-touch-mwt1021hbj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

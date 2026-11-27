@@ -3,7 +3,7 @@
 > IPHONE (1 YEAR APPLE WARRANTY) PHYSICAL SIM + ESIM16 Pro Max for KSh 149,500 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/iphone-1-year-apple-warranty-physical-sim-esim16-pro-max-256gb-umz558nqi
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

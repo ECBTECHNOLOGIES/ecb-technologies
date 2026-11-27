@@ -3,7 +3,7 @@
 > LENOVO THINKPAD P1 16' — XEON 16 / 512 GB SSD NON TOUCHSCREEN 4GPU for KSh 62,000 at ECB Technologies, Nairobi CBD. 16 GB RAM · 512 GB SSD · touchscreen · dedic
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p1-16-xeon-16-512-gb-ssd-non-touchscreen-4gpu-nvidia-quadro-p2000-ecq1038lkb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

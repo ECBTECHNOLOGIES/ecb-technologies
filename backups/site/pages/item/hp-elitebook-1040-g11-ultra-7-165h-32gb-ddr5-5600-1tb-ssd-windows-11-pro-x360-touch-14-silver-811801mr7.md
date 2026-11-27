@@ -3,7 +3,7 @@
 > HP EliteBook 1040 G11 | Ultra 7-165H | 32GB DDR5 5600 | 1TB SSD | for KSh 223,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-1040-g11-ultra-7-165h-32gb-ddr5-5600-1tb-ssd-windows-11-pro-x360-touch-14-silver-811801mr7
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

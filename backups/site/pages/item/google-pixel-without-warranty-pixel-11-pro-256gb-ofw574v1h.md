@@ -3,7 +3,7 @@
 > GOOGLE PIXEL (WITHOUT WARRANTY) Pixel 11 Pro for KSh 151,000 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/google-pixel-without-warranty-pixel-11-pro-256gb-ofw574v1h
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

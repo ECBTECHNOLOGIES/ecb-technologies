@@ -1,10 +1,10 @@
 # Intel Core Ultra laptop prices in Kenya
 
-> 46 Intel Core Ultra laptops in stock, from KSh 72,000 to KSh 290,500 (median KSh 145,500). Below: the best specified two in each budget band. The best specified is the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the HP ELITEBOOK 840 14-inch G11 NOTEBOOK at KSh 72,000. Prices as of 19 November 2026, from the live shop.
+> 46 Intel Core Ultra laptops in stock, from KSh 72,000 to KSh 290,500 (median KSh 145,500). Below: the best specified two in each budget band. The best specified is the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the HP ELITEBOOK 840 14-inch G11 NOTEBOOK at KSh 72,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/laptops/core-ultra-laptops-kenya
 
-## The best pick in every budget
+## Intel Core Ultra laptops: the best pick in every budget
 
 1. **[HP ELITEBOOK 840 14-inch G11 NOTEBOOK](https://www.ecbtechkenya.com/item/hp-elitebook-840-14-inch-g11-notebook-pc-intelr-core-tm-ultra-5-5135u-16-gb-ram-512-gb-ssd-non-touch-zg6480ylf)**: KSh 72,000. Core Ultra · 16 GB RAM · 512 GB SSD. Spec score 36/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; 512 GB SSD; current-generation Core Ultra processor.
 2. **[HP 15 Core Ultra 7 15th Gen](https://www.ecbtechkenya.com/item/hp-15-core-ultra-7-15th-gen-16gb-ddr4-3200-512gb-ssd-dos-156-touch-lbw7814es)**: KSh 104,499. Core Ultra · 16 GB RAM · 512 GB SSD · touchscreen. Spec score 39/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; 512 GB SSD; current-generation Core Ultra processor.
@@ -22,7 +22,7 @@ Canonical: https://www.ecbtechkenya.com/laptops/core-ultra-laptops-kenya
 | 4 | [Dell 14 Plus 2-in-1 DB04250 X360](https://www.ecbtechkenya.com/item/dell-14-plus-2-in-1-db04250-x360-ultra-9-288v-32gb-1tb-ssd-14-fhd-touch-windows-11-home-grey-fingerprint-1-year-warranty-ccp828udg) | Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1 | KSh 200,500 | 42/42 |
 | 5 | [HP Omnibook X Flip 16-AS0043DX](https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-16-as0043dx-core-ultra-9-32gb-2tb-ssd-touchscreen-kbe792mpy) | Core Ultra · 32 GB RAM · 2 TB SSD · 2-in-1 | KSh 215,500 | 42/42 |
 
-## Filter the full range
+## All 46 Intel Core Ultra laptops at a glance
 
 Of the 46 laptops that match, 80% have 16 GB of RAM or more, 100% have a 512 GB SSD or bigger, 43% have a touchscreen and 100% have a 10th-gen or newer processor (or an Apple M / Intel Core Ultra chip). Prices run from KSh 72,000 to KSh 290,500, with half below KSh 145,500. By brand: HP 35, Lenovo 8, Dell 3.
 
@@ -55,7 +55,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which Intel Core Ultra laptop has the best specs?
 
-By our spec score, the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 19 November 2026.
+By our spec score, the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -67,6 +67,6 @@ The HP ELITEBOOK 840 14-inch G11 NOTEBOOK at KSh 72,000 (Core Ultra · 16 GB RAM
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

@@ -3,7 +3,7 @@
 > HP AIO CR0121NH | Core i5 13th Gen | 8GB | 512GB SSD | for KSh 120,500 at ECB Technologies, Nairobi CBD. Core i5 13th gen · 8 GB RAM · 512 GB SSD · touchscreen.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-aio-cr0121nh-core-i5-13th-gen-8gb-512gb-ssd-touchscreen-ntq843c71
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

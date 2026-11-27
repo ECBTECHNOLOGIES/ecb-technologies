@@ -3,7 +3,7 @@
 > Dell XPS 9345 | Snapdragon X Elite 12-Core | 16GB | 512GB SSD | 13.4” for KSh 222,500 at ECB Technologies, Nairobi CBD. Snapdragon · 16 GB RAM · 512 GB SSD · to
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-9345-snapdragon-x-elite-12-core-16gb-512gb-ssd-134-fhd-touch-windows-11-home-graphite-1-year-warranty-2jj829a20
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

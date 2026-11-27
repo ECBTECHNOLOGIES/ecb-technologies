@@ -3,7 +3,7 @@
 > Shop Headphones & earbuds in Kenya at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya and free pickup in Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/category/Audio-Accessories
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 13 products. Prices in KSh. Page 1 of 2.
 

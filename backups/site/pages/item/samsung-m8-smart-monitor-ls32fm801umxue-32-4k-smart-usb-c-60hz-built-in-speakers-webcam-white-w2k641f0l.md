@@ -3,7 +3,7 @@
 > samsung M8 Smart Monitor LS32FM801UMXUE –32” | 4K | Smart | USB-C | for KSh 89,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-m8-smart-monitor-ls32fm801umxue-32-4k-smart-usb-c-60hz-built-in-speakers-webcam-white-w2k641f0l
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

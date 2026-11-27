@@ -3,7 +3,7 @@
 > Genuine laptops, smartphones, printers and accessories with prices in KSh, at Techmart Iconic Business Plaza, Moi Avenue, Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 Electronics shop in Nairobi CBD, Kenya, selling genuine laptops, smartphones, printers, gaming gear and accessories, with prices in Kenyan shillings (KSh).
 

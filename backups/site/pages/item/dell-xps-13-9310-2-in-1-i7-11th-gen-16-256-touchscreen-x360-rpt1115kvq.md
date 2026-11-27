@@ -3,7 +3,7 @@
 > Dell XPS 13 9310 2-IN-1 i7 11th Gen, 16 / 256-TOUCHSCREEN for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 256 GB SSD · 2-in-1. D
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-9310-2-in-1-i7-11th-gen-16-256-touchscreen-x360-rpt1115kvq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

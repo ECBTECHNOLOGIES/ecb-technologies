@@ -3,7 +3,7 @@
 > LENOVO THINKPRAD for KSh 21,000 at ECB Technologies, Nairobi CBD. Core i5 4th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkprad-x240-i5-4th-gen-8gb-256-ssd-nontouch-gcf969shy
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

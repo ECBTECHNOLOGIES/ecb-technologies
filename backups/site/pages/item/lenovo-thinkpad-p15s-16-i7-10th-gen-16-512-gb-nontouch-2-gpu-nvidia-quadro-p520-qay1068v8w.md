@@ -3,7 +3,7 @@
 > Lenovo THINKPAD P15s 16' i7 10th Gen, 16 / 512 GB NonTouch 2 GPU for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD · de
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p15s-16-i7-10th-gen-16-512-gb-nontouch-2-gpu-nvidia-quadro-p520-qay1068v8w
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

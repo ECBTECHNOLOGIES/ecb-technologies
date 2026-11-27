@@ -3,7 +3,7 @@
 > MSI MAG 275UPD E14 27” | IPS | 4K @ 144Hz / FHD @ 288Hz | Dual-Mode for KSh 57,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/msi-mag-275upd-e14-27-ips-4k-at-144hz-fhd-at-288hz-dual-mode-gaming-kka726pdc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Logitech M185 Wireless Mouse for KSh 2,100 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/logitech-m185-wireless-mouse-vlc936dra
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

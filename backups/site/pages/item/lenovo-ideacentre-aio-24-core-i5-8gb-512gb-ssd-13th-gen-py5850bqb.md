@@ -3,7 +3,7 @@
 > Lenovo IdeaCentre AIO | 24” | Core i5 | 8GB | 512GB SSD | 13th for KSh 110,500 at ECB Technologies, Nairobi CBD. Core i5 13th gen · 8 GB RAM · 512 GB SSD. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-ideacentre-aio-24-core-i5-8gb-512gb-ssd-13th-gen-py5850bqb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

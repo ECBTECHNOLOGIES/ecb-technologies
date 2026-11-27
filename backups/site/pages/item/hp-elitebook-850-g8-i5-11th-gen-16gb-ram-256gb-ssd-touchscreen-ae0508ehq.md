@@ -3,7 +3,7 @@
 > HP ELITEBOOK 850 G8 i5 11th GEN 16GB RAM 256GB SSD for KSh 49,000 at ECB Technologies, Nairobi CBD. Core i5 11th gen · 16 GB RAM · 256 GB SSD · touchscreen. Del
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-850-g8-i5-11th-gen-16gb-ram-256gb-ssd-touchscreen-ae0508ehq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

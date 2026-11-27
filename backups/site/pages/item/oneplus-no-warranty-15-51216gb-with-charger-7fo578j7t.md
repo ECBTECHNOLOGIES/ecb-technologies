@@ -3,7 +3,7 @@
 > ONEPLUS (NO WARRANTY) 15 512/16GB (with charger) for KSh 120,999 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/oneplus-no-warranty-15-51216gb-with-charger-7fo578j7t
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

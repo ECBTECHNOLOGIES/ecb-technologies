@@ -1,10 +1,10 @@
 # Core i5 laptop prices in Kenya
 
-> 90 Core i5 laptops in stock, from KSh 21,000 to KSh 125,500 (median KSh 31,000). Below: the best specified two in each budget band. The best specified is the Lenovo IdeaPad Slim 3 at KSh 92,500 (Core i5 13th gen · 16 GB RAM · 512 GB SSD). The cheapest on the list is the Lenovo THINKPAD X280 i5 8th Gen at KSh 28,000. Prices as of 19 November 2026, from the live shop.
+> 90 Core i5 laptops in stock, from KSh 21,000 to KSh 125,500 (median KSh 31,000). Below: the best specified two in each budget band. The best specified is the Lenovo IdeaPad Slim 3 at KSh 92,500 (Core i5 13th gen · 16 GB RAM · 512 GB SSD). The cheapest on the list is the Lenovo THINKPAD X280 i5 8th Gen at KSh 28,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/laptops/core-i5-laptops-kenya
 
-## The best pick in every budget
+## Core i5 laptops: the best pick in every budget
 
 1. **[Lenovo THINKPAD X280 i5 8th Gen](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x280-i5-8th-gen-16-256-gb-non-touch-oct1057qxl)**: KSh 28,000. Core i5 8th gen · 16 GB RAM · 256 GB SSD. Spec score 23/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; KSh 31,500 below the median of this list; cheapest laptop on this page. Cons: 8th-gen Intel processor from 2017: the oldest generation Windows 11 supports.
 2. **[Lenovo THINKPAD X390 — i5 8th Gen](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x390-i5-8th-gen-16-256-gb-nontouch-normal-t1o10480bp)**: KSh 29,000. Core i5 8th gen · 16 GB RAM · 256 GB SSD. Spec score 23/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; KSh 30,500 below the median of this list. Cons: 8th-gen Intel processor from 2017: the oldest generation Windows 11 supports.
@@ -32,7 +32,7 @@ Canonical: https://www.ecbtechkenya.com/laptops/core-i5-laptops-kenya
 | 9 | [HP AIO CR0121NH](https://www.ecbtechkenya.com/item/hp-aio-cr0121nh-core-i5-13th-gen-8gb-512gb-ssd-touchscreen-ntq843c71) | Core i5 13th gen · 8 GB RAM · 512 GB SSD · touchscreen | KSh 120,500 | 30/42 |
 | 10 | [HP Victus 15](https://www.ecbtechkenya.com/item/hp-victus-15-core-i5-13420h-16gb-512gb-ssd-rtx-4050-6gb-rhy803dnl) | Core i5 · 16 GB RAM · 512 GB SSD · dedicated graphics | KSh 125,500 | 23/42 |
 
-## Filter the full range
+## All 90 Core i5 laptops at a glance
 
 Of the 90 laptops that match, 14% have 16 GB of RAM or more, 17% have a 512 GB SSD or bigger, 41% have a touchscreen and 26% have a 10th-gen or newer processor (or an Apple M / Intel Core Ultra chip). Prices run from KSh 21,000 to KSh 125,500, with half below KSh 31,000. By brand: HP 47, Lenovo 29, Dell 13, Microsoft 1.
 
@@ -52,10 +52,10 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 ## Related guides
 
 - [Lenovo laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya)
-- [HP laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/hp-laptops-kenya)
+- [Lenovo ThinkPad X280 price in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-thinkpad-x280-price-kenya)
+- [Best Core i5 laptops under KSh 100,000 in Kenya](https://www.ecbtechkenya.com/best/core-i5-laptops-under-100k-kenya)
+- [Best HP Core i5 laptops in Kenya](https://www.ecbtechkenya.com/best/hp-core-i5-laptops-kenya)
 - [Core i5 vs Core i7: which to buy in Kenya](https://www.ecbtechkenya.com/compare/core-i5-vs-core-i7-kenya)
-- [Best laptops under KSh 30,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-30k-kenya)
-- HP ProBook in Kenya: models, prices and history
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -65,7 +65,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which Core i5 laptop has the best specs?
 
-By our spec score, the Lenovo IdeaPad Slim 3 at KSh 92,500 (Core i5 13th gen · 16 GB RAM · 512 GB SSD), as of 19 November 2026.
+By our spec score, the Lenovo IdeaPad Slim 3 at KSh 92,500 (Core i5 13th gen · 16 GB RAM · 512 GB SSD), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -77,6 +77,6 @@ The Lenovo THINKPAD X280 i5 8th Gen at KSh 28,000 (Core i5 8th gen · 16 GB RAM 
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

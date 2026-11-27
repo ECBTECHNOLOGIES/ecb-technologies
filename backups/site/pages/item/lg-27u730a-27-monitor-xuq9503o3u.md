@@ -3,7 +3,7 @@
 > LG 27U730A 27" Monitor for KSh 62,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lg-27u730a-27-monitor-xuq9503o3u
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

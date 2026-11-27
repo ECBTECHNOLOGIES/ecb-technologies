@@ -3,7 +3,7 @@
 > HP ELITEBOOK 1040 G9 i5 12th Gen 16GB RAM 512GB SSD X360 for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i5 12th gen · 16 GB RAM · 512 GB SSD · 2-in-1. De
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-1040-g9-i5-12th-gen-16gb-ram-512gb-ssd-x360-touchscreen-obi1584ao6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

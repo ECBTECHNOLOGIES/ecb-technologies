@@ -3,7 +3,7 @@
 > HP ELITEBOOK 830 G8 i5 11TH 8 GB RAM 256GB for KSh 37,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-830-g8-i5-11th-8-gb-ram-256gb-non-touch-aai459ixw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

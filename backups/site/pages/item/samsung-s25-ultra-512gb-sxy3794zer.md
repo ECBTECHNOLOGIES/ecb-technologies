@@ -3,7 +3,7 @@
 > SAMSUNG S25 Ultra 512GB for KSh 123,000 at ECB Technologies, Moi Avenue, Nairobi CBD. 512 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-s25-ultra-512gb-sxy3794zer
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

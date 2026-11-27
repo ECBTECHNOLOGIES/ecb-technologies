@@ -3,7 +3,7 @@
 > Lenovo ThinkPad E14 G7 | Ultra 7 | 16GB | 512GB | 14” | 15th for KSh 152,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Delivery acr
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-e14-g7-ultra-7-16gb-512gb-14-15th-gen-n9h817zrn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP PROBOOK 640 G1 i5 4TH GEN 8GB 256 GB SSD for KSh 22,500 at ECB Technologies, Nairobi CBD. Core i5 4th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-640-g1-i5-4th-gen-8gb-256-gb-ssd-non-touch-smu448csi
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

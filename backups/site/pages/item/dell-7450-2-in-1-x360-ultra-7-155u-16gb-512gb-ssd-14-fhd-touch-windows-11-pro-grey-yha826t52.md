@@ -3,7 +3,7 @@
 > Dell 7450 2-in-1 X360 | Ultra 7-155U | 16GB | 512GB SSD | 14” FHD+ for KSh 175,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · 2-in-
 
 Canonical: https://www.ecbtechkenya.com/item/dell-7450-2-in-1-x360-ultra-7-155u-16gb-512gb-ssd-14-fhd-touch-windows-11-pro-grey-yha826t52
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

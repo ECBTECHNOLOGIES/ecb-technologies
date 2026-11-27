@@ -1,10 +1,10 @@
 # AMD Ryzen laptop prices in Kenya
 
-> 23 AMD Ryzen laptops in stock, from KSh 33,000 to KSh 79,000 (median KSh 41,000). Below: the best specified two in each budget band. The best specified is the LENOVO THINKPAD T495S at KSh 37,000 (AMD Ryzen · 16 GB RAM · 256 GB SSD). The cheapest on the list is the LENOVO THINKPAD T495S at KSh 37,000. Prices as of 19 November 2026, from the live shop.
+> 23 AMD Ryzen laptops in stock, from KSh 33,000 to KSh 79,000 (median KSh 41,000). Below: the best specified two in each budget band. The best specified is the LENOVO THINKPAD T495S at KSh 37,000 (AMD Ryzen · 16 GB RAM · 256 GB SSD). The cheapest on the list is the LENOVO THINKPAD T495S at KSh 37,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/laptops/amd-ryzen-laptops-kenya
 
-## The best pick in every budget
+## AMD Ryzen laptops: the best pick in every budget
 
 1. **[LENOVO THINKPAD T495S](https://www.ecbtechkenya.com/item/lenovo-thinkpad-t495s-amd-ryzen-7-16-gb-ram-256-gb-ssd-2gb-gpu-non-touch-xpb1036qrl)**: KSh 37,000. AMD Ryzen · 16 GB RAM · 256 GB SSD. Spec score 28/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; KSh 7,500 below the median of this list; cheapest laptop on this page.
 2. **[LENOVO THINKPAD X395](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x395-amd-ryzen-7-16-gb-ram-256-gb-ssd-2gb-gpu-non-touch-evz1040gyt)**: KSh 37,000. AMD Ryzen · 16 GB RAM · 256 GB SSD. Spec score 28/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; KSh 7,500 below the median of this list.
@@ -20,7 +20,7 @@ Canonical: https://www.ecbtechkenya.com/laptops/amd-ryzen-laptops-kenya
 | 3 | [HP ELITEBOOK 835 13-inch G10 NOTEBOOK](https://www.ecbtechkenya.com/item/hp-elitebook-835-13-inch-g10-notebook-pc-amd-ryzen-5-pro-7540u-with-radeon-740m-graphics-16-gb-ram-512-gb-non-touch-toh472eck) | AMD Ryzen · 16 GB RAM · 512 GB SSD | KSh 52,000 | 27/42 |
 | 4 | [HP ELITEBOOK 845 14-inch G10 NOTEBOOK](https://www.ecbtechkenya.com/item/hp-elitebook-845-14-inch-g10-notebook-pc-amd-ryzen-5-pro-7540u-radeon-740m-graphics-16gb-ram-512gb-ssd-non-touch-057500foe) | AMD Ryzen · 16 GB RAM · 512 GB SSD | KSh 60,000 | 27/42 |
 
-## Filter the full range
+## All 23 AMD Ryzen laptops at a glance
 
 Of the 23 laptops that match, 35% have 16 GB of RAM or more, 22% have a 512 GB SSD or bigger, 17% have a touchscreen and 100% have a 10th-gen or newer processor (or an Apple M / Intel Core Ultra chip). Prices run from KSh 33,000 to KSh 79,000, with half below KSh 41,000. By brand: HP 18, Lenovo 4, Other 1.
 
@@ -43,7 +43,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 - [Lenovo laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya)
 - [Best laptops for students in Kenya under KSh 40,000](https://www.ecbtechkenya.com/student-laptops-kenya)
 - [Best laptops under KSh 50,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-50k-kenya)
-- [Best laptops under KSh 25,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-25k-kenya)
+- [Best AMD Ryzen laptops under KSh 40,000 in Kenya](https://www.ecbtechkenya.com/best/amd-ryzen-laptops-under-40k-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -53,7 +53,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which AMD Ryzen laptop has the best specs?
 
-By our spec score, the LENOVO THINKPAD T495S at KSh 37,000 (AMD Ryzen · 16 GB RAM · 256 GB SSD), as of 19 November 2026.
+By our spec score, the LENOVO THINKPAD T495S at KSh 37,000 (AMD Ryzen · 16 GB RAM · 256 GB SSD), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -65,6 +65,6 @@ The LENOVO THINKPAD T495S at KSh 37,000 (AMD Ryzen · 16 GB RAM · 256 GB SSD).
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

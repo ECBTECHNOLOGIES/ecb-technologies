@@ -3,7 +3,7 @@
 > HP ZBook studio 15 G5 — i7 9th Gen, 16 GB / 512 GB — 4GB GPU NVIDIA for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 9th gen · 16 GB RAM · 512 GB SSD ·
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-studio-15-g5-i7-9th-gen-16-gb-512-gb-4gb-gpu-nvidia-quadro-p100-nontouch-os41026wi4
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

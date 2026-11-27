@@ -3,7 +3,7 @@
 > HP ProBook 460 G11 | Core Ultra 5-125U | 16GB | 512GB SSD | 16” for KSh 113,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-460-g11-core-ultra-5-125u-16gb-512gb-ssd-16-silver-wbh797o37
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

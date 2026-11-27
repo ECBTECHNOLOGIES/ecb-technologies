@@ -3,7 +3,7 @@
 > SAMSUNG E.A Fold 8 Ultra 12/512GB for KSh 219,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-ea-fold-8-ultra-12512gb-t0t545zpx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

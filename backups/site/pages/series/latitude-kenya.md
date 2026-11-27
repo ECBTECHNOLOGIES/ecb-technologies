@@ -1,6 +1,6 @@
 # Dell Latitude in Kenya: models, prices and history
 
-> We have 21 Dell Latitude laptops, from KSh 21,000 to KSh 57,000 with a median of KSh 28,000. Dell's business line, from basic 3000 models to premium 7000 and 9000 models. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 19 November 2026.
+> We have 21 Dell Latitude laptops, from KSh 21,000 to KSh 57,000 with a median of KSh 28,000. Dell's business line, from basic 3000 models to premium 7000 and 9000 models. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/series/latitude-kenya
 
@@ -55,9 +55,9 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 - [Lenovo ThinkPad in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/thinkpad-kenya)
 - [HP EliteBook in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/elitebook-kenya)
+- [Best Latitude Core i7 laptops in Kenya](https://www.ecbtechkenya.com/best/latitude-core-i7-laptops-kenya)
+- [Best Dell laptops under KSh 40,000 in Kenya](https://www.ecbtechkenya.com/best/dell-laptops-under-40k-kenya)
 - [Dell laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/dell-laptops-kenya)
-- [Best laptops under KSh 30,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-30k-kenya)
-- [EliteBook vs Latitude: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-latitude-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -68,7 +68,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### How much is a Dell Latitude in Kenya?
 
-At ECB Technologies, Dell Latitude laptops cost from KSh 21,000 to KSh 57,000, with a median of KSh 28,000 across 21 models (19 November 2026).
+At ECB Technologies, Dell Latitude laptops cost from KSh 21,000 to KSh 57,000, with a median of KSh 28,000 across 21 models (25 November 2026).
 
 ### What is the cheapest Dell Latitude?
 
@@ -82,4 +82,4 @@ The DELL LATITUDE E7240 I5 4TH GEN 8 GB RAM at KSh 21,000.
 
 Ask on WhatsApp (0717 040 531) for the warranty on the exact model; it is shown on each product page where the shop lists it.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

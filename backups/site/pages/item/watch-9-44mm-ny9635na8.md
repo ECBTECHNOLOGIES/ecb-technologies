@@ -3,7 +3,7 @@
 > Watch 9 44mm for KSh 41,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/watch-9-44mm-ny9635na8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

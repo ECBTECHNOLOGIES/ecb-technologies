@@ -3,7 +3,7 @@
 > Lenovo ThinkPad X1 Carbon Gen 13 Aura Edition | Ultra 7-255U | 32GB | for KSh 290,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 1 TB SSD · touc
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-carbon-gen-13-aura-edition-ultra-7-255u-32gb-1tb-ssd-gen-4-14-wuxga-touch-windows-11-pro-zc1821jeu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

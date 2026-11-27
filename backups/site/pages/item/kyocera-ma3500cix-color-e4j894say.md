@@ -3,7 +3,7 @@
 > Kyocera MA3500CIX Color for KSh 147,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kyocera-ma3500cix-color-e4j894say
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

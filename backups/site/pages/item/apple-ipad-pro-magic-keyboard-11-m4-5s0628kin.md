@@ -3,7 +3,7 @@
 > APPLE iPad Pro Magic Keyboard 11” M4 for KSh 44,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/apple-ipad-pro-magic-keyboard-11-m4-5s0628kin
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

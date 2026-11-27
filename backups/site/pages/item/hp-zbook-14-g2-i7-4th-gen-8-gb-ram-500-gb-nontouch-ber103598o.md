@@ -3,7 +3,7 @@
 > HP ZBook 14 G2 i7 4th Gen 8 GB RAM / 500 GB for KSh 24,000 at ECB Technologies, Nairobi CBD. Core i7 4th gen · 8 GB RAM. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-14-g2-i7-4th-gen-8-gb-ram-500-gb-nontouch-ber103598o
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

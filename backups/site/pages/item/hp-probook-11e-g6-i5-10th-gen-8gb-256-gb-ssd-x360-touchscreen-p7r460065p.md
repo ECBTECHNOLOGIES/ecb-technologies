@@ -3,7 +3,7 @@
 > HP PROBOOK 11E G6 i5 10TH GEN 8GB 256 GB SSD x360 for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i5 10th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery a
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-11e-g6-i5-10th-gen-8gb-256-gb-ssd-x360-touchscreen-p7r460065p
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

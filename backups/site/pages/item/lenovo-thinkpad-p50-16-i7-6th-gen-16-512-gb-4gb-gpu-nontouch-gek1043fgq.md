@@ -3,7 +3,7 @@
 > Lenovo THINKPAD P50 16' — i7 6th Gen, 16 / 512 GB 4GB GPU for KSh 42,000 at ECB Technologies, Nairobi CBD. Core i7 6th gen · 16 GB RAM · 512 GB SSD. Delivery ac
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p50-16-i7-6th-gen-16-512-gb-4gb-gpu-nontouch-gek1043fgq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

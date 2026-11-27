@@ -1,6 +1,6 @@
 # Best laptops under KSh 70,000 in Kenya
 
-> 222 laptops at ECB Technologies cost KSh 70,000 or less. These are the 10 with the best specs for the money, ranked by a published formula, not by hand. The best specified is the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000 (Core i7 13th gen · 16 GB RAM · 512 GB SSD · touchscreen). The cheapest on the list is the LENOVO THINKPAD T14S i7 11th Gen at KSh 47,000. Prices as of 19 November 2026, from the live shop.
+> Looking for the best laptops under KSh 70,000 in Kenya? 222 laptops at ECB Technologies cost KSh 70,000 or less. These are the 10 with the best specs for the money, ranked by a published formula, not by hand. The best specified is the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000 (Core i7 13th gen · 16 GB RAM · 512 GB SSD · touchscreen). The cheapest on the list is the LENOVO THINKPAD T14S i7 11th Gen at KSh 47,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/best-laptops-under-70k-kenya
 
@@ -51,8 +51,8 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ## Related guides
 
-- [Best touchscreen laptops in Kenya](https://www.ecbtechkenya.com/best/touchscreen-laptops-kenya)
-- [Best 2-in-1 laptops in Kenya](https://www.ecbtechkenya.com/best/2-in-1-laptops-kenya)
+- [Best Core i7 11th Gen laptops in Kenya](https://www.ecbtechkenya.com/best/core-i7-11th-gen-laptops-kenya)
+- [Best HP laptops under KSh 70,000 in Kenya](https://www.ecbtechkenya.com/best/hp-laptops-under-70k-kenya)
 - [HP EliteBook in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/elitebook-kenya)
 - [Lenovo laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya)
 - [Dell laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/dell-laptops-kenya)
@@ -66,7 +66,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which laptop under KSh 70,000 has the best specs?
 
-By our spec score, the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000 (Core i7 13th gen · 16 GB RAM · 512 GB SSD · touchscreen), as of 19 November 2026.
+By our spec score, the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000 (Core i7 13th gen · 16 GB RAM · 512 GB SSD · touchscreen), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -78,6 +78,6 @@ The LENOVO THINKPAD T14S i7 11th Gen at KSh 47,000 (Core i7 11th gen · 32 GB RA
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

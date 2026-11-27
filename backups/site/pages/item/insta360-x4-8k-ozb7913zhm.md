@@ -3,7 +3,7 @@
 > Insta360 X4 8K for KSh 42,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/insta360-x4-8k-ozb7913zhm
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

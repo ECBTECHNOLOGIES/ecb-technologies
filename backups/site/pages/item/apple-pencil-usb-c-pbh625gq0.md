@@ -3,7 +3,7 @@
 > APPLE Pencil USB-C for KSh 12,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/apple-pencil-usb-c-pbh625gq0
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

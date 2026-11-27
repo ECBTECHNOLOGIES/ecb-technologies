@@ -3,7 +3,7 @@
 > HP 524SF Series 5 23.8” FHD for KSh 24,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-524sf-series-5-238-fhd-hdt909jok
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -1,6 +1,6 @@
 # ECB Technologies - full content
 > Electronics shop in Nairobi CBD, Kenya, selling genuine laptops, smartphones, printers, gaming gear and accessories, with prices in Kenyan shillings (KSh).
-Generated: 2026-11-20
+Generated: 2026-11-26
 
 ---
 <!-- source: https://www.ecbtechkenya.com/ -->
@@ -9,7 +9,7 @@ Generated: 2026-11-20
 > Genuine laptops, smartphones, printers and accessories with prices in KSh, at Techmart Iconic Business Plaza, Moi Avenue, Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 Electronics shop in Nairobi CBD, Kenya, selling genuine laptops, smartphones, printers, gaming gear and accessories, with prices in Kenyan shillings (KSh).
 
@@ -56,7 +56,7 @@ Electronics shop in Nairobi CBD, Kenya, selling genuine laptops, smartphones, pr
 > Original statistics from ECB Technologies' own catalogue of laptops, phones and accessories in Kenya.
 
 Canonical: https://www.ecbtechkenya.com/research
-Last updated: 2026-11-19
+Last updated: 2026-11-25
 
 - [Laptop Prices in Kenya 2026: 349 Laptops Analyzed](https://www.ecbtechkenya.com/research/laptop-prices-kenya): The median laptop at ECB Technologies costs KSh 52,000, across 349 laptops priced from KSh 16,000 to KSh 324,000. 75 of 349 laptops (21%) cost under KSh 30,000; 62 (18%) cost KSh 120,000 or more.
 - [Tech Prices in Kenya 2026: 672 Products Analyzed](https://www.ecbtechkenya.com/research/tech-prices-kenya): Laptops make up 349 of the 672 products at ECB Technologies (52%), the largest category. Median prices by category: PC Accessories KSh 26,000 (102 products); Mobile Accessories KSh 39,500 (25 products); Printers KSh 47,500 (47 products); Laptops KSh 52,000 (349 products); Gaming KSh 69,000 (70 products); Phones & Tablets KSh 111,750 (66 products).
@@ -68,7 +68,7 @@ Last updated: 2026-11-19
 > The median laptop at ECB Technologies costs KSh 52,000, across 349 laptops priced from KSh 16,000 to KSh 324,000. 75 of 349 laptops (21%) cost under KSh 30,000; 62 (18%) cost KSh 120,000 or more.
 
 Canonical: https://www.ecbtechkenya.com/research/laptop-prices-kenya
-Last updated: 2026-11-19 (when the catalogue last changed)
+Last updated: 2026-11-25 (when the catalogue last changed)
 
 ## Key findings
 
@@ -153,7 +153,7 @@ HP, with 174 of 349 laptops (50%). ([link](https://www.ecbtechkenya.com/research
 - Brand, processor and generation come from the product names as typed by the shop; products whose name doesn't state them are left out of those tables.
 - Findings with fewer than 20 products behind them are not shown; differences within 5% are reported as about the same.
 - Medians are rounded to the nearest shilling; shares to whole percent (band and category shares add up to 100%).
-- Refreshed automatically when the catalogue changes; data last changed 19 November 2026.
+- Refreshed automatically when the catalogue changes; data last changed 25 November 2026.
 
 ## Cite this research
 
@@ -171,7 +171,7 @@ ECB Technologies, "Laptop Prices in Kenya 2026: 349 Laptops Analyzed", November 
 > Laptops make up 349 of the 672 products at ECB Technologies (52%), the largest category. Median prices by category: PC Accessories KSh 26,000 (102 products); Mobile Accessories KSh 39,500 (25 products); Printers KSh 47,500 (47 products); Laptops KSh 52,000 (349 products); Gaming KSh 69,000 (70 products); Phones & Tablets KSh 111,750 (66 products).
 
 Canonical: https://www.ecbtechkenya.com/research/tech-prices-kenya
-Last updated: 2026-11-19 (when the catalogue last changed)
+Last updated: 2026-11-25 (when the catalogue last changed)
 
 ## Key findings
 
@@ -226,7 +226,7 @@ Phones & Tablets cost from KSh 15,000 to KSh 257,500, with a median of KSh 111,7
 - Brand, processor and generation come from the product names as typed by the shop; products whose name doesn't state them are left out of those tables.
 - Findings with fewer than 20 products behind them are not shown; differences within 5% are reported as about the same.
 - Medians are rounded to the nearest shilling; shares to whole percent (band and category shares add up to 100%).
-- Refreshed automatically when the catalogue changes; data last changed 19 November 2026.
+- Refreshed automatically when the catalogue changes; data last changed 25 November 2026.
 
 ## Cite this research
 
@@ -243,7 +243,7 @@ ECB Technologies, "Tech Prices in Kenya 2026: 672 Products Analyzed", November 2
 > Who ECB Technologies is and how the shop in Nairobi CBD works.
 
 Canonical: https://www.ecbtechkenya.com/about
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 Welcome to our store — your trusted destination for premium consumer electronics. We make it easy to find the right technology at the right price, whether you are shopping for a powerful laptop, the latest smartphone, or everyday tech accessories.
 
@@ -261,7 +261,7 @@ We work directly with authorised distributors and leading brands to bring you an
 > Address, phone, WhatsApp, email and opening hours of the shop on Moi Avenue, Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/contact
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 ## Shop details
 - Shop: Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD, Kenya
@@ -285,7 +285,7 @@ Map and directions: [Google Business Profile](https://share.google/56ymLkB3i6DS0
 > ECB Technologies delivers laptops, phones and accessories across Nairobi by rider and to all 47 counties by courier. Free pickup on Moi Avenue, Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/delivery
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 ## Delivery across Kenya
 
@@ -358,7 +358,7 @@ Yes. Visit the shop and our team will show you.
 > Answers about ordering, accounts, returns and support at ECB Technologies.
 
 Canonical: https://www.ecbtechkenya.com/faq
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 ### What is ECB Technologies and how does it work?
 
@@ -420,7 +420,7 @@ Our goal is to make quality technology accessible without compromising on perfor
 > HP vs Dell vs Lenovo laptops in Kenya compared: models, starting and typical prices at ECB Technologies, Moi Avenue, Nairobi CBD. Updated 15 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/hp-vs-dell-vs-lenovo-laptops-kenya
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 **At ECB Technologies, HP has the most laptops (172 models), and the lowest starting price is Lenovo at KSh 16,000.** The table compares the HP, Dell and Lenovo laptops we stock, with prices checked on 15 November 2026.
 
@@ -456,7 +456,7 @@ See also [laptop prices in Kenya](https://www.ecbtechkenya.com/laptop-prices-in-
 > How ECB Technologies collects and uses personal information.
 
 Canonical: https://www.ecbtechkenya.com/privacy
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 ## **Privacy Policy**
 
@@ -554,7 +554,7 @@ Email: [email protected]
 > The terms for buying from ECB Technologies.
 
 Canonical: https://www.ecbtechkenya.com/terms
-Last updated: 2026-11-20
+Last updated: 2026-11-26
 
 ## **Terms & Conditions**
 

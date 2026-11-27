@@ -3,7 +3,7 @@
 > LENOVO THINKPAD X280 I7 8TH 8GB 256 for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i7 · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x280-i7-8th-8gb-256-ssd-nontouch-sv79788zy
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Samsung Tablet A11 Plus 256GB WiFi + for KSh 49,000 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-tablet-a11-plus-256gb-wifi-cellular-lbu0886xbw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

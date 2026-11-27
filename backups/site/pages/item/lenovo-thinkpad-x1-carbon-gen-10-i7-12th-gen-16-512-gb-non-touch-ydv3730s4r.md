@@ -3,7 +3,7 @@
 > Lenovo THINKPAD X1 Carbon GEN 10— i7 12th Gen, 16 / 512 GB — NON for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 12th gen · 16 GB RAM · 512 GB SSD. Del
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-carbon-gen-10-i7-12th-gen-16-512-gb-non-touch-ydv3730s4r
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

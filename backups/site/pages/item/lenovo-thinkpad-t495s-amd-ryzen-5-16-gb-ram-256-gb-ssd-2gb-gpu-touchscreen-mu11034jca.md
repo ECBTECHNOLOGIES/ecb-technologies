@@ -3,7 +3,7 @@
 > LENOVO THINKPAD T495S (AMD Ryzen 5, 16 GB RAM, 256 GB SSD) 2GB GPU for KSh 37,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 16 GB RAM · 256 GB SSD · touchsc
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t495s-amd-ryzen-5-16-gb-ram-256-gb-ssd-2gb-gpu-touchscreen-mu11034jca
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

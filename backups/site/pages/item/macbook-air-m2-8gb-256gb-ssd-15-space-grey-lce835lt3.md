@@ -3,7 +3,7 @@
 > MacBook Air M2 | 8GB | 256GB SSD | 15” | Space for KSh 165,000 at ECB Technologies, Nairobi CBD. Apple M-series · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-air-m2-8gb-256gb-ssd-15-space-grey-lce835lt3
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

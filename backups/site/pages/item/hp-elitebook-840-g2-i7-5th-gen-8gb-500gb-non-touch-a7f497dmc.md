@@ -3,7 +3,7 @@
 > HP ELITEBOOK 840 G2 i7 5th Gen 8GB 500GB for KSh 24,000 at ECB Technologies, Nairobi CBD. Core i7 5th gen · 8 GB RAM. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-840-g2-i7-5th-gen-8gb-500gb-non-touch-a7f497dmc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

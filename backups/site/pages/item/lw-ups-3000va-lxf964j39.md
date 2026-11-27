@@ -3,7 +3,7 @@
 > LW UPS 3000VA for KSh 27,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lw-ups-3000va-lxf964j39
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

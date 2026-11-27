@@ -3,7 +3,7 @@
 > HP ELITEBOOK 740 G1 i5 4TH GEN 8 GB RAM 500 NON for KSh 22,000 at ECB Technologies, Nairobi CBD. Core i5 4th gen · 8 GB RAM. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-740-g1-i5-4th-gen-8-gb-ram-500-non-touch-i4u453kim
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

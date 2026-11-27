@@ -3,7 +3,7 @@
 > HP 14 Core i3 8GB 256GB SSD 13th Gen 14” Windows for KSh 64,500 at ECB Technologies, Nairobi CBD. Core i3 13th gen · 8 GB RAM · 256 GB SSD. Delivery across Keny
 
 Canonical: https://www.ecbtechkenya.com/item/hp-14-core-i3-8gb-256gb-ssd-13th-gen-14-windows-11-t2g7747am
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

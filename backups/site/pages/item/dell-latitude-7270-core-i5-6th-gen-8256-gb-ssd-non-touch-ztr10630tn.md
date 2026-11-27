@@ -3,7 +3,7 @@
 > DELL LATITUDE 7270 CORE i5 6TH GEN 8/256 GB SSD NON for KSh 23,500 at ECB Technologies, Nairobi CBD. Core i5 6th gen · 8 GB RAM · 256 GB SSD. Delivery across Ke
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7270-core-i5-6th-gen-8256-gb-ssd-non-touch-ztr10630tn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

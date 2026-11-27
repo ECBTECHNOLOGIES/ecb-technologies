@@ -1,6 +1,6 @@
 # MacBook vs Windows laptops: which to buy in Kenya
 
-> At ECB Technologies, the median MacBook laptop costs KSh 207,000 (11 in stock) and the median Windows laptops laptop costs KSh 52,000 (338 in stock). Windows laptops is KSh 155,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median MacBook laptop costs KSh 207,000 (11 in stock) and the median Windows laptops laptop costs KSh 52,000 (338 in stock). Windows laptops is KSh 155,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/macbook-vs-windows-laptops-kenya
 
@@ -79,7 +79,7 @@ Every MacBook and Windows laptops laptop in stock is counted, not a sample. Shar
 
 ### Which is cheaper, MacBook or Windows laptops?
 
-Windows laptops, at the median: KSh 52,000 against KSh 207,000 at ECB Technologies (19 November 2026).
+Windows laptops, at the median: KSh 52,000 against KSh 207,000 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, MacBook or Windows laptops?
 
@@ -93,4 +93,4 @@ MacBook from KSh 98,000 and Windows laptops from KSh 16,000.
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

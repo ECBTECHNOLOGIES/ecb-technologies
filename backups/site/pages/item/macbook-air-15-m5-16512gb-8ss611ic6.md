@@ -3,7 +3,7 @@
 > MacBook Air 15” M5 16/512GB for KSh 207,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Apple M-series. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-air-15-m5-16512gb-8ss611ic6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

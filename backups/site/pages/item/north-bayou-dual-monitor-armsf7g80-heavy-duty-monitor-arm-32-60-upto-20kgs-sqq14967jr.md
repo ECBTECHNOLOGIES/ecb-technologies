@@ -3,7 +3,7 @@
 > SINGLE MONITOR ARMSF7/G80 heavy duty monitor arm 32”-60” upto for KSh 15,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/north-bayou-dual-monitor-armsf7g80-heavy-duty-monitor-arm-32-60-upto-20kgs-sqq14967jr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

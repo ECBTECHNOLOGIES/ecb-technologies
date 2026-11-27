@@ -3,7 +3,7 @@
 > Microsoft Office 2021 for KSh 14,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/microsoft-office-2021-xvw924csn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

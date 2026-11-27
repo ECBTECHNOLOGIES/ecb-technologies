@@ -3,7 +3,7 @@
 > LG 27U730A27” | 4K UHD | USB-C | 60Hz | Speakers for KSh 62,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lg-27u730a27-4k-uhd-usb-c-60hz-speakers-pvp6790dp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

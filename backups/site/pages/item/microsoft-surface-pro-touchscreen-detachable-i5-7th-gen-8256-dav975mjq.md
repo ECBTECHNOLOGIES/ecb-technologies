@@ -3,7 +3,7 @@
 > MICROSOFT SURFACE PRO Touchscreen Detachable i5 7th Gen for KSh 49,000 at ECB Technologies, Nairobi CBD. Core i5 7th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/microsoft-surface-pro-touchscreen-detachable-i5-7th-gen-8256-dav975mjq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP S500 Wireless Mouse for KSh 1,700 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-s500-wireless-mouse-3qa9323qd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

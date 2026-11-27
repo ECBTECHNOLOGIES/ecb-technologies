@@ -3,7 +3,7 @@
 > Microsoft Surface Pro 12th Edition - 13-inch Snapdragon X2 Plus for KSh 163,000 at ECB Technologies, Nairobi CBD. Snapdragon. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/microsoft-surface-pro-12th-edition-13-inch-snapdragon-x2-plus-16256gb-m8n5320zp6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

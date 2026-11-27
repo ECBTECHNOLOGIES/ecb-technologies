@@ -3,7 +3,7 @@
 > HP E24t G4 Touch Monitor for KSh 35,000 at ECB Technologies, Moi Avenue, Nairobi CBD. touchscreen. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-e24t-g4-touch-monitor-c945420cbd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

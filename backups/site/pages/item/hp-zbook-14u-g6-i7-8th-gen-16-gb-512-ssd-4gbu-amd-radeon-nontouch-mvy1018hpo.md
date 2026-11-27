@@ -3,7 +3,7 @@
 > HP ZBOOK 14U G6 i7 8TH GEN 16 GB 512 SSD 4GBU AMD RADEON for KSh 47,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD. Delivery acr
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-14u-g6-i7-8th-gen-16-gb-512-ssd-4gbu-amd-radeon-nontouch-mvy1018hpo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Lenovo THINKPAD 11E CELERON 4GB 128GB NON for KSh 16,000 at ECB Technologies, Nairobi CBD. Celeron / Pentium · 4 GB RAM · 128 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-11e-celeron-4gb-128gb-non-touch-2l81096ljb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

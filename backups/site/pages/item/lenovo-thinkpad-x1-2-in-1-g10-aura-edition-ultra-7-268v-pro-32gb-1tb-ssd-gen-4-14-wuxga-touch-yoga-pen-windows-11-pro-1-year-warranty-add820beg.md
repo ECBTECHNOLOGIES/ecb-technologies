@@ -3,7 +3,7 @@
 > Lenovo ThinkPad X1 2-in-1 G10 Aura Edition | Ultra 7-268V Pro | 32GB for KSh 275,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-2-in-1-g10-aura-edition-ultra-7-268v-pro-32gb-1tb-ssd-gen-4-14-wuxga-touch-yoga-pen-windows-11-pro-1-year-warranty-add820beg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

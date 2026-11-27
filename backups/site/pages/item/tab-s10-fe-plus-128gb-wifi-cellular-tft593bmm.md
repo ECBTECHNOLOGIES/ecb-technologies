@@ -3,7 +3,7 @@
 > Tab S10 FE Plus 128GB WiFi + Cellular for KSh 74,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 128 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/tab-s10-fe-plus-128gb-wifi-cellular-tft593bmm
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

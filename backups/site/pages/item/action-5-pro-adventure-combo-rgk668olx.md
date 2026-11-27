@@ -3,7 +3,7 @@
 > Action 5 Pro Adventure Combo for KSh 52,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/action-5-pro-adventure-combo-rgk668olx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

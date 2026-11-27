@@ -3,7 +3,7 @@
 > HP PROBOOK 11E G4 i5 8TH GEN 8GB RAM 256 GB X360 for KSh 25,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery acr
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-11e-g4-i5-8th-gen-8gb-ram-256-gb-x360-touchscreen-flz7041afq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

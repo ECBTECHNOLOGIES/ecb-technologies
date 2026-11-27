@@ -3,7 +3,7 @@
 > Watch Ultra 3 Black Titanium (Milanese Loop) for KSh 113,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/watch-ultra-3-black-titanium-milanese-loop-kup623rsh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

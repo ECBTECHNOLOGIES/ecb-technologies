@@ -3,7 +3,7 @@
 > Dell Pro 14 PC14250 | Core 7-150U | 16GB | 512GB SSD | 14” | Ubuntu | for KSh 185,500 at ECB Technologies, Nairobi CBD. 16 GB RAM · 512 GB SSD. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/dell-pro-14-pc14250-core-7-150u-16gb-512gb-ssd-14-ubuntu-platinum-fingerprint-1-year-warranty-dfb825gcc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

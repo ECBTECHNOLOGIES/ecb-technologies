@@ -3,7 +3,7 @@
 > Lenovo thinkpad T460s i5 6th, 8 / 256 GB — non for KSh 24,500 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t460s-i5-6th-8-256-gb-non-touch-qic981rwl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

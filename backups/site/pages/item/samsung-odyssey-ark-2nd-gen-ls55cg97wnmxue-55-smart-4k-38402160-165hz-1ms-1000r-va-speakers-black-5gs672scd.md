@@ -3,7 +3,7 @@
 > Samsung Odyssey Ark 2nd Gen LS55CG97WNMXUE 55” | Smart | 4K 3840×2160 for KSh 347,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-odyssey-ark-2nd-gen-ls55cg97wnmxue-55-smart-4k-38402160-165hz-1ms-1000r-va-speakers-black-5gs672scd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

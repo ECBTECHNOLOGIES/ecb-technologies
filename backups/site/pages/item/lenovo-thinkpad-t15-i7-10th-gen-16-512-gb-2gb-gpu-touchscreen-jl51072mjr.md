@@ -3,7 +3,7 @@
 > Lenovo THINKPAD T15 — i7 10th Gen, 16 / 512 GB 2GB GPU— for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD · touchscreen
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t15-i7-10th-gen-16-512-gb-2gb-gpu-touchscreen-jl51072mjr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

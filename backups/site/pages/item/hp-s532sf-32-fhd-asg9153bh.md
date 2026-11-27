@@ -3,7 +3,7 @@
 > HP S532SF 32” FHD for KSh 39,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-s532sf-32-fhd-asg9153bh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

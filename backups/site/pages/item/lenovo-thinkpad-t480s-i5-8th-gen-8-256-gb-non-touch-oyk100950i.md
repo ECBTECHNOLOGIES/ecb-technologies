@@ -3,7 +3,7 @@
 > Lenovo THINKPAD T480s i5 8th Gen, 8 / 256 GB NON for KSh 26,500 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t480s-i5-8th-gen-8-256-gb-non-touch-oyk100950i
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

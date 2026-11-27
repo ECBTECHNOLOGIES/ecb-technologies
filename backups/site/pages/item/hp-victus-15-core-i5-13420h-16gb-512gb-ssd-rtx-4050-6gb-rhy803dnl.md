@@ -3,7 +3,7 @@
 > HP Victus 15 | Core i5-13420H | 16GB | 512GB SSD | RTX 4050 for KSh 125,500 at ECB Technologies, Nairobi CBD. Core i5 · 16 GB RAM · 512 GB SSD · dedicated graph
 
 Canonical: https://www.ecbtechkenya.com/item/hp-victus-15-core-i5-13420h-16gb-512gb-ssd-rtx-4050-6gb-rhy803dnl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

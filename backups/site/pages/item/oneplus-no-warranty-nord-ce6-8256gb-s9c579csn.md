@@ -3,7 +3,7 @@
 > ONEPLUS (NO WARRANTY) Nord CE6 8/256GB for KSh 50,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/oneplus-no-warranty-nord-ce6-8256gb-s9c579csn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

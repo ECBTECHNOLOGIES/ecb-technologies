@@ -3,7 +3,7 @@
 > SAMSUNG Watch 7 44mm for KSh 22,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-watch-7-44mm-dhz6312v2
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

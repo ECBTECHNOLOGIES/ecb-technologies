@@ -3,7 +3,7 @@
 > SAMSUNG Tab S11 Ultra 256GB WiFi + for KSh 149,500 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-tab-s11-ultra-256gb-wifi-cellular-3lm588lkd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

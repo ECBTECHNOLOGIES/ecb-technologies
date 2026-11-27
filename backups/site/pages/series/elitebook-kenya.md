@@ -1,6 +1,6 @@
 # HP EliteBook in Kenya: models, prices and history
 
-> We have 84 HP EliteBook laptops, from KSh 22,000 to KSh 223,500 with a median of KSh 39,000. HP's top business line: metal bodies, good keyboards and business security features. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 19 November 2026.
+> We have 84 HP EliteBook laptops, from KSh 22,000 to KSh 223,500 with a median of KSh 39,000. HP's top business line: metal bodies, good keyboards and business security features. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/series/elitebook-kenya
 
@@ -60,9 +60,9 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 - [HP x360 in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/x360-kenya)
 - [Lenovo ThinkPad in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/thinkpad-kenya)
+- [Best HP laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/hp-laptops-under-80k-kenya)
 - [Best laptops under KSh 70,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-70k-kenya)
 - [Best laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-80k-kenya)
-- [Best business laptops in Kenya](https://www.ecbtechkenya.com/best/business-laptops-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -73,7 +73,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### How much is an HP EliteBook in Kenya?
 
-At ECB Technologies, HP EliteBook laptops cost from KSh 22,000 to KSh 223,500, with a median of KSh 39,000 across 84 models (19 November 2026).
+At ECB Technologies, HP EliteBook laptops cost from KSh 22,000 to KSh 223,500, with a median of KSh 39,000 across 84 models (25 November 2026).
 
 ### What is the cheapest HP EliteBook?
 
@@ -87,4 +87,4 @@ The HP ELITEBOOK 820 G1 i5 4th Gen 8GB at KSh 22,000.
 
 Ask on WhatsApp (0717 040 531) for the warranty on the exact model; it is shown on each product page where the shop lists it.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

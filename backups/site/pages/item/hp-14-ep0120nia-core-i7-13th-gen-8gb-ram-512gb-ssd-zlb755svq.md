@@ -3,7 +3,7 @@
 > HP 14-EP0120NIA Core i7 13th Gen | 8GB RAM | 512GB for KSh 95,000 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 8 GB RAM · 512 GB SSD. Delivery across Ke
 
 Canonical: https://www.ecbtechkenya.com/item/hp-14-ep0120nia-core-i7-13th-gen-8gb-ram-512gb-ssd-zlb755svq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

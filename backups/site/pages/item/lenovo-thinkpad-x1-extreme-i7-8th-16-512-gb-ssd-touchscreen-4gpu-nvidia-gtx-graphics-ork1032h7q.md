@@ -3,7 +3,7 @@
 > LENOVO THINKPAD X1 EXTREME i7 8TH 16 / 512 GB SSD TOUCHSCREEN — 4GPU for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i7 · 16 GB RAM · 512 GB SSD · touchsc
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-extreme-i7-8th-16-512-gb-ssd-touchscreen-4gpu-nvidia-gtx-graphics-ork1032h7q
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

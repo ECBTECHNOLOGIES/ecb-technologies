@@ -3,7 +3,7 @@
 > Lenovo thinkpad P15 GEN 1 16 i7 10th Gen, 16 / 512 GB NonTouch 4GPU for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD ·
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p15-gen-1-16-i7-10th-gen-16-512-gb-nontouch-4gpu-invidia-quadro-t1000-graphics-vbe1070hyk
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

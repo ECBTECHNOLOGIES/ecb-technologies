@@ -3,7 +3,7 @@
 > HP ZBOOK STUDIO 15.6 G8 MOBILE WORKSTATION I7 11TH 32 512 NON TOUCH for KSh 92,000 at ECB Technologies, Nairobi CBD. Core i7 · 32 GB RAM · 512 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-studio-156-g8-mobile-workstation-i7-11th-32-512-non-touch-4gpu-nvidia-t1200-graphics-wn81022zbe
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

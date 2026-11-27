@@ -3,7 +3,7 @@
 > Dell LATITUDE 7320 — i7 11th Gen, 16 / 512 GB — X360 for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 512 GB SSD · 2-in-1. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7320-i7-11th-gen-16-512-gb-x360-touchscreen-gf710399ri
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

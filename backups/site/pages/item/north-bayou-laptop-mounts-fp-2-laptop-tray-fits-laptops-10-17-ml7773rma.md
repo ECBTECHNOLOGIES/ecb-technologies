@@ -3,7 +3,7 @@
 > North Bayou LAPTOP MOUNTS FP-2 Laptop Tray Fits laptops for KSh 4,500 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/north-bayou-laptop-mounts-fp-2-laptop-tray-fits-laptops-10-17-ml7773rma
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

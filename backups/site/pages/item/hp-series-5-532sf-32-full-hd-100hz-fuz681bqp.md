@@ -3,7 +3,7 @@
 > HP Series 5 532SF 32” | Full HD | 100Hz for KSh 42,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-series-5-532sf-32-full-hd-100hz-fuz681bqp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > MSI Modern MD271UL for KSh 52,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/msi-modern-md271ul-z93626me6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > SAMSUNG Tab S10 Ultra 256GB WiFi for KSh 114,000 at ECB Technologies, Moi Avenue, Nairobi CBD. 256 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-tab-s10-ultra-256gb-wifi-wzd5907ee
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

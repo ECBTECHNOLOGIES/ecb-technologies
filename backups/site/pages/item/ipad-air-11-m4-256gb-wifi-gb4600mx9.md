@@ -3,7 +3,7 @@
 > iPad Air 11” M4 256GB WiFi for KSh 111,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 256 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/ipad-air-11-m4-256gb-wifi-gb4600mx9
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

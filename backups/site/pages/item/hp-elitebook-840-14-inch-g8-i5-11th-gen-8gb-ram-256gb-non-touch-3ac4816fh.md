@@ -3,7 +3,7 @@
 > HP ELITEBOOK 840 14-inch G8 i5 11th Gen 8GB RAM 256GB for KSh 37,000 at ECB Technologies, Nairobi CBD. Core i5 11th gen · 8 GB RAM · 256 GB SSD. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-840-14-inch-g8-i5-11th-gen-8gb-ram-256gb-non-touch-3ac4816fh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

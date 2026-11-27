@@ -3,7 +3,7 @@
 > Lenovo IdeaPad Slim 3 | Core i7 13th Gen | 16GB | 512GB SSD | for KSh 113,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-ideapad-slim-3-core-i7-13th-gen-16gb-512gb-ssd-14-md1815cbt
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

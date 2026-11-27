@@ -3,7 +3,7 @@
 > Lenovo THINKPAD Yoga x370 — i5 7th Gen, 8 / 256 GB x360 for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i5 7th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-yoga-x370-i5-7th-gen-8-256-gb-x360-touchscreen-v7c9944az
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

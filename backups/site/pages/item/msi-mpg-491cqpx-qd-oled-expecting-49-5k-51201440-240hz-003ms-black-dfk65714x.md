@@ -3,7 +3,7 @@
 > MSI MPG 491CQPX QD-OLED – EXPECTING 49” | 5K 5120×1440 | 240Hz | for KSh 147,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/msi-mpg-491cqpx-qd-oled-expecting-49-5k-51201440-240hz-003ms-black-dfk65714x
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

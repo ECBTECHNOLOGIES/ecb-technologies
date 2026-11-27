@@ -3,7 +3,7 @@
 > HP ELITEBOOK 820 G1 i5 4th Gen 8GB 256GB for KSh 22,000 at ECB Technologies, Nairobi CBD. Core i5 4th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-820-g1-i5-4th-gen-8gb-256gb-non-touch-c1e455fgl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

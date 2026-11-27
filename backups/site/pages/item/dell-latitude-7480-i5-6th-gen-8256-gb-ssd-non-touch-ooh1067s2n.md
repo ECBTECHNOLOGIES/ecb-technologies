@@ -3,7 +3,7 @@
 > DELL LATITUDE 7480 i5 6TH GEN 8/256 GB SSD NON for KSh 26,000 at ECB Technologies, Nairobi CBD. Core i5 6th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7480-i5-6th-gen-8256-gb-ssd-non-touch-ooh1067s2n
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

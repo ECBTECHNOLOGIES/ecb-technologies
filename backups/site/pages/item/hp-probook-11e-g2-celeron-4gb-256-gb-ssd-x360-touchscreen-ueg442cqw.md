@@ -3,7 +3,7 @@
 > HP PROBOOK 11E G2 CELERON 4GB 256 GB SSD X360 for KSh 21,000 at ECB Technologies, Nairobi CBD. Celeron / Pentium · 4 GB RAM · 256 GB SSD · 2-in-1. Delivery acro
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-11e-g2-celeron-4gb-256-gb-ssd-x360-touchscreen-ueg442cqw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

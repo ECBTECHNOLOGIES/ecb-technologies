@@ -3,7 +3,7 @@
 > North Bayou DUAL MONITOR ARMS G55 Heavy Duty Dual for KSh 18,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/north-bayou-dual-monitor-arms-g55-heavy-duty-dual-27-34-mjf772ymd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

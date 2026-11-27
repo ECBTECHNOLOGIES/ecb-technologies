@@ -3,7 +3,7 @@
 > Amigo Wired Keyboard for KSh 800 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/amigo-wired-keyboard-y7c930ln8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

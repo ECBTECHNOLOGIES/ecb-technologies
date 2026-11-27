@@ -3,7 +3,7 @@
 > Lenovo THINKPAD X280 i5 8th Gen, 16/ 256 GB NON for KSh 28,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 16 GB RAM · 256 GB SSD. Delivery across Kenya
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x280-i5-8th-gen-16-256-gb-non-touch-oct1057qxl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

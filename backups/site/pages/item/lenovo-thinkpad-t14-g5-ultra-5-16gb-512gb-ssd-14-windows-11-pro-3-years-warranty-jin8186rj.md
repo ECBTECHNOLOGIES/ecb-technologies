@@ -3,7 +3,7 @@
 > Lenovo ThinkPad T14 G5 | Ultra 5 | 16GB | 512GB SSD | 14” | Windows for KSh 145,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t14-g5-ultra-5-16gb-512gb-ssd-14-windows-11-pro-3-years-warranty-jin8186rj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

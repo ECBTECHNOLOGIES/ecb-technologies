@@ -3,7 +3,7 @@
 > IPHONE 1 YEAR WARRANTY ESIM ONLY 17 Pro Max for KSh 187,000 at ECB Technologies, Nairobi CBD. 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/iphone-1-year-warranty-esim-only-17-pro-max-512gb-rh1563stt
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

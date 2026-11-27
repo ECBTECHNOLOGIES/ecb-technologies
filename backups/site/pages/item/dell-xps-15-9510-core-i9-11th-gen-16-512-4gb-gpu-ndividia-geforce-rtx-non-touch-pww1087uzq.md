@@ -3,7 +3,7 @@
 > Dell XPS 15 9510 CORE i9 11th Gen, 16 / 512 4GB GPU NDIVIDIA GEFORCE for KSh 82,000 at ECB Technologies, Nairobi CBD. Core i9 11th gen · 16 GB RAM · 512 GB SSD
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-15-9510-core-i9-11th-gen-16-512-4gb-gpu-ndividia-geforce-rtx-non-touch-pww1087uzq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

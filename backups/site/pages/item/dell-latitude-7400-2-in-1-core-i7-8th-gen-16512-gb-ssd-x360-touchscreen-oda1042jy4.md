@@ -3,7 +3,7 @@
 > DELL LATITUDE 7400 2-in-1 CORE i7 8TH GEN 16/512 GB SSD X360 for KSh 45,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7400-2-in-1-core-i7-8th-gen-16512-gb-ssd-x360-touchscreen-oda1042jy4
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

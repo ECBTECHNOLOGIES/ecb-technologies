@@ -3,7 +3,7 @@
 > HP PROBOOK 11E G2 i5 7th Gen, 8GB / 256 GB x360 for KSh 24,000 at ECB Technologies, Nairobi CBD. Core i5 7th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery acro
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-11e-g2-i5-7th-gen-8gb-256-gb-x360-touchscreen-u0i3131zso
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

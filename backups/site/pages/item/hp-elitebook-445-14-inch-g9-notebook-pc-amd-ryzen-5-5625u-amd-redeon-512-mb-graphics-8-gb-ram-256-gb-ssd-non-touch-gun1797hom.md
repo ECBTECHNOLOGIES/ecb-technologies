@@ -3,7 +3,7 @@
 > HP ELITEBOOK 445 14-inch G9 NOTEBOOK PC AMD RYZEN 5 5625U/ AMD REDEON for KSh 43,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 256 GB SSD. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-445-14-inch-g9-notebook-pc-amd-ryzen-5-5625u-amd-redeon-512-mb-graphics-8-gb-ram-256-gb-ssd-non-touch-gun1797hom
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > DJI Mobile 8P for KSh 25,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/dji-mobile-8p-s3g5794fjg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Epson EcoTank L8100 Photo Printer for KSh 72,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/epson-ecotank-l8100-photo-printer-xe3879kn0
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

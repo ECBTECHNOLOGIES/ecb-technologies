@@ -3,7 +3,7 @@
 > Xiaomi G34WQi 34” | WQHD 3440×1440 | 180Hz | 1ms | for KSh 62,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/xiaomi-g34wqi-34-wqhd-34401440-180hz-1ms-white-bgg645oej
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Address, phone, WhatsApp, email and opening hours of the shop on Moi Avenue, Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/contact
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 ## Shop details
 - Shop: Techmart Iconic Business Plaza, 3rd Floor, Room T12, Moi Avenue, Nairobi CBD, Kenya

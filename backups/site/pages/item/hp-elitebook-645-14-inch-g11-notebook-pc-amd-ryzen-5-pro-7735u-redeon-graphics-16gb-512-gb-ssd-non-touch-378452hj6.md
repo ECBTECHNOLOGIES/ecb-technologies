@@ -3,7 +3,7 @@
 > HP ELITEBOOK 645 14-inch G11 NOTEBOOK PC AMD RYZEN 5 PRO 7735U REDEON for KSh 49,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 16 GB RAM · 512 GB SSD. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-645-14-inch-g11-notebook-pc-amd-ryzen-5-pro-7735u-redeon-graphics-16gb-512-gb-ssd-non-touch-378452hj6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

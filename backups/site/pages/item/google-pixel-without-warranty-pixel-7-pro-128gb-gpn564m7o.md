@@ -3,7 +3,7 @@
 > GOOGLE PIXEL (WITHOUT WARRANTY) * Pixel 7 Pro for KSh 49,000 at ECB Technologies, Nairobi CBD. 128 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/google-pixel-without-warranty-pixel-7-pro-128gb-gpn564m7o
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Vivo X300 Ultra 16/512GB [Black] for KSh 200,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/vivo-x300-ultra-16512gb-black-4t5544tim
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

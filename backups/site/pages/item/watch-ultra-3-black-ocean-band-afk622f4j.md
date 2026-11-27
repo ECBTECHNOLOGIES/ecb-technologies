@@ -3,7 +3,7 @@
 > Watch Ultra 3 Black Ocean Band for KSh 93,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/watch-ultra-3-black-ocean-band-afk622f4j
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

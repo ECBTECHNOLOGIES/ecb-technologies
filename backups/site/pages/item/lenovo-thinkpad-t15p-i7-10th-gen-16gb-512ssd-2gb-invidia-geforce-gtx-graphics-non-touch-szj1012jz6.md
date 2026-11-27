@@ -3,7 +3,7 @@
 > Lenovo thinkpad T15P i7 10th Gen, 16gb 512ssd 2GB INVIDIA GEFORCE GTX for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t15p-i7-10th-gen-16gb-512ssd-2gb-invidia-geforce-gtx-graphics-non-touch-szj1012jz6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

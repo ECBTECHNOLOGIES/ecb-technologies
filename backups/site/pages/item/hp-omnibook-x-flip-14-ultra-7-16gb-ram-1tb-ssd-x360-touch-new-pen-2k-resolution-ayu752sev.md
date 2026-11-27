@@ -3,7 +3,7 @@
 > HP Omnibook X Flip 14” Ultra 7 | 16GB RAM | 1TB SSD | x360 Touch | for KSh 172,000 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-14-ultra-7-16gb-ram-1tb-ssd-x360-touch-new-pen-2k-resolution-ayu752sev
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

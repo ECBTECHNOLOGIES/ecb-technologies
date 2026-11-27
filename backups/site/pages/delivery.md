@@ -3,7 +3,7 @@
 > ECB Technologies delivers laptops, phones and accessories across Nairobi by rider and to all 47 counties by courier. Free pickup on Moi Avenue, Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/delivery
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 ## Delivery across Kenya
 

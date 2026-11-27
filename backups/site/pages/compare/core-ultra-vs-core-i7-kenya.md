@@ -1,6 +1,6 @@
 # Core Ultra vs Core i7: which to buy in Kenya
 
-> At ECB Technologies, the median Core Ultra laptop costs KSh 145,500 (46 in stock) and the median Core i7 laptop costs KSh 52,000 (132 in stock). Core i7 is KSh 93,500 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median Core Ultra laptop costs KSh 145,500 (46 in stock) and the median Core i7 laptop costs KSh 52,000 (132 in stock). Core i7 is KSh 93,500 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/core-ultra-vs-core-i7-kenya
 
@@ -79,7 +79,7 @@ Every Core Ultra and Core i7 laptop in stock is counted, not a sample. Shares ar
 
 ### Which is cheaper, Core Ultra or Core i7?
 
-Core i7, at the median: KSh 52,000 against KSh 145,500 at ECB Technologies (19 November 2026).
+Core i7, at the median: KSh 52,000 against KSh 145,500 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, Core Ultra or Core i7?
 
@@ -93,4 +93,4 @@ Core Ultra from KSh 72,000 and Core i7 from KSh 22,000.
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

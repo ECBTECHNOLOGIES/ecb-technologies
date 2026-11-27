@@ -3,7 +3,7 @@
 > SAMSUNG (WITHOUT WARRANTY) . Fold 7 512GB for KSh 183,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 512 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-without-warranty-fold-7-512gb-aad5521qd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

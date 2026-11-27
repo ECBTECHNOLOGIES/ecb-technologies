@@ -3,7 +3,7 @@
 > HP Victus 15 Gaming Core i7 | 16GB RAM | 1TB SSD NVIDIA RTX 5060 8GB for KSh 182,000 at ECB Technologies, Nairobi CBD. Core i7 · 16 GB RAM · 1 TB SSD · dedicate
 
 Canonical: https://www.ecbtechkenya.com/item/hp-victus-15-gaming-core-i7-16gb-ram-1tb-ssd-nvidia-rtx-5060-8gb-156-display-xgq763nyf
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

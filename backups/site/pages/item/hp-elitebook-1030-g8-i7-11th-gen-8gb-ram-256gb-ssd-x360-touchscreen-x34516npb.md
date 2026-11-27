@@ -3,7 +3,7 @@
 > HP ELITEBOOK 1030 G8 i7 11th Gen 8GB RAM 256GB SSD X360 for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Deli
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-1030-g8-i7-11th-gen-8gb-ram-256gb-ssd-x360-touchscreen-x34516npb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP OmniBook X Flip 16-AS0023DX | Core Ultra 7 256V | 16GB | 1TB for KSh 141,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · 2-in-1. De
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-16-as0023dx-core-ultra-7-256v-16gb-1tb-ssd-wke788pqf
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

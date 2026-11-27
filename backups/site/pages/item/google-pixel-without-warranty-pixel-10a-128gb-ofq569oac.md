@@ -3,7 +3,7 @@
 > GOOGLE PIXEL (WITHOUT WARRANTY) Pixel 10a for KSh 59,000 at ECB Technologies, Nairobi CBD. 128 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/google-pixel-without-warranty-pixel-10a-128gb-ofq569oac
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

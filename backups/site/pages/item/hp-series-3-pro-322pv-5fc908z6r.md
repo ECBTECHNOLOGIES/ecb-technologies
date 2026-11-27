@@ -3,7 +3,7 @@
 > HP Series 3 Pro 322PV for KSh 19,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-series-3-pro-322pv-5fc908z6r
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

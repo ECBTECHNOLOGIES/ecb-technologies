@@ -3,7 +3,7 @@
 > HP ELITEBOOK 840 G7 — i7 10th Gen 8 GB RAM 256 GB for KSh 42,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 8 GB RAM · 256 GB SSD · touchscreen. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-840-g7-i7-10th-gen-8-gb-ram-256-gb-touchscreen-c36485vi9
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

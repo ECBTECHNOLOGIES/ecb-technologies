@@ -3,7 +3,7 @@
 > Lenovo Yoga 7 2-in-1 | Ultra 7 | 16GB | 512GB SSD | for KSh 173,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · 2-in-1. Delivery acr
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-yoga-7-2-in-1-ultra-7-16gb-512gb-ssd-14-6az822vwa
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

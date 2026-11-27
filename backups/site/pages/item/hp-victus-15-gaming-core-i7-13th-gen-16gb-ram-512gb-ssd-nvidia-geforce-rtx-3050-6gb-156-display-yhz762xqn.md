@@ -3,7 +3,7 @@
 > HP Victus 15 Gaming Core i7 13th Gen | 16GB RAM | 512GB SSD NVIDIA for KSh 142,000 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD ·
 
 Canonical: https://www.ecbtechkenya.com/item/hp-victus-15-gaming-core-i7-13th-gen-16gb-ram-512gb-ssd-nvidia-geforce-rtx-3050-6gb-156-display-yhz762xqn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

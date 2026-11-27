@@ -3,7 +3,7 @@
 > Dell XPS 13 9310 i7 11th Gen, 16 / 512 for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-9310-i7-11th-gen-16-512-non-touch-iur1114y9p
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

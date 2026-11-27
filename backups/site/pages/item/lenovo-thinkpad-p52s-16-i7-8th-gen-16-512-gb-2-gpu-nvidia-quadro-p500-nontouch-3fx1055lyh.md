@@ -3,7 +3,7 @@
 > Lenovo thinkpad P52S 16 i7 8th Gen 16 / 512 GB 2 GPU NVIDIA QUADRO for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD · d
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p52s-16-i7-8th-gen-16-512-gb-2-gpu-nvidia-quadro-p500-nontouch-3fx1055lyh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

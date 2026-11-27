@@ -3,7 +3,7 @@
 > HP 527SW Series 5 27” FHD for KSh 30,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-527sw-series-5-27-fhd-seb9137qb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

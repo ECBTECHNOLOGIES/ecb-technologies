@@ -3,7 +3,7 @@
 > Lenovo IdeaPad 5 X360 | Core Ultra 5-13420H | 8GB | 512GB SSD | for KSh 95,500 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD · 2-in-1. De
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-ideapad-5-x360-core-ultra-5-13420h-8gb-512gb-ssd-windows-11-14-silver-h9r814aol
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

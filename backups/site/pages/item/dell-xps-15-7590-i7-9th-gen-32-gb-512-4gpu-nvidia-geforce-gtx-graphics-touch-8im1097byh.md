@@ -3,7 +3,7 @@
 > DELL XPS 15 7590 I7 9TH GEN-32 GB 512 4GPU NVIDIA GEFORCE GTX for KSh 77,000 at ECB Technologies, Nairobi CBD. Core i7 9th gen · 32 GB RAM · touchscreen · dedic
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-15-7590-i7-9th-gen-32-gb-512-4gpu-nvidia-geforce-gtx-graphics-touch-8im1097byh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

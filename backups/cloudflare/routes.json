@@ -82,5 +82,29 @@
   "pattern": "www.ecbtechkenya.com/sitemap*",
   "script": "ecb-sitemap",
   "request_limit_fail_open": false
+ },
+ {
+  "id": "e3ec1c567ca748078cbcdaeaa5f82cdf",
+  "pattern": "www.ecbtechkenya.com/admin/login",
+  "script": "ecb-speed",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "d51d112a449b42ac8efa5100a57137a2",
+  "pattern": "ecbtechkenya.com/admin/login",
+  "script": "ecb-speed",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "53e15f5cb1ee4846a0495b90071da83f",
+  "pattern": "www.ecbtechkenya.com/product-sitemap.xml",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
+ },
+ {
+  "id": "803bb745fec7449ba4d65986f81c8883",
+  "pattern": "ecbtechkenya.com/product-sitemap.xml",
+  "script": "ecb-sitemap",
+  "request_limit_fail_open": false
  }
 ]

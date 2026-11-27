@@ -3,7 +3,7 @@
 > HP ZBOOK STUDIO 15.6 G8 MOBILE WORKSTATION i7 11th Gen 32GB RAM 512GB for KSh 92,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 32 GB RAM · 512 GB SSD
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-studio-156-g8-mobile-workstation-i7-11th-gen-32gb-ram-512gb-non-touch-4-gb-gpu-nvidia-t1200-graphics-xed538p8w
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

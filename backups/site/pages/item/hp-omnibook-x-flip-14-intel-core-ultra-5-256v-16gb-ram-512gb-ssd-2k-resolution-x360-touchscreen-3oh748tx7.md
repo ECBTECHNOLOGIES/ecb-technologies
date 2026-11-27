@@ -3,7 +3,7 @@
 > HP Omnibook X Flip 14” Intel Core Ultra 5 256V | 16GB RAM | 512GB SSD for KSh 117,000 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · 2-
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-14-intel-core-ultra-5-256v-16gb-ram-512gb-ssd-2k-resolution-x360-touchscreen-3oh748tx7
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

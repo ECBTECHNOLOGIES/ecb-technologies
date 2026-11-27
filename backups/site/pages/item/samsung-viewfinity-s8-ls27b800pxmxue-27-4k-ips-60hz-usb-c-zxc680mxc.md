@@ -3,7 +3,7 @@
 > Samsung ViewFinity S8 LS27B800PXMXUE 27” | 4K | IPS | 60Hz | for KSh 69,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-viewfinity-s8-ls27b800pxmxue-27-4k-ips-60hz-usb-c-zxc680mxc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

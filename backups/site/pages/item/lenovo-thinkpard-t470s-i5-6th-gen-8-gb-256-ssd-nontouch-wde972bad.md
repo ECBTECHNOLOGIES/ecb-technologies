@@ -3,7 +3,7 @@
 > LENOVO THINKPARD T470S i5 6TH GEN 8 GB 256 SSD for KSh 25,500 at ECB Technologies, Nairobi CBD. Core i5 6th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpard-t470s-i5-6th-gen-8-gb-256-ssd-nontouch-wde972bad
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

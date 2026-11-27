@@ -3,7 +3,7 @@
 > HP 15 Core Ultra 7 15th Gen | 16GB DDR4 3200 | 512GB SSD | DOS | for KSh 104,499 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · touchsc
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-core-ultra-7-15th-gen-16gb-ddr4-3200-512gb-ssd-dos-156-touch-lbw7814es
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

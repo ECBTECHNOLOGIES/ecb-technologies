@@ -3,7 +3,7 @@
 > HP LaserJet 182N Color for KSh 47,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-laserjet-182n-color-ti18606ln
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP ELITEBOOK 835 13-inch G9 NOTEBOOK PC AMD RYZEN 5 PRO 6650U WITH for KSh 47,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 16 GB RAM · 512 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-835-13-inch-g9-notebook-pc-amd-ryzen-5-pro-6650u-with-radeon-graphics-16-gb-ram-512-gb-non-touch-fml473zl3
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

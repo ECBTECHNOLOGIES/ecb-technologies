@@ -3,7 +3,7 @@
 > Kaspersky Standard 5 Users for KSh 3,300 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kaspersky-standard-5-users-f79918rvc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

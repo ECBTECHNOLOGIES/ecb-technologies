@@ -3,7 +3,7 @@
 > Epson EB-E01 3300 Lumens for KSh 53,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/epson-eb-e01-3300-lumens-1fq904f5k
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

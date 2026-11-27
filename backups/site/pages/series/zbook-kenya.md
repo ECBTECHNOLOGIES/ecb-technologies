@@ -1,6 +1,6 @@
 # HP ZBook in Kenya: models, prices and history
 
-> We have 20 HP ZBook laptops, from KSh 24,000 to KSh 92,000 with a median of KSh 75,500. Mobile workstations for design, engineering and video work, often with workstation graphics. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 19 November 2026.
+> We have 20 HP ZBook laptops, from KSh 24,000 to KSh 92,000 with a median of KSh 75,500. Mobile workstations for design, engineering and video work, often with workstation graphics. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/series/zbook-kenya
 
@@ -54,9 +54,9 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 - [Lenovo ThinkPad in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/thinkpad-kenya)
 - [HP EliteBook in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/elitebook-kenya)
-- [Best laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-80k-kenya)
-- [Laptops for graphic design and video editing in Kenya](https://www.ecbtechkenya.com/best/laptops-for-graphic-design-and-video-editing-kenya)
-- [Best touchscreen laptops in Kenya](https://www.ecbtechkenya.com/best/touchscreen-laptops-kenya)
+- [Best ZBook laptops under KSh 100,000 in Kenya](https://www.ecbtechkenya.com/best/zbook-laptops-under-100k-kenya)
+- [Best Gaming laptops under KSh 100,000 in Kenya](https://www.ecbtechkenya.com/best/gaming-laptops-under-100k-kenya)
+- [Best 32GB RAM laptops under KSh 100,000 in Kenya](https://www.ecbtechkenya.com/best/32gb-ram-laptops-under-100k-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -67,7 +67,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### How much is an HP ZBook in Kenya?
 
-At ECB Technologies, HP ZBook laptops cost from KSh 24,000 to KSh 92,000, with a median of KSh 75,500 across 20 models (19 November 2026).
+At ECB Technologies, HP ZBook laptops cost from KSh 24,000 to KSh 92,000, with a median of KSh 75,500 across 20 models (25 November 2026).
 
 ### What is the cheapest HP ZBook?
 
@@ -81,4 +81,4 @@ The HP ZBook 14 G2 i7 4th Gen 8 GB RAM at KSh 24,000.
 
 Ask on WhatsApp (0717 040 531) for the warranty on the exact model; it is shown on each product page where the shop lists it.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

@@ -3,7 +3,7 @@
 > HP 524SA Series 5 23.8” Speaker for KSh 25,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-524sa-series-5-238-speaker-gkn910cfk
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

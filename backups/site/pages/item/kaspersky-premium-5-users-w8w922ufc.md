@@ -3,7 +3,7 @@
 > Kaspersky Premium 5 Users for KSh 4,100 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kaspersky-premium-5-users-w8w922ufc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

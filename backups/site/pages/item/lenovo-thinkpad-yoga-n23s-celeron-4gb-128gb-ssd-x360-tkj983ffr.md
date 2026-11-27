@@ -3,7 +3,7 @@
 > Lenovo THINKPAD YOGA N23S CELERON 4GB 128GB SSD for KSh 16,000 at ECB Technologies, Nairobi CBD. Celeron / Pentium · 4 GB RAM · 128 GB SSD · 2-in-1. Delivery ac
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-yoga-n23s-celeron-4gb-128gb-ssd-x360-tkj983ffr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

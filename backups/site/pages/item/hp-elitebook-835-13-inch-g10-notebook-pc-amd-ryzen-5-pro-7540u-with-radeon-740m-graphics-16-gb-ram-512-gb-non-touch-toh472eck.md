@@ -3,7 +3,7 @@
 > HP ELITEBOOK 835 13-inch G10 NOTEBOOK PC AMD RYZEN 5 PRO 7540U WITH for KSh 52,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 16 GB RAM · 512 GB SSD. Deliver
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-835-13-inch-g10-notebook-pc-amd-ryzen-5-pro-7540u-with-radeon-740m-graphics-16-gb-ram-512-gb-non-touch-toh472eck
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

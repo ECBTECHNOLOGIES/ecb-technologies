@@ -3,7 +3,7 @@
 > Insta360 Invisible Selfie Stick with Tripod for KSh 7,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/insta360-invisible-selfie-stick-with-tripod-svo669wmw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

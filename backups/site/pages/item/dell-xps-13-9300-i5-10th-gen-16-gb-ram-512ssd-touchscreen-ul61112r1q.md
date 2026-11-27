@@ -3,7 +3,7 @@
 > DELL xps 13 9300 i5 10th GEN 16 GB RAM 512SSD for KSh 57,000 at ECB Technologies, Nairobi CBD. Core i5 10th gen · 16 GB RAM · 512 GB SSD · touchscreen. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-9300-i5-10th-gen-16-gb-ram-512ssd-touchscreen-ul61112r1q
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

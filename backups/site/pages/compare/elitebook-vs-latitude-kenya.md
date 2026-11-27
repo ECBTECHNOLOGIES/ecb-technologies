@@ -1,6 +1,6 @@
 # EliteBook vs Latitude: which to buy in Kenya
 
-> At ECB Technologies, the median EliteBook laptop costs KSh 39,000 (84 in stock) and the median Latitude laptop costs KSh 28,000 (21 in stock). Latitude is KSh 11,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median EliteBook laptop costs KSh 39,000 (84 in stock) and the median Latitude laptop costs KSh 28,000 (21 in stock). Latitude is KSh 11,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/elitebook-vs-latitude-kenya
 
@@ -80,7 +80,7 @@ Every EliteBook and Latitude laptop in stock is counted, not a sample. Shares ar
 
 ### Which is cheaper, EliteBook or Latitude?
 
-Latitude, at the median: KSh 28,000 against KSh 39,000 at ECB Technologies (19 November 2026).
+Latitude, at the median: KSh 28,000 against KSh 39,000 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, EliteBook or Latitude?
 
@@ -94,4 +94,4 @@ EliteBook from KSh 22,000 and Latitude from KSh 21,000.
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

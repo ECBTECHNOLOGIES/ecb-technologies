@@ -3,7 +3,7 @@
 > HP ProBook 440 G11 | Core Ultra 7-155U | 16GB | 512GB PCIe | FreeDOS for KSh 135,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Deli
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-440-g11-core-ultra-7-155u-16gb-512gb-pcie-freedos-14-uha796iry
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

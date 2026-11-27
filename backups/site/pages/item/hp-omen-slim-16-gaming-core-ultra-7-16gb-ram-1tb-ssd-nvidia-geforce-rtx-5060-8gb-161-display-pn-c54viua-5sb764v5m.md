@@ -3,7 +3,7 @@
 > HP OMEN Slim 16 Gaming Core Ultra 7 | 16GB RAM | 1TB SSD NVIDIA for KSh 192,000 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · dedicated
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omen-slim-16-gaming-core-ultra-7-16gb-ram-1tb-ssd-nvidia-geforce-rtx-5060-8gb-161-display-pn-c54viua-5sb764v5m
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

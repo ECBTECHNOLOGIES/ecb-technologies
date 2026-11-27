@@ -3,7 +3,7 @@
 > Dell XPS 13 9305 i7 11th Gen 16 GB RAM 512 for KSh 72,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · touchscreen. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-9305-i7-11th-gen-16-gb-ram-512-touchscreen-9jk1118qob
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

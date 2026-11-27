@@ -1,6 +1,6 @@
 # ThinkPad vs EliteBook: which to buy in Kenya
 
-> At ECB Technologies, the median ThinkPad laptop costs KSh 35,000 (79 in stock) and the median EliteBook laptop costs KSh 39,000 (84 in stock). ThinkPad is KSh 4,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median ThinkPad laptop costs KSh 35,000 (79 in stock) and the median EliteBook laptop costs KSh 39,000 (84 in stock). ThinkPad is KSh 4,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/thinkpad-vs-elitebook-kenya
 
@@ -81,7 +81,7 @@ Every ThinkPad and EliteBook laptop in stock is counted, not a sample. Shares ar
 
 ### Which is cheaper, ThinkPad or EliteBook?
 
-ThinkPad, at the median: KSh 35,000 against KSh 39,000 at ECB Technologies (19 November 2026).
+ThinkPad, at the median: KSh 35,000 against KSh 39,000 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, ThinkPad or EliteBook?
 
@@ -95,4 +95,4 @@ ThinkPad from KSh 16,000 and EliteBook from KSh 22,000.
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

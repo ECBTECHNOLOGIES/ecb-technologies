@@ -3,7 +3,7 @@
 > LENOVO THINKPAD 13e GEN 2 i5 7TH 8GB 256 SSD NON for KSh 25,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-13e-gen-2-i5-7th-8gb-256-ssd-non-touch-otz982v2z
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

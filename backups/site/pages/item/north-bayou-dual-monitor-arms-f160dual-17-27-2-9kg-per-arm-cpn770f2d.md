@@ -3,7 +3,7 @@
 > North Bayou DUAL MONITOR ARMS F160Dual 17"-27" | 2-9kg per for KSh 12,500 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/north-bayou-dual-monitor-arms-f160dual-17-27-2-9kg-per-arm-cpn770f2d
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

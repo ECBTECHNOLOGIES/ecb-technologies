@@ -3,7 +3,7 @@
 > LENOVO THINKPRAD X270 I5 6TH 8 GB 256 SSD for KSh 24,500 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD · touchscreen. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkprad-x270-i5-6th-8-gb-256-ssd-touchscreen-id4968pmn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

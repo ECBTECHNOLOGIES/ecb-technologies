@@ -3,7 +3,7 @@
 > HP 15 Core i3-1315U | 8GB | 256GB | 15.6” Touch | Windows for KSh 64,500 at ECB Technologies, Nairobi CBD. Core i3 · 8 GB RAM · 256 GB SSD · touchscreen. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-core-i3-1315u-8gb-256gb-156-touch-windows-11-fgw7764bd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Answers about ordering, accounts, returns and support at ECB Technologies.
 
 Canonical: https://www.ecbtechkenya.com/faq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 ### What is ECB Technologies and how does it work?
 

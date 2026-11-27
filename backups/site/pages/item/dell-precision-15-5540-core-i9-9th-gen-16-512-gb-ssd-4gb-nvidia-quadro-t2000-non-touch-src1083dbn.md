@@ -3,7 +3,7 @@
 > Dell Precision 15 5540 CORE i9 9th Gen, 16 / 512 GB SSD 4GB NVIDIA for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i9 9th gen · 16 GB RAM · 512 GB SSD · d
 
 Canonical: https://www.ecbtechkenya.com/item/dell-precision-15-5540-core-i9-9th-gen-16-512-gb-ssd-4gb-nvidia-quadro-t2000-non-touch-src1083dbn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP OmniBook X Flip 2-in-1 14-KB0023 | Ultra 7 355 | 16GB | 1TB SSD | for KSh 162,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · 2-in-
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-2-in-1-14-kb0023-ultra-7-355-16gb-1tb-ssd-1-year-warranty-rpa787x8r
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

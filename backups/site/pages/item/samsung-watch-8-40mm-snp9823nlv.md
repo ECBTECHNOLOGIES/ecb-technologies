@@ -3,7 +3,7 @@
 > SAMSUNG Watch 8 40mm for KSh 26,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-watch-8-40mm-snp9823nlv
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

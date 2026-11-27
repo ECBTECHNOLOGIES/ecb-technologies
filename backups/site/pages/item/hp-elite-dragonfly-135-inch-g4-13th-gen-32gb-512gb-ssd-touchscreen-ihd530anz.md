@@ -3,7 +3,7 @@
 > HP ELITE DRAGONFLY 13.5-inch G4 13th Gen 32GB 512GB SSD for KSh 95,000 at ECB Technologies, Nairobi CBD. 32 GB RAM · 512 GB SSD · touchscreen. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elite-dragonfly-135-inch-g4-13th-gen-32gb-512gb-ssd-touchscreen-ihd530anz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

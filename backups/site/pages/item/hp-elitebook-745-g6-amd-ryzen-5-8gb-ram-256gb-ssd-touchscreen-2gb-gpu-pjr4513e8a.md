@@ -3,7 +3,7 @@
 > HP ELITEBOOK 745 G6 AMD Ryzen 5 8GB RAM 256GB SSD Touchscreen 2GB for KSh 33,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 256 GB SSD · touchscre
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-745-g6-amd-ryzen-5-8gb-ram-256gb-ssd-touchscreen-2gb-gpu-pjr4513e8a
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

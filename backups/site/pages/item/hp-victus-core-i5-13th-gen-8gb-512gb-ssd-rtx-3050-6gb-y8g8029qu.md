@@ -3,7 +3,7 @@
 > HP Victus | Core i5 13th Gen | 8GB | 512GB SSD | RTX 3050 for KSh 107,500 at ECB Technologies, Nairobi CBD. Core i5 13th gen · 8 GB RAM · 512 GB SSD · dedicated
 
 Canonical: https://www.ecbtechkenya.com/item/hp-victus-core-i5-13th-gen-8gb-512gb-ssd-rtx-3050-6gb-y8g8029qu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

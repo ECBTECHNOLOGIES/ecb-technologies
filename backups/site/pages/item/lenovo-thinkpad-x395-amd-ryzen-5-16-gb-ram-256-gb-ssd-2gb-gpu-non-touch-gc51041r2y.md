@@ -3,7 +3,7 @@
 > LENOVO THINKPAD X395 (AMD Ryzen 5, 16 GB RAM, 256 GB SSD) 2GB GPU NON for KSh 35,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 16 GB RAM · 256 GB SSD. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x395-amd-ryzen-5-16-gb-ram-256-gb-ssd-2gb-gpu-non-touch-gc51041r2y
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

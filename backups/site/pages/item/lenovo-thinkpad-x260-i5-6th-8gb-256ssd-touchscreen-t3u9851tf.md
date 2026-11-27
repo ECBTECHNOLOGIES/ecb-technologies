@@ -3,7 +3,7 @@
 > lenovo thinkpad x260 i5 6th 8gb 256ssd for KSh 24,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD · touchscreen. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x260-i5-6th-8gb-256ssd-touchscreen-t3u9851tf
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

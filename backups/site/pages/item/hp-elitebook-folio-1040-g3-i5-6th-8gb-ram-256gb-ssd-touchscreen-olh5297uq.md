@@ -3,7 +3,7 @@
 > HP ELITEBOOK FOLIO 1040 G3 i5 6th 8GB RAM 256GB SSD for KSh 31,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-folio-1040-g3-i5-6th-8gb-ram-256gb-ssd-touchscreen-olh5297uq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

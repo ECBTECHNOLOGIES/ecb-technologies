@@ -3,7 +3,7 @@
 > GOOGLE PIXEL (WITHOUT WARRANTY) Pixel 9 for KSh 74,000 at ECB Technologies, Nairobi CBD. 128 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/google-pixel-without-warranty-pixel-9-128gb-p8l5671x1
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

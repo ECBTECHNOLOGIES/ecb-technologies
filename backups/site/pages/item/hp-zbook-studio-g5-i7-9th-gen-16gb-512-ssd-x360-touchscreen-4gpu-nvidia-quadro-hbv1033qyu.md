@@ -3,7 +3,7 @@
 > HP ZBooK STUDIO G5 I7 9TH GEN 16GB 512 SSD X360 TOUCHSCREEN 4GPU for KSh 72,000 at ECB Technologies, Nairobi CBD. Core i7 9th gen · 16 GB RAM · 512 GB SSD · 2-i
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-studio-g5-i7-9th-gen-16gb-512-ssd-x360-touchscreen-4gpu-nvidia-quadro-hbv1033qyu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

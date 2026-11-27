@@ -3,7 +3,7 @@
 > DJI Osmo Pocket 3 Creator Combo for KSh 57,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/dji-osmo-pocket-3-creator-combo-cud664eio
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

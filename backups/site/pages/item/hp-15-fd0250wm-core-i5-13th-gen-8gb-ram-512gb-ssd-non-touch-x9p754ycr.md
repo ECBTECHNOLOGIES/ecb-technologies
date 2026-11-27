@@ -3,7 +3,7 @@
 > HP 15-FD0250WM Core i5 13th Gen | 8GB RAM | 512GB SSD | for KSh 84,000 at ECB Technologies, Nairobi CBD. Core i5 13th gen · 8 GB RAM · 512 GB SSD. Delivery acro
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-fd0250wm-core-i5-13th-gen-8gb-ram-512gb-ssd-non-touch-x9p754ycr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

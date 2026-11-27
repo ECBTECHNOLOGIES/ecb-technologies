@@ -3,7 +3,7 @@
 > HP 14 AI Core Ultra 7 15th Gen | 8GB | 512GB SSD | DOS | for KSh 110,500 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/hp-14-ai-core-ultra-7-15th-gen-8gb-512gb-ssd-dos-14-ixc782fo5
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

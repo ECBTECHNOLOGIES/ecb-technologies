@@ -3,7 +3,7 @@
 > Epson L3252 Wireless (1 bottle black included) for KSh 27,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/epson-l3252-wireless-1-bottle-black-included-ve4868uxd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

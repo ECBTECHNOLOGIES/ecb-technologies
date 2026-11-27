@@ -3,7 +3,7 @@
 > HP Omnibook 3 Snapdragon 16GB RAM | 512GB SSD | Touch Display | for KSh 112,000 at ECB Technologies, Nairobi CBD. Snapdragon · 16 GB RAM · 512 GB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-3-snapdragon-16gb-ram-512gb-ssd-touch-display-non-x360-qit747v1l
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

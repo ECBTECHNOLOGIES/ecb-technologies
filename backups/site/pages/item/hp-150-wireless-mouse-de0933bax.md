@@ -3,7 +3,7 @@
 > HP 150 Wireless Mouse for KSh 1,700 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-150-wireless-mouse-de0933bax
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

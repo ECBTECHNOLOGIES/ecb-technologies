@@ -3,7 +3,7 @@
 > iPad Pro M5 11” 256GB WiFi + Cellular for KSh 163,000 at ECB Technologies, Moi Avenue, Nairobi CBD. 256 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/ipad-pro-m5-11-256gb-wifi-cellular-14w605wm4
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

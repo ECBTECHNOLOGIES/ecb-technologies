@@ -3,7 +3,7 @@
 > HP OMEN 27Q Gaming Monitor for KSh 52,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omen-27q-gaming-monitor-jkn621iof
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > The median laptop at ECB Technologies costs KSh 52,000, across 349 laptops priced from KSh 16,000 to KSh 324,000. 75 of 349 laptops (21%) cost under KSh 30,000; 62 (18%) cost KSh 120,000 or more.
 
 Canonical: https://www.ecbtechkenya.com/research/laptop-prices-kenya
-Last updated: 2026-11-19 (when the catalogue last changed)
+Last updated: 2026-11-25 (when the catalogue last changed)
 
 ## Key findings
 
@@ -88,7 +88,7 @@ HP, with 174 of 349 laptops (50%). ([link](https://www.ecbtechkenya.com/research
 - Brand, processor and generation come from the product names as typed by the shop; products whose name doesn't state them are left out of those tables.
 - Findings with fewer than 20 products behind them are not shown; differences within 5% are reported as about the same.
 - Medians are rounded to the nearest shilling; shares to whole percent (band and category shares add up to 100%).
-- Refreshed automatically when the catalogue changes; data last changed 19 November 2026.
+- Refreshed automatically when the catalogue changes; data last changed 25 November 2026.
 
 ## Cite this research
 

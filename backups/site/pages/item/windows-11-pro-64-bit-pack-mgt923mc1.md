@@ -3,7 +3,7 @@
 > Windows 11 Pro 64-bit Pack for KSh 11,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/windows-11-pro-64-bit-pack-mgt923mc1
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

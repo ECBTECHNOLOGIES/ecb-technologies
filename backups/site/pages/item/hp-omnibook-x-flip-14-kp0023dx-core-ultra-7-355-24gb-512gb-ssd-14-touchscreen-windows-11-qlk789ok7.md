@@ -3,7 +3,7 @@
 > HP OmniBook X Flip 14-KP0023DX | Core Ultra 7 355 | 24GB | 512GB SSD for KSh 167,500 at ECB Technologies, Nairobi CBD. Core Ultra · 24 GB RAM · 512 GB SSD · 2-i
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-14-kp0023dx-core-ultra-7-355-24gb-512gb-ssd-14-touchscreen-windows-11-qlk789ok7
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP ZBOOK 14U G6 I7 8TH 16/512 NON TOUCH 2GPU AMD REDON for KSh 42,000 at ECB Technologies, Nairobi CBD. Core i7 · 16 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-14u-g6-i7-8th-16512-non-touch-2gpu-amd-redon-graphics-oyl1019i7d
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

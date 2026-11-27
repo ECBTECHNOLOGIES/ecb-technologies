@@ -3,7 +3,7 @@
 > Lenovo THINKPAD 11E CORE{TM} M-5 8GB 128GB NON for KSh 21,500 at ECB Technologies, Nairobi CBD. 8 GB RAM · 128 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-11e-coretm-m-5-8gb-128gb-non-touch-2ig1091aur
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

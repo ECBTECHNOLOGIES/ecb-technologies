@@ -3,7 +3,7 @@
 > Fire HD 10 32GB for KSh 15,000 at ECB Technologies, Moi Avenue, Nairobi CBD. 32 GB RAM. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/fire-hd-10-32gb-6iw608bxa
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

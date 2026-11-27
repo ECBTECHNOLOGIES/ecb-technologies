@@ -3,7 +3,7 @@
 > Kindle Paper 16GB 12th Gen for KSh 24,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 16 GB RAM. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kindle-paper-16gb-12th-gen-txu607smx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > APC 1600VA UPS for KSh 27,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/apc-1600va-ups-pgz946dxw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

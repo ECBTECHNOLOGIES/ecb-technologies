@@ -3,7 +3,7 @@
 > LG 34CB99-W 34” | 3440×1440 | 60Hz | USB-C | Built-in for KSh 52,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lg-34cb99-w-34-34401440-60hz-usb-c-built-in-speakers-szi673cef
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > SAMSUNG E.A S26 Ultra 512GB for KSh 145,000 at ECB Technologies, Moi Avenue, Nairobi CBD. 512 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-ea-s26-ultra-512gb-rlu546wmj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

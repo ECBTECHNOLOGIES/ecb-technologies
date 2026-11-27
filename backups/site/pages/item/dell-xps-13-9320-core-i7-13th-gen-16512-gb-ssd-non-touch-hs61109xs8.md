@@ -3,7 +3,7 @@
 > DELL XPS 13 9320 CORE i7 13TH GEN 16/512 GB SSD NON for KSh 112,000 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-9320-core-i7-13th-gen-16512-gb-ssd-non-touch-hs61109xs8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

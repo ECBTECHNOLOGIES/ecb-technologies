@@ -3,7 +3,7 @@
 > Lenovo thinkpad P53S 16 i7 8th Gen, 16gb 512ssd 2GB GPU INVIDIA for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD · dedi
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p53s-16-i7-8th-gen-16gb-512ssd-2gb-gpu-invidia-quadro-p520-nontouch-m2y105441o
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

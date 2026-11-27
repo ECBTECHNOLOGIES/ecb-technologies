@@ -3,7 +3,7 @@
 > DELL LATITUDE E7240 I5 4TH GEN 8 GB RAM 256 for KSh 21,000 at ECB Technologies, Nairobi CBD. Core i5 4th gen · 8 GB RAM. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-e7240-i5-4th-gen-8-gb-ram-256-nontouch-ma21073yug
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

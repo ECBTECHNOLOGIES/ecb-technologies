@@ -3,7 +3,7 @@
 > Samsung Odyssey G9 LS49FG910EMXUE 49” | 5K 5120×1440 | 1000R | 144Hz for KSh 147,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-odyssey-g9-ls49fg910emxue-49-5k-51201440-1000r-144hz-1ms-va-black-lpo717mb6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

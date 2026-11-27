@@ -1,10 +1,10 @@
 # Lenovo laptop prices in Kenya
 
-> 97 Lenovo laptops in stock, from KSh 16,000 to KSh 290,500. Below: the best specified two in each budget band, and how the whole range splits by memory, storage and screen. The best specified is the Lenovo ThinkPad X1 2-in-1 G10 Aura at KSh 275,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the Lenovo THINKPAD X280 i5 8th Gen at KSh 28,000. Prices as of 19 November 2026, from the live shop.
+> 97 Lenovo laptops in stock, from KSh 16,000 to KSh 290,500. Below: the best specified two in each budget band, and how the whole range splits by memory, storage and screen. The best specified is the Lenovo ThinkPad X1 2-in-1 G10 Aura at KSh 275,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the Lenovo THINKPAD X280 i5 8th Gen at KSh 28,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya
 
-## The best pick in every budget
+## Lenovo laptops: the best pick in every budget
 
 1. **[Lenovo THINKPAD X280 i5 8th Gen](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x280-i5-8th-gen-16-256-gb-non-touch-oct1057qxl)**: KSh 28,000. Core i5 8th gen · 16 GB RAM · 256 GB SSD. Spec score 23/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; KSh 41,500 below the median of this list; cheapest laptop on this page. Cons: 8th-gen Intel processor from 2017: the oldest generation Windows 11 supports.
 2. **[Lenovo THINKPAD X390 — i5 8th Gen](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x390-i5-8th-gen-16-256-gb-nontouch-normal-t1o10480bp)**: KSh 29,000. Core i5 8th gen · 16 GB RAM · 256 GB SSD. Spec score 23/42. Pros: 16 GB RAM, comfortable for many tabs and heavy apps; KSh 40,500 below the median of this list. Cons: 8th-gen Intel processor from 2017: the oldest generation Windows 11 supports.
@@ -32,7 +32,7 @@ Canonical: https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya
 | 9 | [Lenovo ThinkPad X1 2-in-1 G10 Aura](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-2-in-1-g10-aura-edition-ultra-7-268v-pro-32gb-1tb-ssd-gen-4-14-wuxga-touch-yoga-pen-windows-11-pro-1-year-warranty-add820beg) | Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1 | KSh 275,500 | 42/42 |
 | 10 | [Lenovo ThinkPad X1 Carbon Gen 13 Aura](https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-carbon-gen-13-aura-edition-ultra-7-255u-32gb-1tb-ssd-gen-4-14-wuxga-touch-windows-11-pro-zc1821jeu) | Core Ultra · 32 GB RAM · 1 TB SSD · touchscreen | KSh 290,500 | 42/42 |
 
-## Filter the full range
+## All 97 Lenovo laptops at a glance
 
 Of the 97 laptops that match, 51% have 16 GB of RAM or more, 47% have a 512 GB SSD or bigger, 30% have a touchscreen and 33% have a 10th-gen or newer processor (or an Apple M / Intel Core Ultra chip). Prices run from KSh 16,000 to KSh 290,500, with half below KSh 37,000. 
 
@@ -54,8 +54,8 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 - [Core i5 laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-i5-laptops-kenya)
 - [Core i7 laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-i7-laptops-kenya)
 - [Lenovo ThinkPad in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/thinkpad-kenya)
-- [Best laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-80k-kenya)
-- [Best laptops under KSh 30,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-30k-kenya)
+- [Best Lenovo laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/lenovo-laptops-under-80k-kenya)
+- [Best Lenovo laptops with 16GB RAM in Kenya](https://www.ecbtechkenya.com/best/lenovo-laptops-with-16gb-ram-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -66,7 +66,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which Lenovo laptop has the best specs?
 
-By our spec score, the Lenovo ThinkPad X1 2-in-1 G10 Aura at KSh 275,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 19 November 2026.
+By our spec score, the Lenovo ThinkPad X1 2-in-1 G10 Aura at KSh 275,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -78,6 +78,6 @@ The Lenovo THINKPAD X280 i5 8th Gen at KSh 28,000 (Core i5 8th gen · 16 GB RAM 
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

@@ -3,7 +3,7 @@
 > HP ELITE DRAGONFLY 13.5-inch G3 12th Gen 32GB 512GB SSD for KSh 82,000 at ECB Technologies, Nairobi CBD. 32 GB RAM · 512 GB SSD · touchscreen. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elite-dragonfly-135-inch-g3-12th-gen-32gb-512gb-ssd-touchscreen-xhx531jmw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

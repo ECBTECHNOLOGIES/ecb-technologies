@@ -3,7 +3,7 @@
 > Lenovo V14 G5 | Core i5 13th Gen | 8GB | 512GB SSD | 14” | for KSh 89,500 at ECB Technologies, Nairobi CBD. Core i5 13th gen · 8 GB RAM · 512 GB SSD. Delivery a
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-v14-g5-core-i5-13th-gen-8gb-512gb-ssd-14-dos-awv812yb8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

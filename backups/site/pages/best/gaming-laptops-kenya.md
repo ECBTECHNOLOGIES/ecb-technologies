@@ -1,6 +1,6 @@
 # Gaming laptops in Kenya
 
-> Only laptops with a dedicated graphics card or a gaming line (OMEN, Victus, Legion and similar) are listed. 40 laptops qualify. The best specified is the HP OMEN Ultra 9 at KSh 253,500 (Core Ultra · 32 GB RAM · 1 TB SSD · dedicated graphics). The cheapest on the list is the LENOVO THINKPAD P1 16' — i9 10th Gen at KSh 72,000. Prices as of 19 November 2026, from the live shop.
+> Only laptops with a dedicated graphics card or a gaming line (OMEN, Victus, Legion and similar) are listed. 40 laptops qualify. The best specified is the HP OMEN Ultra 9 at KSh 253,500 (Core Ultra · 32 GB RAM · 1 TB SSD · dedicated graphics). The cheapest on the list is the LENOVO THINKPAD P1 16' — i9 10th Gen at KSh 72,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/gaming-laptops-kenya
 
@@ -63,9 +63,9 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 - [Laptops for graphic design and video editing in Kenya](https://www.ecbtechkenya.com/best/laptops-for-graphic-design-and-video-editing-kenya)
 - [Best laptops for programming in Kenya](https://www.ecbtechkenya.com/best/laptops-for-programming-kenya)
-- [Lenovo ThinkPad in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/thinkpad-kenya)
-- [Best 16 GB RAM laptops in Kenya](https://www.ecbtechkenya.com/best/16gb-ram-laptops-kenya)
-- [Lenovo laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya)
+- [Best HP Gaming laptops in Kenya](https://www.ecbtechkenya.com/best/hp-gaming-laptops-kenya)
+- [Best Gaming laptops under KSh 100,000 in Kenya](https://www.ecbtechkenya.com/best/gaming-laptops-under-100k-kenya)
+- [Best HP Core i7 laptops in Kenya](https://www.ecbtechkenya.com/best/hp-core-i7-laptops-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -75,7 +75,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which gaming laptop has the best specs?
 
-By our spec score, the HP OMEN Ultra 9 at KSh 253,500 (Core Ultra · 32 GB RAM · 1 TB SSD · dedicated graphics), as of 19 November 2026.
+By our spec score, the HP OMEN Ultra 9 at KSh 253,500 (Core Ultra · 32 GB RAM · 1 TB SSD · dedicated graphics), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -87,6 +87,6 @@ The LENOVO THINKPAD P1 16' — i9 10th Gen at KSh 72,000 (Core i9 10th gen · 16
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

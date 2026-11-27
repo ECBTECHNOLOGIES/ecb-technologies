@@ -3,7 +3,7 @@
 > Lenovo Idea Tab 8GB/128GB 5G for KSh 42,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-idea-tab-8gb128gb-5g-vlx606agh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

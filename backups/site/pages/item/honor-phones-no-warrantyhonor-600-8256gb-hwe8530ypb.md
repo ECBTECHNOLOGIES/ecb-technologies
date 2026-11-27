@@ -3,7 +3,7 @@
 > HONOR PHONES (NO WARRANTY)Honor 600 8/256GB for KSh 60,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/honor-phones-no-warrantyhonor-600-8256gb-hwe8530ypb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

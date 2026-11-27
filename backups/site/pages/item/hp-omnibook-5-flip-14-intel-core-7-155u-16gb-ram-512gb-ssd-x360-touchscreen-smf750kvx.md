@@ -3,7 +3,7 @@
 > HP Omnibook 5 Flip 14” Intel Core 7-155U | 16GB RAM | 512GB SSD | for KSh 142,000 at ECB Technologies, Nairobi CBD. 16 GB RAM · 512 GB SSD · 2-in-1. Delivery ac
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-5-flip-14-intel-core-7-155u-16gb-ram-512gb-ssd-x360-touchscreen-smf750kvx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

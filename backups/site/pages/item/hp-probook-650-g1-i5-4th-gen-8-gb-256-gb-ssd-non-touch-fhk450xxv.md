@@ -3,7 +3,7 @@
 > HP PROBOOK 650 G1 i5 4TH GEN 8 GB 256 GB SSD for KSh 23,000 at ECB Technologies, Nairobi CBD. Core i5 4th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-650-g1-i5-4th-gen-8-gb-256-gb-ssd-non-touch-fhk450xxv
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP PROBOOK 640 G9 i5 12TH GEN 8 GB 256 GB SSD for KSh 43,000 at ECB Technologies, Nairobi CBD. Core i5 12th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-640-g9-i5-12th-gen-8-gb-256-gb-ssd-non-touch-ck84469eo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

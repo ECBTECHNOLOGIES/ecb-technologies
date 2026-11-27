@@ -3,7 +3,7 @@
 > HP ELITEBOOK 830 G8 — i7 11th Gen 32GB RAM 512GB X360 for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 32 GB RAM · 512 GB SSD · 2-in-1. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-830-g8-i7-11th-gen-32gb-ram-512gb-x360-touchscreen-pow0850pms
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

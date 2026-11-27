@@ -3,7 +3,7 @@
 > DELL XPS 15 9570 i9 8TH 32 GB RAM 512 GB SSD 4GPU NVIDIA GRAPHIC for KSh 72,000 at ECB Technologies, Nairobi CBD. Core i9 · 32 GB RAM · 512 GB SSD · touchscreen
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-15-9570-i9-8th-32-gb-ram-512-gb-ssd-4gpu-nvidia-graphic-touchscreen-zs11106h7i
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP E24t G4 Touch Monitor 24” Touch | IPS | Full HD | for KSh 35,000 at ECB Technologies, Nairobi CBD. touchscreen. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-e24t-g4-touch-monitor-24-touch-ips-full-hd-60hz-fw8674nhb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

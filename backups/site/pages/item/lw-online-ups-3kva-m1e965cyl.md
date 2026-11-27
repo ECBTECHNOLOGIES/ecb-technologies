@@ -3,7 +3,7 @@
 > LW Online UPS 3KVA for KSh 50,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lw-online-ups-3kva-m1e965cyl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

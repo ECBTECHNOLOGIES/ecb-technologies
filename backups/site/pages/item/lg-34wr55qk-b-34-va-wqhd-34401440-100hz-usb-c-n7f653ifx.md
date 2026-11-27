@@ -3,7 +3,7 @@
 > LG 34WR55QK-B 34” | VA | WQHD 3440×1440 | 100Hz | USB-C for KSh 67,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lg-34wr55qk-b-34-va-wqhd-34401440-100hz-usb-c-n7f653ifx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

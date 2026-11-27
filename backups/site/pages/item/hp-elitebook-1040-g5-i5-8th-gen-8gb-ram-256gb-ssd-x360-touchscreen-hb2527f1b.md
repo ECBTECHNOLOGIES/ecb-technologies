@@ -3,7 +3,7 @@
 > HP ELITEBOOK 1040 G5 i5 8th Gen 8GB RAM 256GB SSD x360 for KSh 40,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-1040-g5-i5-8th-gen-8gb-ram-256gb-ssd-x360-touchscreen-hb2527f1b
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

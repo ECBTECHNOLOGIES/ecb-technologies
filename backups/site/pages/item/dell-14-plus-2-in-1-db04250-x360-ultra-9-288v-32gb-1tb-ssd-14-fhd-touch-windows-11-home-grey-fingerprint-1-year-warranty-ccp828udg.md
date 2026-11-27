@@ -3,7 +3,7 @@
 > Dell 14 Plus 2-in-1 DB04250 X360 | Ultra 9-288V | 32GB | 1TB SSD | for KSh 200,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-14-plus-2-in-1-db04250-x360-ultra-9-288v-32gb-1tb-ssd-14-fhd-touch-windows-11-home-grey-fingerprint-1-year-warranty-ccp828udg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

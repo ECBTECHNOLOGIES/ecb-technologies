@@ -3,7 +3,7 @@
 > DELL LATITUDE 7490 i5 8TH GEN 8/256 GB SSD for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · touchscreen. Delivery acro
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7490-i5-8th-gen-8256-gb-ssd-touchscreen-uul1061f0h
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

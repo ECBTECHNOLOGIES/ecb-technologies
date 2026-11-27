@@ -3,7 +3,7 @@
 > Dell LATITUDE 5300-2IN1 CORE i5 8th Gen 8/256 x360 for KSh 33,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery a
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-5300-2in1-core-i5-8th-gen-8256-x360-touchscreen-dpw1044yzk
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

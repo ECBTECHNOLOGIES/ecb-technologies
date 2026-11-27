@@ -3,7 +3,7 @@
 > All laptops, smartphones, printers, gaming gear and accessories at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/category
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 678 products. Prices in KSh. Page 1 of 57.
 

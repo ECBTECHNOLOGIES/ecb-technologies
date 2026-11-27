@@ -1,6 +1,6 @@
 # Laptop and phone shop in Nairobi CBD
 
-> ECB Technologies is a laptop and phone shop at Techmart Iconic Business Plaza, 3rd floor, room T12, Moi Avenue, Nairobi CBD, open Monday to Saturday, 9am to 7pm (closed Sunday). It lists 349 laptops from KSh 16,000 to KSh 324,000 (median KSh 52,000) and 672 products in all, with prices in KSh on every product page. Orders are delivered by rider within Nairobi and by courier to all 47 counties, or picked up free at the shop. Figures as of 19 November 2026.
+> ECB Technologies is a laptop and phone shop at Techmart Iconic Business Plaza, 3rd floor, room T12, Moi Avenue, Nairobi CBD, open Monday to Saturday, 9am to 7pm (closed Sunday). It lists 349 laptops from KSh 16,000 to KSh 324,000 (median KSh 52,000) and 672 products in all, with prices in KSh on every product page. Orders are delivered by rider within Nairobi and by courier to all 47 counties, or picked up free at the shop. Figures as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/laptop-shop-nairobi
 
@@ -93,7 +93,7 @@ Yes. Riders deliver within Nairobi, couriers deliver to all 47 counties, and pic
 
 ### What laptop brands does ECB Technologies sell?
 
-HP (174 models), Lenovo (97 models), Dell (56 models), Apple (12 models), Microsoft (5 models), MSI (2 models), Samsung (2 models), as of 19 November 2026.
+HP (174 models), Lenovo (97 models), Dell (56 models), Apple (12 models), Microsoft (5 models), MSI (2 models), Samsung (2 models), as of 25 November 2026.
 
 ### Is ECB Technologies open on Sunday?
 
@@ -103,4 +103,4 @@ No. The shop is open Monday to Saturday, 9am to 7pm, and closed on Sunday. Whats
 
 Call or WhatsApp 0717 040 531, or visit the shop on Moi Avenue, Nairobi CBD.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

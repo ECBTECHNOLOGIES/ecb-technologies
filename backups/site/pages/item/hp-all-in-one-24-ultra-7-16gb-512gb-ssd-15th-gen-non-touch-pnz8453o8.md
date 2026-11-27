@@ -3,7 +3,7 @@
 > HP All-in-One 24” | Ultra 7 | 16GB | 512GB SSD | 15th Gen | for KSh 145,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Delivery acro
 
 Canonical: https://www.ecbtechkenya.com/item/hp-all-in-one-24-ultra-7-16gb-512gb-ssd-15th-gen-non-touch-pnz8453o8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

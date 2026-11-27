@@ -3,7 +3,7 @@
 > MSI MAG 275UPD E14 | IPS | 4K @ 144Hz / FHD @ 288Hz | Dual-Mode Gaming at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/msi-mag-275upd-e14-ips-4k-at-144hz-fhd-at-288hz-dual-mode-gaming-m80701xqe
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

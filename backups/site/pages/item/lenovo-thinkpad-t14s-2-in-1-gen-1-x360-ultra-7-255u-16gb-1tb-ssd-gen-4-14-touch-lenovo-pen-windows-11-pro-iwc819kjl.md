@@ -3,7 +3,7 @@
 > Lenovo ThinkPad T14s 2-in-1 Gen 1 X360 | Ultra 7-255U | 16GB | 1TB for KSh 195,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t14s-2-in-1-gen-1-x360-ultra-7-255u-16gb-1tb-ssd-gen-4-14-touch-lenovo-pen-windows-11-pro-iwc819kjl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

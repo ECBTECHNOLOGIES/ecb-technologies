@@ -1,10 +1,10 @@
 # Dell laptop prices in Kenya
 
-> 56 Dell laptops in stock, from KSh 21,000 to KSh 315,500. Below: the best specified two in each budget band, and how the whole range splits by memory, storage and screen. The best specified is the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the DELL LATITUDE 7300 CORE i7 8TH GEN at KSh 28,000. Prices as of 19 November 2026, from the live shop.
+> 56 Dell laptops in stock, from KSh 21,000 to KSh 315,500. Below: the best specified two in each budget band, and how the whole range splits by memory, storage and screen. The best specified is the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the DELL LATITUDE 7300 CORE i7 8TH GEN at KSh 28,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/laptops/dell-laptops-kenya
 
-## The best pick in every budget
+## Dell laptops: the best pick in every budget
 
 1. **[DELL LATITUDE 7300 CORE i7 8TH GEN](https://www.ecbtechkenya.com/item/dell-latitude-7300-core-i7-8th-gen-8256-gb-ssd-non-touch-mfh1058gkm)**: KSh 28,000. Core i7 8th gen · 8 GB RAM · 256 GB SSD. Spec score 23/42. Pros: KSh 26,500 below the median of this list; cheapest laptop on this page. Cons: 8 GB RAM: fine for office work and browsing, tight for heavy multitasking; 8th-gen Intel processor from 2017: the oldest generation Windows 11 supports.
 2. **[DELL LATITUDE 5300 CORE i7 8TH GEN 8 GB](https://www.ecbtechkenya.com/item/dell-latitude-5300-core-i7-8th-gen-8-gb-ram-256-ssd-non-touch-qoa1056pwz)**: KSh 29,000. Core i7 8th gen · 8 GB RAM · 256 GB SSD. Spec score 23/42. Pros: KSh 25,500 below the median of this list. Cons: 8 GB RAM: fine for office work and browsing, tight for heavy multitasking; 8th-gen Intel processor from 2017: the oldest generation Windows 11 supports.
@@ -32,7 +32,7 @@ Canonical: https://www.ecbtechkenya.com/laptops/dell-laptops-kenya
 | 9 | [Dell 14 Plus 2-in-1 DB04250 X360](https://www.ecbtechkenya.com/item/dell-14-plus-2-in-1-db04250-x360-ultra-9-288v-32gb-1tb-ssd-14-fhd-touch-windows-11-home-grey-fingerprint-1-year-warranty-ccp828udg) | Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1 | KSh 200,500 | 42/42 |
 | 10 | [Dell 14 Plus 2-in-1 DB04250 X360](https://www.ecbtechkenya.com/item/dell-14-plus-2-in-1-db04250-x360-ultra-7-256v-16gb-1tb-ssd-14-fhd-touch-windows-11-home-ice-blue-fingerprint-1-year-warranty-k4l827a4s) | Core Ultra · 16 GB RAM · 1 TB SSD · 2-in-1 | KSh 140,500 | 40/42 |
 
-## Filter the full range
+## All 56 Dell laptops at a glance
 
 Of the 56 laptops that match, 61% have 16 GB of RAM or more, 54% have a 512 GB SSD or bigger, 45% have a touchscreen and 45% have a 10th-gen or newer processor (or an Apple M / Intel Core Ultra chip). Prices run from KSh 21,000 to KSh 315,500, with half below KSh 59,500. 
 
@@ -52,10 +52,10 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 ## Related guides
 
 - [Core i7 laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-i7-laptops-kenya)
-- [Intel Core Ultra laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-ultra-laptops-kenya)
+- [Dell XPS 13 9320 price in Kenya](https://www.ecbtechkenya.com/laptops/dell-xps-13-9320-price-kenya)
+- [Best Dell laptops under KSh 60,000 in Kenya](https://www.ecbtechkenya.com/best/dell-laptops-under-60k-kenya)
 - [Dell Latitude in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/latitude-kenya)
-- [EliteBook vs Latitude: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-latitude-kenya)
-- [ThinkPad vs Latitude: which to buy in Kenya](https://www.ecbtechkenya.com/compare/thinkpad-vs-latitude-kenya)
+- [Best Latitude Core i7 laptops in Kenya](https://www.ecbtechkenya.com/best/latitude-core-i7-laptops-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -66,7 +66,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which Dell laptop has the best specs?
 
-By our spec score, the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 19 November 2026.
+By our spec score, the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -78,6 +78,6 @@ The DELL LATITUDE 7300 CORE i7 8TH GEN at KSh 28,000 (Core i7 8th gen · 8 GB RA
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

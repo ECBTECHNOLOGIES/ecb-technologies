@@ -1,6 +1,6 @@
 ;;
 ;; Domain:     ecbtechkenya.com.
-;; Exported:   2026-11-20 03:37:15
+;; Exported:   2026-11-27 08:29:23
 ;;
 ;; This file is intended for use for informational and archival
 ;; purposes ONLY and MUST be edited before use on a production
@@ -24,7 +24,7 @@
 ;;
 ;; Use at your own risk.
 ;; SOA Record
-ecbtechkenya.com	3600	IN	SOA	rodrigo.ns.cloudflare.com. dns.cloudflare.com. 2054681243 10000 2400 604800 3600
+ecbtechkenya.com	3600	IN	SOA	rodrigo.ns.cloudflare.com. dns.cloudflare.com. 2054743476 10000 2400 604800 3600
 
 ;; NS Records
 ecbtechkenya.com.	86400	IN	NS	rodrigo.ns.cloudflare.com.

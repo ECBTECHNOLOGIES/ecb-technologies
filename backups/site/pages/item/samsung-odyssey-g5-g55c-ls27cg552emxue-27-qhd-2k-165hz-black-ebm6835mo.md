@@ -3,7 +3,7 @@
 > Samsung Odyssey G5 G55C (LS27CG552EMXUE) 27” | QHD 2K | 165Hz | for KSh 47,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-odyssey-g5-g55c-ls27cg552emxue-27-qhd-2k-165hz-black-ebm6835mo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

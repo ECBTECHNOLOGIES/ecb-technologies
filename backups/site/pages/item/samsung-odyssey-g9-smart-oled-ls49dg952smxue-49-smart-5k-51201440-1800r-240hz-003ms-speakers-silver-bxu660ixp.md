@@ -3,7 +3,7 @@
 > Samsung Odyssey G9 Smart OLED LS49DG952SMXUE 49” | Smart | 5K for KSh 207,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-odyssey-g9-smart-oled-ls49dg952smxue-49-smart-5k-51201440-1800r-240hz-003ms-speakers-silver-bxu660ixp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

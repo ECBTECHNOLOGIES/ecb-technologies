@@ -3,7 +3,7 @@
 > HP ELITEBOOK 830 G6 — i7 8th Gen 8 GB RAM 256 GB for KSh 37,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 8 GB RAM · 256 GB SSD · touchscreen. Deliver
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-830-g6-i7-8th-gen-8-gb-ram-256-gb-touchscreen-le08495u2e
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

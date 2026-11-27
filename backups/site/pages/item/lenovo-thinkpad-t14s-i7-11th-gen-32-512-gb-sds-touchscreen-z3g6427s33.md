@@ -3,7 +3,7 @@
 > LENOVO THINKPAD T14S i7 11th Gen, 32 / 512 GB SDS for KSh 47,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 32 GB RAM · 512 GB SSD · touchscreen. Deli
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t14s-i7-11th-gen-32-512-gb-sds-touchscreen-z3g6427s33
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

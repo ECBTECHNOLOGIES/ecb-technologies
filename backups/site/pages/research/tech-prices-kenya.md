@@ -3,7 +3,7 @@
 > Laptops make up 349 of the 672 products at ECB Technologies (52%), the largest category. Median prices by category: PC Accessories KSh 26,000 (102 products); Mobile Accessories KSh 39,500 (25 products); Printers KSh 47,500 (47 products); Laptops KSh 52,000 (349 products); Gaming KSh 69,000 (70 products); Phones & Tablets KSh 111,750 (66 products).
 
 Canonical: https://www.ecbtechkenya.com/research/tech-prices-kenya
-Last updated: 2026-11-19 (when the catalogue last changed)
+Last updated: 2026-11-25 (when the catalogue last changed)
 
 ## Key findings
 
@@ -58,7 +58,7 @@ Phones & Tablets cost from KSh 15,000 to KSh 257,500, with a median of KSh 111,7
 - Brand, processor and generation come from the product names as typed by the shop; products whose name doesn't state them are left out of those tables.
 - Findings with fewer than 20 products behind them are not shown; differences within 5% are reported as about the same.
 - Medians are rounded to the nearest shilling; shares to whole percent (band and category shares add up to 100%).
-- Refreshed automatically when the catalogue changes; data last changed 19 November 2026.
+- Refreshed automatically when the catalogue changes; data last changed 25 November 2026.
 
 ## Cite this research
 

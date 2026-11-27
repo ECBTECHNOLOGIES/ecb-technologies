@@ -3,7 +3,7 @@
 > Kaspersky Plus Internet Security 3 Users for KSh 3,700 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kaspersky-plus-internet-security-3-users-sod920nrk
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

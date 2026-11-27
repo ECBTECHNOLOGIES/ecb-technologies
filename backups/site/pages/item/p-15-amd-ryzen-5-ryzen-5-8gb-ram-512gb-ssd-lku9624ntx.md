@@ -3,7 +3,7 @@
 > HP 15 AMD Ryzen 5 Ryzen 5 | 8GB RAM | 512GB for KSh 79,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/p-15-amd-ryzen-5-ryzen-5-8gb-ram-512gb-ssd-lku9624ntx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Lenovo thinkpad T470s i5 7th Gen, 8 / 256 GB — NON for KSh 36,000 at ECB Technologies, Nairobi CBD. Core i5 7th gen · 8 GB RAM · 256 GB SSD. Delivery across Ken
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t470s-i5-7th-gen-8-256-gb-non-touch-j3p996gkp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

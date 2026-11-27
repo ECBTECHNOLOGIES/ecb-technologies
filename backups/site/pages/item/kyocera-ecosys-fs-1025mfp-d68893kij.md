@@ -3,7 +3,7 @@
 > Kyocera Ecosys FS-1025MFP for KSh 45,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kyocera-ecosys-fs-1025mfp-d68893kij
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP OMEN 34c – 34” | WQHD 3440×1440 | 165Hz | 1ms | Built-in for KSh 72,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omen-34c-34-wqhd-34401440-165hz-1ms-built-in-speakers-ajn652hcv
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

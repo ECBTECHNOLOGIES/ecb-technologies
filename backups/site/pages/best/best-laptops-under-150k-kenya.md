@@ -1,6 +1,6 @@
 # Best laptops under KSh 150,000 in Kenya
 
-> 305 laptops at ECB Technologies cost KSh 150,000 or less. These are the 10 with the best specs for the money, ranked by a published formula, not by hand. The best specified is the HP Omnibook 5 AI 16” Intel Core Ultra 7 at KSh 122,000 (Core Ultra · 16 GB RAM · 1 TB SSD · touchscreen). The cheapest on the list is the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000. Prices as of 19 November 2026, from the live shop.
+> Looking for the best laptops under KSh 150,000 in Kenya? 305 laptops at ECB Technologies cost KSh 150,000 or less. These are the 10 with the best specs for the money, ranked by a published formula, not by hand. The best specified is the HP Omnibook 5 AI 16” Intel Core Ultra 7 at KSh 122,000 (Core Ultra · 16 GB RAM · 1 TB SSD · touchscreen). The cheapest on the list is the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/best-laptops-under-150k-kenya
 
@@ -51,8 +51,8 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ## Related guides
 
-- [Best 16 GB RAM laptops in Kenya](https://www.ecbtechkenya.com/best/16gb-ram-laptops-kenya)
-- [Best 2-in-1 laptops in Kenya](https://www.ecbtechkenya.com/best/2-in-1-laptops-kenya)
+- [Best laptops with 16GB RAM and 512GB SSD in Kenya](https://www.ecbtechkenya.com/best/laptops-with-16gb-ram-and-512gb-ssd-kenya)
+- [Dell XPS 13 9320 alternatives in Kenya](https://www.ecbtechkenya.com/laptops/dell-xps-13-9320-alternatives-kenya)
 - [Best business laptops in Kenya](https://www.ecbtechkenya.com/best/business-laptops-kenya)
 - HP ProBook in Kenya: models, prices and history
 - [EliteBook vs ProBook: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-probook-kenya)
@@ -66,7 +66,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which laptop under KSh 150,000 has the best specs?
 
-By our spec score, the HP Omnibook 5 AI 16” Intel Core Ultra 7 at KSh 122,000 (Core Ultra · 16 GB RAM · 1 TB SSD · touchscreen), as of 19 November 2026.
+By our spec score, the HP Omnibook 5 AI 16” Intel Core Ultra 7 at KSh 122,000 (Core Ultra · 16 GB RAM · 1 TB SSD · touchscreen), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -78,6 +78,6 @@ The HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000 (Core i7 13th gen · 16 G
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

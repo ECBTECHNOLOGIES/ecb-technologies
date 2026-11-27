@@ -3,7 +3,7 @@
 > Samsung Odyssey Neo G9 LS57CG952NMXUE 57” | Dual 4K 7680×2160 | 240Hz for KSh 367,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-odyssey-neo-g9-ls57cg952nmxue-57-dual-4k-76802160-240hz-1ms-1000r-white-eoj696wyl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP ELITEBOOK 835 G8 AMD RYEZN 5 PRO 8GB RAM 256GB SSD for KSh 36,000 at ECB Technologies, Nairobi CBD. 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-835-g8-amd-ryezn-5-pro-8gb-ram-256gb-ssd-non-touch-twn474kms
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

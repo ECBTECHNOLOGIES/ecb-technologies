@@ -3,7 +3,7 @@
 > Dell Precision 15 5540 — XEON, 16 / 512 GB SSD 4GPU INVIDIA GRAPHICS for KSh 52,000 at ECB Technologies, Nairobi CBD. 16 GB RAM · 512 GB SSD. Delivery across Ke
 
 Canonical: https://www.ecbtechkenya.com/item/dell-precision-15-5540-xeon-16-512-gb-ssd-4gpu-invidia-graphics-non-touch-ffn1085kec
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

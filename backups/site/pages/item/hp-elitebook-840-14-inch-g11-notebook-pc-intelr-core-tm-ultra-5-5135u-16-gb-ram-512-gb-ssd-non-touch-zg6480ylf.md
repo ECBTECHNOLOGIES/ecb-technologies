@@ -3,7 +3,7 @@
 > HP ELITEBOOK 840 14-inch G11 NOTEBOOK PC INTEL(R) core (TM) ULTRA 5 for KSh 72,000 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-840-14-inch-g11-notebook-pc-intelr-core-tm-ultra-5-5135u-16-gb-ram-512-gb-ssd-non-touch-zg6480ylf
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

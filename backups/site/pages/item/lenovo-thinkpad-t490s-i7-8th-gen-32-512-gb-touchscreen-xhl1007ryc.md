@@ -3,7 +3,7 @@
 > LENOVO THINKPAD T490s — i7 8th Gen, 32 / 512 GB — for KSh 42,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 32 GB RAM · 512 GB SSD · touchscreen. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t490s-i7-8th-gen-32-512-gb-touchscreen-xhl1007ryc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

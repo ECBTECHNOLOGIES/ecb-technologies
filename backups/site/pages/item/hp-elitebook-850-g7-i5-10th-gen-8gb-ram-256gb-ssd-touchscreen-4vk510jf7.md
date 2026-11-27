@@ -3,7 +3,7 @@
 > HP ELITEBOOK 850 G7 i5 10th Gen 8GB RAM 256GB SSD for KSh 45,000 at ECB Technologies, Nairobi CBD. Core i5 10th gen · 8 GB RAM · 256 GB SSD · touchscreen. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-850-g7-i5-10th-gen-8gb-ram-256gb-ssd-touchscreen-4vk510jf7
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

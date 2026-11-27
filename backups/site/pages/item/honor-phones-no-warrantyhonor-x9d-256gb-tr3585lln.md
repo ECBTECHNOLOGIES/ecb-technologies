@@ -3,7 +3,7 @@
 > HONOR PHONES (NO WARRANTY)Honor X9D 256GB for KSh 47,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 256 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/honor-phones-no-warrantyhonor-x9d-256gb-tr3585lln
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

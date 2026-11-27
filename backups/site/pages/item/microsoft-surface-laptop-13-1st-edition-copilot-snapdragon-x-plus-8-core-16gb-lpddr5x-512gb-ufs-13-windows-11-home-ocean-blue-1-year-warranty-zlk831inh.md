@@ -3,7 +3,7 @@
 > Microsoft Surface Laptop 13 1st Edition Copilot | Snapdragon X Plus for KSh 152,500 at ECB Technologies, Nairobi CBD. Snapdragon · 16 GB RAM · 512 GB SSD. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/microsoft-surface-laptop-13-1st-edition-copilot-snapdragon-x-plus-8-core-16gb-lpddr5x-512gb-ufs-13-windows-11-home-ocean-blue-1-year-warranty-zlk831inh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

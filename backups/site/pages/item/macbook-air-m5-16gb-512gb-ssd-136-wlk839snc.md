@@ -3,7 +3,7 @@
 > MacBook Air M5 | 16GB | 512GB SSD | for KSh 185,000 at ECB Technologies, Nairobi CBD. Apple M-series · 16 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-air-m5-16gb-512gb-ssd-136-wlk839snc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

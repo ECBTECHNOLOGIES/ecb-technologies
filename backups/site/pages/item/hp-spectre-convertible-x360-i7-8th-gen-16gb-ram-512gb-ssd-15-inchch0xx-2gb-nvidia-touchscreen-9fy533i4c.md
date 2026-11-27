@@ -3,7 +3,7 @@
 > HP SPECTRE CONVERTIBLE X360 i7 8th Gen 16GB RAM 512GB SSD for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD · 2-in-1. De
 
 Canonical: https://www.ecbtechkenya.com/item/hp-spectre-convertible-x360-i7-8th-gen-16gb-ram-512gb-ssd-15-inchch0xx-2gb-nvidia-touchscreen-9fy533i4c
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

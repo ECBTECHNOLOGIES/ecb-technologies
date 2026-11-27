@@ -3,7 +3,7 @@
 > NOTHING PHONE (NO WARRANTY) Nothing 4A 12/256GB for KSh 61,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/nothing-phone-no-warranty-nothing-4a-12256gb-onh581ufh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

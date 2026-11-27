@@ -3,7 +3,7 @@
 > HP OmniBook X Flip 14-FM0047NR | Core Ultra 7 256V | 16GB | 512GB SSD for KSh 157,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · 2-
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-14-fm0047nr-core-ultra-7-256v-16gb-512gb-ssd-touchscreen-stylus-pen-cia785gzh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

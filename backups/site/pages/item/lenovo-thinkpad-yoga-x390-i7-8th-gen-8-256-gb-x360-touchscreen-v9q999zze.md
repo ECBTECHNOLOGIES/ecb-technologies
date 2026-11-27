@@ -3,7 +3,7 @@
 > Lenovo thinkpad Yoga x390 i7 8th Gen, 8 / 256 GB x360 for KSh 37,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Deliver
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-yoga-x390-i7-8th-gen-8-256-gb-x360-touchscreen-v9q999zze
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

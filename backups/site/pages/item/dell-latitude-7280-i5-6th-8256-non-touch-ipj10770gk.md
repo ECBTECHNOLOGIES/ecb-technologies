@@ -3,7 +3,7 @@
 > DELL LATITUDE 7280 i5 6TH 8/256 NON for KSh 24,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7280-i5-6th-8256-non-touch-ipj10770gk
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Apple iMac M3 | 8-Core CPU | 10-Core GPU | 24” 4.5K Retina | 8GB | for KSh 207,000 at ECB Technologies, Nairobi CBD. 8 GB RAM · 256 GB SSD. Delivery across Keny
 
 Canonical: https://www.ecbtechkenya.com/item/apple-imac-m3-8-core-cpu-10-core-gpu-24-45k-retina-8gb-256gb-ssd-macos-sonoma-blue-sxp842m4z
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Lenovo thinkpad X390 i5 8th Gen, 8 / 256 GB Nontouch for KSh 28,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x390-i5-8th-gen-8-256-gb-nontouch-normal-wsx1005qug
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

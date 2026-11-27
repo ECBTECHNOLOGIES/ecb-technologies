@@ -3,7 +3,7 @@
 > HP ELITEBOOK 850 G3 i7 6th Gen 8GB 256GB SSD for KSh 31,000 at ECB Technologies, Nairobi CBD. Core i7 6th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-850-g3-i7-6th-gen-8gb-256gb-ssd-non-touch-khh5125fg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > MSI MAG 275UPD E14 Dual-Mode Gaming for KSh 57,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/msi-mag-275upd-e14-dual-mode-gaming-6e8618ojg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Epson CO-W01 WXGA 3000 Lumens for KSh 49,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/epson-co-w01-wxga-3000-lumens-zvb903k4d
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

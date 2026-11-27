@@ -3,7 +3,7 @@
 > ASUS TUF VG34VQL3A 34” | WQHD 3440×1440 | 180Hz | 1ms | for KSh 72,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/asus-tuf-vg34vql3a-34-wqhd-34401440-180hz-1ms-speakers-nfr650ksu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > IPHONE( 2 YEARS LOCAL WARRANTY)17 Pro Max 1TB for KSh 227,000 at ECB Technologies, Nairobi CBD. 1 TB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/iphone-2-years-local-warranty17-pro-max-1tb-orange-h15557xws
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

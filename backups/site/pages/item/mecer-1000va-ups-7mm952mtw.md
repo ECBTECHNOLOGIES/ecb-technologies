@@ -3,7 +3,7 @@
 > Mecer 1000VA UPS for KSh 18,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/mecer-1000va-ups-7mm952mtw
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

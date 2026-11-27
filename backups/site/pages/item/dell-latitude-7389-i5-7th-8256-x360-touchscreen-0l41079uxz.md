@@ -3,7 +3,7 @@
 > DELL LATITUDE 7389 I5 7TH 8/256 X360 for KSh 28,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7389-i5-7th-8256-x360-touchscreen-0l41079uxz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

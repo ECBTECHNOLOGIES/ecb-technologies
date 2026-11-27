@@ -3,7 +3,7 @@
 > Hollyland Lark M2S Combo for KSh 16,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hollyland-lark-m2s-combo-tc33839mjp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

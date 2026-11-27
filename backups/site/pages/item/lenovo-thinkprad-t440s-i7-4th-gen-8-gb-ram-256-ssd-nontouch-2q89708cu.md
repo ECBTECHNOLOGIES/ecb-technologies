@@ -3,7 +3,7 @@
 > Lenovo THINKPRAD T440S I7 4TH GEN 8 GB RAM 256 SSD for KSh 23,000 at ECB Technologies, Nairobi CBD. Core i7 4th gen · 8 GB RAM · 256 GB SSD. Delivery across Ken
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkprad-t440s-i7-4th-gen-8-gb-ram-256-ssd-nontouch-2q89708cu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

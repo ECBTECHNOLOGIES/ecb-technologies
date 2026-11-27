@@ -3,7 +3,7 @@
 > HP LaserJet Pro MFP 4103FDW for KSh 74,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-laserjet-pro-mfp-4103fdw-pll864hfx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

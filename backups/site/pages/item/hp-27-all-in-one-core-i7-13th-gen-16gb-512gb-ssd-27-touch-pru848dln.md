@@ -3,7 +3,7 @@
 > HP 27 All-in-One | Core i7 13th Gen | 16GB | 512GB SSD | 27” for KSh 153,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD · touch
 
 Canonical: https://www.ecbtechkenya.com/item/hp-27-all-in-one-core-i7-13th-gen-16gb-512gb-ssd-27-touch-pru848dln
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

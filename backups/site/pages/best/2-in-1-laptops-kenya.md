@@ -1,6 +1,6 @@
 # Best 2-in-1 laptops in Kenya
 
-> 74 laptops here fold into a tablet (x360, Yoga, 2-in-1 and Folio models). These are the 10 best specified. The best specified is the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the HP Omnibook 5 AI 16-AF1017WM at KSh 123,500. Prices as of 19 November 2026, from the live shop.
+> 74 laptops here fold into a tablet (x360, Yoga, 2-in-1 and Folio models). These are the 10 best specified. The best specified is the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the HP Omnibook 5 AI 16-AF1017WM at KSh 123,500. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/2-in-1-laptops-kenya
 
@@ -51,8 +51,8 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ## Related guides
 
+- [HP OmniBook X Flip 14 alternatives in Kenya](https://www.ecbtechkenya.com/laptops/hp-omnibook-x-flip-14-alternatives-kenya)
 - [Best 16 GB RAM laptops in Kenya](https://www.ecbtechkenya.com/best/16gb-ram-laptops-kenya)
-- [Best laptops under KSh 150,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-150k-kenya)
 - [Best laptops for programming in Kenya](https://www.ecbtechkenya.com/best/laptops-for-programming-kenya)
 - [HP x360 in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/x360-kenya)
 - [Core Ultra vs Core i7: which to buy in Kenya](https://www.ecbtechkenya.com/compare/core-ultra-vs-core-i7-kenya)
@@ -65,7 +65,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which 2-in-1 laptop has the best specs?
 
-By our spec score, the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 19 November 2026.
+By our spec score, the Dell 14 Plus 2-in-1 DB04250 X360 at KSh 200,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -77,6 +77,6 @@ The HP Omnibook 5 AI 16-AF1017WM at KSh 123,500 (Core Ultra · 16 GB RAM · 1 TB
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

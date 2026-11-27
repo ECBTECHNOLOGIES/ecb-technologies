@@ -3,7 +3,7 @@
 > HP 15 Core i5-120U | 8GB | 512GB SSD | DOS | 15.6” for KSh 79,500 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-core-i5-120u-8gb-512gb-ssd-dos-156-silver-65q777ewm
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

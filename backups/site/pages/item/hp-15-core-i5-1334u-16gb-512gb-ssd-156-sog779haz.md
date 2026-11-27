@@ -3,7 +3,7 @@
 > HP 15 Core i5-1334U | 16GB | 512GB SSD | for KSh 91,500 at ECB Technologies, Nairobi CBD. Core i5 · 16 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-core-i5-1334u-16gb-512gb-ssd-156-sog779haz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

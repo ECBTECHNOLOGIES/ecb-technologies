@@ -3,7 +3,7 @@
 > Lenovo thinkpad T14s i7 10th Gen, 16 / 512 SSD GB NON for KSh 50,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD. Delivery acros
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t14s-i7-10th-gen-16-512-ssd-gb-non-touch-cxr1064vgb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

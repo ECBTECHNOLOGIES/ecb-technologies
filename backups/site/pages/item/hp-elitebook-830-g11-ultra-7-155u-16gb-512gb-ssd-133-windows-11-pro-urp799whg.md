@@ -3,7 +3,7 @@
 > HP EliteBook 830 G11 | Ultra 7-155U | 16GB | 512GB SSD | 13.3” | for KSh 151,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-830-g11-ultra-7-155u-16gb-512gb-ssd-133-windows-11-pro-urp799whg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

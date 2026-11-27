@@ -1,6 +1,6 @@
 # Best laptops under KSh 25,000 in Kenya
 
-> 46 laptops at ECB Technologies cost KSh 25,000 or less. These are the 10 with the best specs for the money, ranked by a published formula, not by hand. The best specified is the HP PROBOOK 11E G4 i5 8TH GEN 8GB RAM at KSh 25,000 (Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1). The cheapest on the list is the DELL LATITUDE E7240 I7 4TH GEN 8GB RAM at KSh 22,000. Prices as of 19 November 2026, from the live shop.
+> Looking for the best laptops under KSh 25,000 in Kenya? 46 laptops at ECB Technologies cost KSh 25,000 or less. These are the 10 with the best specs for the money, ranked by a published formula, not by hand. The best specified is the HP PROBOOK 11E G4 i5 8TH GEN 8GB RAM at KSh 25,000 (Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1). The cheapest on the list is the DELL LATITUDE E7240 I7 4TH GEN 8GB RAM at KSh 22,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/best-laptops-under-25k-kenya
 
@@ -51,11 +51,11 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ## Related guides
 
-- [Best 2-in-1 laptops in Kenya](https://www.ecbtechkenya.com/best/2-in-1-laptops-kenya)
-- [Best touchscreen laptops in Kenya](https://www.ecbtechkenya.com/best/touchscreen-laptops-kenya)
+- [Best ThinkPad laptops under KSh 25,000 in Kenya](https://www.ecbtechkenya.com/best/thinkpad-laptops-under-25k-kenya)
+- [Best Dell laptops under KSh 30,000 in Kenya](https://www.ecbtechkenya.com/best/dell-laptops-under-30k-kenya)
+- [Lenovo ThinkPad X260 price in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-thinkpad-x260-price-kenya)
 - [HP laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/hp-laptops-kenya)
-- [Best laptops for students in Kenya under KSh 40,000](https://www.ecbtechkenya.com/student-laptops-kenya)
-- [Best business laptops in Kenya](https://www.ecbtechkenya.com/best/business-laptops-kenya)
+- [Lenovo ThinkPad X280 price in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-thinkpad-x280-price-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -66,7 +66,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which laptop under KSh 25,000 has the best specs?
 
-By our spec score, the HP PROBOOK 11E G4 i5 8TH GEN 8GB RAM at KSh 25,000 (Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1), as of 19 November 2026.
+By our spec score, the HP PROBOOK 11E G4 i5 8TH GEN 8GB RAM at KSh 25,000 (Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -78,6 +78,6 @@ The DELL LATITUDE E7240 I7 4TH GEN 8GB RAM at KSh 22,000 (Core i7 4th gen · 8 G
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

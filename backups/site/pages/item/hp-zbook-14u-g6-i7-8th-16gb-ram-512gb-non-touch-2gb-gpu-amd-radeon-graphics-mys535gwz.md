@@ -3,7 +3,7 @@
 > HP ZBOOK 14U G6 i7 8th 16GB RAM 512GB Non-Touch 2GB GPU AMD RADEON for KSh 42,000 at ECB Technologies, Nairobi CBD. Core i7 · 16 GB RAM · 512 GB SSD. Delivery a
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-14u-g6-i7-8th-16gb-ram-512gb-non-touch-2gb-gpu-amd-radeon-graphics-mys535gwz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

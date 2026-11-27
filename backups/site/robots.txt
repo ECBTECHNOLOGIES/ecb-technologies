@@ -37,6 +37,12 @@ Disallow: /addtonumcart
 Disallow: /addbyone
 Disallow: /reducebyone
 Disallow: /removecart/
+Disallow: /subscriber/
+Disallow: /currency/
+Disallow: /language/
+Disallow: /wishlists
+Disallow: /track-order
+Disallow: /search
 Allow: /
 
 Sitemap: https://www.ecbtechkenya.com/sitemap.xml

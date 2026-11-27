@@ -3,7 +3,7 @@
 > Lenovo THINKPAD X1 Yoga — i7 11th Gen, 16 / 512 GB x360 for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 512 GB SSD · 2-in-1. Del
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-yoga-i7-11th-gen-16-512-gb-x360-touchscreen-2ls1080ozi
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

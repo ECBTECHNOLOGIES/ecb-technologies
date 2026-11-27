@@ -3,7 +3,7 @@
 > Lenovo THINKPAD 11E CORE{TM} i3 4GB 128GB NON for KSh 18,000 at ECB Technologies, Nairobi CBD. Core i3 · 4 GB RAM · 128 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-11e-coretm-i3-4gb-128gb-non-touch-rfx1094fpi
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

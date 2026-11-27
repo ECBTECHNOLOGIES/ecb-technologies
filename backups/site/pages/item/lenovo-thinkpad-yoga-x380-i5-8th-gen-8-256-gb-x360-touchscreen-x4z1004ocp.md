@@ -3,7 +3,7 @@
 > Lenovo THINKPAD Yoga x380 — i5 8th Gen, 8 / 256 GB x360 for KSh 32,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-yoga-x380-i5-8th-gen-8-256-gb-x360-touchscreen-x4z1004ocp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

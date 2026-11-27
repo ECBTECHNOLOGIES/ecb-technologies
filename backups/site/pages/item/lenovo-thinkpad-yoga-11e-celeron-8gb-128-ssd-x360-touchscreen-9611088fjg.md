@@ -3,7 +3,7 @@
 > LENOVO THINKPAD YOGA 11E CELERON 8GB 128 SSD X360 for KSh 19,000 at ECB Technologies, Nairobi CBD. Celeron / Pentium · 8 GB RAM · 128 GB SSD · 2-in-1. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-yoga-11e-celeron-8gb-128-ssd-x360-touchscreen-9611088fjg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

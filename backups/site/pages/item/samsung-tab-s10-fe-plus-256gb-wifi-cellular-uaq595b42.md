@@ -3,7 +3,7 @@
 > SAMSUNG Tab S10 FE Plus 256GB WiFi + for KSh 91,500 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-tab-s10-fe-plus-256gb-wifi-cellular-uaq595b42
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

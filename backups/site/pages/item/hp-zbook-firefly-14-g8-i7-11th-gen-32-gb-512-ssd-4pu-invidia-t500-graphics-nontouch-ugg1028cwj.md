@@ -3,7 +3,7 @@
 > HP ZBOOK FIREFLY 14 G8 i7 11TH GEN 32 GB 512 SSD 4PU INVIDIA T500 for KSh 79,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 32 GB RAM · 512 GB SSD. De
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-firefly-14-g8-i7-11th-gen-32-gb-512-ssd-4pu-invidia-t500-graphics-nontouch-ugg1028cwj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

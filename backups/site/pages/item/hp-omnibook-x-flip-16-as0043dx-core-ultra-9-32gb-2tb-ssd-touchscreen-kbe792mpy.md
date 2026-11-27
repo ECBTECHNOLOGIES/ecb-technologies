@@ -3,7 +3,7 @@
 > HP Omnibook X Flip 16-AS0043DX | Core Ultra 9 | 32GB | 2TB SSD | for KSh 215,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 2 TB SSD · 2-in-1. D
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-16-as0043dx-core-ultra-9-32gb-2tb-ssd-touchscreen-kbe792mpy
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

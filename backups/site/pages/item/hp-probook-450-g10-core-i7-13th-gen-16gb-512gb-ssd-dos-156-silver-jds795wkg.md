@@ -3,7 +3,7 @@
 > HP ProBook 450 G10 | Core i7 13th Gen | 16GB | 512GB SSD | DOS | for KSh 118,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD. De
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-450-g10-core-i7-13th-gen-16gb-512gb-ssd-dos-156-silver-jds795wkg
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

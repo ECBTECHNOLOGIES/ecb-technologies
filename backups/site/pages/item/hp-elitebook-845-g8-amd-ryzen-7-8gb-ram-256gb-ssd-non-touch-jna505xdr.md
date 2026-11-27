@@ -3,7 +3,7 @@
 > HP ELITEBOOK 845 G8 AMD Ryzen 7 8GB RAM 256GB SSD for KSh 40,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-845-g8-amd-ryzen-7-8gb-ram-256gb-ssd-non-touch-jna505xdr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Lenovo THINKPAD X280 i5 7h Gen 8 / 256 GB for KSh 25,000 at ECB Technologies, Nairobi CBD. Core i5 · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x280-i5-7h-gen-8-256-gb-nontouch-ncn984mvq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

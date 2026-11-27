@@ -3,7 +3,7 @@
 > XIAOMI (NO WARRANTY)Mi 17 Pro Max 12/512GB for KSh 127,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/xiaomi-no-warrantymi-17-pro-max-12512gb-vds575iuu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

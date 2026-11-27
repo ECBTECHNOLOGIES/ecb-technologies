@@ -3,7 +3,7 @@
 > DELL LATITUDE 7390 i7 8th Gen, 8 / 256 for KSh 32,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 8 GB RAM · 256 GB SSD · touchscreen. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7390-i7-8th-gen-8-256-touchscreen-3wk1059p8c
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

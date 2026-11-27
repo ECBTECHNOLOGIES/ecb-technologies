@@ -3,7 +3,7 @@
 > DELL LATITUDE 7390 2-in-1 core i5 8TH GEN 8/256 X360 TOUCH for KSh 32,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · 2-in-1. De
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-7390-2-in-1-core-i5-8th-gen-8256-x360-touch-screen-h621046dv8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

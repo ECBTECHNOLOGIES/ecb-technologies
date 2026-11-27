@@ -3,7 +3,7 @@
 > HP ELITEBOOK 835 G7 AMD RYZEN 7 8GB RAM 256 GB SSD for KSh 39,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-835-g7-amd-ryzen-7-8gb-ram-256-gb-ssd-non-touch-odz479enb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > Lenovo Legion 5 | Core i9 | 16GB | 1TB SSD | RTX 5070 for KSh 240,500 at ECB Technologies, Nairobi CBD. Core i9 · 16 GB RAM · 1 TB SSD · dedicated graphics. Del
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-legion-5-core-i9-16gb-1tb-ssd-rtx-5070-8gb-utp823fyn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

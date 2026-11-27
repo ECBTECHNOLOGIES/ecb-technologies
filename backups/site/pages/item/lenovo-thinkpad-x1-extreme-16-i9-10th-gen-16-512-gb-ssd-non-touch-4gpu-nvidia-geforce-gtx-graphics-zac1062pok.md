@@ -3,7 +3,7 @@
 > LENOVO THINKPAD x1 EXTREME 16' — i9 10th Gen, 16 / 512 GB SSD NON for KSh 82,000 at ECB Technologies, Nairobi CBD. Core i9 10th gen · 16 GB RAM · 512 GB SSD · d
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-extreme-16-i9-10th-gen-16-512-gb-ssd-non-touch-4gpu-nvidia-geforce-gtx-graphics-zac1062pok
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

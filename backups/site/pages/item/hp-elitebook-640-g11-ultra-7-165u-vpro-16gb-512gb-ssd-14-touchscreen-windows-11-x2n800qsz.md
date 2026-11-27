@@ -3,7 +3,7 @@
 > HP EliteBook 640 G11 | Ultra 7-165U vPro | 16GB | 512GB SSD | 14” for KSh 167,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · touchs
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-640-g11-ultra-7-165u-vpro-16gb-512gb-ssd-14-touchscreen-windows-11-x2n800qsz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

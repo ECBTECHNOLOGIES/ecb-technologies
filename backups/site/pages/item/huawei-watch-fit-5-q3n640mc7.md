@@ -3,7 +3,7 @@
 > Huawei Watch Fit 5 for KSh 19,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/huawei-watch-fit-5-q3n640mc7
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

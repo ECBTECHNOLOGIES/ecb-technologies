@@ -3,7 +3,7 @@
 > Logitech H390 USB Headset for KSh 4,700 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/logitech-h390-usb-headset-bfk4842nbp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

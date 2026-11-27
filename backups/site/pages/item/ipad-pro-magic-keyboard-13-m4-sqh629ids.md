@@ -3,7 +3,7 @@
 > iPad Pro Magic Keyboard 13” M4 for KSh 48,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/ipad-pro-magic-keyboard-13-m4-sqh629ids
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

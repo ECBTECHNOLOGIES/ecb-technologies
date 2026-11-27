@@ -3,7 +3,7 @@
 > HP 15 Core Ultra 5-1334U | 8GB | 512GB SSD | DOS | 15.6” Touch for KSh 82,500 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD · touchscreen
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-core-ultra-5-1334u-8gb-512gb-ssd-dos-156-touch-silver-3gx778c3h
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

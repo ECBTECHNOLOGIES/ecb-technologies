@@ -3,7 +3,7 @@
 > Shop Phone accessories in Kenya at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya and free pickup in Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/category/Mobile-Accessories
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 25 products. Prices in KSh. Page 1 of 3.
 

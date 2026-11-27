@@ -3,7 +3,7 @@
 > LENOVO THINKPAD X1 EXTREME i7 9TH 16 / 512 GB SSD NON TOUCH — 4GPU for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 · 16 GB RAM · 512 GB SSD · dedicated
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-extreme-i7-9th-16-512-gb-ssd-non-touch-4gpu-nvidia-geforce-gtx-graphic-s1j10304eo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

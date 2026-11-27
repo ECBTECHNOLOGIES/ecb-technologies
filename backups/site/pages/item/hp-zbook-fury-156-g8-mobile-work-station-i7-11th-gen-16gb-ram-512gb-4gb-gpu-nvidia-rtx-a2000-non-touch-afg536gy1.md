@@ -3,7 +3,7 @@
 > HP ZBook Fury 15.6 G8 Mobile Work Station — i7 11th Gen 16GB RAM for KSh 83,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 512 GB SSD · de
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-fury-156-g8-mobile-work-station-i7-11th-gen-16gb-ram-512gb-4gb-gpu-nvidia-rtx-a2000-non-touch-afg536gy1
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

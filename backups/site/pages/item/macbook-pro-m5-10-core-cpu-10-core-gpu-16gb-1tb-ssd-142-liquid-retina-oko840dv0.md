@@ -3,7 +3,7 @@
 > MacBook Pro M5 | 10-Core CPU | 10-Core GPU | 16GB | 1TB SSD | 14.2” for KSh 285,000 at ECB Technologies, Nairobi CBD. Apple M-series · 16 GB RAM · 1 TB SSD. Del
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-pro-m5-10-core-cpu-10-core-gpu-16gb-1tb-ssd-142-liquid-retina-oko840dv0
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

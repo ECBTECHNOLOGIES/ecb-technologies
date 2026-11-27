@@ -3,7 +3,7 @@
 > HP PROBOOK 430 G7 i5 10TH GEN 8 GB / 256 GB SSD for KSh 32,000 at ECB Technologies, Nairobi CBD. Core i5 10th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-430-g7-i5-10th-gen-8-gb-256-gb-ssd-non-touch-dpr443e43
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

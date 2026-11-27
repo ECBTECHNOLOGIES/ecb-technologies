@@ -3,7 +3,7 @@
 > HP PROBOOK 645 G1 AMD A6 5350M APU 4GB 256 SSD WITH REDEON HP for KSh 25,000 at ECB Technologies, Nairobi CBD. 4 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-645-g1-amd-a6-5350m-apu-4gb-256-ssd-with-redeon-hp-graphics-non-touch-vcm449biq
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

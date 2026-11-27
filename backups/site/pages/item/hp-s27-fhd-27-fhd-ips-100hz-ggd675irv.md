@@ -3,7 +3,7 @@
 > HP S27 FHD 27” FHD | IPS | 100Hz for KSh 30,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-s27-fhd-27-fhd-ips-100hz-ggd675irv
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

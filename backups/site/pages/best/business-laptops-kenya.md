@@ -1,6 +1,6 @@
 # Best business laptops in Kenya
 
-> Business lines (ThinkPad, EliteBook, Latitude, ProBook) with an 8th-gen or newer processor, so every pick runs Windows 11. 133 laptops qualify. The best specified is the HP EliteBook 1040 G11 at KSh 223,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000. Prices as of 19 November 2026, from the live shop.
+> Business lines (ThinkPad, EliteBook, Latitude, ProBook) with an 8th-gen or newer processor, so every pick runs Windows 11. 133 laptops qualify. The best specified is the HP EliteBook 1040 G11 at KSh 223,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1). The cheapest on the list is the HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/business-laptops-kenya
 
@@ -66,7 +66,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 - [Best laptops for students in Kenya under KSh 40,000](https://www.ecbtechkenya.com/student-laptops-kenya)
 - [ThinkPad vs EliteBook: which to buy in Kenya](https://www.ecbtechkenya.com/compare/thinkpad-vs-elitebook-kenya)
 - [EliteBook vs ProBook: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-probook-kenya)
-- [Lenovo ThinkPad in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/thinkpad-kenya)
+- [Best laptops with 16GB RAM and 512GB SSD in Kenya](https://www.ecbtechkenya.com/best/laptops-with-16gb-ram-and-512gb-ssd-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -76,7 +76,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which business laptop has the best specs?
 
-By our spec score, the HP EliteBook 1040 G11 at KSh 223,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 19 November 2026.
+By our spec score, the HP EliteBook 1040 G11 at KSh 223,500 (Core Ultra · 32 GB RAM · 1 TB SSD · 2-in-1), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -88,6 +88,6 @@ The HP PROBOOK 630 G10 i7 13TH GEN 16 GB at KSh 62,000 (Core i7 13th gen · 16 G
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

@@ -3,7 +3,7 @@
 > HP ELITEBOOK 1040 G8 i5 11th Gen 16 GB RAM 512GB SSD x360 for KSh 57,000 at ECB Technologies, Nairobi CBD. Core i5 11th gen · 16 GB RAM · 512 GB SSD · 2-in-1. D
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-1040-g8-i5-11th-gen-16-gb-ram-512gb-ssd-x360-touchscreen-chj522gcv
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

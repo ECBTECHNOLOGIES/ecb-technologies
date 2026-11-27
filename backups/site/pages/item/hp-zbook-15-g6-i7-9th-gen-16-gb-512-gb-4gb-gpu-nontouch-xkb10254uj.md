@@ -3,7 +3,7 @@
 > HP ZBook 15 G6 — i7 9th Gen, 16 GB / 512 GB — 4GB GPU for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 9th gen · 16 GB RAM · 512 GB SSD. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-15-g6-i7-9th-gen-16-gb-512-gb-4gb-gpu-nontouch-xkb10254uj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

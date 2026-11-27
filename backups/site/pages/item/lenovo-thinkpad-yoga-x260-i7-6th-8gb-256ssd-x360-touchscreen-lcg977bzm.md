@@ -3,7 +3,7 @@
 > lenovo thinkpad YOGA X260 i7 6th 8gb 256ssd X360 for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i7 · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery across Keny
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-yoga-x260-i7-6th-8gb-256ssd-x360-touchscreen-lcg977bzm
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

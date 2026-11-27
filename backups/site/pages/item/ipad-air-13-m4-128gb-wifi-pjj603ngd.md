@@ -3,7 +3,7 @@
 > iPad Air 13” M4 128GB WiFi for KSh 111,000 at ECB Technologies, Moi Avenue, Nairobi CBD. 128 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/ipad-air-13-m4-128gb-wifi-pjj603ngd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

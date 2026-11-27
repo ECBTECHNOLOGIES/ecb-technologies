@@ -3,7 +3,7 @@
 > HP OfficeJet Pro 9730 Wide Format for KSh 44,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-officejet-pro-9730-wide-format-c0n866gmx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

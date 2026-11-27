@@ -3,7 +3,7 @@
 > HP All-in-One | Core i7 | 16GB | 512GB SSD | 24” | 13th Gen | for KSh 150,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD · touc
 
 Canonical: https://www.ecbtechkenya.com/item/hp-all-in-one-core-i7-16gb-512gb-ssd-24-13th-gen-touch-slo846l61
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

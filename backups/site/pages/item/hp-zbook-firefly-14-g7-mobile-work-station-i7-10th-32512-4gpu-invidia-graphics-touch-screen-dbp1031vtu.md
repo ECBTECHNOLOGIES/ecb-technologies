@@ -3,7 +3,7 @@
 > HP ZBOOK FIREFLY 14 G7 MOBILE WORK STATION i7 10TH 32/512 4GPU for KSh 72,000 at ECB Technologies, Nairobi CBD. Core i7 · 32 GB RAM · 512 GB SSD · touchscreen.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-firefly-14-g7-mobile-work-station-i7-10th-32512-4gpu-invidia-graphics-touch-screen-dbp1031vtu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

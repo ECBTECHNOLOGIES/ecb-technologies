@@ -3,7 +3,7 @@
 > HONOR PHONES (NO WARRANTY)honor 400 12/512GB for KSh 54,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/honor-phones-no-warrantyhonor-400-12512gb-rwp582ngh
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

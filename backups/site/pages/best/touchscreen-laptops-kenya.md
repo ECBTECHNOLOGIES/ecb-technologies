@@ -1,6 +1,6 @@
 # Best touchscreen laptops in Kenya
 
-> 63 laptops have a touchscreen but a normal hinge (for fold-over models see the 2-in-1 list). The best specified is the Lenovo ThinkPad X1 Carbon Gen 13 Aura at KSh 290,500 (Core Ultra · 32 GB RAM · 1 TB SSD · touchscreen). The cheapest on the list is the LENOVO THINKPAD T14S i7 11th Gen at KSh 47,000. Prices as of 19 November 2026, from the live shop.
+> 63 laptops have a touchscreen but a normal hinge (for fold-over models see the 2-in-1 list). The best specified is the Lenovo ThinkPad X1 Carbon Gen 13 Aura at KSh 290,500 (Core Ultra · 32 GB RAM · 1 TB SSD · touchscreen). The cheapest on the list is the LENOVO THINKPAD T14S i7 11th Gen at KSh 47,000. Prices as of 25 November 2026, from the live shop.
 
 Canonical: https://www.ecbtechkenya.com/best/touchscreen-laptops-kenya
 
@@ -51,8 +51,8 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ## Related guides
 
+- [Best HP Touchscreen laptops in Kenya](https://www.ecbtechkenya.com/best/hp-touchscreen-laptops-kenya)
 - [Best laptops under KSh 150,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-150k-kenya)
-- [Best laptops under KSh 70,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-70k-kenya)
 - [Core i7 laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-i7-laptops-kenya)
 - [Best business laptops in Kenya](https://www.ecbtechkenya.com/best/business-laptops-kenya)
 - [HP laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/hp-laptops-kenya)
@@ -65,7 +65,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### Which touchscreen laptop has the best specs?
 
-By our spec score, the Lenovo ThinkPad X1 Carbon Gen 13 Aura at KSh 290,500 (Core Ultra · 32 GB RAM · 1 TB SSD · touchscreen), as of 19 November 2026.
+By our spec score, the Lenovo ThinkPad X1 Carbon Gen 13 Aura at KSh 290,500 (Core Ultra · 32 GB RAM · 1 TB SSD · touchscreen), as of 25 November 2026.
 
 ### What is the cheapest option on this list?
 
@@ -77,6 +77,6 @@ The LENOVO THINKPAD T14S i7 11th Gen at KSh 47,000 (Core i7 11th gen · 32 GB RA
 
 ### Can I see one before paying?
 
-Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). We deliver across Kenya and you can pay by M-Pesa or card.
+Yes. Visit the shop at Techmart Iconic Business Plaza, 3rd floor, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am to 7pm), or ask for photos on WhatsApp (0717 040 531). Riders deliver in Nairobi and couriers to all 47 counties; pickup at the shop is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

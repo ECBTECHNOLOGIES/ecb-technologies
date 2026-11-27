@@ -3,7 +3,7 @@
 > MacBook Pro 14-inch M5 24/1TB for KSh 289,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Apple M-series. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-pro-14-inch-m5-241tb-m30613aqt
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

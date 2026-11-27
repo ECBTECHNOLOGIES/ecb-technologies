@@ -3,7 +3,7 @@
 > HP ELITEBOOK 830 G7 i7 10TH 8GB RAM 256 GB SSD X360 for KSh 47,000 at ECB Technologies, Nairobi CBD. Core i7 · 8 GB RAM · 256 GB SSD · 2-in-1. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-830-g7-i7-10th-8gb-ram-256-gb-ssd-x360-touchscreen-mvs465iln
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

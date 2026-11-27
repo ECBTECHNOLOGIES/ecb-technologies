@@ -3,7 +3,7 @@
 > LG 34U650A-B 34” | IPS | 3440×1440 | 100Hz | Built-in for KSh 77,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lg-34u650a-b-34-ips-34401440-100hz-built-in-speakers-wv4655o1c
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

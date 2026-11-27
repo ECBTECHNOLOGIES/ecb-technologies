@@ -3,7 +3,7 @@
 > HP PROBOOK 630 G10 i7 13TH GEN 16 GB 512 GB SSD for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD · touchscreen. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-630-g10-i7-13th-gen-16-gb-512-gb-ssd-touchscreen-cpw445s2i
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

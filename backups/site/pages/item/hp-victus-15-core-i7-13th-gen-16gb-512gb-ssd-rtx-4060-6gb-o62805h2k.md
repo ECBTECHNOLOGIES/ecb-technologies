@@ -3,7 +3,7 @@
 > HP Victus 15 | Core i7 13th Gen | 16GB | 512GB SSD | RTX 4060 for KSh 150,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD · dedi
 
 Canonical: https://www.ecbtechkenya.com/item/hp-victus-15-core-i7-13th-gen-16gb-512gb-ssd-rtx-4060-6gb-o62805h2k
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

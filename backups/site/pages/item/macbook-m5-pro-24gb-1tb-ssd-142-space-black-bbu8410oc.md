@@ -3,7 +3,7 @@
 > MacBook M5 Pro | 24GB | 1TB SSD | 14.2” Space for KSh 322,000 at ECB Technologies, Nairobi CBD. Apple M-series · 24 GB RAM · 1 TB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-m5-pro-24gb-1tb-ssd-142-space-black-bbu8410oc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

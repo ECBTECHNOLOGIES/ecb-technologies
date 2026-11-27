@@ -3,7 +3,7 @@
 > Dell XPS 13 7390 i5 10th Gen, 8/256 GB SSD touchscreen for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i5 10th gen · 8 GB RAM · 256 GB SSD · 2-in-1. Deliv
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-7390-i5-10th-gen-8256-gb-ssd-touchscreen-x360-viz1099npo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

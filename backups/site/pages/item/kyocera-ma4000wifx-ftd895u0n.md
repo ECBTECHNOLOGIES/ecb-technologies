@@ -3,7 +3,7 @@
 > Kyocera MA4000WIFX for KSh 127,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/kyocera-ma4000wifx-ftd895u0n
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

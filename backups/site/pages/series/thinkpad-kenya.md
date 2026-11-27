@@ -1,6 +1,6 @@
 # Lenovo ThinkPad in Kenya: models, prices and history
 
-> We have 79 Lenovo ThinkPad laptops, from KSh 16,000 to KSh 290,500 with a median of KSh 35,000. Business laptops known for their keyboards, the red TrackPoint and spare parts that are easy to find. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 19 November 2026.
+> We have 79 Lenovo ThinkPad laptops, from KSh 16,000 to KSh 290,500 with a median of KSh 35,000. Business laptops known for their keyboards, the red TrackPoint and spare parts that are easy to find. Below: the models in stock by generation, the best specified, and how the line developed. Prices as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/series/thinkpad-kenya
 
@@ -59,9 +59,9 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 - [HP EliteBook in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/elitebook-kenya)
 - HP ProBook in Kenya: models, prices and history
+- [Best Lenovo laptops with 16GB RAM in Kenya](https://www.ecbtechkenya.com/best/lenovo-laptops-with-16gb-ram-kenya)
 - [Lenovo laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/lenovo-laptops-kenya)
 - [Best business laptops in Kenya](https://www.ecbtechkenya.com/best/business-laptops-kenya)
-- [Best laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-80k-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -72,7 +72,7 @@ Each laptop gets a spec score out of 42, read from its listing: processor class 
 
 ### How much is a Lenovo ThinkPad in Kenya?
 
-At ECB Technologies, Lenovo ThinkPad laptops cost from KSh 16,000 to KSh 290,500, with a median of KSh 35,000 across 79 models (19 November 2026).
+At ECB Technologies, Lenovo ThinkPad laptops cost from KSh 16,000 to KSh 290,500, with a median of KSh 35,000 across 79 models (25 November 2026).
 
 ### What is the cheapest Lenovo ThinkPad?
 
@@ -86,4 +86,4 @@ The Lenovo THINKPAD 11E CELERON 4GB 128GB at KSh 16,000.
 
 Ask on WhatsApp (0717 040 531) for the warranty on the exact model; it is shown on each product page where the shop lists it.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

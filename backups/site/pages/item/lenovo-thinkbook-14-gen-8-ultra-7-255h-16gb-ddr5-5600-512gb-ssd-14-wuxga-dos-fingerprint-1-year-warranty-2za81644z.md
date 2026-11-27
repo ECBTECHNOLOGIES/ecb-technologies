@@ -3,7 +3,7 @@
 > Lenovo ThinkBook 14 Gen 8 | Ultra 7-255H | 16GB DDR5-5600 | 512GB SSD for KSh 131,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD. Del
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkbook-14-gen-8-ultra-7-255h-16gb-ddr5-5600-512gb-ssd-14-wuxga-dos-fingerprint-1-year-warranty-2za81644z
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

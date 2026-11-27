@@ -3,7 +3,7 @@
 > Dell XPS 13 7390 i7 10th Gen, 16 / 512 for KSh 52,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD · touchscreen. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-13-7390-i7-10th-gen-16-512-touchscreen-f1e1113iro
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

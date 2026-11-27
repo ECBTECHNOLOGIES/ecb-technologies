@@ -3,7 +3,7 @@
 > SINGLE MONITOR ARMS L60 / G70 Premium Arm with RGB for KSh 16,500 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/single-monitor-arms-l60-g70-premium-arm-with-rgb-22-60-efo769wmz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -1,6 +1,6 @@
 # EliteBook vs ProBook: which to buy in Kenya
 
-> At ECB Technologies, the median EliteBook laptop costs KSh 39,000 (84 in stock) and the median ProBook laptop costs KSh 37,500 (20 in stock). That is about the same, so choose on features. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median EliteBook laptop costs KSh 39,000 (84 in stock) and the median ProBook laptop costs KSh 37,500 (20 in stock). That is about the same, so choose on features. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/elitebook-vs-probook-kenya
 
@@ -67,8 +67,8 @@ Every EliteBook and ProBook laptop in stock is counted, not a sample. Shares are
 - [ThinkPad vs EliteBook: which to buy in Kenya](https://www.ecbtechkenya.com/compare/thinkpad-vs-elitebook-kenya)
 - [EliteBook vs Latitude: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-latitude-kenya)
 - [Best business laptops in Kenya](https://www.ecbtechkenya.com/best/business-laptops-kenya)
+- [Best laptops with 16GB RAM and 512GB SSD in Kenya](https://www.ecbtechkenya.com/best/laptops-with-16gb-ram-and-512gb-ssd-kenya)
 - [Best laptops under KSh 150,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-150k-kenya)
-- [HP EliteBook in Kenya: models, prices and history](https://www.ecbtechkenya.com/series/elitebook-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -79,7 +79,7 @@ Every EliteBook and ProBook laptop in stock is counted, not a sample. Shares are
 
 ### Which is cheaper, EliteBook or ProBook?
 
-ProBook, at the median: KSh 37,500 against KSh 39,000 at ECB Technologies (19 November 2026).
+ProBook, at the median: KSh 37,500 against KSh 39,000 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, EliteBook or ProBook?
 
@@ -93,4 +93,4 @@ EliteBook from KSh 22,000 and ProBook from KSh 21,000.
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

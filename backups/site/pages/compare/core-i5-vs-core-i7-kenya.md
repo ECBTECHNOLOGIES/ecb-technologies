@@ -1,6 +1,6 @@
 # Core i5 vs Core i7: which to buy in Kenya
 
-> At ECB Technologies, the median Core i5 laptop costs KSh 31,000 (90 in stock) and the median Core i7 laptop costs KSh 52,000 (132 in stock). Core i5 is KSh 21,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median Core i5 laptop costs KSh 31,000 (90 in stock) and the median Core i7 laptop costs KSh 52,000 (132 in stock). Core i5 is KSh 21,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/core-i5-vs-core-i7-kenya
 
@@ -69,7 +69,7 @@ Every Core i5 and Core i7 laptop in stock is counted, not a sample. Shares are o
 - [EliteBook vs ProBook: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-probook-kenya)
 - [Core i5 laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-i5-laptops-kenya)
 - [Core i7 laptop prices in Kenya](https://www.ecbtechkenya.com/laptops/core-i7-laptops-kenya)
-- [Best laptops under KSh 80,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-80k-kenya)
+- [Best Core i5 laptops under KSh 100,000 in Kenya](https://www.ecbtechkenya.com/best/core-i5-laptops-under-100k-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -79,7 +79,7 @@ Every Core i5 and Core i7 laptop in stock is counted, not a sample. Shares are o
 
 ### Which is cheaper, Core i5 or Core i7?
 
-Core i5, at the median: KSh 31,000 against KSh 52,000 at ECB Technologies (19 November 2026).
+Core i5, at the median: KSh 31,000 against KSh 52,000 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, Core i5 or Core i7?
 
@@ -93,4 +93,4 @@ Core i5 from KSh 21,000 and Core i7 from KSh 22,000.
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

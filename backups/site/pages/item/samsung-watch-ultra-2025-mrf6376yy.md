@@ -3,7 +3,7 @@
 > SAMSUNG Watch Ultra 2025 for KSh 43,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-watch-ultra-2025-mrf6376yy
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

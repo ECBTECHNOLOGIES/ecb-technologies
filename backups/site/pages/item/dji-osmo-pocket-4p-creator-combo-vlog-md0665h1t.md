@@ -3,7 +3,7 @@
 > DJI Osmo Pocket 4P Creator Combo Vlog for KSh 105,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/dji-osmo-pocket-4p-creator-combo-vlog-md0665h1t
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

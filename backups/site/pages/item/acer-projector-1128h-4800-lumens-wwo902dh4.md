@@ -3,7 +3,7 @@
 > Acer Projector 1128H 4800 Lumens for KSh 51,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/acer-projector-1128h-4800-lumens-wwo902dh4
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

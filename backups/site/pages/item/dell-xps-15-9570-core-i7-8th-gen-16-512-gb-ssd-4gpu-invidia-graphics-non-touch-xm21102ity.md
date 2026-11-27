@@ -3,7 +3,7 @@
 > Dell XPS 15 9570 CORE i7 8Th Gen, 16 / 512 GB SSD 4GPU INVIDIA for KSh 57,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD. Delive
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-15-9570-core-i7-8th-gen-16-512-gb-ssd-4gpu-invidia-graphics-non-touch-xm21102ity
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

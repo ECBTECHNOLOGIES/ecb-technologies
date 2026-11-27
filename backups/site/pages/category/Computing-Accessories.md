@@ -3,7 +3,7 @@
 > Shop Computer accessories in Kenya at ECB Technologies, Moi Avenue, Nairobi CBD. Prices in KSh, delivery across Kenya and free pickup in Nairobi CBD.
 
 Canonical: https://www.ecbtechkenya.com/category/Computing-Accessories
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 107 products. Prices in KSh. Page 1 of 9.
 

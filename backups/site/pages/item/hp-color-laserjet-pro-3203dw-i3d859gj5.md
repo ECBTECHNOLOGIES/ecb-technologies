@@ -3,7 +3,7 @@
 > HP Color LaserJet Pro 3203DW for KSh 45,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-color-laserjet-pro-3203dw-i3d859gj5
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

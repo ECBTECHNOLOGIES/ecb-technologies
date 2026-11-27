@@ -3,7 +3,7 @@
 > HP vs Dell vs Lenovo laptops in Kenya compared: models, starting and typical prices at ECB Technologies, Moi Avenue, Nairobi CBD. Updated 15 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/hp-vs-dell-vs-lenovo-laptops-kenya
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 **At ECB Technologies, HP has the most laptops (172 models), and the lowest starting price is Lenovo at KSh 16,000.** The table compares the HP, Dell and Lenovo laptops we stock, with prices checked on 15 November 2026.
 

@@ -3,7 +3,7 @@
 > HP All-in-One | Core Ultra 5 | 8GB | 512GB SSD | 24” Non-Touch | for KSh 118,500 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-all-in-one-core-ultra-5-8gb-512gb-ssd-24-non-touch-white-13th-gen-h2m844ahp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

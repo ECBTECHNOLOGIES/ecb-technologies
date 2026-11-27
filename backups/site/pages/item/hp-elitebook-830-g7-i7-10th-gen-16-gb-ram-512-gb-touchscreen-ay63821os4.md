@@ -3,7 +3,7 @@
 > HP ELITEBOOK 830 G7 — i7 10th Gen 16 GB RAM 512 GB for KSh 47,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD · touchscreen. Del
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-830-g7-i7-10th-gen-16-gb-ram-512-gb-touchscreen-ay63821os4
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

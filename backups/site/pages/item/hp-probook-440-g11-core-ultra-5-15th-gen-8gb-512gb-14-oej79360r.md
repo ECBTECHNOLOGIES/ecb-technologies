@@ -3,7 +3,7 @@
 > HP ProBook 440 G11 | Core Ultra 5 15th Gen | 8GB | 512GB | for KSh 104,000 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/hp-probook-440-g11-core-ultra-5-15th-gen-8gb-512gb-14-oej79360r
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

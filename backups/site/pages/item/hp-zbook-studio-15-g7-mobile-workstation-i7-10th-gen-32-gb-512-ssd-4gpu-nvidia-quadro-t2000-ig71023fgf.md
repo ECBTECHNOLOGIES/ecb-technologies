@@ -3,7 +3,7 @@
 > HP ZBOOK STUDIO 15 G7 MOBILE WORKSTATION I7 10TH GEN 32 GB 512 SSD for KSh 87,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 32 GB RAM · 512 GB SSD ·
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-studio-15-g7-mobile-workstation-i7-10th-gen-32-gb-512-ssd-4gpu-nvidia-quadro-t2000-ig71023fgf
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

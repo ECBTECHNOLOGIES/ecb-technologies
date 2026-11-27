@@ -3,7 +3,7 @@
 > MSI PRO MP341CQW E12 34” | 3440×1440 | 120Hz | 1ms | for KSh 62,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/msi-pro-mp341cqw-e12-34-34401440-120hz-1ms-white-bce6470me
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

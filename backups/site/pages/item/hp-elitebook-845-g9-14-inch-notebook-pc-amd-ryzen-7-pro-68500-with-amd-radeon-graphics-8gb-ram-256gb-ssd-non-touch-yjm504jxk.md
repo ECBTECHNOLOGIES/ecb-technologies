@@ -3,7 +3,7 @@
 > HP ELITEBOOK 845 G9 14-inch NOTEBOOK PC AMD RYZEN 7 PRO 68500 WITH for KSh 50,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 256 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-845-g9-14-inch-notebook-pc-amd-ryzen-7-pro-68500-with-amd-radeon-graphics-8gb-ram-256gb-ssd-non-touch-yjm504jxk
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

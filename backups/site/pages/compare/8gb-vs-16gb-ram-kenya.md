@@ -1,6 +1,6 @@
 # 8 GB RAM vs 16 GB RAM: which to buy in Kenya
 
-> At ECB Technologies, the median 8 GB RAM laptop costs KSh 32,000 (157 in stock) and the median 16 GB RAM laptop costs KSh 72,000 (139 in stock). 8 GB RAM is KSh 40,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 19 November 2026.
+> At ECB Technologies, the median 8 GB RAM laptop costs KSh 32,000 (157 in stock) and the median 16 GB RAM laptop costs KSh 72,000 (139 in stock). 8 GB RAM is KSh 40,000 cheaper at the median. The table below compares them on the specs that matter, using every laptop in stock, as of 25 November 2026.
 
 Canonical: https://www.ecbtechkenya.com/compare/8gb-vs-16gb-ram-kenya
 
@@ -70,7 +70,7 @@ Every 8 GB RAM and 16 GB RAM laptop in stock is counted, not a sample. Shares ar
 - [EliteBook vs Latitude: which to buy in Kenya](https://www.ecbtechkenya.com/compare/elitebook-vs-latitude-kenya)
 - [Best laptops under KSh 150,000 in Kenya](https://www.ecbtechkenya.com/best/best-laptops-under-150k-kenya)
 - [Best 16 GB RAM laptops in Kenya](https://www.ecbtechkenya.com/best/16gb-ram-laptops-kenya)
-- [Best 2-in-1 laptops in Kenya](https://www.ecbtechkenya.com/best/2-in-1-laptops-kenya)
+- [Dell XPS 13 9320 alternatives in Kenya](https://www.ecbtechkenya.com/laptops/dell-xps-13-9320-alternatives-kenya)
 - [Laptops in Kenya: all prices](https://www.ecbtechkenya.com/category/laptops)
 - [All laptop guides](https://www.ecbtechkenya.com/guides)
 - [All product categories](https://www.ecbtechkenya.com/categories)
@@ -80,7 +80,7 @@ Every 8 GB RAM and 16 GB RAM laptop in stock is counted, not a sample. Shares ar
 
 ### Which is cheaper, 8 GB RAM or 16 GB RAM?
 
-8 GB RAM, at the median: KSh 32,000 against KSh 72,000 at ECB Technologies (19 November 2026).
+8 GB RAM, at the median: KSh 32,000 against KSh 72,000 at ECB Technologies (25 November 2026).
 
 ### Which has more RAM, 8 GB RAM or 16 GB RAM?
 
@@ -94,4 +94,4 @@ Every 8 GB RAM and 16 GB RAM laptop in stock is counted, not a sample. Shares ar
 
 Yes, by courier to all 47 counties; riders deliver within Nairobi, and pickup at the shop on Moi Avenue is free.
 
-Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties; pay by M-Pesa or card.
+Ask about any laptop here on WhatsApp (0717 040 531) or visit the shop on Moi Avenue, Nairobi CBD, Monday to Saturday, 9am–7pm. Delivery to all 47 counties, or free pickup at the shop.

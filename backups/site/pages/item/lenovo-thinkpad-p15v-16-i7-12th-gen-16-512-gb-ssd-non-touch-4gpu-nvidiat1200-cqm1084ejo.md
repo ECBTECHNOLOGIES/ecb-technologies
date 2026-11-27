@@ -3,7 +3,7 @@
 > LENOVO THINKPAD P15V 16' — i7 12th Gen, 16 / 512 GB SSD NON TOUCH for KSh 72,000 at ECB Technologies, Nairobi CBD. Core i7 12th gen · 16 GB RAM · 512 GB SSD. De
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p15v-16-i7-12th-gen-16-512-gb-ssd-non-touch-4gpu-nvidiat1200-cqm1084ejo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

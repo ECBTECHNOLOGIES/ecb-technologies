@@ -3,7 +3,7 @@
 > Tab S10 FE 256GB WiFi for KSh 61,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 256 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/tab-s10-fe-256gb-wifi-8we592fes
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

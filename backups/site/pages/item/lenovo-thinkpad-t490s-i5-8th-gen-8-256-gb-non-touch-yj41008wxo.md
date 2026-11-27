@@ -3,7 +3,7 @@
 > Lenovo THINKPAD T490s — i5 8th Gen, 8 / 256 GB — NON for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-t490s-i5-8th-gen-8-256-gb-non-touch-yj41008wxo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

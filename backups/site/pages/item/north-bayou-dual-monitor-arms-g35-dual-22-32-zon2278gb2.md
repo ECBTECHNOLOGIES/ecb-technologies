@@ -3,7 +3,7 @@
 > North Bayou DUAL MONITOR ARMS G35 Dual 22"-32" for KSh 13,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/north-bayou-dual-monitor-arms-g35-dual-22-32-zon2278gb2
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

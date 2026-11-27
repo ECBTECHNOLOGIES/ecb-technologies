@@ -3,7 +3,7 @@
 > SINGLE MONITOR ARMS F80 17"-30" | 2-9kg for KSh 9,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/north-bayou-dual-monitor-arms-f80-17-30-2-9kg-xxc1254lsa
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

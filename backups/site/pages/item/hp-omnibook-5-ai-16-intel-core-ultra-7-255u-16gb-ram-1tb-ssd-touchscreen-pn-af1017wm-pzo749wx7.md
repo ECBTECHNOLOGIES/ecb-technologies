@@ -3,7 +3,7 @@
 > HP Omnibook 5 AI 16” Intel Core Ultra 7 255U | 16GB RAM | 1TB SSD | for KSh 122,000 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · touchs
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-5-ai-16-intel-core-ultra-7-255u-16gb-ram-1tb-ssd-touchscreen-pn-af1017wm-pzo749wx7
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

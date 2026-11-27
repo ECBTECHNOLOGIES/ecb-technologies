@@ -3,7 +3,7 @@
 > Microsoft Surface Pro 12 Copilot | Snapdragon X Plus 8-Core | 8GB for KSh 150,500 at ECB Technologies, Nairobi CBD. Snapdragon · 8 GB RAM · 256 GB SSD. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/microsoft-surface-pro-12-copilot-snapdragon-x-plus-8-core-8gb-lpddr5x-256gb-ufs-12-windows-11-home-platinum-1-year-warranty-enh832yjr
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

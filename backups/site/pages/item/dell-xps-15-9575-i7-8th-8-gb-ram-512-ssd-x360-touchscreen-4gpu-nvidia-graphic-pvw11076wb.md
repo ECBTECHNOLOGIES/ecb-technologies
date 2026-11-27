@@ -3,7 +3,7 @@
 > DELL XPS 15 9575 I7 8TH 8 GB RAM 512 SSD X360 TOUCHSCREEN 4GPU NVIDIA for KSh 62,000 at ECB Technologies, Nairobi CBD. Core i7 · 8 GB RAM · 512 GB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-15-9575-i7-8th-8-gb-ram-512-ssd-x360-touchscreen-4gpu-nvidia-graphic-pvw11076wb
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

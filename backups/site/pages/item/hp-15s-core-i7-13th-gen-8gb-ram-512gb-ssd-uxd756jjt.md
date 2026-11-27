@@ -3,7 +3,7 @@
 > HP 15s Core i7 13th Gen | 8GB RAM | 512GB for KSh 94,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 8 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15s-core-i7-13th-gen-8gb-ram-512gb-ssd-uxd756jjt
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

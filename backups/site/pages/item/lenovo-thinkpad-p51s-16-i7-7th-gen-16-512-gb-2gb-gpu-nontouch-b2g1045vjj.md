@@ -3,7 +3,7 @@
 > Lenovo THINKPAD P51s 16' — i7 7th Gen, 16 / 512 GB 2GB GPU for KSh 53,000 at ECB Technologies, Nairobi CBD. Core i7 7th gen · 16 GB RAM · 512 GB SSD. Delivery a
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-p51s-16-i7-7th-gen-16-512-gb-2gb-gpu-nontouch-b2g1045vjj
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP 15-FD0154WM Core Ultra 5 | 8GB RAM | 512GB SSD | for KSh 85,500 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD · touchscreen. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-fd0154wm-core-ultra-5-8gb-ram-512gb-ssd-touchscreen-t6p757ask
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

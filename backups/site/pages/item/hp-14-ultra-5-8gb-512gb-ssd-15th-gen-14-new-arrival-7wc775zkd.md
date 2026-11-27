@@ -3,7 +3,7 @@
 > HP 14 Ultra 5 8GB 512GB SSD 15th Gen 14” NEW for KSh 92,500 at ECB Technologies, Nairobi CBD. Core Ultra · 8 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-14-ultra-5-8gb-512gb-ssd-15th-gen-14-new-arrival-7wc775zkd
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

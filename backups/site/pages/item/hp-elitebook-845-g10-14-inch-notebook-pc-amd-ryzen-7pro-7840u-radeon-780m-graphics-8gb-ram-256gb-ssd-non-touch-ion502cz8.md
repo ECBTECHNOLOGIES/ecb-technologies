@@ -3,7 +3,7 @@
 > HP ELITEBOOK 845 G10 14-inch NOTEBOOK PC AMD RYZEN 7PRO 7840U Radeon for KSh 52,000 at ECB Technologies, Nairobi CBD. AMD Ryzen · 8 GB RAM · 256 GB SSD. Deliver
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-845-g10-14-inch-notebook-pc-amd-ryzen-7pro-7840u-radeon-780m-graphics-8gb-ram-256gb-ssd-non-touch-ion502cz8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

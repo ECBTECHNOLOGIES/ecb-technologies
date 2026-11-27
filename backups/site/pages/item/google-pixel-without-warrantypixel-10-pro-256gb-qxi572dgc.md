@@ -3,7 +3,7 @@
 > GOOGLE PIXEL (WITHOUT WARRANTY)Pixel 10 Pro for KSh 128,000 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/google-pixel-without-warrantypixel-10-pro-256gb-qxi572dgc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

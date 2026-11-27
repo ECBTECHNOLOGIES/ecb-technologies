@@ -3,7 +3,7 @@
 > MacBook Pro M3 | 8GB | 512GB SSD | 14.2” Space for KSh 207,000 at ECB Technologies, Nairobi CBD. Apple M-series · 8 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/macbook-pro-m3-8gb-512gb-ssd-142-space-grey-jeu837pnp
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > iPad Air Magic Keyboard 11” M4 for KSh 42,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/ipad-air-magic-keyboard-11-m4-1dn627cvo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

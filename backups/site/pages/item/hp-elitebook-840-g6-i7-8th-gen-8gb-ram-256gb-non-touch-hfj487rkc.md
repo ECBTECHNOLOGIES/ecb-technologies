@@ -3,7 +3,7 @@
 > HP ELITEBOOK 840 G6 i7 8th Gen 8GB RAM 256GB for KSh 35,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-840-g6-i7-8th-gen-8gb-ram-256gb-non-touch-hfj487rkc
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

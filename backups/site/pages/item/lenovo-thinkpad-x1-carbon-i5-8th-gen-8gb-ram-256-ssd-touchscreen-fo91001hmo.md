@@ -3,7 +3,7 @@
 > LENOVO THINKPAD X1 CARBON i5 8TH GEN 8GB RAM 256 SSD for KSh 34,000 at ECB Technologies, Nairobi CBD. Core i5 8th gen · 8 GB RAM · 256 GB SSD · touchscreen. Del
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x1-carbon-i5-8th-gen-8gb-ram-256-ssd-touchscreen-fo91001hmo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

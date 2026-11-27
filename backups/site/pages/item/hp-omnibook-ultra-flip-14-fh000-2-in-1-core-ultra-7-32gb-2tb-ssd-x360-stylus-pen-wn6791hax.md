@@ -3,7 +3,7 @@
 > HP Omnibook Ultra Flip 14-FH000 2-in-1 | Core Ultra 7 | 32GB | 2TB for KSh 220,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 2 TB SSD · 2-in-1.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-ultra-flip-14-fh000-2-in-1-core-ultra-7-32gb-2tb-ssd-x360-stylus-pen-wn6791hax
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

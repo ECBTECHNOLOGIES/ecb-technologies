@@ -3,7 +3,7 @@
 > IPHONE (2 YEARS LOCAL WARRANTY) 17 Pro 256GB for KSh 160,000 at ECB Technologies, Nairobi CBD. 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/iphone-2-years-local-warranty-17-pro-256gb-silver-qzg555ekl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

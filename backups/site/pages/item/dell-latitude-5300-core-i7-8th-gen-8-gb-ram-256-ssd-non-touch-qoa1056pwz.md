@@ -3,7 +3,7 @@
 > DELL LATITUDE 5300 CORE i7 8TH GEN 8 GB RAM 256 SSD NON for KSh 29,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 8 GB RAM · 256 GB SSD. Delivery acros
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-5300-core-i7-8th-gen-8-gb-ram-256-ssd-non-touch-qoa1056pwz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

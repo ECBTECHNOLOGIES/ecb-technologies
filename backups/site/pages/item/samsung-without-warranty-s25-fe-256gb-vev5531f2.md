@@ -3,7 +3,7 @@
 > SAMSUNG (WITHOUT WARRANTY) S25 FE 256GB for KSh 71,500 at ECB Technologies, Moi Avenue, Nairobi CBD. 256 GB SSD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-without-warranty-s25-fe-256gb-vev5531f2
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

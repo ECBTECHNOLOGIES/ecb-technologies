@@ -3,7 +3,7 @@
 > HP ELITEBOOK 1040 G6 i7 8th Gen 16GB RAM 512GB SSD x360 for KSh 50,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD · 2-in-1. Deli
 
 Canonical: https://www.ecbtechkenya.com/item/hp-elitebook-1040-g6-i7-8th-gen-16gb-ram-512gb-ssd-x360-touchscreen-whq526sv1
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

@@ -3,7 +3,7 @@
 > HP OmniBook X Flip 14-FM0013DX 2-in-1 | Ultra 5 226V | 16GB | 512GB for KSh 116,000 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 512 GB SSD · 2-in
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-x-flip-14-fm0013dx-2-in-1-ultra-5-226v-16gb-512gb-ssd-14-1-year-warranty-8uo7837d8
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

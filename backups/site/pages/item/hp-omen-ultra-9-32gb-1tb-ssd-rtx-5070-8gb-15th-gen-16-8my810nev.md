@@ -3,7 +3,7 @@
 > HP OMEN Ultra 9 | 32GB | 1TB SSD | RTX 5070 8GB | 15th Gen | for KSh 253,500 at ECB Technologies, Nairobi CBD. Core Ultra · 32 GB RAM · 1 TB SSD · dedicated gra
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omen-ultra-9-32gb-1tb-ssd-rtx-5070-8gb-15th-gen-16-8my810nev
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

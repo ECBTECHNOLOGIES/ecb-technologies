@@ -3,7 +3,7 @@
 > APC Smart UPS 1500VA Tower LCD 230V for KSh 82,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/apc-smart-ups-1500va-tower-lcd-230v-vom9482dx
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

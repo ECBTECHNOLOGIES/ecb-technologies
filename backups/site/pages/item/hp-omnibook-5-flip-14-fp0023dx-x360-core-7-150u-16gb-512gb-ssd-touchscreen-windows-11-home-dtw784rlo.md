@@ -3,7 +3,7 @@
 > HP Omnibook 5 Flip 14-FP0023DX X360 | Core 7-150U | 16GB | 512GB SSD for KSh 143,500 at ECB Technologies, Nairobi CBD. 16 GB RAM · 512 GB SSD · 2-in-1. Delivery
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-5-flip-14-fp0023dx-x360-core-7-150u-16gb-512gb-ssd-touchscreen-windows-11-home-dtw784rlo
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

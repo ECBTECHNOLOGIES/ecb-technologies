@@ -3,7 +3,7 @@
 > DELL LATITUDE E7280 I7 6TH GEN 8 GB 256 SSD for KSh 24,000 at ECB Technologies, Nairobi CBD. Core i7 6th gen · 8 GB RAM · 256 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/dell-latitude-e7280-i7-6th-gen-8-gb-256-ssd-nontouch-d5u1069t2c
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

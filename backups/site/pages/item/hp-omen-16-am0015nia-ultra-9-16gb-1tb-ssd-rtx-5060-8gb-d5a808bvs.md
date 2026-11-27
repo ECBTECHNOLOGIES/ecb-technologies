@@ -3,7 +3,7 @@
 > HP OMEN 16-AM0015NIA | Ultra 9 | 16GB | 1TB SSD | RTX 5060 for KSh 203,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · dedicated graph
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omen-16-am0015nia-ultra-9-16gb-1tb-ssd-rtx-5060-8gb-d5a808bvs
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

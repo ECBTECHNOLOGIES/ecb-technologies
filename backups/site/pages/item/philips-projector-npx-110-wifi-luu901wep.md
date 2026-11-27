@@ -3,7 +3,7 @@
 > Philips Projector NPX 110 WiFi for KSh 23,000 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/philips-projector-npx-110-wifi-luu901wep
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

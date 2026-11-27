@@ -3,7 +3,7 @@
 > Lenovo X1 Carbon — i7 8th Gen, 16 / 512 GB — for KSh 49,000 at ECB Technologies, Nairobi CBD. Core i7 8th gen · 16 GB RAM · 512 GB SSD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-x1-carbon-i7-8th-gen-16-512-gb-nontouch-g8n974jwe
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

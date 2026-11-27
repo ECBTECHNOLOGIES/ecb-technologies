@@ -3,7 +3,7 @@
 > Samsung ViewFinity S6 LS34C650VAMXUE 34” | 3440×1440 | 100Hz | USB-C for KSh 85,000 at ECB Technologies, Nairobi CBD. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/samsung-viewfinity-s6-ls34c650vamxue-34-34401440-100hz-usb-c-webcam-built-in-speakers-mya656qhu
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

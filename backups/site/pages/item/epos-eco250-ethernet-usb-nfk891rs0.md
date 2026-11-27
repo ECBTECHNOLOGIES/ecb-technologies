@@ -3,7 +3,7 @@
 > Epos ECO250 Ethernet + USB for KSh 15,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/epos-eco250-ethernet-usb-nfk891rs0
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

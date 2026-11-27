@@ -3,7 +3,7 @@
 > Dell XPS 15 9500 i7 10th Gen, 16 / 512 4GB GPU NDIVIDIA GEFORCE GTX for KSh 77,000 at ECB Technologies, Nairobi CBD. Core i7 10th gen · 16 GB RAM · 512 GB SSD ·
 
 Canonical: https://www.ecbtechkenya.com/item/dell-xps-15-9500-i7-10th-gen-16-512-4gb-gpu-ndividia-geforce-gtx-non-touch-7qn1092cem
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

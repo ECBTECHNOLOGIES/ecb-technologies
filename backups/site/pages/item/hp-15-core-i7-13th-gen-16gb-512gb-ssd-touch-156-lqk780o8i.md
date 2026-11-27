@@ -3,7 +3,7 @@
 > HP 15 Core i7 13th Gen | 16GB | 512GB SSD | Touch for KSh 103,500 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD · touchscreen. Del
 
 Canonical: https://www.ecbtechkenya.com/item/hp-15-core-i7-13th-gen-16gb-512gb-ssd-touch-156-lqk780o8i
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

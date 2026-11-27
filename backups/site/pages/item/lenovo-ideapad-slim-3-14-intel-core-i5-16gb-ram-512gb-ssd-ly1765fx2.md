@@ -3,7 +3,7 @@
 > Lenovo IdeaPad Slim 3 – 14” Intel Core i5 | 16GB RAM | 512GB for KSh 96,000 at ECB Technologies, Nairobi CBD. Core i5 · 16 GB RAM · 512 GB SSD. Delivery across
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-ideapad-slim-3-14-intel-core-i5-16gb-ram-512gb-ssd-ly1765fx2
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

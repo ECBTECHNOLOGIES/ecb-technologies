@@ -3,7 +3,7 @@
 > Microsoft Surface Pro Copilot 11th Edition | Snapdragon X Elite for KSh 257,500 at ECB Technologies, Nairobi CBD. Snapdragon · 16 GB RAM · 1 TB SSD. Delivery ac
 
 Canonical: https://www.ecbtechkenya.com/item/microsoft-surface-pro-copilot-11th-edition-snapdragon-x-elite-12-core-16gb-lpddr5x-1tb-ssd-13-windows-11-home-graphite-pen-keyboard-combo-1-year-warranty-jd5834iqs
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

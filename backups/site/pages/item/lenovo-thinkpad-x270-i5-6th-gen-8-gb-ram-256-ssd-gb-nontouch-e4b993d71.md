@@ -3,7 +3,7 @@
 > Lenovo THINKPAD X270 i5 6th Gen, 8 GB RAM 256 SSD GB for KSh 23,000 at ECB Technologies, Nairobi CBD. Core i5 6th gen · 8 GB RAM · 256 GB SSD. Delivery across K
 
 Canonical: https://www.ecbtechkenya.com/item/lenovo-thinkpad-x270-i5-6th-gen-8-gb-ram-256-ssd-gb-nontouch-e4b993d71
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

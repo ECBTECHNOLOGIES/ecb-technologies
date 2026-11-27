@@ -3,7 +3,7 @@
 > HP ZBOOK FIREFLY 14inch G10 i7 13TH GEN 16/512 GB SSD NON for KSh 72,000 at ECB Technologies, Nairobi CBD. Core i7 13th gen · 16 GB RAM · 512 GB SSD. Delivery a
 
 Canonical: https://www.ecbtechkenya.com/item/hp-zbook-firefly-14inch-g10-i7-13th-gen-16512-gb-ssd-non-touch-gti1027lgn
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

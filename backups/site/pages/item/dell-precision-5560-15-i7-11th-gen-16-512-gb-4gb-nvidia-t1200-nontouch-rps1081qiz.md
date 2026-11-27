@@ -3,7 +3,7 @@
 > Dell Precision 5560 15 i7 11th Gen 16 / 512 GB 4GB NVIDIA T1200 for KSh 82,000 at ECB Technologies, Nairobi CBD. Core i7 11th gen · 16 GB RAM · 512 GB SSD. Deli
 
 Canonical: https://www.ecbtechkenya.com/item/dell-precision-5560-15-i7-11th-gen-16-512-gb-4gb-nvidia-t1200-nontouch-rps1081qiz
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

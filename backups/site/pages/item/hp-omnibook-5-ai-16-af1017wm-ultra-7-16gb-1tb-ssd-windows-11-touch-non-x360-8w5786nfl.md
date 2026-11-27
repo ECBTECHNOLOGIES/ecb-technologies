@@ -3,7 +3,7 @@
 > HP Omnibook 5 AI 16-AF1017WM | Ultra 7 | 16GB | 1TB SSD | Windows 11 for KSh 123,500 at ECB Technologies, Nairobi CBD. Core Ultra · 16 GB RAM · 1 TB SSD · 2-in-
 
 Canonical: https://www.ecbtechkenya.com/item/hp-omnibook-5-ai-16-af1017wm-ultra-7-16gb-1tb-ssd-windows-11-touch-non-x360-8w5786nfl
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

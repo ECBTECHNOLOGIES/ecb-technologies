@@ -3,7 +3,7 @@
 > HP SPECTRE CONVERTABLE X360 I7 8TH 16GB/512SSD 15__CH0XX___2GB for KSh 67,000 at ECB Technologies, Nairobi CBD. Core i7 · 2-in-1. Delivery across Kenya.
 
 Canonical: https://www.ecbtechkenya.com/item/hp-spectre-convertable-x360-i7-8th-16gb512ssd-15-ch0xx-2gb-invidia-unl1017993
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

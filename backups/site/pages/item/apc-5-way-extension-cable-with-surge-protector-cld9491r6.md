@@ -3,7 +3,7 @@
 > APC 5-Way Extension Cable with Surge Protector for KSh 2,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/apc-5-way-extension-cable-with-surge-protector-cld9491r6
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |

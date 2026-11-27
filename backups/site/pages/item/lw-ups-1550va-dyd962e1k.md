@@ -3,7 +3,7 @@
 > LW UPS 1550VA for KSh 15,500 at ECB Technologies, Moi Avenue, Nairobi CBD. Delivery to all 47 counties; free pickup.
 
 Canonical: https://www.ecbtechkenya.com/item/lw-ups-1550va-dyd962e1k
-Last updated: 2026-11-20
+Last updated: 2026-11-27
 
 | | |
 | --- | --- |
