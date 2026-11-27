@@ -23,7 +23,7 @@ export function studentFlagship(x) {
 
   // Best laptop for each course.
   const courses = [
-    ["Business, law, arts, education, nursing and medicine", "Documents, research, presentations and online classes: any 8th-gen or newer Core i5 is enough. Up to KSh 35,000:", (r) => ok(r) && r.price <= 35000],
+    ["Business, accounting, law, arts, education, nursing and medicine", "Documents, research, presentations and online classes: any 8th-gen or newer Core i5 is enough. Up to KSh 35,000:", (r) => ok(r) && r.price <= 35000],
     ["Computer science and IT", "Code editors, browsers and virtual machines need memory: 16 GB RAM and an 8th-gen or newer processor. Up to KSh 60,000:", (r) => ok(r) && r.sp.ram >= 16 && r.price <= 60000],
     ["Engineering and architecture (AutoCAD, SolidWorks, MATLAB)", "3D software is happiest with a dedicated graphics card; at minimum 16 GB RAM and a 10th-gen or newer processor. Up to KSh 100,000:", (r) => r.price <= 100000 && (r.sp.gpu || (r.sp.ram >= 16 && recency(r.sp) >= 4 && (r.sp.tier || 0) >= 3))],
     ["Graphic design, film and media", "A touchscreen or 2-in-1 helps for sketching; 16 GB RAM for Photoshop and Premiere. Up to KSh 80,000:", (r) => ok(r) && r.price <= 80000 && r.sp.ram >= 16 && (r.sp.touch || r.sp.convertible)],

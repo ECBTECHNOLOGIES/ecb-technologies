@@ -24,8 +24,8 @@
         "answer": "For browser-based work (Google Docs, email, online classes), yes. But Chromebooks can't install Windows programs such as desktop Microsoft Office, SPSS, Stata or AutoCAD, which many Kenyan university courses use, so a Windows laptop is the safer choice."
       },
       {
-        "question": "Which laptop is good for a high school student?",
-        "answer": "A light 8th-gen or newer Core i3 or i5 with 8 GB RAM and an SSD is plenty for schoolwork and research; durable business models (ThinkPad, EliteBook, Latitude) survive daily carrying. The budget table above shows what each price gets."
+        "question": "What laptop should a KCSE leaver or high school student buy?",
+        "answer": "For KCSE leavers heading to university, an 8th-gen or newer Core i5 with 8 GB RAM and an SSD covers almost every course, and the course table above shows when to spend more (computer science, engineering, design). For secondary school work, a light 8th-gen Core i3 or i5 is plenty; durable business models survive daily carrying."
       },
       {
         "question": "What laptop is best for online classes?",
@@ -252,7 +252,24 @@
     ]
   },
   "/learn/laptop-upgrade-ram-ssd": {
-    "sections": [],
+    "sections": [
+      {
+        "heading": "What you can't upgrade: the processor and graphics",
+        "body": "Laptop processors and graphics chips are soldered to the motherboard on almost all modern laptops, so they can't be upgraded. Choose them right when buying; RAM (if slotted) and storage are the realistic upgrades."
+      },
+      {
+        "heading": "Shared graphics memory and how much RAM Windows 11 uses",
+        "body": "Laptops with integrated graphics use part of the system RAM as video memory (shown as \"shared GPU memory\" in Task Manager), which is one reason 8 GB feels tight and 16 GB helps with graphics-heavy work. Windows 11 itself typically uses around 3–4 GB at idle with nothing open; Microsoft's minimum is 4 GB, but 8 GB is the practical minimum."
+      },
+      {
+        "heading": "Mixing RAM sizes and speeds, single vs dual channel",
+        "body": "You can usually mix sizes (e.g. 8 GB + 4 GB) and speeds: the memory runs at the slower module's speed. Two matching modules run in dual-channel mode, which roughly doubles memory bandwidth and noticeably helps integrated graphics; a single module runs single-channel. Best: two identical modules of the type the laptop supports (DDR4 or DDR5, laptop SO-DIMM)."
+      },
+      {
+        "heading": "Installing a larger SSD and checking NVMe support",
+        "body": "Most laptops accept a larger SSD of the same type. To check NVMe support, look up the laptop's spec sheet or service manual (\"M.2 PCIe NVMe\"), or open Device Manager → Disk drives: an existing NVMe drive shows \"NVMe\" in its name. Clone or reinstall Windows after the swap."
+      }
+    ],
     "faq": [
       {
         "question": "Can a laptop have both an SSD and an HDD?",
@@ -261,6 +278,14 @@
       {
         "question": "What is the difference between RAM and storage?",
         "answer": "RAM is short-term working memory (what's open now, cleared when you shut down); storage (SSD/HDD) keeps your files and programs permanently."
+      },
+      {
+        "question": "Can I upgrade the graphics card in my laptop?",
+        "answer": "Almost never: laptop GPUs are soldered to the motherboard. The options are an external GPU over Thunderbolt (on supported laptops) or a laptop with a dedicated GPU."
+      },
+      {
+        "question": "What is the difference between SATA SSD and NVMe SSD?",
+        "answer": "Both are SSDs; NVMe uses a faster connection, several times quicker for large file copies. The laptop's slot decides which you can use."
       }
     ]
   },
@@ -291,6 +316,71 @@
       {
         "question": "What questions should I ask a laptop seller before paying?",
         "answer": "Is it new, refurbished or used? What was replaced (battery, screen)? What's the battery health? Is Windows activated? What warranty covers it, for how long, and is that on the receipt? Can I test it first?"
+      }
+    ]
+  },
+  "/learn/laptop-screen-and-build-quality-guide": {
+    "sections": [
+      {
+        "heading": "Refresh rate: 60, 120 and 144 Hz",
+        "body": "Refresh rate is how many times per second the screen updates. 60 Hz is standard and fine for office work; 120 Hz makes scrolling and motion smoother (MacBook Pro ProMotion, some premium laptops); 144 Hz and higher matter mainly for fast games, where they're worth it if the GPU can reach those frame rates."
+      },
+      {
+        "heading": "OLED vs IPS",
+        "body": "OLED has perfect blacks, high contrast and vivid colour, great for media and design; it costs more and can show image retention with static content over long periods. IPS is cheaper, very good for colour and has no burn-in risk. For office work, a good IPS is plenty."
+      },
+      {
+        "heading": "Can a broken laptop screen be replaced?",
+        "body": "Yes: screens are replaceable on almost all laptops. The panel must match (size, resolution, connector, touch or not). On many 2-in-1s and MacBooks, the screen is a full assembly and costs more. A technician can confirm the exact part."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is a Full HD laptop screen good enough in 2026?",
+        "answer": "Yes for most people on 13–15.6-inch screens; QHD or higher helps for design and photo work."
+      },
+      {
+        "question": "What is the difference between matte and glossy laptop screens?",
+        "answer": "Matte screens reduce reflections (better near windows and in offices); glossy screens look more vivid but reflect light. Most touchscreens are glossy."
+      },
+      {
+        "question": "How much does laptop screen replacement cost in Kenya?",
+        "answer": "It depends on the model and panel (size, resolution, touch, OLED), so get a quote for your exact laptop; we don't publish a single price because it varies widely."
+      }
+    ]
+  },
+  "/learn/windows-11-and-laptop-software-kenya": {
+    "sections": [
+      {
+        "heading": "Dual booting: two operating systems on one laptop",
+        "body": "Dual booting installs two operating systems (for example Windows and Ubuntu Linux) side by side; you choose which to start at boot. Back up first, shrink the Windows partition in Disk Management, install Linux from a USB stick alongside Windows, and note your BitLocker recovery key if encryption is on. Many people prefer WSL or a virtual machine instead, which needs no repartitioning."
+      },
+      {
+        "heading": "Windows Hello",
+        "body": "Windows Hello signs you in with a fingerprint, face (IR camera) or PIN. Most business laptops from about 2017 on have a fingerprint reader or IR camera on at least some configurations; check the listing or Settings → Accounts → Sign-in options. A PIN works on every Windows 11 laptop."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can I run Android apps on a Windows laptop?",
+        "answer": "Microsoft ended its Windows Subsystem for Android in March 2025, so there's no built-in way any more. Google Play Games for PC runs some Android games; otherwise use emulators or the web/desktop version of the app."
+      },
+      {
+        "question": "How much RAM does Windows 11 use?",
+        "answer": "Typically around 3–4 GB at idle. Microsoft's minimum is 4 GB, but 8 GB is the practical minimum and 16 GB for heavy multitasking."
+      }
+    ]
+  },
+  "/learn/laptops-for-small-business-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Can a laptop run Microsoft Teams smoothly?",
+        "answer": "Yes: any 8th-gen or newer Core i5 with 8 GB RAM runs Teams; 16 GB helps if Teams stays open alongside Office and many browser tabs."
+      },
+      {
+        "question": "Which laptop is best for Zoom meetings?",
+        "answer": "Any 8th-gen or newer Core i5 with 8 GB RAM, plus a working webcam and microphone (1080p webcams look sharper) and stable internet."
       }
     ]
   }

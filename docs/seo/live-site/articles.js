@@ -1565,3 +1565,255 @@ ARTICLES.push({
     };
   },
 });
+
+// ---------- Batch 5 (27 Nov 2026): the fourth 100 questions ----------
+// See docs/seo/question-map-4.md. Software requirements: the vendors'
+// published minimum/recommended figures for recent versions, stated as such.
+
+const winOnly = (x, r) => x.brandOf(r.slug) !== "Apple";
+const gpuFirst = (rows) => dedupe([...rows].sort((a, b) => (b.sp.gpu ? 1 : 0) - (a.sp.gpu ? 1 : 0) || a.price - b.price));
+
+ARTICLES.push({
+  slug: "creative",
+  path: "/learn/laptop-requirements-video-photo-editing-3d",
+  kw: "laptop for Adobe Premiere Pro",
+  secondary: ["laptop requirements for video editing", "laptop for illustrator", "laptop for photo editing", "laptop for 3d modelling", "how much ram for video editing", "is a gaming laptop good for video editing", "edit 4k video on laptop"],
+  h1: "Laptop for Adobe Premiere Pro, Photoshop, Illustrator and 3D: what you need",
+  title: "Laptop for Adobe Premiere Pro, Photoshop and 3D: A Guide",
+  related: ["/best/laptops-for-graphic-design-and-video-editing-kenya", "/learn/best-laptop-for-your-profession-kenya", "/learn/gaming-laptop-guide-kenya"],
+  write(x) {
+    const { L, ksh, link, SITE, asOf, recency, tableMd } = x;
+    const ed = L.filter((r) => r.sp.ram >= 16 && (r.sp.gpu || r.sp.cpu === "Apple M-series" || recency(r.sp) >= 5));
+    const gpu = gpuFirst(ed.filter((r) => r.sp.gpu && r.price <= 150000));
+    const mac = dedupe(ed.filter((r) => r.sp.cpu === "Apple M-series").sort((a, b) => a.price - b.price));
+    if (ed.length < 8) return null;
+    const pr = (rows) => rows.slice(0, 6).map((r) => `- ${link(r.short, `${SITE}/item/${r.slug}`)}: ${ksh(r.price)} (${x.specLine(r.sp)})`).join("\n");
+    return {
+      intro: `A laptop for Adobe Premiere Pro needs 16 GB RAM at minimum (32 GB for 4K), a recent processor, a dedicated NVIDIA RTX graphics card or an Apple-chip MacBook, and a 512 GB+ SSD. Photo editing and design need less (16 GB and a good screen); 3D and animation need the most. ${ed.length} laptops in stock meet the editing bar (${asOf}). Below: what each app needs, by Adobe's and Blender's published requirements, and the laptops that fit; the full ranked list is in ${link("laptops for design and video editing", `${SITE}/best/laptops-for-graphic-design-and-video-editing-kenya`)}.`,
+      description: `Laptops for video editing, Premiere Pro, Photoshop, Illustrator, photo editing, 3D and animation in Kenya: RAM, GPU and screen needs, with live picks and prices.`,
+      sections: [
+        { heading: "What each app needs", body: tableMd(["Work", "RAM", "Graphics", "Notes"], [
+          ["Photoshop, Lightroom (photos)", "8 GB min, 16 GB recommended", "GPU with DirectX 12 support", "Colour-accurate IPS screen matters most"],
+          ["Illustrator (vector design)", "8 GB min, 16 GB recommended", "Integrated is fine for most work", "High-resolution screen helps"],
+          ["Premiere Pro, 1080p", "16 GB min", "Dedicated GPU recommended", "Intel 6th gen or newer per Adobe"],
+          ["Premiere Pro, 4K", "32 GB recommended", "GPU with 8 GB video memory recommended", "Fast NVMe SSD, 1 TB+ for footage"],
+          ["After Effects, animation, motion graphics", "16 GB min, 32 GB recommended", "Dedicated GPU", "More cores help rendering"],
+          ["Blender, 3D modelling", "8 GB min, 32 GB recommended", "Dedicated GPU (NVIDIA RTX for fast rendering)", "Cooling matters on long renders"],
+        ]) + "\n\nThese are the vendors' published figures for recent versions (Adobe, Blender); they change with updates, so check the version you'll use." },
+        { heading: "Recommended laptops in stock", body: `**Windows laptops with a dedicated graphics card (up to KSh 150,000), cheapest first:**\n\n${gpu.length ? pr(gpu) : "None in stock right now."}${mac.length ? `\n\n**MacBooks with Apple chips** (excellent for Premiere, Final Cut and Lightroom; check your apps run on macOS):\n\n${pr(mac)}` : ""}\n\nMore: ${link("laptops for design and video editing", `${SITE}/best/laptops-for-graphic-design-and-video-editing-kenya`)}. Prices as of ${asOf}.` },
+        { heading: "How much RAM for video editing?", body: "16 GB for 1080p editing and photo work; 32 GB for 4K, long timelines, After Effects or 3D. Memory is the most common bottleneck after the GPU; check whether the laptop has a free slot before buying a 16 GB model you'll want to upgrade (see the RAM guide)." },
+        { heading: "Is a gaming laptop good for video editing?", body: `Often yes: gaming laptops (HP Victus and OMEN, Lenovo Legion) have the RTX GPU, cooling and RAM editing needs, usually for less than a creator laptop. Trade-offs: heavier, louder, shorter battery, and screens tuned for speed rather than colour accuracy. See the ${link("gaming laptop guide", `${SITE}/learn/gaming-laptop-guide-kenya`)}.` },
+        { heading: "Can you edit 4K on a normal laptop?", body: "Short, simple 4K clips, yes, especially on 11th-gen+ Intel (Quick Sync), recent Ryzen or Apple-chip laptops, using proxy files (low-resolution copies Premiere and others create for editing). Long 4K projects with effects need a dedicated GPU and 32 GB RAM." },
+        { heading: "The best screen for design and photo editing", body: `Look for IPS or OLED, at least Full HD (QHD or higher is better for detail), wide colour coverage (100% sRGB or more is often listed on creator models) and a matte finish if you work near windows. Calibrate with a colorimeter for print work. See ${link("laptop screens explained", `${SITE}/learn/laptop-screen-and-build-quality-guide`)}.` },
+        { heading: "Entry-level vs professional", body: "- **Entry level (students, social media, YouTube):** 16 GB, 11th-gen+ Intel / Ryzen or an M1/M2 MacBook Air, 512 GB SSD.\n- **Professional (client 4K work, motion graphics, 3D):** 32 GB, RTX GPU with 6–8 GB+, 1 TB NVMe, a calibrated screen or external monitor." },
+      ],
+      faq: [
+        { question: "What do I need in a laptop for video editing?", answer: gpu.length ? `16–32 GB RAM, an RTX graphics card and a fast SSD (or an Apple-chip MacBook). The most affordable in stock with a dedicated GPU and 16 GB+ is the ${gpu[0].short} at ${ksh(gpu[0].price)} (${asOf}).` : "One with 16–32 GB RAM, an RTX graphics card and a fast SSD, or an Apple-chip MacBook." },
+        { question: "How much RAM do I need for video editing?", answer: "16 GB for 1080p; 32 GB for 4K, After Effects or 3D work." },
+        { question: "Which laptop is best for Adobe Premiere Pro?", answer: "Adobe lists 16 GB RAM as the minimum and recommends 32 GB and a GPU with 8 GB of video memory for 4K. An RTX gaming or creator laptop, or an Apple-chip MacBook Pro, fits." },
+        { question: "Which laptop is best for Adobe Illustrator?", answer: "Illustrator is lighter: 16 GB RAM, an 8th-gen or newer processor and a sharp, colour-accurate screen are enough for most work." },
+        { question: "Is a gaming laptop good for video editing?", answer: "Often yes: it has the GPU, cooling and RAM editing needs. The trade-offs are weight, noise, battery life and a screen tuned for gaming rather than colour accuracy." },
+        { question: "Can I edit 4K videos on a normal laptop?", answer: "Short, simple clips with proxy files, yes; long 4K projects with effects need a dedicated GPU and 32 GB RAM." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "charging",
+  path: "/learn/laptop-charger-and-battery-guide",
+  kw: "laptop battery cycle count",
+  secondary: ["check laptop battery cycle count", "laptop battery drains when off", "laptop battery percentage jumps", "can i use laptop while charging", "does fast charging damage laptop battery", "is my laptop charger original", "wrong wattage charger", "can a power bank charge a laptop"],
+  h1: "Laptop battery cycle count, chargers and power banks explained",
+  title: "Laptop Battery Cycle Count, Chargers and Power Banks Guide",
+  related: ["/learn/laptop-battery-and-overheating-fixes", "/learn/laptop-accessories-guide-kenya", "/learn/laptop-maintenance-guide"],
+  write(x) {
+    const { link, SITE, tableMd } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `A laptop battery cycle count is the number of full 0–100% charges the battery has been through (two charges from 50% to 100% count as one cycle). Laptop batteries are commonly rated to keep around 80% of their capacity for several hundred cycles; Apple, for example, rates recent MacBook batteries at 1,000 cycles. This guide shows how to check the cycle count, why batteries drain or jump, and how to choose a safe charger or power bank.`,
+      description: `Laptop battery cycle count, battery drain when off, jumping percentages, charging while using, fast charging, original chargers, wrong wattage and power banks.`,
+      sections: [
+        { heading: "How to check the cycle count", body: "- **Windows:** run `powercfg /batteryreport` in Command Prompt and open the report: \"Cycle Count\" is listed under Installed batteries (some laptops don't report it; the maker's app such as Lenovo Vantage, HP Support Assistant or Dell Power Manager may).\n- **MacBook:** Apple menu → System Information → Power → Cycle Count.\n\nRead it together with health (full-charge vs design capacity): a battery with a modest cycle count but low health has aged from heat or time." },
+        { heading: "Why does the battery drain when switched off?", body: "Usually it isn't fully off: Windows Fast Startup and Sleep keep some power flowing, and some laptops charge devices from USB while off. Use Shut down (or Restart), turn off Fast Startup (Control Panel → Power Options → Choose what the power buttons do), and unplug USB devices. A few percent loss over days is normal self-discharge." },
+        { heading: "Why does the percentage jump suddenly?", body: "The battery's gauge has drifted from its real capacity, common on worn batteries. Calibrate it: charge to 100%, use it down until it shuts off, then charge to 100% uninterrupted. If jumps continue (e.g. 30% to 5%), the battery is worn and needs replacing; check the battery report." },
+        { heading: "Using the laptop while charging, and fast charging", body: "Using a laptop while charging is safe and normal: the charger powers the laptop and charges the battery. What wears batteries is heat and long periods at 100%, so keep it ventilated and turn on the maker's 80% charge limit if it's usually plugged in. Fast charging with the laptop's own or a compatible certified charger is managed by the laptop and isn't harmful in normal use; it does add some heat." },
+        { heading: "Volts, amps, watts and connectors", body: tableMd(["Term", "What it means", "Rule"], [["Voltage (V)", "Electrical pressure", "Must match the laptop (barrel chargers are usually 19–20 V)"], ["Current (A)", "Flow the charger can supply", "Equal or higher is fine; the laptop draws what it needs"], ["Wattage (W = V × A)", "Total power", "Equal or higher than the original is safe; lower charges slowly or not at all"], ["Connector", "The plug", "Must fit and be the type the laptop expects (some HP and Dell chargers also identify themselves to the laptop)"]]) + "\n\nA lower-wattage charger may show a warning at startup, charge only while the laptop is off, or let the battery drain under load. A higher-wattage charger of the right type is fine." },
+        { heading: "Is my charger original?", body: "Check the brand logo and part number on the label against the maker's spare-parts listing, the print quality, weight (fakes are often lighter), the cable's strain relief and whether the laptop shows a warning such as \"unknown adapter\". Buy chargers from a shop that will take them back; cheap fakes can overheat and damage the battery." },
+        { heading: "Can a power bank charge a laptop?", body: `Only a **USB-C Power Delivery (PD)** power bank, and only if the laptop charges over USB-C: check for a charging symbol by the port or the spec sheet. Choose one with at least 45–65 W PD output (100 W for bigger laptops) and the right cable (rated for the wattage). Airline rules generally limit carry-on power banks to 100 Wh without approval. Laptops that charge only from a barrel connector need an AC power bank or a car inverter instead. See ${link("USB-C charging", `${SITE}/learn/laptop-accessories-guide-kenya`)}.` },
+      ],
+      faq: [
+        { question: "What does laptop battery cycle count mean?", answer: "How many full 0–100% charges the battery has done (partial charges add up). Batteries lose capacity gradually as cycles accumulate." },
+        { question: "How do I check my laptop battery cycle count?", answer: "On Windows, the battery report (powercfg /batteryreport) or the maker's app; on a MacBook, System Information → Power." },
+        { question: "Can I use a laptop while charging?", answer: "Yes, it's safe. Keep it ventilated, and use an 80% charge limit if it's plugged in most of the time." },
+        { question: "What happens if I use a charger with the wrong wattage?", answer: "Lower wattage charges slowly or not at all and may show a warning; higher wattage with the right voltage and connector is safe. Wrong voltage can damage the laptop." },
+        { question: "Can a power bank charge a laptop?", answer: "Yes, if it's a USB-C Power Delivery power bank (45–100 W) and the laptop supports USB-C charging." },
+        { question: "Does fast charging damage laptop batteries?", answer: "Not in normal use with a proper charger; the laptop manages it. Heat and long periods at 100% matter more." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "verify",
+  path: "/learn/check-if-laptop-is-genuine",
+  kw: "how to check if a laptop is genuine",
+  secondary: ["check hp laptop genuine", "verify dell warranty", "lenovo serial number check", "laptop manufacturing year", "is my laptop brand new", "grade a refurbished laptop", "documents when buying laptop kenya"],
+  h1: "How to check if a laptop is genuine: serial numbers, warranty and condition",
+  title: "How to Check if a Laptop Is Genuine: Serial and Warranty",
+  related: ["/learn/buying-a-laptop-safely-kenya", "/learn/refurbished-vs-used-laptops-kenya", "/learn/check-used-laptop-before-buying"],
+  write(x) {
+    const { link, SITE, PHONE } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `How to check if a laptop is genuine: find its serial number (HP, Lenovo) or service tag (Dell) on the label underneath and in the BIOS, check they match, then enter it on the manufacturer's warranty-check page: the model, specification and dates shown should match the laptop and the listing. Then check the condition (screen, keyboard, battery) and make sure the receipt lists the serial. Here's how for each brand, plus what refurbished grades really mean.`,
+      description: `Check if a laptop is genuine: HP, Dell and Lenovo serial and warranty checks, manufacturing year, new vs refurbished, Grade A/B meaning, screens, keyboards and documents.`,
+      sections: [
+        { heading: "Find the serial number", body: "- **Label:** underneath the laptop or under the battery on older models.\n- **BIOS:** press F1 (Lenovo), F10 (HP) or F2 (Dell) at startup; the serial or service tag is on the main page.\n- **Windows:** Command Prompt → `wmic bios get serialnumber` (or PowerShell: `Get-CimInstance Win32_BIOS`).\n\nAll three should match. A mismatch can mean a replaced motherboard or a relabelled laptop." },
+        { heading: "Check it with the manufacturer", body: "- **HP:** the \"Check warranty\" page on support.hp.com: enter the serial (and product number if asked).\n- **Dell:** dell.com/support: enter the service tag to see the model, original configuration and warranty.\n- **Lenovo:** pcsupport.lenovo.com: warranty lookup by serial number.\n\nWhat to look for: the same model name, a configuration consistent with the listing (Dell shows the original parts), and the warranty dates. An expired warranty is normal on ex-corporate laptops; a serial that isn't found, or shows a different model, is a red flag." },
+        { heading: "Manufacturing year and 'brand new'", body: "The warranty lookup shows the ship or warranty start date, which is close to the manufacturing year; the BIOS and the label often show a date too. A brand-new laptop comes sealed, with a warranty that starts on or near your purchase date, close to zero battery cycles (check the battery report), and no wear on keys or screen. If the warranty started years ago, it isn't new." },
+        { heading: "Refurbished grades: A, B, C", body: "Grades describe cosmetic condition and aren't standardised between sellers. Typically:\n\n- **Grade A:** minimal signs of use, screen and keyboard in very good condition.\n- **Grade B:** visible light scratches or wear; fully working.\n- **Grade C:** heavier marks or worn keys; working.\n\nAsk each seller what their grade means, whether the battery and screen are included in it, and what the warranty covers. Grade is about looks; battery health and function matter more." },
+        { heading: "Replaced screens and keyboard checks", body: "A replaced screen is fine if it's the right panel (same resolution, IPS rather than a cheaper TN panel, touch if the model had it) and the seller discloses it. Check for uneven gaps, dead pixels on white and black screens, and colour when tilted.\n\nKeyboard: type every key in Notepad or an online keyboard tester, test the backlight, both touchpad buttons and scrolling, and look for shiny worn keys (heavy use)." },
+        { heading: "Documents you should receive in Kenya", body: "- A receipt or tax invoice (ETR / KRA eTIMS invoice from registered businesses) listing the model and **serial number**.\n- The warranty terms in writing: length, what's covered, where to take it.\n- The charger (and box/manual if new).\n- For new laptops, the manufacturer's warranty card or registration details." },
+        { heading: "Buying from ECB Technologies", body: `Ask us for the serial number of any laptop before you buy and check it yourself on the manufacturer's site, or see it at our shop on Moi Avenue first. Questions on WhatsApp: ${PHONE}. Related: ${link("buying a laptop safely", `${SITE}/learn/buying-a-laptop-safely-kenya`)} and ${link("the 12-point used-laptop checklist", `${SITE}/learn/check-used-laptop-before-buying`)}.` },
+      ],
+      faq: [
+        { question: "How do I check if an HP laptop is genuine?", answer: "Enter the serial number from the label and BIOS on HP's Check warranty page (support.hp.com); the model and dates should match the laptop." },
+        { question: "How do I verify a Dell laptop warranty?", answer: "Enter the service tag (on the label or in the BIOS via F2) at dell.com/support to see the model, original configuration and warranty status." },
+        { question: "How can I check a Lenovo laptop serial number?", answer: "On the label underneath, in the BIOS (F1), or with wmic bios get serialnumber in Windows; check it on pcsupport.lenovo.com." },
+        { question: "How do I check the manufacturing year of a laptop?", answer: "The manufacturer's warranty lookup shows the ship or warranty start date; the label and BIOS often show a date too." },
+        { question: "What does Grade A refurbished mean?", answer: "Usually minimal cosmetic wear, but grades aren't standardised: ask the seller what their grade covers, and check battery health and function separately." },
+        { question: "What documents should I receive when buying a laptop in Kenya?", answer: "A receipt or tax invoice listing the serial number, the warranty terms in writing, and the charger." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "specialist-software",
+  path: "/learn/laptops-for-engineering-data-and-programming-software",
+  kw: "best laptop for SolidWorks",
+  secondary: ["laptop for matlab", "laptop for spss", "laptop for data analysis", "laptop for python machine learning", "laptop for android studio", "laptop for virtual machines", "laptop for sketchup", "laptop for music production", "laptop for web development", "laptop for cybersecurity students"],
+  h1: "Laptops for SolidWorks, MATLAB, SPSS, Python, Android Studio and more",
+  title: "Best Laptop for SolidWorks, MATLAB, Python & Android Studio",
+  related: ["/learn/best-laptops-for-autocad-and-revit-kenya", "/best/laptops-for-programming-kenya", "/learn/best-laptop-for-your-profession-kenya"],
+  write(x) {
+    const { L, ksh, link, SITE, asOf, recency, tableMd } = x;
+    const heavy = dedupe(L.filter((r) => winOnly(x, r) && r.sp.ram >= 16 && recency(r.sp) >= 4 && (r.sp.tier || 0) >= 3 && r.price <= 120000).sort((a, b) => b.sp.ram - a.sp.ram || a.price - b.price));
+    const ws = gpuFirst(L.filter((r) => /-(zbook|precision|thinkpad-p\d+s?|p\d{2}s?)-/.test(`-${r.slug}-`) && r.sp.ram >= 16));
+    const vm = dedupe(L.filter((r) => winOnly(x, r) && r.sp.ram >= 32).sort((a, b) => a.price - b.price));
+    if (heavy.length < 6) return null;
+    const pr = (rows, n = 5) => rows.slice(0, n).map((r) => `- ${link(r.short, `${SITE}/item/${r.slug}`)}: ${ksh(r.price)} (${x.specLine(r.sp)})`).join("\n");
+    return {
+      intro: `The best laptop for SolidWorks is a Windows mobile workstation (HP ZBook, Dell Precision, ThinkPad P) with 16–32 GB RAM, a fast recent processor and a certified professional GPU; SolidWorks runs only on Windows. MATLAB, SPSS, Python and web development need far less, while Android Studio, virtual machines and machine learning need more memory. Here's each tool's published requirements in plain terms, and the laptops in stock that fit (${asOf}).`,
+      description: `Laptops for SolidWorks, MATLAB, SPSS, data analysis, Python and machine learning, Android Studio, virtual machines, SketchUp, music production and web development.`,
+      sections: [
+        { heading: "Requirements at a glance", body: tableMd(["Software", "OS", "RAM", "Graphics / other"], [
+          ["SolidWorks", "Windows only", "16 GB min; 32 GB for large assemblies", "Certified workstation GPU recommended; fast single-core CPU"],
+          ["MATLAB", "Windows, macOS, Linux", "8 GB min; 16 GB recommended", "SSD; a GPU only for GPU-accelerated toolboxes"],
+          ["SPSS", "Windows, macOS", "Modest (8 GB is comfortable)", "Any 8th-gen+ laptop runs it"],
+          ["Python, data analysis", "Any", "8–16 GB; 16–32 GB for large datasets", "SSD; more cores speed up processing"],
+          ["Machine learning (training)", "Linux or Windows", "16–32 GB", "NVIDIA GPU with CUDA for training; large models need cloud GPUs"],
+          ["Android Studio", "Windows, macOS, Linux", "8 GB min; 16 GB+ recommended", "Virtualisation enabled for the emulator; SSD with 16 GB+ free"],
+          ["Virtual machines", "Any", "16 GB for 1–2 VMs; 32 GB+ for several", "Virtualisation (VT-x/AMD-V) on in BIOS; more cores"],
+          ["SketchUp", "Windows, macOS", "8 GB min; 16 GB recommended", "Dedicated GPU helps with large models"],
+          ["Music production (DAWs)", "Windows, macOS", "16 GB; 32 GB for big sample libraries", "Quiet cooling, SSD, an audio interface"],
+          ["Web development", "Any", "8–16 GB", "Any 8th-gen+ laptop"],
+        ]) + `\n\nFigures are the vendors' published minimums/recommendations for recent versions (Dassault Systèmes, MathWorks, IBM, Google, Trimble); check the version you'll install. Android Studio's are on [developer.android.com](https://developer.android.com/studio).` },
+        { heading: "SolidWorks, SketchUp and CAD", body: `SolidWorks needs Windows, and Dassault recommends certified professional graphics (NVIDIA RTX A-series / Quadro, AMD Radeon Pro): mobile workstations are the safe choice.${ws.length ? ` Workstations in stock with 16 GB+:\n\n${pr(ws)}` : ""}\n\nFor AutoCAD and Revit, see ${link("laptops for AutoCAD and Revit", `${SITE}/learn/best-laptops-for-autocad-and-revit-kenya`)}.` },
+        { heading: "Data analysis, Python and machine learning", body: `For learning Python, pandas, SPSS, R or MATLAB, a 10th-gen+ laptop with 16 GB RAM is plenty. Training deep-learning models needs an NVIDIA GPU (CUDA); even then, laptop GPUs handle small models only. Large models are trained on cloud GPUs (Google Colab, Kaggle, cloud providers): a mid-range laptop plus cloud time is often the better investment for students.` },
+        { heading: "Android Studio, virtual machines and cybersecurity labs", body: `Android Studio's emulator, virtual machines and cybersecurity labs (Kali Linux, test networks) are memory-hungry: 16 GB is the working minimum, 32 GB comfortable for several VMs, with virtualisation enabled in the BIOS and an SSD.${vm.length ? ` Laptops in stock with 32 GB RAM or more:\n\n${pr(vm)}` : ""}` },
+        { heading: "Recommended all-rounders (16 GB, 10th gen+, up to KSh 120,000)", body: `${pr(heavy, 6)}\n\nMore: ${link("laptops for programming", `${SITE}/best/laptops-for-programming-kenya`)}.` },
+        { heading: "Music production and web development", body: "Music production rewards quiet cooling, 16 GB+ RAM, an SSD and low audio latency (an external USB audio interface helps on any laptop); MacBooks are popular for Logic Pro, Windows laptops for FL Studio and Ableton (both also run on Mac). Web development runs well on any 8th-gen+ laptop with 8–16 GB." },
+      ],
+      faq: [
+        { question: "Which laptop is best for running SolidWorks?", answer: "A Windows mobile workstation (HP ZBook, Dell Precision or ThinkPad P) with 16–32 GB RAM and a certified professional GPU; SolidWorks doesn't run on macOS." },
+        { question: "What laptop is suitable for running MATLAB?", answer: "Any 8th-gen or newer laptop with 16 GB RAM and an SSD; MathWorks lists 8 GB as the minimum. A GPU matters only for GPU-accelerated toolboxes." },
+        { question: "Which laptop is best for running SPSS?", answer: "SPSS is light: any 8th-gen or newer Windows laptop or MacBook with 8 GB RAM runs it comfortably." },
+        { question: "Which laptop is best for Python and machine learning?", answer: "For learning and data analysis, 16 GB RAM and a 10th-gen+ processor. For training models, an NVIDIA GPU with CUDA, and cloud GPUs for large models." },
+        { question: "What laptop is best for running Android Studio?", answer: "Google lists 8 GB RAM as the minimum and recommends 16 GB or more, with virtualisation enabled and an SSD." },
+        { question: "Which laptop is suitable for running virtual machines?", answer: "16 GB RAM for one or two VMs, 32 GB for several, virtualisation turned on in the BIOS and a multi-core processor." },
+        { question: "Which laptop is best for cybersecurity students?", answer: "One that runs several virtual machines (Kali Linux, test targets): 16–32 GB RAM, a 10th-gen+ processor and virtualisation support." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "families",
+  path: "/learn/laptop-product-families-explained",
+  kw: "HP EliteBook vs ZBook",
+  secondary: ["dell precision vs latitude", "thinkpad vs thinkbook", "are microsoft surface laptops worth it", "probook vs zbook", "what is a mobile workstation", "what is a convertible laptop", "netbook vs laptop", "best business laptop brands"],
+  h1: "Laptop families explained: EliteBook vs ZBook, Precision vs Latitude, ThinkPad vs ThinkBook, Surface",
+  title: "HP EliteBook vs ZBook, Precision vs Latitude and More",
+  related: ["/learn/business-vs-consumer-laptops", "/series/zbook-kenya", "/learn/hp-elitebook-models-explained"],
+  write(x) {
+    const { L, ksh, median, link, SITE, asOf, tableMd } = x;
+    const fam = (re) => L.filter((r) => re.test(`-${r.slug}-`));
+    const rows = [["HP ProBook", fam(/-probook-/)], ["HP EliteBook", fam(/-elitebook-/)], ["HP ZBook", fam(/-zbook-/)], ["Dell Latitude", fam(/-latitude-/)], ["Dell Precision", fam(/-precision-/)], ["Lenovo ThinkPad", fam(/-thinkpad-/)], ["Lenovo ThinkBook", fam(/-thinkbook-/)], ["Microsoft Surface", fam(/-surface-/)]];
+    if (rows.filter(([, r]) => r.length).length < 5) return null;
+    const surf = dedupe(fam(/-surface-/).sort((a, b) => a.price - b.price));
+    return {
+      intro: `HP EliteBook vs ZBook: the EliteBook is HP's premium business laptop for office work and travel; the ZBook is HP's mobile workstation, with professional graphics and more power for CAD, 3D and engineering software. The same split exists at Dell (Latitude vs Precision) and Lenovo (ThinkPad T/X vs ThinkPad P), while ThinkBook and ProBook are lower-cost business lines. Below: every family explained, with how many are in stock and their prices (${asOf}).`,
+      description: `Laptop families compared: HP ProBook, EliteBook and ZBook; Dell Latitude and Precision; ThinkPad vs ThinkBook; Microsoft Surface; workstations, convertibles and netbooks.`,
+      sections: [
+        { heading: "The families side by side", body: tableMd(["Family", "What it is", "In stock", "Median price"], rows.map(([n, r]) => [n, { "HP ProBook": "Mid-range business: practical, lower cost", "HP EliteBook": "Premium business: metal build, security, light", "HP ZBook": "Mobile workstation: professional GPU, CAD/3D", "Dell Latitude": "Business line, 3000 to 9000 series", "Dell Precision": "Mobile workstation: professional GPU", "Lenovo ThinkPad": "Business line (T, X, E, L) and workstations (P)", "Lenovo ThinkBook": "Small-business line between IdeaPad and ThinkPad", "Microsoft Surface": "Premium tablets (Pro) and laptops, often 2-in-1" }[n], String(r.length), r.length >= 3 ? ksh(median(r.map((y) => y.price))) : r.length ? ksh(r[0].price) : "–"])) },
+        { heading: "EliteBook vs ZBook, and ProBook vs ZBook", body: `EliteBooks are built for office work, travel and security; ZBooks add workstation processors, professional NVIDIA RTX A / Quadro graphics certified for CAD software, and more RAM capacity, at the cost of weight and price. ProBooks are HP's cheaper business line: fine for office work, not for CAD. See ${link("HP ZBook laptops", `${SITE}/series/zbook-kenya`)} and ${link("EliteBook vs ProBook", `${SITE}/compare/elitebook-vs-probook-kenya`)}.` },
+        { heading: "Dell Precision vs Latitude", body: `Precision is Dell's mobile workstation (professional graphics, ISV-certified for engineering software); Latitude is the business line for office work. Precision is better only if you run CAD, simulation or 3D; for everything else a Latitude is lighter and cheaper. See ${link("Latitude models explained", `${SITE}/learn/dell-latitude-models-explained`)}.` },
+        { heading: "ThinkPad vs ThinkBook", body: "ThinkBook is Lenovo's lower-cost small-business line: modern design, good value, but without some ThinkPad features (TrackPoint on most models, the same durability testing and enterprise management). ThinkPad remains the line for durability and long-term repairability." },
+        { heading: "Are Microsoft Surface laptops worth buying?", body: `Surface devices have excellent screens and pens, and the Surface Pro doubles as a tablet. Downsides: higher prices, few ports, and limited repairability, and some newer models use Snapdragon (Arm) chips, on which a few Windows programs and games don't run.${surf.length ? ` ${surf.length} Surface devices are in stock from ${ksh(surf[0].price)}.` : ""}` },
+        { heading: "Mobile workstations, convertibles and netbooks", body: `- **Mobile workstation:** a laptop with workstation-class processor and certified professional graphics for CAD, simulation and 3D (ZBook, Precision, ThinkPad P). See ${link("laptops for AutoCAD and Revit", `${SITE}/learn/best-laptops-for-autocad-and-revit-kenya`)}.\n- **Convertible (2-in-1):** a laptop whose touchscreen folds into a tablet (HP x360, ThinkPad Yoga) or detaches (Surface Pro). See ${link("is a 2-in-1 worth it", `${SITE}/learn/touchscreen-laptop-worth-it-kenya`)}.\n- **Netbook:** small, low-power laptops popular around 2008–2012; today their role is filled by Chromebooks and small 11–12-inch laptops (like the ThinkPad 11e).` },
+        { heading: "Which brands make the best business laptops? And after-sales support", body: `HP (EliteBook), Dell (Latitude) and Lenovo (ThinkPad) all make excellent business laptops; compare the specific model, generation, battery and price, not the logo: ${link("HP vs Dell vs Lenovo", `${SITE}/hp-vs-dell-vs-lenovo-laptops-kenya`)}. For after-sales support in Kenya, check whether the manufacturer's warranty is valid locally (warranty lookup shows the region), where its authorised service partners are, and what warranty the seller gives; parts for HP, Dell and Lenovo business models are widely available in Nairobi.` },
+      ],
+      faq: [
+        { question: "What is the difference between HP EliteBook and HP ZBook?", answer: "EliteBook is HP's premium business laptop; ZBook is its mobile workstation, with professional graphics and more power for CAD, 3D and engineering." },
+        { question: "Is Dell Precision better than Dell Latitude?", answer: "For CAD, simulation and 3D, yes. For office work, a Latitude is lighter and cheaper and does the job." },
+        { question: "What is the difference between Lenovo ThinkPad and ThinkBook?", answer: "ThinkBook is Lenovo's lower-cost small-business line; ThinkPad adds the TrackPoint, durability testing and enterprise features." },
+        { question: "Are Microsoft Surface laptops worth buying?", answer: "For pen use, portability and great screens, yes; but they cost more, have few ports, are hard to repair, and Snapdragon models don't run every Windows program." },
+        { question: "What is a mobile workstation laptop?", answer: "A laptop with professional, software-certified graphics and workstation-class components for CAD, 3D and engineering, such as an HP ZBook, Dell Precision or ThinkPad P." },
+        { question: "What is the difference between a netbook and a laptop?", answer: "Netbooks were small, low-power laptops from around 2008–2012; today small Chromebooks and 11–12-inch laptops fill that role." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "procurement",
+  path: "/learn/business-laptop-procurement-kenya",
+  kw: "buying laptops in bulk for a company in Kenya",
+  secondary: ["refurbished or new laptops for business", "choose laptops for employees", "laptop for sales representative", "laptop for travelling professionals", "backup laptops small business", "total cost of ownership laptop", "when to replace company laptops", "standard laptop specs for employees"],
+  h1: "Buying laptops for a company in Kenya: specs, cost of ownership and bulk orders",
+  title: "Buying Laptops in Bulk for a Company in Kenya: A Guide",
+  related: ["/learn/laptops-for-small-business-kenya", "/best/business-laptops-kenya", "/learn/laptop-maintenance-guide"],
+  write(x) {
+    const { L, ksh, median, link, SITE, PHONE, asOf, recency, tableMd } = x;
+    const std = L.filter((r) => /-(thinkpad|elitebook|latitude|probook)-/.test(`-${r.slug}-`) && recency(r.sp) >= 3 && (r.sp.tier || 0) >= 3);
+    if (std.length < 15) return null;
+    const models = {};
+    for (const r of std) { const k = x.modelKey(r.slug); if (k) (models[k] = models[k] || []).push(r); }
+    const deep = Object.entries(models).filter(([, rs]) => rs.length >= 3).sort((a, b) => b[1].length - a[1].length).slice(0, 6);
+    const light = dedupe(std.filter((r) => /-(x2\d0|x3\d0|x13|t4\d0s|t14s|830|835|1030|1040|7390|7400|7300)-/.test(`-${r.slug}-`)).sort((a, b) => a.price - b.price));
+    const wa = `https://wa.me/254717040531?text=${encodeURIComponent("Hello ECB Technologies, we'd like a quote for several laptops. Quantity: __, budget per laptop: __, use: __.")}`;
+    return {
+      intro: `When buying laptops in bulk for a company in Kenya, standardise on one or two business models, set a minimum spec (8th-gen or newer Core i5, 8–16 GB RAM, SSD, Windows 11 Pro), compare total cost of ownership rather than sticker price, and plan replacements every 4–5 years. ${std.length} business laptops that meet that spec are in stock at ECB Technologies, median ${ksh(median(std.map((r) => r.price)))} (${asOf}). Below: refurbished vs new, specs, spares, cost of ownership and how to request a quote.`,
+      description: `Company laptop purchasing in Kenya: refurbished vs new, standard specs, sales and travel staff, spares, total cost of ownership, replacement cycles and bulk quotes.`,
+      sections: [
+        { heading: "Refurbished or new for a business?", body: tableMd(["", "Refurbished business laptops", "New laptops"], [["Price", "Much lower for the same class", "Higher"], ["Warranty", "Seller's warranty (varies)", "Manufacturer's warranty"], ["Battery", "Used; check health", "New"], ["Fit for", "Office staff, students, budgets, spares", "Long deployments, staff who need the newest features"]]) + `\n\nMany SMEs mix both: refurbished 8th–11th gen business laptops for most staff, new for roles that need the latest hardware. See ${link("refurbished vs used vs new", `${SITE}/learn/refurbished-vs-used-laptops-kenya`)}.` },
+        { heading: "Standard specs for employees", body: "- **Office staff:** 8th-gen+ Core i5, 8 GB (16 GB for heavy Excel or many tabs), 256 GB SSD, 14-inch, Windows 11 Pro.\n- **Finance and analysts:** 10th-gen+, 16 GB, 15.6-inch with number pad.\n- **Designers / engineers:** see the creative and CAD guides.\n- **Everyone:** TPM 2.0 for BitLocker, a webcam and mic, USB-C or a dock for desk setups.\n\nStandardising on one model simplifies support, chargers and spare parts." },
+        { heading: "Sales representatives and travelling staff", body: `Choose light 13–14-inch business laptops (ThinkPad X/T-s, EliteBook 830/840, Latitude 7000) with good battery health, Wi-Fi 6 where possible, and a sturdy bag.${light.length ? ` Light business laptops in stock from ${ksh(light[0].price)}:\n\n${light.slice(0, 5).map((r) => `- ${link(r.short, `${SITE}/item/${r.slug}`)}: ${ksh(r.price)} (${x.specLine(r.sp)})`).join("\n")}` : ""}` },
+        { heading: "Models in stock in several configurations", body: deep.length ? `Models we hold in 3 or more configurations (easier to standardise on):\n\n${deep.map(([k, rs]) => `- ${link(x.modelName(k), `${SITE}/laptops/${k.replace(/ /g, "-")}-price-kenya`)}: ${rs.length} in stock, from ${ksh(Math.min(...rs.map((r) => r.price)))}`).join("\n")}\n\nStock changes daily; confirm quantities before ordering.` : "Ask us which models we can supply in the quantity you need." },
+        { heading: "Total cost of ownership", body: "Total cost of ownership (TCO) per laptop over its life:\n\n**TCO = purchase price + accessories + software licences + repairs and parts (battery, charger) + IT time + downtime − resale value.**\n\nA cheaper laptop that fails or slows staff down can cost more than a better one. Worked example: a KSh 40,000 laptop kept 4 years with a KSh 6,000 battery replacement and KSh 8,000 resale costs about KSh 38,000 over 4 years, roughly KSh 9,500 a year, before licences and support." },
+        { heading: "Spares, replacement cycles and continuity", body: "- **Spares:** many IT teams keep around one spare for every 10–20 laptops (at least one for small teams), so a broken laptop doesn't stop work.\n- **Replacement cycle:** typically 4–5 years for business laptops, earlier if the processor drops out of Windows support or repairs pass about half the cost of a replacement.\n- **Continuity:** cloud backups (OneDrive/Google Drive), encryption, and a record of serial numbers and warranties." },
+        { heading: "Bulk orders and quotes", body: `Before buying in bulk: agree the exact model and spec, warranty terms in writing, delivery timeline, invoice requirements (KRA eTIMS invoices for your accounts), and what happens if a unit is faulty on arrival. Whether a bulk order is cheaper depends on the models and quantity; ask for a written quote.\n\n**Request a quote:** [send your quantity, budget and use on WhatsApp](${wa}) (${PHONE}), or visit the shop on Moi Avenue, Nairobi CBD. See also ${link("laptops for small business", `${SITE}/learn/laptops-for-small-business-kenya`)}.` },
+      ],
+      faq: [
+        { question: "Should a small business buy refurbished or brand-new laptops?", answer: "Refurbished business laptops give more performance per shilling for most staff; new laptops suit long deployments and roles needing the newest hardware. Many SMEs mix both." },
+        { question: "How do I choose laptops for a company's employees?", answer: "Standardise on one or two business models, set a minimum spec by role (8th-gen+ Core i5, 8–16 GB, SSD, Windows 11 Pro) and compare total cost of ownership." },
+        { question: "How many laptops should a small business keep as backup?", answer: "A common rule of thumb is one spare for every 10–20 laptops, and at least one for a small team." },
+        { question: "How do I calculate the total cost of owning a business laptop?", answer: "Purchase price plus accessories, licences, repairs, IT time and downtime, minus resale value, divided by the years you keep it." },
+        { question: "When should a company replace its employees' laptops?", answer: "Typically every 4–5 years, or earlier if the processor loses Windows support or repairs pass about half the cost of a replacement." },
+        { question: "Is it cheaper for a company to buy laptops in bulk in Kenya?", answer: "It depends on the model and quantity; ask suppliers for a written quote. Standardising on one model also saves on support and spare parts." },
+      ],
+    };
+  },
+});

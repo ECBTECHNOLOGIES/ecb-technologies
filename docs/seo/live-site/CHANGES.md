@@ -1148,3 +1148,19 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   /learn/laptop-ports-explained (projectors and wireless printers in stock).
 - 15 FAQs added to 7 existing pages (additions.json).
 - 100 of 100 questions answered on live pages; 30 /learn pages in total.
+
+## 2026-11-27: fourth 100 questions (see docs/seo/question-map-4.md, content-map.md)
+- 6 new pages: /learn/laptop-requirements-video-photo-editing-3d (Adobe and
+  Blender requirements; RTX and Apple-chip picks; points to the existing
+  /best design and video list, which keeps the "best laptop for video
+  editing" intent), /learn/laptop-charger-and-battery-guide,
+  /learn/check-if-laptop-is-genuine, /learn/laptops-for-engineering-data-and-programming-software
+  (SolidWorks, MATLAB, SPSS, Python/ML, Android Studio, VMs, SketchUp, music,
+  web), /learn/laptop-product-families-explained (live counts per family),
+  /learn/business-laptop-procurement-kenya (TCO, spares, replacement cycle,
+  WhatsApp quote link; no invented discounts).
+- Expanded: screens (refresh rate, OLED vs IPS, screen replacement),
+  upgrades (CPU/GPU limits, shared memory, dual channel, NVMe), Windows
+  (dual boot, Windows Hello, Android apps), small business (Teams, Zoom),
+  student page (accounting and nursing named; KCSE FAQ).
+- Master index of all 400 questions: docs/seo/content-map.md (390 answered).
