@@ -1136,3 +1136,15 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
 - Articles can now use the whole catalogue (actx.P), not only laptops.
 - 96 of 100 questions answered; 4 not published (prices of parts the shop
   doesn't stock: RAM, SSD, battery, charger).
+
+## 2026-11-27: third 100 questions (see docs/seo/question-map-3.md)
+- 8 new pages: /learn/best-value-laptops-kenya (live budget bands and
+  specs-per-shilling ranking), /learn/laptop-slow-freezing-not-charging-fixes,
+  /learn/laptop-security-guide-kenya (Defender, encryption, remote-access
+  scams; security software in stock), /learn/laptop-wifi-and-internet-guide,
+  /learn/laptops-for-small-business-kenya (accounts, QuickBooks, POS,
+  meetings, team buying, laptops vs desktops; live picks),
+  /learn/business-vs-consumer-laptops, /learn/laptop-maintenance-guide,
+  /learn/laptop-ports-explained (projectors and wireless printers in stock).
+- 15 FAQs added to 7 existing pages (additions.json).
+- 100 of 100 questions answered on live pages; 30 /learn pages in total.

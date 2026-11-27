@@ -1096,7 +1096,7 @@ ARTICLES.push({
   kw: "Windows 10 or Windows 11 laptop",
   secondary: ["genuine windows 11 licence price kenya", "how to check windows is genuine", "laptop without operating system", "linux vs windows for programming", "microsoft office on chromebook", "microsoft office on macbook"],
   h1: "Windows 10 or Windows 11? Licences, Office and laptop software explained",
-  title: "Windows 10 or 11 Laptop? Licences and Office in Kenya",
+  title: "Windows 10 or 11 Laptop? A Guide to Licences and Office",
   related: ["/learn/laptop-processor-generations-kenya", "/learn/refurbished-vs-used-laptops-kenya", "/learn/macbook-buying-guide-kenya"],
   write(x) {
     const { P, ksh, link, SITE, asOf } = x;
@@ -1241,6 +1241,326 @@ ARTICLES.push({
         { question: "How do I verify a laptop's serial number?", answer: "Enter the serial or service tag from the label on the manufacturer's warranty check page and confirm the model and specs match; it should also match the serial in the BIOS." },
         { question: "Is it better to buy a laptop online or from a physical shop?", answer: "An online shop with a physical address gives both: prices to compare online and a place to test the laptop and return to if there's a problem." },
         { question: "How do I negotiate the price of a laptop in Kenya?", answer: "Compare prices first, ask what's included (bag, mouse, software), and be ready to pay in full and collect. Our price research shows typical prices by budget and brand." },
+      ],
+    };
+  },
+});
+
+// ---------- Batch 4 (27 Nov 2026): the third 100 questions ----------
+// See docs/seo/question-map-3.md.
+
+const liveList = (x, rows, n = 6) => rows.slice(0, n).map((r) => `- ${x.link(r.short, `${x.SITE}/item/${r.slug}`)}: ${x.ksh(r.price)}${r.sp && x.specLine(r.sp) ? ` (${x.specLine(r.sp)})` : ""}`).join("\n");
+const dedupe = (rs) => { const s = new Set(); return rs.filter((r) => { const k = `${r.short}|${r.price}`; return s.has(k) ? false : (s.add(k), true); }); };
+
+ARTICLES.push({
+  slug: "value-for-money",
+  path: "/learn/best-value-laptops-kenya",
+  kw: "best value for money laptop in Kenya",
+  secondary: ["how much should i spend on a laptop", "best laptop for ksh 25000", "laptop for ksh 35000", "is a ksh 50000 laptop good for office work", "is it worth spending ksh 100000 on a laptop", "business laptop price kenya"],
+  h1: "Best value for money laptops in Kenya: how much to spend and what you get",
+  title: "Best Value for Money Laptops in Kenya: What to Spend",
+  related: ["/best/best-laptops-under-30k-kenya", "/best/best-laptops-under-50k-kenya", "/learn/laptop-buying-guide-kenya"],
+  write(x) {
+    const { L, ksh, median, link, SITE, asOf, recency, tableMd } = x;
+    if (L.length < 50) return null;
+    const ok = L.filter((r) => r.score && r.price >= 15000);
+    const perK = (r) => r.score / (r.price / 10000);
+    const value = dedupe([...ok].filter((r) => recency(r.sp) >= 3).sort((a, b) => perK(b) - perK(a) || a.price - b.price));
+    const at = (max) => { const rs = ok.filter((r) => r.price <= max && recency(r.sp) >= 3); return [...rs].sort((a, b) => b.score - a.score || a.price - b.price)[0]; };
+    const biz = L.filter((r) => /-(thinkpad|elitebook|latitude|probook)-/.test(`-${r.slug}-`));
+    const biz8 = biz.filter((r) => recency(r.sp) >= 3);
+    const cell = (r) => (r ? `${link(r.short, `${SITE}/item/${r.slug}`)} – ${ksh(r.price)} (${x.specLine(r.sp)})` : "none in stock");
+    return {
+      intro: `The best value for money laptop in Kenya is usually an 8th-gen or newer business laptop (ThinkPad, EliteBook, Latitude) with a Core i5 or i7, 8–16 GB RAM and an SSD: they cost far less than new laptops of similar speed and last for years. For everyday use, plan on KSh 30,000–50,000; spend more only for a specific need (design, engineering, gaming, a newer generation). Below: the laptops in stock that give the most specs per shilling, and what each budget gets (${asOf}).`,
+      description: `Best value laptops in Kenya: what KSh 25,000, 35,000, 50,000, 80,000 and 100,000 buys, the most specs per shilling in stock, and why some laptops cost less.`,
+      sections: [
+        { heading: "What each budget gets you", body: tableMd(["Budget", "Best specified in stock (8th gen or newer)"], [[0, 25000, "Up to KSh 25,000"], [25000, 35000, "KSh 25,001–35,000"], [35000, 50000, "KSh 35,001–50,000"], [50000, 80000, "KSh 50,001–80,000"], [80000, 100000, "KSh 80,001–100,000"]].map(([lo, m, l]) => [l, cell([...ok].filter((r) => r.price > lo && r.price <= m && recency(r.sp) >= 3).sort((a, b) => b.score - a.score || a.price - b.price)[0])])) + `\n\nFull lists: ${link("under KSh 25,000", `${SITE}/best/best-laptops-under-25k-kenya`)}, ${link("under KSh 30,000", `${SITE}/best/best-laptops-under-30k-kenya`)}, ${link("under KSh 40,000", `${SITE}/student-laptops-kenya`)}, ${link("under KSh 50,000", `${SITE}/best/best-laptops-under-50k-kenya`)}, ${link("under KSh 80,000", `${SITE}/best/best-laptops-under-80k-kenya`)}.` },
+        { heading: "The most specs per shilling right now", body: `Ranked by our spec score (processor, generation, RAM, storage) divided by price, 8th gen or newer only:\n\n${liveList(x, value, 8)}\n\nHow the score works is explained on every ${link("guide page", `${SITE}/guides`)}.` },
+        { heading: "How much should you spend for everyday use?", body: `- **KSh 25,000–35,000:** 8th-gen Core i5 business laptops: documents, browsing, online classes, Zoom.\n- **KSh 35,000–50,000:** the sweet spot: 8th–10th gen, often 16 GB RAM or a 512 GB SSD, touchscreens and slimmer models. A KSh 50,000 laptop is more than enough for office work.\n- **KSh 50,000–80,000:** 10th–11th gen, 16 GB, premium business models (T14s, EliteBook 840 G7/G8): faster and longer-lasting.\n- **KSh 100,000+:** worth it for design, engineering, gaming (dedicated GPU), the newest Core Ultra chips, or a MacBook. For office work alone, it's more than you need.` },
+        { heading: "Why are some laptops cheaper than others?", body: `- **Generation:** each newer generation costs more; 8th gen is the best-value Windows 11 entry point.\n- **Line:** business lines cost more new but are excellent value once a few years old.\n- **RAM, SSD, screen:** 16 GB, larger SSDs, touchscreens and higher-resolution screens all add cost.\n- **Graphics:** a dedicated GPU adds a lot.\n- **Condition and warranty:** new, refurbished and used laptops of the same model are priced differently.\n\nSee ${link("refurbished vs used vs new laptops", `${SITE}/learn/refurbished-vs-used-laptops-kenya`)} and ${link("laptop prices in Kenya", `${SITE}/research/laptop-prices-kenya`)}.` },
+        { heading: "How much does a business-class laptop cost in Kenya?", body: `At ECB Technologies, ${biz.length} business laptops (ThinkPad, EliteBook, Latitude, ProBook) are in stock; those with 8th-gen or newer processors start at ${biz8.length ? ksh(Math.min(...biz8.map((r) => r.price))) : "n/a"} with a median of ${biz8.length ? ksh(median(biz8.map((r) => r.price))) : "n/a"} (${asOf}). Browse ${link("business laptops", `${SITE}/best/business-laptops-kenya`)}.` },
+      ],
+      faq: [
+        { question: "What is the best laptop to buy in Kenya with KSh 25,000?", answer: at(25000) ? `The best specified 8th-gen or newer laptop up to KSh 25,000 in stock is the ${at(25000).short} at ${ksh(at(25000).price)} (${asOf}).` : "Few 8th-gen laptops cost KSh 25,000 or less; see the under-25k list for what's in stock." },
+        { question: "Which laptop can I buy with KSh 35,000 in Kenya?", answer: at(35000) ? `An 8th-gen or newer business laptop; the best specified in stock is the ${at(35000).short} at ${ksh(at(35000).price)} (${asOf}).` : "An 8th-gen business laptop; see the student guide for current options." },
+        { question: "Is a KSh 50,000 laptop good enough for office work?", answer: "Yes, comfortably: at that price you get an 8th–10th gen Core i5 or i7 business laptop, often with 16 GB RAM." },
+        { question: "Is it worth spending KSh 100,000 on a laptop?", answer: "For design, engineering, gaming or a MacBook, yes. For office work and study, a KSh 35,000–60,000 business laptop does the job." },
+        { question: "Which laptop gives the best performance for its price?", answer: value[0] ? `By spec score per shilling, the ${value[0].short} at ${ksh(value[0].price)} leads right now (${asOf}).` : "See the value ranking on this page." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "slow-laptop",
+  path: "/learn/laptop-slow-freezing-not-charging-fixes",
+  kw: "why is my laptop running slow",
+  secondary: ["laptop takes long to start", "laptop keeps restarting", "laptop freezes randomly", "laptop fan loud", "laptop switches off", "laptop black screen power light on", "laptop not charging plugged in", "make old laptop faster"],
+  h1: "Why is my laptop running slow? Fixes for freezing, restarts, noise and charging",
+  title: "Why Is My Laptop Running Slow? How to Fix It",
+  related: ["/learn/laptop-battery-and-overheating-fixes", "/learn/laptop-upgrade-ram-ssd", "/learn/laptop-maintenance-guide"],
+  write(x) {
+    const { link, SITE, PHONE } = x;
+    if (x.L.length < 50) return null;
+    const fix = (title, causes, steps, pro) => ({ heading: title, body: `**Common causes:** ${causes}\n\n**Try this:**\n${steps.map((s, i) => `${i + 1}. ${s}`).join("\n")}${pro ? `\n\n**When to get help:** ${pro}` : ""}` });
+    return {
+      intro: `Why is my laptop running slow? Most often: a hard drive instead of an SSD, too little RAM for what's open, too many startup programs, a nearly full drive, or overheating that makes the processor slow itself down. Below are safe, step-by-step fixes for slow laptops and the other common problems (slow startup, restarts, freezing, loud fan, sudden shutdowns, black screen, not charging), and when it's time for a technician or a replacement.`,
+      description: `Laptop slow, slow to start, restarting, freezing, loud fan, switching off, black screen or not charging: causes, safe fixes, and when to repair or replace.`,
+      sections: [
+        fix("Laptop running very slowly", "a hard drive (HDD), little RAM, background programs, a full drive, malware, overheating.", ["Task Manager (Ctrl+Shift+Esc) → Processes: sort by CPU, Memory and Disk to see what's using them.", "Check the drive type (Performance → Disk): if it says HDD, an SSD is the biggest upgrade.", "Free space: Settings → System → Storage → Cleanup recommendations; keep 15–20% free.", "Run a full scan in Windows Security.", "Install Windows and driver updates, then restart."], "if it's still slow with an SSD, enough RAM and no heavy programs, the hardware may be too old for your work."),
+        fix("Laptop takes long to start", "startup programs, a hard drive, pending updates.", ["Task Manager → Startup apps: disable what you don't need at startup.", "Let pending Windows updates finish.", "Replace a hard drive with an SSD: startup drops from minutes to seconds."]),
+        fix("Laptop keeps restarting or freezes randomly", "a faulty driver or update, overheating, failing RAM or drive, malware.", ["Note when it happens (gaming, charging, idle).", "Install updates; roll back a driver installed just before it started (Device Manager).", "Check temperatures: clean the vents and use it on a hard surface.", "Run Windows Memory Diagnostic, and check the drive's health (CrystalDiskInfo).", "Run a full malware scan."], "repeated blue screens or freezes with healthy software usually mean a hardware fault (RAM, drive, motherboard)."),
+        fix("Loud laptop fan", "dust in the vents, heavy programs, blocked airflow, a worn fan.", ["Check Task Manager for a program using a lot of CPU.", "Use the laptop on a hard surface; clean the vents with compressed air (laptop off).", "Choose a balanced power mode instead of best performance."], "a grinding or clicking fan needs replacing."),
+        fix("Laptop switches off without warning", "overheating, a worn battery that reports the wrong charge, a faulty charger.", [`Check the battery report (powercfg /batteryreport); see ${link("battery fixes", `${SITE}/learn/laptop-battery-and-overheating-fixes`)}.`, "Clean the vents and check it doesn't shut down only when hot.", "Try another known-good charger of the right wattage."], "a swollen battery or shutdowns while cool and plugged in need a technician."),
+        fix("Black screen but the power light is on", "display or graphics issue, sleep/hibernate glitch, a loose RAM module.", ["Press Windows + Ctrl + Shift + B (restarts the graphics driver).", "Hold the power button for 15 seconds, unplug, then start again.", "Connect an external monitor: if it shows a picture, the laptop's screen or cable is the problem."], "if an external monitor is also black, or the laptop beeps at startup, take it to a technician."),
+        fix("Not charging even when plugged in", "a wrong or faulty charger, a loose charging port, a worn battery, a charge-limit setting.", ["Check the charger's wattage and connector match the laptop.", "Check for a battery charge limit in the maker's app (Lenovo Vantage, HP, Dell Power Manager) that stops at 80%.", "Try another wall socket and charger.", "Check the battery report for very low capacity."], "a loose charging port or a battery that won't charge with a good charger needs repair. Don't open the charger or the battery."),
+        { heading: "How to make an old laptop faster", body: `1. Fit an SSD (the biggest single improvement): ${link("HDD to SSD upgrade", `${SITE}/learn/laptop-upgrade-ram-ssd`)}.\n2. Add RAM if there's a free slot.\n3. Remove unused programs and startup apps.\n4. Clean the vents and fan.\n5. Reinstall Windows cleanly if it's years old.\n\nIf it's 7th gen or older (no Windows 11), compare the cost of upgrades with a newer laptop: see ${link("best value laptops", `${SITE}/learn/best-value-laptops-kenya`)}.` },
+        { heading: "Repair or replace?", body: `Repair when the fix is a battery, charger, SSD, RAM or fan on an 8th-gen or newer laptop. Replace when the motherboard or screen has failed on an old model, or the repair costs more than about half the price of a comparable replacement. Ask a technician for a written quote first. Questions about a replacement: WhatsApp ${PHONE}.` },
+      ],
+      faq: [
+        { question: "Why is my laptop running very slowly?", answer: "Usually a hard drive instead of an SSD, too little RAM, too many background programs, a full drive or overheating. Task Manager shows which one." },
+        { question: "Why does my laptop keep restarting?", answer: "Often a faulty driver or update, overheating, malware or failing RAM or storage. Update, check temperatures, scan for malware and test the memory and drive." },
+        { question: "Why is my laptop not charging when plugged in?", answer: "Check the charger's wattage and connector, any 80% charge limit in the maker's app, another socket, and the battery's health. A loose port needs repair." },
+        { question: "How do I make my old laptop faster?", answer: "Fit an SSD, add RAM if there's a free slot, remove startup programs, clean the vents and reinstall Windows if it's years old." },
+        { question: "Why is my laptop screen black but the power light is on?", answer: "Try Windows + Ctrl + Shift + B, a 15-second power reset, and an external monitor. If the monitor works, the laptop's screen or cable is faulty." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "security",
+  path: "/learn/laptop-security-guide-kenya",
+  kw: "how to protect my laptop from hackers",
+  secondary: ["do i need antivirus", "is windows defender enough", "best antivirus for windows laptop", "how to encrypt my laptop", "laptop public wifi security", "what to do if laptop is stolen", "how to know if laptop has virus"],
+  h1: "How to protect your laptop from hackers: antivirus, encryption, Wi-Fi and theft",
+  title: "How to Protect Your Laptop From Hackers: Security Guide",
+  related: ["/learn/windows-11-and-laptop-software-kenya", "/learn/buying-a-laptop-safely-kenya", "/learn/laptop-maintenance-guide"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf } = x;
+    if (!P || P.length < 50) return null;
+    const av = dedupe(P.filter((p) => /kaspersky|eset|norton|mcafee|bitdefender|antivirus/.test(p.slug)).sort((a, b) => a.price - b.price));
+    return {
+      intro: `How to protect your laptop from hackers: keep Windows and your apps updated, keep Microsoft Defender (or another reputable antivirus) on, use strong unique passwords with two-step sign-in, encrypt the drive, back up your files, and be careful on public Wi-Fi and with links. No single tool guarantees safety; these layers together make your laptop a much harder target. Here's how to set each one up.`,
+      description: `Laptop security in plain English: antivirus and Microsoft Defender, signs of a virus, remote access scams, encryption, public Wi-Fi, backups and what to do if it's stolen.`,
+      sections: [
+        { heading: "Do you need antivirus? Is Windows Defender enough?", body: `Windows 10 and 11 include **Microsoft Defender Antivirus**, on by default and updated through Windows Update. For most home users who keep Windows updated and avoid pirated software, it provides solid protection. A paid security suite adds extras (web protection across browsers, password managers, VPNs, parental controls, licences for several devices).${av.length ? ` Security software in stock:\n\n${liveList(x, av, 5)}\n\nPrices as of ${asOf}.` : ""}\n\nWhatever you choose, run only one real-time antivirus at a time.` },
+        { heading: "Signs your laptop may have a virus", body: "- Sudden slowness, pop-ups or new browser toolbars.\n- Programs you didn't install, or settings that change by themselves.\n- Antivirus turned off without you doing it.\n- Friends receiving messages you didn't send.\n\nRun a full scan (Windows Security → Virus & threat protection → Scan options → Full scan), and the Microsoft Defender Offline scan for stubborn infections." },
+        { heading: "Can someone access my laptop remotely?", body: "Yes, if you install remote-access software and give someone the code, or through malware. Common scams: a \"technician\" calls or shows a pop-up claiming your laptop is infected and asks you to install AnyDesk or TeamViewer. Real companies (Microsoft, banks, Safaricom) don't do this. Uninstall remote tools you don't use, and never share a remote-access code with someone who contacted you first." },
+        { heading: "Passwords and two-step sign-in", body: "Use a PIN or Windows Hello (fingerprint or face) to sign in, a password manager for unique passwords, and two-step verification (authenticator app or SMS) on email, banking and social media. Your email account is the key to everything else: protect it first." },
+        { heading: "How to encrypt your laptop", body: "Encryption protects your files if the laptop is stolen.\n\n- **Windows 11/10 Pro:** BitLocker (Settings → Privacy & security → Device encryption or search \"Manage BitLocker\").\n- **Windows Home:** \"Device encryption\" on supported laptops (same Settings page).\n- Save the recovery key to your Microsoft account or print it: without it, you can't unlock the drive if something changes." },
+        { heading: "Public Wi-Fi", body: "On café, hotel or campus Wi-Fi: use sites with HTTPS (most are), avoid logging into banking on unknown networks, set the network as Public (Windows asks), turn off file sharing, and consider a reputable VPN. Your phone's hotspot is safer than open Wi-Fi." },
+        { heading: "Backups", body: "Ransomware and theft both destroy files: keep a copy elsewhere. Use OneDrive or Google Drive for documents, and an external drive for a full backup every week or month. Keep at least one backup disconnected from the laptop." },
+        { heading: "If your laptop is stolen", body: "1. **Find my device** (Settings → Privacy & security → Find my device) shows its last location if it was turned on before.\n2. Change your passwords, starting with email, and sign out of sessions on other devices.\n3. Report it to the police and keep the serial number from your receipt (it helps recovery and insurance).\n4. If it was encrypted, your files are protected." },
+        { heading: "Choosing a laptop with security in mind", body: `Business laptops (ThinkPad, EliteBook, Latitude) usually have TPM 2.0, fingerprint readers and BIOS security features, and run Windows 11. See ${link("business laptops", `${SITE}/best/business-laptops-kenya`)} and ${link("Windows 11 and software", `${SITE}/learn/windows-11-and-laptop-software-kenya`)}.` },
+      ],
+      faq: [
+        { question: "Do I need antivirus software on my laptop?", answer: "Windows includes Microsoft Defender, which is on by default. Keep it on and updated; a paid suite adds extras like web protection and multi-device licences." },
+        { question: "Is Windows Defender enough to protect my laptop?", answer: "For most home users who keep Windows updated and avoid pirated software, it provides solid protection. No antivirus guarantees safety on its own." },
+        { question: "How do I know if my laptop has a virus?", answer: "Pop-ups, new programs or toolbars, sudden slowness or antivirus turned off by itself. Run a full scan and a Microsoft Defender Offline scan." },
+        { question: "How do I encrypt my laptop?", answer: "Use BitLocker on Windows Pro, or Device encryption on supported Windows Home laptops, and save the recovery key somewhere safe." },
+        { question: "How do I secure my laptop on public Wi-Fi?", answer: "Mark the network as Public, avoid banking on unknown networks, keep file sharing off, and use your phone hotspot or a reputable VPN." },
+        { question: "What should I do if my laptop is stolen?", answer: "Use Find my device if it was on, change your passwords (email first), report it to the police with the serial number, and rely on encryption to protect your files." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "wifi",
+  path: "/learn/laptop-wifi-and-internet-guide",
+  kw: "laptop not connecting to WiFi",
+  secondary: ["laptop keeps disconnecting from wifi", "connect laptop to mobile hotspot", "improve laptop wifi speed", "connect laptop to ethernet", "wifi 5 vs wifi 6", "does a laptop need a sim card"],
+  h1: "Laptop not connecting to WiFi? Fixes, hotspots, Ethernet and Wi-Fi 6",
+  title: "Laptop Not Connecting to WiFi? How to Fix It (Guide)",
+  related: ["/learn/laptop-slow-freezing-not-charging-fixes", "/learn/laptop-security-guide-kenya", "/learn/laptop-ports-explained"],
+  write(x) {
+    const { link, SITE } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `Laptop not connecting to Wi-Fi? Turn Wi-Fi (and Airplane mode) off and on, forget the network and reconnect, restart the router and the laptop, then run the Windows network troubleshooter and update the Wi-Fi driver. Most connection problems are fixed by one of these. This guide also covers disconnections, mobile hotspots (Safaricom, Airtel and others), Ethernet, why your phone may be faster, and Wi-Fi 5 vs Wi-Fi 6.`,
+      description: `Laptop not connecting to Wi-Fi or dropping out: fixes, connecting to a mobile hotspot or Ethernet, faster Wi-Fi, SIM-card laptops, and Wi-Fi 5 vs Wi-Fi 6 explained.`,
+      sections: [
+        { heading: "Laptop not connecting to Wi-Fi", body: "1. Check Airplane mode is off and Wi-Fi is on (and any Wi-Fi key or switch on older laptops).\n2. Forget the network (Settings → Network & internet → Wi-Fi → Manage known networks) and reconnect with the password.\n3. Restart the router and the laptop.\n4. Run Settings → System → Troubleshoot → Other troubleshooters → Network and Internet.\n5. Update or reinstall the Wi-Fi driver (Device Manager → Network adapters).\n6. Settings → Network & internet → Advanced network settings → Network reset (last resort; you'll re-enter Wi-Fi passwords)." },
+        { heading: "Laptop keeps disconnecting", body: "- Turn off power saving for the Wi-Fi adapter: Device Manager → Network adapters → your Wi-Fi → Properties → Power Management → untick \"Allow the computer to turn off this device\".\n- Move closer to the router or remove obstacles (walls and metal weaken 5 GHz the most).\n- Update the Wi-Fi driver and the router's firmware.\n- If only one network drops, the router is the likely cause." },
+        { heading: "Connecting to a mobile hotspot", body: "On the phone: turn on Mobile Hotspot (Android: Settings → Network → Hotspot; iPhone: Settings → Personal Hotspot) and note the name and password. On the laptop: click the Wi-Fi icon and choose the phone's network. Hotspots use your mobile data quickly (updates and video): set the network as metered on the laptop (Wi-Fi properties → Metered connection) to limit background downloads." },
+        { heading: "Ethernet (cable) connection", body: `Plug a network cable from the router into the laptop's Ethernet (RJ45) port; Windows connects automatically. Many business laptops have one; thin laptops need a USB or USB-C to Ethernet adapter. Ethernet is faster and steadier than Wi-Fi for big downloads and video calls. See ${link("laptop ports explained", `${SITE}/learn/laptop-ports-explained`)}.` },
+        { heading: "Why is my laptop slower than my phone?", body: "Usually not the internet plan but: an older Wi-Fi card (Wi-Fi 4/5) vs a newer phone (Wi-Fi 6), the laptop on the slower 2.4 GHz band while the phone uses 5 GHz, distance from the router, or background downloads (updates, OneDrive) on the laptop. Test both in the same spot with a speed test, and pause updates while testing." },
+        { heading: "Wi-Fi 5 vs Wi-Fi 6", body: x.tableMd(["", "Wi-Fi 5 (802.11ac)", "Wi-Fi 6 / 6E (802.11ax)"], [["Typical laptops", "Most 2015–2019 business laptops", "Most 2020 and newer (10th–11th gen on)"], ["Speed", "Fast", "Faster, especially near the router"], ["Busy networks (campus, office)", "Slows down more", "Handles many devices better"], ["Needs", "Any router", "A Wi-Fi 6 router to get the benefit"]]) + "\n\nYour internet plan still sets the top speed: Wi-Fi 6 can't make a slow connection faster, but it uses a fast one better. Check the laptop's Wi-Fi card in Device Manager → Network adapters (\"AX\" in the name means Wi-Fi 6)." },
+        { heading: "Can I use a laptop without Wi-Fi? Does it need a SIM?", body: "Yes: offline for documents and anything installed, or online through Ethernet, a phone hotspot or a USB modem. Laptops don't need a SIM card; a few business models have a built-in 4G/LTE slot, but most people use a phone hotspot or a MiFi router instead." },
+        { heading: "Which laptops have the best Wi-Fi?", body: `Newer laptops with Wi-Fi 6 or 6E cards (generally 10th–11th gen and newer business models, Core Ultra laptops and Apple-chip MacBooks), plus a good router. Business laptops with Ethernet ports add a reliable wired option. Browse ${link("Core Ultra laptops", `${SITE}/laptops/core-ultra-laptops-kenya`)} and ${link("business laptops", `${SITE}/best/business-laptops-kenya`)}.` },
+      ],
+      faq: [
+        { question: "Why is my laptop not connecting to Wi-Fi?", answer: "Check Airplane mode, forget and rejoin the network, restart the router and laptop, run the network troubleshooter, and update the Wi-Fi driver." },
+        { question: "Why does my laptop keep disconnecting from Wi-Fi?", answer: "Often Wi-Fi power saving, distance from the router, an old driver or the router itself. Turn off the adapter's power saving and update the driver." },
+        { question: "How do I connect my laptop to a mobile hotspot?", answer: "Turn on the phone's hotspot, then choose its network from the laptop's Wi-Fi list. Set it as a metered connection to save data." },
+        { question: "What is the difference between Wi-Fi 5 and Wi-Fi 6?", answer: "Wi-Fi 6 is newer: faster and better on busy networks, if the router also supports it. Most laptops from 2020 on have it." },
+        { question: "Does a laptop need a SIM card to access the internet?", answer: "No. Laptops use Wi-Fi, Ethernet or a phone hotspot; only a few business models have a built-in 4G SIM slot." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "small-business",
+  path: "/learn/laptops-for-small-business-kenya",
+  kw: "best laptop for small business in Kenya",
+  secondary: ["laptop for quickbooks", "laptop for excel", "laptop for pos software", "laptop for remote work", "laptop for zoom meetings", "laptops for company employees", "laptop vs desktop for business"],
+  h1: "Laptops for small businesses in Kenya: accounts, QuickBooks, POS and teams",
+  title: "Best Laptop for Small Business in Kenya: Accounts & POS",
+  related: ["/best/business-laptops-kenya", "/learn/best-laptop-for-your-profession-kenya", "/learn/laptop-security-guide-kenya"],
+  write(x) {
+    const { L, P, ksh, link, SITE, PHONE, asOf, recency, tableMd } = x;
+    if (L.length < 50) return null;
+    const biz = (f) => dedupe(L.filter((r) => /-(thinkpad|elitebook|latitude|probook)-/.test(`-${r.slug}-`) && f(r)).sort((a, b) => a.price - b.price));
+    const entry = biz((r) => recency(r.sp) >= 3 && (r.sp.tier || 0) >= 3 && r.price <= 40000);
+    const mid = biz((r) => recency(r.sp) >= 4 && r.sp.ram >= 16 && r.price <= 70000);
+    const heads = dedupe((P || []).filter((p) => /headset/.test(p.slug)).sort((a, b) => a.price - b.price));
+    return {
+      intro: `The best laptop for a small business in Kenya is a business-class laptop (ThinkPad, EliteBook, Latitude) with an 8th-gen or newer Core i5, 8–16 GB RAM and an SSD: it runs accounts, Excel, QuickBooks, POS software and video calls, and it's built for daily use and easy to repair. At ECB Technologies, ${entry.length} such laptops cost KSh 40,000 or less, from ${entry.length ? ksh(entry[0].price) : "n/a"} (${asOf}). Below: what each business job needs, and how to equip a team.`,
+      description: `Laptops for small businesses in Kenya: specs for accounts, QuickBooks, Excel, POS, remote work and Zoom; buying for a team; laptops vs desktops; live prices.`,
+      sections: [
+        { heading: "What each business job needs", body: tableMd(["Work", "Minimum", "Better"], [
+          ["Accounts, Excel, email, KRA iTax", "8th-gen Core i5, 8 GB, 256 GB SSD", "10th gen, 16 GB for large workbooks"],
+          ["QuickBooks Online / Xero", "Any 8th-gen+ laptop with a modern browser (cloud software)", "16 GB if many tabs stay open"],
+          ["QuickBooks Desktop", "Windows; Intuit recommends at least 8 GB RAM and an SSD for recent versions", "16 GB for large company files"],
+          ["POS software", "Windows (check your POS vendor), USB ports for scanner and receipt printer, Ethernet", "A 15.6-inch screen; a UPS for power cuts"],
+          ["Remote work and video calls", "8th-gen Core i5, 8 GB, working webcam and mic", "16 GB, Wi-Fi 6, a USB headset"],
+          ["Many business apps at once", "16 GB RAM", "10th gen+ Core i7 / Ryzen 7, 16–32 GB"],
+        ]) + "\n\nSoftware requirements change with versions: check your vendor's current system requirements before buying." },
+        { heading: "Recommended laptops in stock", body: `**Entry level (KSh 40,000 or less, 8th gen+ Core i5 class):**\n\n${liveList(x, entry, 5)}\n\n**Mid-range (10th gen+, 16 GB, up to KSh 70,000):**\n\n${mid.length ? liveList(x, mid, 5) : "Ask us on WhatsApp for current stock."}\n\nAll of them: ${link("business laptops", `${SITE}/best/business-laptops-kenya`)}. Prices as of ${asOf}.` },
+        { heading: "Excel professionals and accountants", body: `Large spreadsheets use memory and fast single-core speed: choose 16 GB and a 10th-gen or newer processor; a 15.6-inch screen with a number pad speeds up data entry. More: ${link("best laptop for accountants", `${SITE}/learn/best-laptop-for-your-profession-kenya`)}.` },
+        { heading: "Virtual meetings and remote work", body: `Zoom, Teams and Google Meet run well on any 8th-gen or newer Core i5 with 8 GB. What matters more: a working webcam and microphone (test them before buying), stable Wi-Fi or Ethernet, and a headset for noisy rooms.${heads.length ? ` USB headsets in stock from ${ksh(heads[0].price)}: ${link(heads[0].short, `${SITE}/item/${heads[0].slug}`)}.` : ""} See ${link("laptop Wi-Fi guide", `${SITE}/learn/laptop-wifi-and-internet-guide`)}.` },
+        { heading: "Buying laptops for a team", body: `- **Standardise** on one or two models: easier support, shared chargers and spare parts.\n- **Specs:** 8th gen+ Core i5, 8–16 GB, SSD, Windows 11 Pro for BitLocker and business management.\n- **Security:** encryption, unique accounts, backups: see the ${link("laptop security guide", `${SITE}/learn/laptop-security-guide-kenya`)}.\n- **Records:** keep each laptop's serial number and warranty.\n\nBuying several units? Send the quantity and budget on WhatsApp (${PHONE}) so we can check stock of the same model.` },
+        { heading: "Laptops or desktops for employees?", body: tableMd(["", "Laptops", "Desktops"], [["Mobility", "Work anywhere, meetings, remote work", "Fixed to a desk"], ["Power cuts", "Battery keeps working", "Needs a UPS"], ["Price for the same speed", "Higher", "Lower"], ["Screens and ergonomics", "Add a monitor and keyboard at the desk", "Large screen built in"], ["Repairs and upgrades", "Harder; parts per model", "Easier and cheaper"]]) + "\n\nIn Kenya, power cuts and hybrid work favour laptops for most staff; desktops suit fixed workstations like reception or POS counters (with a UPS)." },
+      ],
+      faq: [
+        { question: "What is the best laptop for running a small business in Kenya?", answer: "A business-class laptop (ThinkPad, EliteBook or Latitude) with an 8th-gen or newer Core i5, 8–16 GB RAM and an SSD." },
+        { question: "What is the best laptop for running QuickBooks?", answer: "QuickBooks Online runs in a browser on any modern laptop. QuickBooks Desktop needs Windows; Intuit recommends at least 8 GB RAM and an SSD for recent versions." },
+        { question: "What laptop is suitable for running POS software?", answer: "A Windows laptop (check your POS vendor) with enough USB ports for the scanner and receipt printer, an Ethernet port and a UPS for power cuts." },
+        { question: "Which laptop is best for virtual meetings?", answer: "Any 8th-gen or newer Core i5 with 8 GB RAM, plus a working webcam and microphone, stable internet and a headset." },
+        { question: "Should a business buy laptops or desktops for employees?", answer: "Laptops for staff who move, meet or work remotely (and to ride through power cuts); desktops with a UPS for fixed workstations." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "business-vs-consumer",
+  path: "/learn/business-vs-consumer-laptops",
+  kw: "business laptop vs consumer laptop",
+  secondary: ["refurbished business laptop vs new budget laptop", "14 inch vs 15.6 inch laptop", "lightweight vs powerful laptop", "workstation laptop vs normal laptop", "laptop vs ultrabook", "is a 2-in-1 laptop worth it"],
+  h1: "Business vs consumer laptops, 14 vs 15.6 inch, ultrabooks and workstations",
+  title: "Business Laptop vs Consumer Laptop: Which Should You Buy?",
+  related: ["/hp-vs-dell-vs-lenovo-laptops-kenya", "/compare/elitebook-vs-latitude-kenya", "/compare/thinkpad-vs-latitude-kenya"],
+  write(x) {
+    const { L, ksh, median, link, SITE, asOf, recency, tableMd } = x;
+    if (L.length < 50) return null;
+    const biz = L.filter((r) => /-(thinkpad|elitebook|latitude|probook|zbook|precision)-/.test(`-${r.slug}-`) && recency(r.sp) >= 3);
+    const ws = L.filter((r) => /-(zbook|precision|p\d{2}s?|p1\d)-/.test(`-${r.slug}-`));
+    return {
+      intro: `Business laptop vs consumer laptop: business laptops (ThinkPad, EliteBook, Latitude, ProBook) are built tougher, are easier to repair and upgrade, and get longer support; consumer laptops (IdeaPad, Pavilion, Inspiron) cost less new and often look sleeker. Bought a few years old, a business laptop is often better value than a new budget consumer laptop: ${biz.length} 8th-gen or newer business laptops are in stock here, median ${ksh(median(biz.map((r) => r.price)))} (${asOf}).`,
+      description: `Business vs consumer laptops, refurbished business vs new budget, 14 vs 15.6 inch, light vs powerful, ultrabooks, workstations and 2-in-1s compared for Kenyan buyers.`,
+      sections: [
+        { heading: "Business vs consumer laptops", body: tableMd(["", "Business (ThinkPad, EliteBook, Latitude)", "Consumer (IdeaPad, Pavilion, Inspiron)"], [["Build", "Tougher; many models tested to MIL-STD-810", "Lighter-duty"], ["Repair and upgrades", "Easy; parts common in Nairobi; often 2 RAM slots", "Varies; more soldered parts"], ["Keyboard", "Excellent for long typing", "Varies"], ["Security", "TPM, fingerprint, BIOS controls, vPro on some", "Basic"], ["New price", "Higher", "Lower"], ["Value used", "Excellent", "Lower resale"]]) },
+        { heading: "Refurbished business laptop or new budget laptop?", body: `For the same money, a few-years-old business laptop usually has a faster processor class, better keyboard and build, and easier repairs than a new entry-level consumer laptop. The new laptop has a full manufacturer warranty and a fresh battery. Check generation (8th gen+), battery health and the seller's warranty: see ${link("refurbished vs used vs new", `${SITE}/learn/refurbished-vs-used-laptops-kenya`)}.` },
+        { heading: "Brand comparisons", body: `No brand is better at everything; compare the model lines: ${link("HP vs Dell vs Lenovo", `${SITE}/hp-vs-dell-vs-lenovo-laptops-kenya`)}, ${link("EliteBook vs Latitude", `${SITE}/compare/elitebook-vs-latitude-kenya`)}, ${link("ThinkPad vs Latitude", `${SITE}/compare/thinkpad-vs-latitude-kenya`)}, ${link("ThinkPad vs EliteBook", `${SITE}/compare/thinkpad-vs-elitebook-kenya`)} and ${link("EliteBook vs ProBook", `${SITE}/compare/elitebook-vs-probook-kenya`)}. Dell's Vostro is a small-business line between Inspiron and Latitude; we don't stock it, so compare HP ProBook with Latitude instead.` },
+        { heading: "14-inch or 15.6-inch?", body: "14 inches: lighter (about 1.3–1.6 kg), easier to carry, the best all-rounder. 15.6 inches: bigger screen, usually a number pad, more ports, heavier (1.7 kg+); better at a desk, for spreadsheets and design." },
+        { heading: "Lightweight or powerful?", body: "If you carry it daily, choose lightweight (13–14 inch, U-series processor, long battery). If it stays on a desk and runs heavy software (CAD, video, games), choose power (H-series processor, dedicated GPU, better cooling). Many people are best served by a light laptop plus a monitor at the desk." },
+        { heading: "Ultrabooks", body: "\"Ultrabook\" means a thin, light laptop with a low-power processor, an SSD and long battery life (originally an Intel specification). Examples: ThinkPad X1 Carbon, EliteBook 830/1040, Dell XPS 13, MacBook Air. Trade-offs: fewer ports, soldered RAM on many, higher prices." },
+        { heading: "Workstation laptops", body: `Workstations (HP ZBook, Dell Precision, ThinkPad P) have professional graphics certified for CAD and engineering software, more RAM capacity and stronger cooling. Worth it for AutoCAD, Revit, SolidWorks and 3D work; unnecessary for office work. ${ws.length} are in stock: see ${link("laptops for AutoCAD and Revit", `${SITE}/learn/best-laptops-for-autocad-and-revit-kenya`)}.` },
+        { heading: "Is a 2-in-1 worth it?", body: `Yes if you take handwritten notes, sketch, sign documents or present; otherwise a standard laptop costs less and is lighter. See ${link("is a touchscreen or 2-in-1 worth it", `${SITE}/learn/touchscreen-laptop-worth-it-kenya`)}.` },
+      ],
+      faq: [
+        { question: "Which is better, a business laptop or a consumer laptop?", answer: "For durability, repairs and keyboards, business laptops; for the lowest new price or a sleek design, consumer laptops. Used, business laptops are usually better value." },
+        { question: "Are refurbished business laptops better than new budget laptops?", answer: "Often, for the same money: better build and processor class and easier repairs. A new laptop has a fresh battery and full manufacturer warranty." },
+        { question: "Is a 14-inch laptop better than a 15.6-inch laptop?", answer: "For carrying, yes. For spreadsheets, design and desk work, 15.6 inches (with a number pad) is better." },
+        { question: "What is the difference between a laptop and an ultrabook?", answer: "An ultrabook is a thin, light laptop with a low-power processor, SSD and long battery life, such as a ThinkPad X1 Carbon or MacBook Air." },
+        { question: "Are workstation laptops better than normal laptops?", answer: "For CAD, engineering and 3D software, yes (certified graphics, more RAM, better cooling). For office work they're unnecessary and heavier." },
+        { question: "Is HP EliteBook better than Dell Latitude for business?", answer: "Neither across the board: compare the specific generation, RAM, battery and price. Our EliteBook vs Latitude comparison uses live stock." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "maintenance",
+  path: "/learn/laptop-maintenance-guide",
+  kw: "laptop maintenance tips",
+  secondary: ["how often should i service my laptop", "how to clean laptop keyboard", "can dust damage a laptop", "should i leave my laptop plugged in", "is it bad to charge laptop overnight", "how to extend laptop battery lifespan"],
+  h1: "Laptop maintenance: cleaning, charging habits and making it last",
+  title: "Laptop Maintenance Tips: A Guide to Cleaning and Charging",
+  related: ["/learn/laptop-battery-and-overheating-fixes", "/learn/laptop-slow-freezing-not-charging-fixes", "/learn/laptop-buying-guide-kenya"],
+  write(x) {
+    const { link, SITE } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `These laptop maintenance tips cover what actually extends a laptop's life: keep it cool and dust-free, keep the battery out of constant 100% and heat, clean the keyboard safely, keep Windows and drivers updated, and back up your files. With care, a business laptop commonly lasts five years or more; the battery is usually the first part to replace.`,
+      description: `Laptop maintenance tips: cleaning the keyboard and vents, dust, servicing, charging overnight, leaving it plugged in, battery lifespan, and repair vs replace.`,
+      sections: [
+        { heading: "How long should a laptop last?", body: "Business laptops (ThinkPad, EliteBook, Latitude) are built for years of daily use and commonly give five years or more; budget consumer laptops are often replaced sooner. The limits are usually the battery (replaceable), the software support of the processor (8th gen or newer for Windows 11), and whether it's still fast enough for your work." },
+        { heading: "How often should you service a laptop?", body: "- **Monthly:** restart fully, install updates, clear unused files.\n- **Every 6–12 months:** blow dust out of the vents (more often in dusty places such as building sites or near roads).\n- **When it runs hot or loud:** a technician can clean the fan and replace dried thermal paste; this needs the laptop opened and is a job for someone experienced." },
+        { heading: "Cleaning the keyboard and screen safely", body: "1. Shut down and unplug.\n2. Turn the laptop upside down at an angle and tap gently; use compressed air between keys in short bursts.\n3. Wipe keys with a cloth lightly dampened with isopropyl alcohol (not dripping).\n4. Clean the screen with a microfibre cloth, lightly dampened with water if needed; never spray liquid directly on the laptop.\n5. Spills: shut down immediately, unplug, turn it upside down and let a technician check it before switching on." },
+        { heading: "Can dust damage a laptop?", body: `Yes, over time: dust clogs the vents and fan, the laptop runs hotter, slows itself down and the fan gets loud; long-term heat shortens battery and component life. Keep it on hard surfaces and clean the vents regularly. See ${link("overheating fixes", `${SITE}/learn/laptop-battery-and-overheating-fixes`)}.` },
+        { heading: "Should you leave a laptop plugged in? Charging overnight", body: "Modern laptops stop charging when full, so charging overnight isn't dangerous. What wears lithium-ion batteries is heat and sitting at 100% for long periods. If the laptop is mostly plugged in at a desk, turn on the maker's charge limit (about 80%): Lenovo Vantage (Conservation mode or charge threshold), HP Battery Health Manager in the BIOS, or Dell Power Manager (Primarily AC use). Keep it ventilated while charging, and don't charge it on a bed or in a hot car." },
+        { heading: "Extending battery lifespan", body: "- Avoid heat.\n- Avoid running it to 0% regularly.\n- Use the 80% charge limit when mostly plugged in.\n- Store it at about 50% if it won't be used for weeks.\n- Use the original or a quality charger of the right wattage." },
+        { heading: "Software maintenance", body: "Keep Windows and drivers updated, keep Microsoft Defender on, uninstall programs you don't use, keep 15–20% of the SSD free, and back up regularly (cloud plus an external drive)." },
+        { heading: "Repair or replace? Signs of motherboard damage", body: `Signs of a motherboard problem: no power at all with a known-good charger, no display even on an external monitor, beeping at startup, random shutdowns while cool, or ports dying one after another. These need a technician's diagnosis. Repair is usually worth it for batteries, chargers, SSDs, RAM, keyboards and fans on 8th-gen or newer laptops; replacing is usually better when the motherboard fails on an older model. See ${link("repair or replace", `${SITE}/learn/laptop-slow-freezing-not-charging-fixes`)} and ${link("best value laptops", `${SITE}/learn/best-value-laptops-kenya`)}.` },
+      ],
+      faq: [
+        { question: "How often should I service my laptop?", answer: "Clean the vents every 6–12 months (more in dusty places), install updates monthly, and have the fan and thermal paste checked when it runs hot or loud." },
+        { question: "Is it bad to charge a laptop overnight?", answer: "No: modern laptops stop charging when full. Heat and long periods at 100% wear the battery, so use an 80% charge limit if it's mostly plugged in." },
+        { question: "Should I leave my laptop plugged in all the time?", answer: "It's safe, but turn on the maker's charge limit (about 80%) to slow battery wear, and keep it ventilated." },
+        { question: "How do I clean my laptop keyboard safely?", answer: "Shut down and unplug, use compressed air in short bursts, and wipe keys with a cloth lightly dampened with isopropyl alcohol." },
+        { question: "When should I replace my laptop instead of repairing it?", answer: "When the motherboard or screen fails on an older laptop, or the repair costs more than about half the price of a comparable replacement." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "ports",
+  path: "/learn/laptop-ports-explained",
+  kw: "laptop ports explained",
+  secondary: ["usb-a vs usb-c", "what is thunderbolt on a laptop", "external graphics card laptop", "connect printer to laptop wirelessly", "connect laptop to projector", "webcam resolution for meetings", "laptop for dual screen setup"],
+  h1: "Laptop ports explained: USB-A, USB-C, Thunderbolt, HDMI and more",
+  title: "Laptop Ports Explained: USB-C, Thunderbolt and HDMI",
+  related: ["/learn/laptop-accessories-guide-kenya", "/learn/laptop-wifi-and-internet-guide", "/learn/laptops-for-small-business-kenya"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf, tableMd } = x;
+    if (!P || P.length < 50) return null;
+    const proj = dedupe(P.filter((p) => /projector/.test(p.slug)).sort((a, b) => a.price - b.price));
+    const wprint = dedupe(P.filter((p) => /wireless|wifi|wi-fi/.test(p.slug) && /epson|canon|hp-|kyocera|brother|printer/.test(p.slug) && !/mouse|keyboard|headset|projector/.test(p.slug)).sort((a, b) => a.price - b.price));
+    const heads = dedupe(P.filter((p) => /headset/.test(p.slug)).sort((a, b) => a.price - b.price));
+    return {
+      intro: `Laptop ports explained: USB-A is the familiar rectangular port; USB-C is the small oval one, but what a USB-C port can do (charging, video, Thunderbolt speed) depends on the laptop, so check its spec sheet, not the shape. Most people need at least one USB-C, two USB-A, HDMI and a headphone jack; Ethernet and an SD card reader are useful extras. Below: each port, external monitors and keyboards, printers, projectors, webcams and microphones.`,
+      description: `Laptop ports explained: USB-A vs USB-C, Thunderbolt, HDMI, external GPUs, wireless printers, projectors, webcams, microphones and dual-screen setups.`,
+      sections: [
+        { heading: "The ports and what they do", body: tableMd(["Port", "What it's for", "Check"], [
+          ["USB-A", "Mice, flash drives, keyboards, printers", "USB 3 (often blue or marked SS) is faster than USB 2"],
+          ["USB-C", "Data, and on many laptops charging and video", "Charging needs USB Power Delivery; video needs DisplayPort Alt Mode"],
+          ["Thunderbolt 3/4 (USB-C with a lightning-bolt symbol)", "Fast data (up to 40 Gbps), docks, two monitors, charging, sometimes external GPUs", "Only on laptops that list it"],
+          ["HDMI", "Monitors, TVs, projectors", "Version limits resolution/refresh on big 4K screens"],
+          ["Ethernet (RJ45)", "Wired internet", "Many business laptops; adapters for thin ones"],
+          ["Headphone/mic jack (3.5 mm)", "Headsets and speakers", "Most laptops"],
+          ["SD card reader", "Camera cards", "Useful for photographers"],
+        ]) + "\n\nThe same-looking USB-C port can support very different features: always confirm in the laptop's specifications before buying a charger, dock or monitor for it." },
+        { heading: "What is Thunderbolt?", body: "Thunderbolt is Intel's high-speed standard that uses the USB-C connector: up to 40 Gbps, two 4K monitors from one port through a dock, charging, and (on many) support for external graphics enclosures. USB4 offers similar features on newer laptops. Look for the lightning-bolt symbol by the port or \"Thunderbolt\" in the spec sheet." },
+        { heading: "Do all laptops support external graphics cards?", body: "No. An external GPU (eGPU) enclosure needs a Thunderbolt 3/4 or USB4 port that supports it, and performance is lower than the same card in a desktop. Many business laptops with Thunderbolt work; laptops without Thunderbolt don't. For gaming or CAD, a laptop with a built-in dedicated GPU is usually simpler." },
+        { heading: "External keyboard, mouse and monitor", body: `Plug the monitor into HDMI or USB-C/Thunderbolt, the keyboard and mouse into USB (or pair Bluetooth), then press Windows + P and choose Extend. Set the monitor as the main display in Settings → System → Display. For two monitors, see ${link("the accessories guide", `${SITE}/learn/laptop-accessories-guide-kenya`)}: the laptop needs two video outputs or a compatible dock. Business laptops with Thunderbolt are the easiest dual-screen workstations.` },
+        { heading: "Printing wirelessly", body: `Connect the printer to the same Wi-Fi network (from its screen or with the maker's app), then on the laptop go to Settings → Bluetooth & devices → Printers & scanners → Add device.${wprint.length ? ` Wireless printers in stock from ${ksh(wprint[0].price)}:\n\n${liveList(x, wprint, 5)}` : ""}` },
+        { heading: "Projectors", body: `Connect by HDMI (or a USB-C to HDMI adapter), then press Windows + P → Duplicate. Some projectors also connect wirelessly.${proj.length ? ` Projectors in stock:\n\n${liveList(x, proj, 3)}` : ""}\n\nPrices as of ${asOf}.` },
+        { heading: "Webcams and microphones", body: `All modern laptops have a built-in webcam and microphone. 720p webcams are common on older business laptops and are fine for calls; 1080p looks noticeably sharper, and newer laptops increasingly have it. Good lighting facing you improves any webcam more than resolution. A USB headset cuts background noise in busy offices${heads.length ? ` (from ${ksh(heads[0].price)}: ${link(heads[0].short, `${SITE}/item/${heads[0].slug}`)})` : ""}.` },
+        { heading: "Which ports should you look for?", body: `For most buyers: at least one USB-C (ideally with charging and video), two USB-A, HDMI and a headphone jack. Add Ethernet for offices and POS, Thunderbolt for docks and two monitors, and an SD reader for photography. See ${link("laptops for small business", `${SITE}/learn/laptops-for-small-business-kenya`)}.` },
+      ],
+      faq: [
+        { question: "What is the difference between USB-A and USB-C?", answer: "USB-A is the older rectangular plug; USB-C is the small reversible one, which on many laptops also carries charging and video. Features depend on the laptop, not the shape." },
+        { question: "What is Thunderbolt on a laptop?", answer: "Intel's high-speed standard over USB-C: up to 40 Gbps, docks, two monitors, charging and, on many laptops, external GPUs." },
+        { question: "Does every laptop support external graphics cards?", answer: "No: it needs a Thunderbolt 3/4 or USB4 port that supports eGPUs, and performance is lower than in a desktop." },
+        { question: "Can I connect a printer to my laptop wirelessly?", answer: "Yes: connect the printer to the same Wi-Fi network, then add it in Settings → Bluetooth & devices → Printers & scanners." },
+        { question: "Can I connect a laptop to a projector?", answer: "Yes, with HDMI (or a USB-C to HDMI adapter), then Windows + P → Duplicate." },
+        { question: "What is the best webcam resolution for online meetings?", answer: "1080p looks sharper; 720p is fine for calls. Good lighting improves any webcam more than extra resolution." },
+        { question: "Do laptops have built-in microphones?", answer: "Yes, all modern laptops do; a USB headset improves sound in noisy rooms." },
       ],
     };
   },

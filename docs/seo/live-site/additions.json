@@ -167,6 +167,10 @@
       {
         "question": "Can I use an external SSD with my laptop?",
         "answer": "Yes: a USB-C or USB 3 external SSD adds fast storage without opening the laptop, ideal for backups and large files."
+      },
+      {
+        "question": "How much storage do I need for everyday use?",
+        "answer": "256 GB is enough for documents, browsing and apps with cloud storage; 512 GB if you keep photos, music or videos on the laptop."
       }
     ]
   },
@@ -206,6 +210,87 @@
       {
         "question": "How do I know if a laptop battery needs replacing?",
         "answer": "The battery report shows below about 60% of design capacity, the laptop dies quickly or only runs plugged in, or the battery is swollen (replace a swollen battery immediately)."
+      },
+      {
+        "question": "How do I prevent my laptop from overheating?",
+        "answer": "Use it on a hard surface, clean the vents every 6–12 months, close programs you aren't using, and use a cooling pad for gaming or long video calls."
+      }
+    ]
+  },
+  "/learn/laptop-terms-explained": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "How many processor cores do I need in a laptop?",
+        "answer": "Four cores is the comfortable minimum for Windows 11, browsing and Office (8th-gen Intel and newer business laptops have at least four); six or more help with programming, editing and heavy multitasking."
+      },
+      {
+        "question": "What is the difference between dual-core and quad-core processors?",
+        "answer": "A quad-core processor works on four tasks at once instead of two, so many open programs stay smooth. Most 7th-gen and older thin-laptop chips are dual-core; 8th-gen and newer are quad-core or more."
+      },
+      {
+        "question": "What does Intel Core Ultra mean?",
+        "answer": "Intel's newer processor family (since late 2023), named Core Ultra 5, 7 and 9, with a built-in AI accelerator (NPU), stronger integrated graphics and better efficiency."
+      },
+      {
+        "question": "What is the difference between Intel Core i5 and Core Ultra 5?",
+        "answer": "Core Ultra 5 is a newer design with an NPU, much stronger built-in graphics and better efficiency; compared with an older Core i5 it's faster and lasts longer on battery. Compare the specific models and generations."
+      }
+    ]
+  },
+  "/learn/laptop-buying-guide-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Is clock speed or processor generation more important?",
+        "answer": "Generation and core count usually matter more: a newer processor at a lower GHz is often faster than an older one at a higher GHz, because each generation does more per clock cycle."
+      },
+      {
+        "question": "What laptop specifications should I check before buying?",
+        "answer": "Processor and generation, RAM, SSD size, screen resolution and size, battery health, ports (USB-C, HDMI), Wi-Fi version, weight and the warranty."
+      }
+    ]
+  },
+  "/learn/laptop-upgrade-ram-ssd": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Can a laptop have both an SSD and an HDD?",
+        "answer": "Yes, if it has two drive bays or an M.2 slot plus a 2.5-inch bay: Windows on the SSD for speed, files on the HDD for capacity."
+      },
+      {
+        "question": "What is the difference between RAM and storage?",
+        "answer": "RAM is short-term working memory (what's open now, cleared when you shut down); storage (SSD/HDD) keeps your files and programs permanently."
+      }
+    ]
+  },
+  "/learn/refurbished-vs-used-laptops-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "What is the difference between refurbished and renewed laptops?",
+        "answer": "Mostly naming: 'renewed' is a marketplace term for refurbished products. What matters is who tested it, what was replaced and the warranty, not the label."
+      },
+      {
+        "question": "How do I check whether a laptop has been repaired before?",
+        "answer": "Compare the serial in the BIOS with the label, look for mismatched screws or panels and non-original stickers, check the battery's design capacity in the battery report, and ask the seller directly what was replaced."
+      },
+      {
+        "question": "Are refurbished HP EliteBooks good for university students?",
+        "answer": "Yes, if 8th gen or newer (Windows 11), with a healthy battery and a warranty: they're sturdy and easy to repair. The 830 and 840 are the usual student picks."
+      },
+      {
+        "question": "Can I buy a refurbished laptop for professional work?",
+        "answer": "Yes: 10th-gen or newer business laptops and workstations (ZBook, Precision, ThinkPad P) handle professional work; match the RAM and GPU to your software."
+      }
+    ]
+  },
+  "/learn/buying-a-laptop-safely-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "What questions should I ask a laptop seller before paying?",
+        "answer": "Is it new, refurbished or used? What was replaced (battery, screen)? What's the battery health? Is Windows activated? What warranty covers it, for how long, and is that on the receipt? Can I test it first?"
       }
     ]
   }
