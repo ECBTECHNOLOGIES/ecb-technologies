@@ -16,5 +16,31 @@
     "title": "Optional: a new title to test (60 characters max)",
     "description": "Optional: a new meta description to test (158 characters max)",
     "since": "YYYY-MM-DD the title/description went live (for the CTR comparison)"
+  },
+  "/student-laptops-kenya": {
+    "faq": [
+      {
+        "question": "Can I use a Chromebook for university?",
+        "answer": "For browser-based work (Google Docs, email, online classes), yes. But Chromebooks can't install Windows programs such as desktop Microsoft Office, SPSS, Stata or AutoCAD, which many Kenyan university courses use, so a Windows laptop is the safer choice."
+      },
+      {
+        "question": "Which laptop is good for a high school student?",
+        "answer": "A light 8th-gen or newer Core i3 or i5 with 8 GB RAM and an SSD is plenty for schoolwork and research; durable business models (ThinkPad, EliteBook, Latitude) survive daily carrying. The budget table above shows what each price gets."
+      },
+      {
+        "question": "What laptop is best for online classes?",
+        "answer": "Any 8th-gen or newer Core i5 (or Ryzen 5) with 8 GB RAM runs Zoom, Teams and Google Meet smoothly. Check the webcam, microphone and speakers before paying, and choose a battery that still holds at least 80% of its design capacity."
+      }
+    ],
+    "sections": []
+  },
+  "/best/business-laptops-kenya": {
+    "faq": [
+      {
+        "question": "Which laptop is best for Excel and accounting software?",
+        "answer": "An 8th-gen or newer Core i5 with 8 GB RAM handles Excel and accounting packages; choose 16 GB for very large workbooks. A 15.6-inch model (such as an EliteBook 850 or Latitude 5000 15-inch) adds a number pad for data entry. Most desktop accounting software runs on Windows."
+      }
+    ],
+    "sections": []
   }
 }

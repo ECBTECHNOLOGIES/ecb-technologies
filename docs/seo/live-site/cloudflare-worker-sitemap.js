@@ -211,6 +211,11 @@ async function robots(url) {
     "User-agent: Google-Extended",
     "User-agent: Applebot-Extended",
     "User-agent: *",
+    // Content Signals (contentsignals.org): how the content may be used after
+    // it is accessed. search = search indexes and results; ai-input = AI
+    // answers that use the page as a source (RAG, grounding); ai-train =
+    // training models. Matches /ai.txt and the crawler policy above.
+    "Content-Signal: search=yes, ai-input=yes, ai-train=yes",
     // Only the admin area is blocked. Cart, checkout, account and cart-action
     // URLs send "noindex" instead: a robots.txt block hides that noindex, so
     // Google kept them as "Indexed, though blocked by robots.txt".

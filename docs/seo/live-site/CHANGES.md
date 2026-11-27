@@ -1103,3 +1103,20 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   their noindex and drop them (a robots block hides the noindex).
 - Added X-Robots-Tag noindex to /item/compare, /wishlist(s), /track-order,
   /subscriber, /currency and /language responses (they had none).
+
+## 2026-11-27: master brief, batch 1 (see docs/seo/question-map.md)
+- robots.txt: Content-Signal: search=yes, ai-input=yes, ai-train=yes.
+- 7 new pages: /learn/laptop-buying-guide-kenya (pillar),
+  /learn/refurbished-vs-used-laptops-kenya, /learn/core-i3-vs-i5-vs-i7-vs-ryzen,
+  /learn/gaming-laptop-guide-kenya, /learn/laptop-battery-and-overheating-fixes,
+  /learn/laptop-upgrade-ram-ssd, /laptops/macbook-price-kenya (commercial;
+  MacBooks only, live prices). All with FAQs, FAQPage + breadcrumb schema,
+  sitemap, related links near the top, live stock data where it applies.
+- FAQs added without a deploy (additions.json): Chromebook, high school and
+  online classes on /student-laptops-kenya; Excel/accounting on
+  /best/business-laptops-kenya.
+- Question map: 94 of 100 questions answered on live pages; 6 not, with
+  reasons (no ASUS/Acer stock, no verified repair prices, repairs and
+  new-vs-used condition not confirmed by the shop).
+- Articles without stock-dependent data now also require 50+ laptops in
+  stock (thin-catalogue safety); model-page test keys on the template.

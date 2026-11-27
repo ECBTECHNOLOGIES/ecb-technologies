@@ -171,7 +171,7 @@ test("pruned pages are flagged (noindex), not deleted", () => {
   assert.ok(!("_pruned" in G.publicJson(d)));
 });
 test("model pages list only that model, at least MIN_CONFIGS configurations", () => {
-  for (const d of built.pages.filter((x) => /\/laptops\/.*-price-kenya$/.test(x.url))) {
+  for (const d of built.pages.filter((x) => x._template === "model")) {
     const key = d.url.match(/\/laptops\/(.*)-price-kenya$/)[1].replace(/-/g, " ");
     const items = d.schema.structured_data["@graph"][0].mainEntity.itemListElement;
     assert.ok(items.length >= G.MIN_CONFIGS, d.url);
