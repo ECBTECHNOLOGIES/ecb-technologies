@@ -1164,3 +1164,19 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   (dual boot, Windows Hello, Android apps), small business (Teams, Zoom),
   student page (accounting and nursing named; KCSE FAQ).
 - Master index of all 400 questions: docs/seo/content-map.md (390 answered).
+
+## 2026-11-27: fifth 100 questions (see docs/seo/question-map-5.md)
+- 8 new pages: /learn/ai-pc-npu-and-snapdragon-laptops (NPUs, Copilot+,
+  Core vs Core Ultra naming, ARM vs x86, Windows on ARM; Core Ultra,
+  Snapdragon, Core 5/7 and Ryzen PRO in stock), /learn/laptop-performance-guide,
+  /learn/laptop-graphics-cards-explained (power-limit caveat; RTX in stock),
+  /learn/laptop-storage-backup-and-recovery, /learn/windows-11-home-vs-pro
+  (erase warnings; live Windows 11 Pro price), /learn/laptop-webcam-microphone-and-audio-guide,
+  /learn/laptop-hardware-problems-and-inspection, /learn/work-from-home-laptop-setup.
+- Expanded: best value (KSh 100–120k band, live "on offer" section from
+  catalogue names only, tight-budget and older-premium sections, live
+  60k/120k FAQs); procurement (finance teams, warranties, endpoint
+  management, data theft, procurement policy, replacement budgeting).
+- Redirect: /learn/windows-11-home-vs-pro-and-reset-guide → /learn/windows-11-home-vs-pro
+  (renamed on publication day).
+- Master map: 490 of 500 questions answered.

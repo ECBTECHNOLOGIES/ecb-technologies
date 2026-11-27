@@ -1274,15 +1274,24 @@ ARTICLES.push({
       intro: `The best value for money laptop in Kenya is usually an 8th-gen or newer business laptop (ThinkPad, EliteBook, Latitude) with a Core i5 or i7, 8–16 GB RAM and an SSD: they cost far less than new laptops of similar speed and last for years. For everyday use, plan on KSh 30,000–50,000; spend more only for a specific need (design, engineering, gaming, a newer generation). Below: the laptops in stock that give the most specs per shilling, and what each budget gets (${asOf}).`,
       description: `Best value laptops in Kenya: what KSh 25,000, 35,000, 50,000, 80,000 and 100,000 buys, the most specs per shilling in stock, and why some laptops cost less.`,
       sections: [
-        { heading: "What each budget gets you", body: tableMd(["Budget", "Best specified in stock (8th gen or newer)"], [[0, 25000, "Up to KSh 25,000"], [25000, 35000, "KSh 25,001–35,000"], [35000, 50000, "KSh 35,001–50,000"], [50000, 80000, "KSh 50,001–80,000"], [80000, 100000, "KSh 80,001–100,000"]].map(([lo, m, l]) => [l, cell([...ok].filter((r) => r.price > lo && r.price <= m && recency(r.sp) >= 3).sort((a, b) => b.score - a.score || a.price - b.price)[0])])) + `\n\nFull lists: ${link("under KSh 25,000", `${SITE}/best/best-laptops-under-25k-kenya`)}, ${link("under KSh 30,000", `${SITE}/best/best-laptops-under-30k-kenya`)}, ${link("under KSh 40,000", `${SITE}/student-laptops-kenya`)}, ${link("under KSh 50,000", `${SITE}/best/best-laptops-under-50k-kenya`)}, ${link("under KSh 80,000", `${SITE}/best/best-laptops-under-80k-kenya`)}.` },
+        { heading: "What each budget gets you", body: tableMd(["Budget", "Best specified in stock (8th gen or newer)"], [[0, 25000, "Up to KSh 25,000"], [25000, 35000, "KSh 25,001–35,000"], [35000, 50000, "KSh 35,001–50,000"], [50000, 80000, "KSh 50,001–80,000"], [80000, 100000, "KSh 80,001–100,000"], [100000, 120000, "KSh 100,001–120,000"]].map(([lo, m, l]) => [l, cell([...ok].filter((r) => r.price > lo && r.price <= m && recency(r.sp) >= 3).sort((a, b) => b.score - a.score || a.price - b.price)[0])])) + `\n\nFull lists: ${link("under KSh 25,000", `${SITE}/best/best-laptops-under-25k-kenya`)}, ${link("under KSh 30,000", `${SITE}/best/best-laptops-under-30k-kenya`)}, ${link("under KSh 40,000", `${SITE}/student-laptops-kenya`)}, ${link("under KSh 50,000", `${SITE}/best/best-laptops-under-50k-kenya`)}, ${link("under KSh 80,000", `${SITE}/best/best-laptops-under-80k-kenya`)}.` },
+        { heading: "Laptops on offer", body: (() => {
+          // Only products whose catalogue name says they're on offer (no invented deals).
+          const offers = dedupe((x.P || []).filter((p) => /-on-offer-|-offer-|-promo-/.test(`-${p.slug}-`)).map((p) => ({ ...p, sp: x.specsOf ? x.specsOf(p.slug) : null })));
+          return offers.length ? `Products currently marked as on offer in our catalogue:\n\n${offers.map((r) => `- ${link(r.short.replace(/[^\x20-\x7E’”–]+/g, "").replace(/\s*ON OFFER\s*/i, " ").replace(/\s+/g, " ").trim(), `${SITE}/item/${r.slug}`)}: ${ksh(r.price)}`).join("\n")}\n\nOffers change; the product page always shows the current price.` : "No products are marked as on offer right now; the product pages always show current prices.";
+        })() },
         { heading: "The most specs per shilling right now", body: `Ranked by our spec score (processor, generation, RAM, storage) divided by price, 8th gen or newer only:\n\n${liveList(x, value, 8)}\n\nHow the score works is explained on every ${link("guide page", `${SITE}/guides`)}.` },
         { heading: "How much should you spend for everyday use?", body: `- **KSh 25,000–35,000:** 8th-gen Core i5 business laptops: documents, browsing, online classes, Zoom.\n- **KSh 35,000–50,000:** the sweet spot: 8th–10th gen, often 16 GB RAM or a 512 GB SSD, touchscreens and slimmer models. A KSh 50,000 laptop is more than enough for office work.\n- **KSh 50,000–80,000:** 10th–11th gen, 16 GB, premium business models (T14s, EliteBook 840 G7/G8): faster and longer-lasting.\n- **KSh 100,000+:** worth it for design, engineering, gaming (dedicated GPU), the newest Core Ultra chips, or a MacBook. For office work alone, it's more than you need.` },
         { heading: "Why are some laptops cheaper than others?", body: `- **Generation:** each newer generation costs more; 8th gen is the best-value Windows 11 entry point.\n- **Line:** business lines cost more new but are excellent value once a few years old.\n- **RAM, SSD, screen:** 16 GB, larger SSDs, touchscreens and higher-resolution screens all add cost.\n- **Graphics:** a dedicated GPU adds a lot.\n- **Condition and warranty:** new, refurbished and used laptops of the same model are priced differently.\n\nSee ${link("refurbished vs used vs new laptops", `${SITE}/learn/refurbished-vs-used-laptops-kenya`)} and ${link("laptop prices in Kenya", `${SITE}/research/laptop-prices-kenya`)}.` },
+        { heading: "Buying on a tight budget: what to prioritise", body: `1. **Processor generation:** 8th gen or newer (Windows 11, quad-core).\n2. **SSD:** non-negotiable; never a hard drive as the only drive.\n3. **8 GB RAM** (16 GB if your work needs it).\n4. **Battery health** above 80% on used laptops.\n5. **A warranty** in writing.\n\nThen screen, weight and looks. Are cheap laptops worth it? A cheap new laptop with a Celeron, 4 GB RAM or eMMC storage usually isn't; a cheap 8th-gen business laptop usually is. Compare prices on the product pages and in ${link("laptop price research", `${SITE}/research/laptop-prices-kenya`)}: match the exact processor, generation, RAM, SSD and condition, not just the model name.` },
+        { heading: "Older premium or new budget?", body: `An older premium or business laptop (EliteBook, ThinkPad T/X, Latitude 7000, XPS) usually beats a new budget laptop at the same price on build, keyboard, screen and repairability; the new laptop wins on battery health, warranty and having the latest processor. A good rule: an older premium laptop of 8th gen or newer beats a new laptop with an entry-level chip. Business laptops cost more new than consumer laptops, but much less once a few years old. See ${link("business vs consumer laptops", `${SITE}/learn/business-vs-consumer-laptops`)}.` },
         { heading: "How much does a business-class laptop cost in Kenya?", body: `At ECB Technologies, ${biz.length} business laptops (ThinkPad, EliteBook, Latitude, ProBook) are in stock; those with 8th-gen or newer processors start at ${biz8.length ? ksh(Math.min(...biz8.map((r) => r.price))) : "n/a"} with a median of ${biz8.length ? ksh(median(biz8.map((r) => r.price))) : "n/a"} (${asOf}). Browse ${link("business laptops", `${SITE}/best/business-laptops-kenya`)}.` },
       ],
       faq: [
         { question: "What is the best laptop to buy in Kenya with KSh 25,000?", answer: at(25000) ? `The best specified 8th-gen or newer laptop up to KSh 25,000 in stock is the ${at(25000).short} at ${ksh(at(25000).price)} (${asOf}).` : "Few 8th-gen laptops cost KSh 25,000 or less; see the under-25k list for what's in stock." },
         { question: "Which laptop can I buy with KSh 35,000 in Kenya?", answer: at(35000) ? `An 8th-gen or newer business laptop; the best specified in stock is the ${at(35000).short} at ${ksh(at(35000).price)} (${asOf}).` : "An 8th-gen business laptop; see the student guide for current options." },
+        { question: "What is the best laptop for KSh 60,000 in Kenya?", answer: at(60000) ? `The best specified 8th-gen or newer laptop up to KSh 60,000 in stock is the ${at(60000).short} at ${ksh(at(60000).price)} (${asOf}).` : "See the under-60k list for what's in stock." },
+        { question: "Which laptop is best under KSh 120,000?", answer: at(120000) ? `By specs, the ${at(120000).short} at ${ksh(at(120000).price)} (${asOf}); at this budget, also consider an RTX laptop for creative work or a MacBook Air.` : "See the budget table on this page." },
         { question: "Is a KSh 50,000 laptop good enough for office work?", answer: "Yes, comfortably: at that price you get an 8th–10th gen Core i5 or i7 business laptop, often with 16 GB RAM." },
         { question: "Is it worth spending KSh 100,000 on a laptop?", answer: "For design, engineering, gaming or a MacBook, yes. For office work and study, a KSh 35,000–60,000 business laptop does the job." },
         { question: "Which laptop gives the best performance for its price?", answer: value[0] ? `By spec score per shilling, the ${value[0].short} at ${ksh(value[0].price)} leads right now (${asOf}).` : "See the value ranking on this page." },
@@ -1813,6 +1822,316 @@ ARTICLES.push({
         { question: "How do I calculate the total cost of owning a business laptop?", answer: "Purchase price plus accessories, licences, repairs, IT time and downtime, minus resale value, divided by the years you keep it." },
         { question: "When should a company replace its employees' laptops?", answer: "Typically every 4–5 years, or earlier if the processor loses Windows support or repairs pass about half the cost of a replacement." },
         { question: "Is it cheaper for a company to buy laptops in bulk in Kenya?", answer: "It depends on the model and quantity; ask suppliers for a written quote. Standardising on one model also saves on support and spare parts." },
+      ],
+    };
+  },
+});
+
+// ---------- Batch 6 (27 Nov 2026): the fifth 100 questions ----------
+// See docs/seo/question-map-5.md.
+
+const notAio = (r) => !/all-in-one|-aio-|desktop/.test(r.slug);
+const plist = (x, rows, n = 6) => dedupe(rows).slice(0, n).map((r) => `- ${x.link(r.short, `${x.SITE}/item/${r.slug}`)}: ${x.ksh(r.price)}${r.sp && x.specLine(r.sp) ? ` (${x.specLine(r.sp)})` : ""}`).join("\n");
+
+ARTICLES.push({
+  slug: "ai-pc",
+  path: "/learn/ai-pc-npu-and-snapdragon-laptops",
+  kw: "what is an AI PC",
+  secondary: ["what is an npu in a laptop", "do i need an ai laptop", "intel core i5 vs core 5", "core i7 vs core ultra 7", "arm vs x86 laptop", "are snapdragon laptops better than intel", "can arm laptops run windows apps", "32-bit vs 64-bit windows", "ryzen for business laptops"],
+  h1: "What is an AI PC? NPUs, Core Ultra, Snapdragon and ARM laptops explained",
+  title: "What Is an AI PC? NPUs, Core Ultra and Snapdragon Explained",
+  related: ["/laptops/core-ultra-laptops-kenya", "/learn/core-i3-vs-i5-vs-i7-vs-ryzen", "/learn/laptop-processor-generations-kenya"],
+  write(x) {
+    const { L, ksh, link, SITE, asOf, tableMd } = x;
+    const lap = L.filter(notAio);
+    const ultra = dedupe(lap.filter((r) => r.sp.cpu === "Core Ultra").sort((a, b) => a.price - b.price));
+    const snap = dedupe(lap.filter((r) => /snapdragon/.test(r.slug)).sort((a, b) => a.price - b.price));
+    const core5 = dedupe(lap.filter((r) => /-core-[3579]-\d{3}/.test(`-${r.slug}`) && !/ultra/.test(r.slug)).sort((a, b) => a.price - b.price));
+    const ryzenPro = dedupe(lap.filter((r) => /ryzen-\d-pro|-pro-\d{4}/.test(r.slug)).sort((a, b) => a.price - b.price));
+    if (ultra.length < 5) return null;
+    return {
+      intro: `What is an AI PC? A laptop with an NPU (neural processing unit), a chip built to run AI features on the laptop itself, efficiently, alongside the processor and graphics. Microsoft's "Copilot+ PC" label requires an NPU of 40 TOPS or more (Snapdragon X, AMD Ryzen AI 300 and Intel Core Ultra 200V chips), plus 16 GB RAM and a 256 GB SSD. Most AI tools people use today (ChatGPT, Copilot chat, Gemini) run in the cloud and work on any laptop, so an AI PC is useful but not essential. At ECB Technologies, ${ultra.length} Intel Core Ultra and ${snap.length} Snapdragon laptops are in stock (${asOf}).`,
+      description: `AI PCs explained: what an NPU does, Copilot+ PCs, Core Ultra vs Core i7, Intel Core 5 vs i5, Snapdragon and ARM vs x86, app compatibility, and 32-bit vs 64-bit.`,
+      sections: [
+        { heading: "What the NPU does, and what runs in the cloud", body: "The NPU runs AI tasks locally with little power: background blur and eye contact in video calls (Windows Studio Effects), live captions and translation, noise suppression, and on Copilot+ PCs features such as Recall and Cocreator. Chatbots, image generators and most AI writing tools run on remote servers instead, so they need an internet connection, not an NPU. Performance is quoted in TOPS (trillions of operations per second)." },
+        { heading: "Do you need an AI laptop in 2026?", body: `Most buyers don't: study, office work and web-based AI tools run well on any 8th-gen or newer laptop. An AI PC is worth it if you're buying new anyway and want the longest support, the best battery life, or on-device features for frequent video calls. Developers experimenting with local AI models need RAM and a GPU more than an NPU.` },
+        { heading: "Intel naming: Core i5, Core 5 and Core Ultra 5", body: tableMd(["Name", "What it is", "NPU"], [
+          ["Core i3/i5/i7/i9 (to 14th gen)", "Intel's classic numbered generations", "No"],
+          ["Core 3/5/7 (e.g. Core 5 120U, Core 7 150U)", "Mainstream chips sold under the newer naming (2024 on), based on earlier designs", "No"],
+          ["Core Ultra 5/7/9 (Series 1 from late 2023, Series 2 from 2024)", "Intel's newest designs with Arc graphics and an NPU", "Yes; Core Ultra 200V qualifies for Copilot+"],
+        ]) + `\n\nSo a Core 5 is not a Core Ultra 5. Core Ultra 7 vs Core i7: the Ultra 7 adds the NPU, much stronger integrated graphics and better battery life; compare specific models, not just the badge.${core5.length ? ` Intel Core 5/7 laptops in stock:\n\n${plist(x, core5, 4)}` : ""}` },
+        { heading: "AMD Ryzen for business", body: `Ryzen laptops are strong value, often with more cores and better integrated graphics. AMD's Ryzen PRO chips add business security and remote-management features, and Ryzen AI 300 chips qualify for Copilot+.${ryzenPro.length ? ` Ryzen PRO business laptops in stock:\n\n${plist(x, ryzenPro, 4)}` : ""}\n\nSee ${link("AMD Ryzen laptops", `${SITE}/laptops/amd-ryzen-laptops-kenya`)}.` },
+        { heading: "ARM vs x86, and Snapdragon laptops", body: `Intel and AMD chips use the x86 architecture; Qualcomm's Snapdragon X chips use ARM, like phones. Snapdragon laptops get excellent battery life and run cool and quiet. Windows on ARM runs native ARM apps (Microsoft Office, Edge, Chrome, Teams, Zoom and many more) and emulates most x86/x64 apps through Microsoft's Prism layer. What can still fail: some games with anti-cheat, older printer and scanner drivers, some VPN and security software, and specialist engineering tools. Check your must-have software before buying.${snap.length ? `\n\nSnapdragon laptops in stock:\n\n${plist(x, snap, 5)}` : ""}` },
+        { heading: "Intel Core Ultra laptops in stock", body: `${plist(x, ultra, 6)}\n\nAll of them: ${link("Core Ultra laptops", `${SITE}/laptops/core-ultra-laptops-kenya`)}. Prices as of ${asOf}.` },
+        { heading: "32-bit vs 64-bit Windows", body: "Windows 11 is 64-bit only. 64-bit Windows can use more than 4 GB of RAM and runs almost all 32-bit apps; 32-bit Windows (Windows 10 and older) is limited to about 4 GB of RAM. Check yours in Settings → System → About → System type." },
+      ],
+      faq: [
+        { question: "What is an AI PC?", answer: "A laptop with an NPU that runs AI features on the device; Microsoft's Copilot+ PCs need an NPU of 40+ TOPS, 16 GB RAM and a 256 GB SSD." },
+        { question: "What is an NPU in a laptop?", answer: "A neural processing unit: a chip that runs AI tasks such as background blur, captions and noise suppression locally, using little power." },
+        { question: "Do I need an AI laptop in 2026?", answer: "Not for most people: web-based AI tools work on any laptop. It's worth it if you're buying new and want long support, great battery life and on-device AI features." },
+        { question: "What is the difference between Intel Core i5 and Intel Core 5?", answer: "Core 5 is Intel's newer naming for mainstream chips (2024 on), without an NPU; Core i5 is the older numbered generations. Neither is a Core Ultra 5." },
+        { question: "Are Snapdragon laptops better than Intel laptops?", answer: "For battery life and quiet running, often yes. For compatibility with every Windows program, game and driver, Intel and AMD are safer." },
+        { question: "Can ARM laptops run normal Windows applications?", answer: "Most: native ARM apps run directly and most x64 apps run through emulation, but some games, drivers and specialist software don't." },
+        { question: "What is the difference between 32-bit and 64-bit Windows?", answer: "64-bit Windows uses more than 4 GB RAM and runs almost all apps; Windows 11 is 64-bit only." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "performance",
+  path: "/learn/laptop-performance-guide",
+  kw: "how to check laptop performance",
+  secondary: ["laptop slow with 16gb ram", "ram or processor which makes laptop faster", "does ssd improve laptop performance", "reduce cpu usage", "laptop lags opening apps", "ideal ram for multitasking", "benchmark laptop"],
+  h1: "Laptop performance guide: what makes a laptop fast and how to check it",
+  title: "How to Check Laptop Performance (and What Makes It Fast)",
+  related: ["/learn/laptop-slow-freezing-not-charging-fixes", "/learn/how-much-ram-laptop-kenya", "/learn/core-i3-vs-i5-vs-i7-vs-ryzen"],
+  write(x) {
+    const { link, SITE } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `How to check laptop performance: open Task Manager (Ctrl+Shift+Esc) → Performance. It shows how busy the processor (CPU), memory, disk and graphics are right now; whichever stays near 100% while the laptop feels slow is your bottleneck. A laptop's speed comes from the processor (tier and generation), enough RAM for what you open, an SSD, and cooling that lets the processor run at full speed. More RAM helps only when memory is the bottleneck.`,
+      description: `Check and improve laptop performance: CPU, RAM, SSD and cooling explained, why a 16 GB laptop can still be slow, reducing CPU use, multitasking and benchmarking.`,
+      sections: [
+        { heading: "How the parts work together", body: x.tableMd(["Part", "What it affects", "Bottleneck sign"], [["Processor (CPU)", "How fast apps run and respond", "CPU near 100% in Task Manager"], ["RAM", "How many apps and tabs stay open smoothly", "Memory above ~90%, slowdowns when switching apps"], ["Storage (SSD/HDD)", "Startup, opening apps and files", "Disk at 100% (common with hard drives)"], ["Cooling", "Whether the CPU keeps its full speed", "Speed drops when hot (thermal throttling); loud fan"], ["Graphics (GPU)", "Games, editing, 3D", "GPU near 100% in games or renders"]]) },
+        { heading: "RAM or processor: which makes a laptop faster?", body: `Neither alone. The processor sets how fast work gets done; RAM sets how much can stay open before slowing down. For office work, an 8th-gen or newer Core i5 with 8 GB and an SSD feels fast; 16 GB helps multitasking. Compare tiers and generations in ${link("Core i3 vs i5 vs i7 vs Ryzen", `${SITE}/learn/core-i3-vs-i5-vs-i7-vs-ryzen`)}.` },
+        { heading: "Does an SSD improve performance?", body: `Hugely, for startup and opening apps and files: often from minutes to seconds compared with a hard drive. It doesn't make the processor faster. See ${link("HDD to SSD upgrade", `${SITE}/learn/laptop-upgrade-ram-ssd`)}.` },
+        { heading: "Why is my laptop slow even with 16 GB RAM?", body: "Because RAM isn't the bottleneck: check Task Manager. Common causes: an old processor (7th gen or older), a hard drive instead of an SSD, overheating that throttles the CPU (clean the vents), a nearly full drive, too many startup apps, a battery-saver power mode, malware, or a single program using all the CPU." },
+        { heading: "Reducing CPU use and lag when opening apps", body: "1. Task Manager → Processes: sort by CPU; close or uninstall what you don't need.\n2. Task Manager → Startup apps: disable unnecessary ones.\n3. Settings → System → Power: use Balanced or Best performance when plugged in.\n4. Update Windows and drivers; scan for malware.\n5. Keep 15–20% of the SSD free.\n6. Limit browser extensions and tabs (each tab uses memory and CPU)." },
+        { heading: "Multitasking: how many apps, how much RAM?", body: `There's no fixed number: it depends on the apps. As a guide: 8 GB handles Office, a browser with 10–15 tabs and a video call; 16 GB handles heavy multitasking, many tabs and development tools; 32 GB is for VMs, 4K editing and large datasets. See ${link("how much RAM you need", `${SITE}/learn/how-much-ram-laptop-kenya`)}.` },
+        { heading: "Does the processor affect browsing speed?", body: "Download speed comes from your internet and Wi-Fi, but how fast pages render and how many tabs stay smooth depends on the processor and RAM: heavy sites (web apps, video, maps) feel noticeably faster on a newer processor." },
+        { heading: "How to benchmark your laptop", body: "Free tools give scores you can compare with published results for the same model:\n\n- **Processor:** Cinebench or Geekbench.\n- **Storage:** CrystalDiskMark (read/write speeds).\n- **Graphics:** 3DMark (free basic tests).\n\nRun tests plugged in, with other apps closed, and run them twice. Very low scores compared with other laptops of the same model usually point to overheating, a power setting, or a hard drive." },
+      ],
+      faq: [
+        { question: "How can I check my laptop performance?", answer: "Task Manager → Performance shows CPU, memory, disk and GPU use in real time; benchmarks like Cinebench and CrystalDiskMark give comparable scores." },
+        { question: "What makes a laptop faster, RAM or processor?", answer: "Both, for different things: the processor sets speed, RAM sets how much stays open smoothly. An SSD makes the biggest difference to startup and opening apps." },
+        { question: "Why is my laptop slow even with 16GB RAM?", answer: "Usually something else is the bottleneck: an old processor, a hard drive, overheating, a full drive, startup apps or malware. Check Task Manager." },
+        { question: "Does an SSD improve laptop performance?", answer: "Yes, dramatically for startup, opening apps and files; it doesn't speed up the processor." },
+        { question: "What is the ideal RAM for multitasking?", answer: "16 GB for heavy multitasking and many browser tabs; 8 GB for normal office use; 32 GB for VMs and 4K editing." },
+        { question: "How do I benchmark my laptop performance?", answer: "Use Cinebench or Geekbench for the CPU, CrystalDiskMark for storage and 3DMark for graphics, plugged in with other apps closed." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "gpu",
+  path: "/learn/laptop-graphics-cards-explained",
+  kw: "laptop graphics card explained",
+  secondary: ["how to check laptop graphics card", "nvidia optimus", "laptop gpu vs desktop gpu", "external gpu laptop", "ray tracing laptop", "vram for video editing", "intel graphics premiere pro", "esports gaming laptop"],
+  h1: "Laptop graphics cards explained: RTX, VRAM, Optimus and ray tracing",
+  title: "Laptop Graphics Card Explained: RTX, VRAM and Optimus",
+  related: ["/learn/gaming-laptop-guide-kenya", "/learn/laptop-requirements-video-photo-editing-3d", "/best/gaming-laptops-kenya"],
+  write(x) {
+    const { L, ksh, link, SITE, asOf } = x;
+    const rtx = dedupe(L.filter((r) => notAio(r) && /rtx/.test(r.slug)).sort((a, b) => a.price - b.price));
+    const gpu = dedupe(L.filter((r) => notAio(r) && r.sp.gpu).sort((a, b) => a.price - b.price));
+    if (gpu.length < 8) return null;
+    return {
+      intro: `In short, the laptop graphics card (GPU) draws everything on screen and accelerates games, video editing and 3D. Laptops have either integrated graphics (built into the processor, fine for office work and light editing) or a dedicated GPU such as an NVIDIA GeForce RTX (needed for modern games, 4K editing and 3D). Important: the same GPU name performs differently in different laptops, because each maker sets its power limit and cooling. ${gpu.length} laptops with a dedicated GPU are in stock (${asOf}).`,
+      description: `Laptop GPUs explained: integrated vs dedicated, RTX 3050 vs 4050, VRAM, power limits, NVIDIA Optimus, ray tracing, external GPUs, and how to check yours.`,
+      sections: [
+        { heading: "How to check your laptop's graphics card", body: "Task Manager → Performance: GPU 0 is usually the integrated graphics, GPU 1 the dedicated card (with its name and dedicated memory). Or Device Manager → Display adapters, or run `dxdiag` → Display tabs." },
+        { heading: "Same GPU, different performance", body: "Laptop GPUs run at a power limit (TGP, in watts) chosen by the laptop maker: an RTX 4050 at 35 W in a thin laptop is much slower than one at 100 W+ in a gaming laptop with big fans. Cooling, the processor paired with it and the screen resolution matter too. Compare reviews of the exact laptop model, not just the GPU name." },
+        { heading: "RTX 3050 vs RTX 4050, and laptop vs desktop GPUs", body: `The RTX 4050 is the newer generation: faster, more efficient, with 6 GB of video memory and DLSS 3 frame generation; the 3050 usually has 4 GB. Laptop GPUs are slower than desktop cards with the same name because they run at much lower power. More in the ${link("gaming laptop guide", `${SITE}/learn/gaming-laptop-guide-kenya`)}.` },
+        { heading: "VRAM: how much graphics memory?", body: `- **Esports and older games at 1080p:** 4 GB.\n- **Current games:** 6–8 GB.\n- **Video editing:** 4 GB for 1080p; Adobe recommends 8 GB for 4K in Premiere Pro.\n- **3D and rendering:** 8 GB or more.\n\nIntegrated graphics use part of the system RAM instead (shared memory). See ${link("laptop requirements for video and photo editing", `${SITE}/learn/laptop-requirements-video-photo-editing-3d`)}.` },
+        { heading: "Can Intel integrated graphics run Premiere Pro?", body: "Yes for 1080p editing on 11th-gen or newer Intel laptops (Iris Xe) and Core Ultra (Arc graphics), which also speed up H.264/HEVC video through Quick Sync. Long 4K timelines and heavy effects need a dedicated GPU." },
+        { heading: "NVIDIA Optimus and MUX switches", body: "Optimus lets the laptop use the integrated graphics for everyday work (saving battery) and switch to the NVIDIA GPU for games and heavy apps automatically. Some gaming laptops add a MUX switch that sends the display straight to the NVIDIA GPU for a few extra frames, at the cost of battery." },
+        { heading: "Ray tracing", body: "Ray tracing simulates how light bounces for realistic reflections and shadows. RTX GPUs have dedicated hardware for it; it's demanding, so on laptops it's usually paired with DLSS upscaling. GTX cards don't support it in hardware." },
+        { heading: "Esports, GTA V and external GPUs", body: `Esports titles (Valorant, CS2, League, Fortnite on lower settings) run well on a GTX 1650/RTX 3050 or better, ideally with a high-refresh screen. Older titles such as GTA V run on entry-level dedicated GPUs; check each game's official requirements. External GPUs need a laptop with Thunderbolt or USB4 eGPU support: see ${link("laptop ports explained", `${SITE}/learn/laptop-ports-explained`)}.` },
+        { heading: "Laptops with RTX graphics in stock", body: `${rtx.length ? plist(x, rtx, 8) : plist(x, gpu, 8)}\n\nAll gaming laptops: ${link("gaming laptops in Kenya", `${SITE}/best/gaming-laptops-kenya`)}. Prices as of ${asOf}.` },
+      ],
+      faq: [
+        { question: "How do I check my laptop graphics card?", answer: "Task Manager → Performance shows each GPU and its memory; Device Manager → Display adapters lists them too." },
+        { question: "What is the difference between RTX 3050 and RTX 4050 laptop GPUs?", answer: "The RTX 4050 is newer, faster and more efficient, with more video memory and DLSS 3. Performance also depends on each laptop's power limit and cooling." },
+        { question: "How much graphics memory do I need for video editing?", answer: "4 GB for 1080p; Adobe recommends 8 GB for 4K in Premiere Pro." },
+        { question: "Can Intel integrated graphics run Adobe Premiere Pro?", answer: "Yes for 1080p on 11th-gen+ Intel (Iris Xe) or Core Ultra laptops; 4K and heavy effects need a dedicated GPU." },
+        { question: "What is NVIDIA Optimus in laptops?", answer: "Automatic switching between integrated graphics (to save battery) and the NVIDIA GPU (for games and heavy apps)." },
+        { question: "What is ray tracing in laptop graphics?", answer: "Realistic simulation of light, reflections and shadows, accelerated by RTX GPUs and usually paired with DLSS upscaling on laptops." },
+        { question: "Can I connect an external GPU to a laptop?", answer: "Only if it has a Thunderbolt 3/4 or USB4 port that supports eGPUs; performance is lower than the same card in a desktop." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "storage-backup",
+  path: "/learn/laptop-storage-backup-and-recovery",
+  kw: "how to free up space on a laptop",
+  secondary: ["laptop storage full", "check laptop storage", "recover deleted files laptop", "best way to back up laptop", "onedrive or external hard drive", "can ssd fail without warning", "check ssd health", "transfer files to new laptop"],
+  h1: "Laptop storage full? Free up space, back up and recover files",
+  title: "How to Free Up Space on a Laptop, Back Up and Recover Files",
+  related: ["/learn/laptop-ssd-size-kenya", "/learn/laptop-security-guide-kenya", "/learn/laptop-upgrade-ram-ssd"],
+  write(x) {
+    const { link, SITE } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `How to free up space on a laptop: open Settings → System → Storage, run Cleanup recommendations, turn on Storage Sense, empty the Recycle Bin and Downloads, and uninstall apps you don't use; files kept in OneDrive can be set to "online-only" to free space. Then protect what matters: keep at least two copies of important files, in the cloud and on an external drive, because deleted files can't always be recovered and SSDs can fail without warning.`,
+      description: `Laptop storage full? Check and free up space, recover deleted files safely, back up with OneDrive or an external drive, check SSD health and move files to a new laptop.`,
+      sections: [
+        { heading: "Check how much storage you have", body: "Open File Explorer → This PC to see each drive's free space, or Settings → System → Storage for a breakdown by category (apps, documents, temporary files, system). The capacity shown is a little lower than the advertised size (a \"512 GB\" SSD shows about 476 GB) because of how sizes are counted and the recovery partition." },
+        { heading: "Why storage fills up, and how to free it", body: "Common culprits: the Downloads folder, videos and photos, Windows update leftovers, temporary files, large apps and games, the hibernation file and restore points.\n\n1. Settings → System → Storage → **Cleanup recommendations**.\n2. Turn on **Storage Sense** to clear temporary files and the Recycle Bin automatically.\n3. Uninstall apps you don't use (Settings → Apps).\n4. Move videos and photos to an external drive or the cloud.\n5. In OneDrive, choose **Free up space** on folders to keep them online-only.\n6. Disk Cleanup → Clean up system files removes old update files." },
+        { heading: "Can deleted files be recovered?", body: "Sometimes, not always:\n\n1. Check the **Recycle Bin** first, then the **OneDrive recycle bin** (online) for synced files.\n2. Right-click the folder → **Restore previous versions** if File History or backups were on.\n3. Microsoft's **Windows File Recovery** tool can try to recover deleted files.\n\nImportant: stop saving files to that drive immediately (new data can overwrite what you want back). On SSDs, a feature called TRIM often erases deleted data quickly, so recovery is less likely than on hard drives. For valuable data from a failed drive, go to a professional data-recovery service before trying anything else." },
+        { heading: "The best way to back up: 3-2-1", body: "Keep **3** copies of important files, on **2** different types of storage, with **1** off the laptop (cloud or a drive kept elsewhere).\n\n- **OneDrive / Google Drive:** automatic, survives theft and fire, needs internet; free plans are small.\n- **External drive or SSD:** fast and holds everything, but must be plugged in to back up and can be lost with the laptop.\n- Use both: cloud for documents, an external drive for a full backup every week or month." },
+        { heading: "Can an SSD fail without warning? Checking SSD health", body: "Yes: SSDs often fail gradually, but they can stop suddenly, which is why backups matter. Check health in Windows 11: Settings → System → Storage → Advanced storage settings → Disks & volumes → Properties (shows drive health and estimated life remaining for NVMe drives). The free CrystalDiskInfo tool shows Good, Caution or Bad for any drive. Replace a drive marked Caution after backing up." },
+        { heading: "Cloud vs local storage", body: "Local storage (the SSD) is fast and works offline; cloud storage is accessible from any device and survives the laptop being lost or broken. Most people need both: local for working files, cloud for backup and sharing." },
+        { heading: "Moving files to a new laptop", body: `- **OneDrive:** sign in with the same Microsoft account on the new laptop and your synced folders appear.\n- **Windows Backup app (Windows 11):** backs up folders, settings and app lists to your Microsoft account to restore on the new PC.\n- **External drive:** copy Documents, Desktop, Pictures and Downloads across.\n\nBefore handing over or selling the old laptop, sign out of accounts and reset it (Settings → System → Recovery → Reset this PC → Remove everything). Shopping for the new one? See the ${link("laptop buying guide", `${SITE}/learn/laptop-buying-guide-kenya`)}.` },
+      ],
+      faq: [
+        { question: "Why is my laptop storage full?", answer: "Usually downloads, videos and photos, update leftovers, temporary files and large apps. Settings → System → Storage shows what's using it." },
+        { question: "How do I free up space on a Windows laptop?", answer: "Run Cleanup recommendations, turn on Storage Sense, uninstall unused apps, move media to an external drive or cloud, and set OneDrive folders to online-only." },
+        { question: "Can I recover deleted files from my laptop?", answer: "Sometimes: check the Recycle Bin, OneDrive's recycle bin and previous versions, or try Windows File Recovery. Stop using the drive; recovery from SSDs is less likely." },
+        { question: "Should I use OneDrive or an external hard drive for backups?", answer: "Both: the cloud survives theft and fire, an external drive holds a full fast backup. Keep at least two copies of important files." },
+        { question: "How do I check SSD health?", answer: "Windows 11 shows drive health under Settings → System → Storage → Disks & volumes; CrystalDiskInfo shows Good, Caution or Bad." },
+        { question: "How do I transfer files from an old laptop to a new laptop?", answer: "Use OneDrive or the Windows Backup app, or copy folders to an external drive; then reset the old laptop before passing it on." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "home-vs-pro",
+  path: "/learn/windows-11-home-vs-pro",
+  kw: "Windows 11 Home vs Pro",
+  secondary: ["is windows 11 pro worth it for business", "upgrade windows 11 home to pro", "what is bitlocker", "reset laptop without losing files", "factory reset hp laptop", "factory reset dell laptop", "factory reset lenovo laptop", "sleep vs hibernate vs shutdown", "reinstall windows on laptop"],
+  h1: "Windows 11 Home vs Pro, BitLocker, and how to reset or reinstall Windows",
+  title: "Windows 11 Home vs Pro: Differences, BitLocker and Resets",
+  related: ["/learn/windows-11-and-laptop-software-kenya", "/learn/laptop-security-guide-kenya", "/learn/laptop-storage-backup-and-recovery"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf, tableMd } = x;
+    const pro = (P || []).find((p) => /^windows-11-pro/.test(p.slug));
+    if (!P || P.length < 50) return null;
+    return {
+      intro: `Windows 11 Home vs Pro: Home covers everything most people need; Pro adds business features: BitLocker drive encryption management, Remote Desktop (to connect into the laptop), Group Policy, Hyper-V virtual machines, Windows Sandbox, and joining a company domain or Microsoft Entra ID. For businesses, Pro is worth it; for home and study, Home is enough. ${pro ? `A Windows 11 Pro licence costs ${ksh(pro.price)} at ECB Technologies (${asOf}).` : ""} This guide also covers resetting and reinstalling Windows safely.`,
+      description: `Windows 11 Home vs Pro compared, upgrading to Pro, BitLocker, resetting without losing files, factory resets on HP, Dell and Lenovo, sleep vs hibernate, reinstalling Windows.`,
+      sections: [
+        { heading: "Home vs Pro side by side", body: tableMd(["Feature", "Home", "Pro"], [["Everyday apps, Office, browsers", "Yes", "Yes"], ["Encryption", "Device encryption on supported laptops", "BitLocker with full management"], ["Remote Desktop (connect into this PC)", "No (can connect out)", "Yes"], ["Group Policy, domain / Entra ID join", "No", "Yes"], ["Hyper-V and Windows Sandbox", "No", "Yes"], ["Windows Update for Business controls", "No", "Yes"]]) + "\n\nBusiness laptops are often sold with Pro; check Settings → System → About → Edition." },
+        { heading: "Upgrading from Home to Pro", body: `Settings → System → Activation → Upgrade your edition of Windows → Change product key, then enter a genuine Pro key; your files and apps stay.${pro ? ` ${link(pro.short, `${SITE}/item/${pro.slug}`)}: ${ksh(pro.price)}.` : ""} The upgrade keeps everything, but back up first anyway.` },
+        { heading: "What is BitLocker?", body: `BitLocker encrypts the whole drive so a stolen laptop's files can't be read without your sign-in or recovery key. It's managed in Pro (and higher); many Home laptops have the simpler \"Device encryption\" on supported hardware (needs TPM 2.0 and Modern Standby support). Save the recovery key to your Microsoft account or print it before resetting or changing hardware. See the ${link("laptop security guide", `${SITE}/learn/laptop-security-guide-kenya`)}.` },
+        { heading: "Reset without losing files", body: "Settings → System → Recovery → **Reset this PC** → **Keep my files**. This reinstalls Windows and keeps your personal files, but **removes installed apps** (you reinstall them) and resets settings. Back up first anyway; have your BitLocker recovery key ready." },
+        { heading: "Factory reset (erases everything)", body: "**This erases all files and apps.** Back up first, sign out of accounts, and note your BitLocker recovery key.\n\n- **Any laptop:** Settings → System → Recovery → Reset this PC → **Remove everything** (choose Cloud download for a fresh copy of Windows).\n- **HP:** the same Windows reset, or at startup press F11 for the recovery environment; HP's Cloud Recovery tool can make a recovery USB.\n- **Dell:** the Windows reset, or on supported models press F12 at startup → SupportAssist OS Recovery.\n- **Lenovo:** the Windows reset; many IdeaPad and Yoga models have a small Novo button for System Recovery; Lenovo also offers recovery USB downloads for registered devices.\n\nIf Windows won't start, hold Shift while clicking Restart (or interrupt startup three times) to reach Troubleshoot → Reset this PC." },
+        { heading: "Reinstalling Windows from scratch", body: `Create a USB installer with Microsoft's Media Creation Tool on another PC, boot from it (F12 on Dell and Lenovo, F9 on HP for the boot menu), delete the partitions you want to wipe and install. Laptops that came with Windows reactivate automatically once online. More: ${link("Windows 11 and laptop software", `${SITE}/learn/windows-11-and-laptop-software-kenya`)}.` },
+        { heading: "Sleep, hibernate and shutdown", body: "- **Sleep:** keeps everything in memory with very low power; instant resume; uses a little battery.\n- **Hibernate:** saves your session to the SSD and powers off; slower to resume, uses no battery.\n- **Shut down:** closes everything (with Fast Startup, Windows saves part of the system to speed up the next start). Use **Restart** to fully refresh Windows and apply updates." },
+      ],
+      faq: [
+        { question: "What is the difference between Windows 11 Home and Pro?", answer: "Pro adds BitLocker management, Remote Desktop hosting, Group Policy, Hyper-V, Windows Sandbox and company domain/Entra ID join." },
+        { question: "Is Windows 11 Pro worth it for business users?", answer: "Yes: encryption management, remote access and joining company systems are Pro features." },
+        { question: "Can I upgrade from Windows 11 Home to Pro?", answer: "Yes: Settings → System → Activation → Change product key with a genuine Pro key; files and apps stay." },
+        { question: "What is BitLocker on a laptop?", answer: "Full-drive encryption that protects files if the laptop is stolen; keep the recovery key safe." },
+        { question: "How do I reset a laptop without losing files?", answer: "Settings → System → Recovery → Reset this PC → Keep my files. Installed apps are removed, so back up first." },
+        { question: "What is the difference between sleep, hibernate and shutdown?", answer: "Sleep keeps the session in memory (instant, uses a little battery); hibernate saves it to storage and powers off; shutdown closes everything." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "webcam-audio",
+  path: "/learn/laptop-webcam-microphone-and-audio-guide",
+  kw: "laptop for video conferencing",
+  secondary: ["is 720p webcam good enough", "improve laptop webcam quality", "laptop microphone not working", "laptop speakers crackling", "connect bluetooth headphones to laptop", "noise cancelling microphone laptop", "laptop for online teaching"],
+  h1: "Laptops for video conferencing: webcams, microphones, speakers and online teaching",
+  title: "Laptop for Video Conferencing: Webcam, Mic and Audio Guide",
+  related: ["/learn/laptops-for-small-business-kenya", "/learn/laptop-wifi-and-internet-guide", "/learn/laptop-ports-explained"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf } = x;
+    if (!P || P.length < 50) return null;
+    const heads = dedupe(P.filter((p) => /headset/.test(p.slug)).sort((a, b) => a.price - b.price));
+    const camMon = dedupe(P.filter((p) => /webcam|camera/.test(p.slug) && /monitor|viewfinity|smart-monitor|-\d{2}-/.test(p.slug)).sort((a, b) => a.price - b.price));
+    return {
+      intro: `A good laptop for video conferencing needs a sharp webcam (1080p if possible), clear microphones, stable Wi-Fi and enough performance to run Teams or Zoom with other apps open (an 8th-gen or newer Core i5 with 8 GB RAM is enough). Lighting and a headset make a bigger difference than webcam megapixels. Below: how to improve video and sound, fix a microphone or crackling speakers, and set up for online teaching.`,
+      description: `Laptops for video calls and online teaching: webcam resolution, improving video, fixing microphones and crackling speakers, Bluetooth headphones and noise cancellation.`,
+      sections: [
+        { heading: "Is a 720p webcam good enough?", body: "For meetings, yes, with good light: most video platforms compress video heavily anyway. 1080p (\"FHD\" or 2 MP) looks noticeably sharper, and newer business laptops increasingly have 1080p or 5 MP cameras plus IR cameras for Windows Hello. Megapixels alone don't decide quality: lens, sensor size and lighting matter more." },
+        { heading: "Improving webcam quality", body: "1. **Light your face from the front:** face a window or lamp; avoid a bright window behind you.\n2. **Raise the laptop** so the camera is at eye level (a stand or books).\n3. **Clean the lens** with a soft cloth.\n4. In Settings → Bluetooth & devices → Cameras, adjust brightness and choose the highest resolution.\n5. On laptops with an NPU, Windows Studio Effects adds background blur and eye contact without slowing the laptop." },
+        { heading: "Microphone not working?", body: "1. Check the mute key (often F4 or with a light) and the mute button in Teams or Zoom.\n2. Settings → Privacy & security → Microphone: allow access for apps and desktop apps.\n3. Settings → System → Sound → Input: choose the right microphone and test the level.\n4. Update or reinstall the audio driver (Device Manager → Audio inputs and outputs).\n5. Try a headset: if it works, the built-in microphone or its cable may be faulty." },
+        { heading: "Crackling speakers", body: "Usually software: update the audio driver, turn off audio enhancements (Sound → device properties), lower the volume to test for distortion, and set power mode to Balanced. Crackling at every volume after a drop or spill can mean a damaged speaker; a technician can replace it." },
+        { heading: "Bluetooth headphones and noise cancellation", body: "Connect Bluetooth headphones in Settings → Bluetooth & devices → Add device → Bluetooth, with the headphones in pairing mode. Noise cancellation in laptop microphones usually means two or more microphones plus software (in Teams, Zoom or the laptop's audio app) that filters keyboard and background noise; a headset with a boom microphone still sounds clearer in busy offices or open-plan rooms." },
+        { heading: "Online teaching setup", body: `- A laptop with an 8th-gen or newer Core i5 and 8–16 GB RAM.\n- A 2-in-1 or touchscreen to write on slides, or a drawing tablet.\n- An external monitor to see students while presenting.\n- A USB headset and good front lighting.\n- Ethernet or strong Wi-Fi, and a UPS or charged battery for power cuts.\n\nSee ${link("2-in-1 laptops", `${SITE}/best/2-in-1-laptops-kenya`)} and the ${link("Wi-Fi guide", `${SITE}/learn/laptop-wifi-and-internet-guide`)}.` },
+        { heading: "Do business laptops have better webcams?", body: `Many newer business models have 1080p or 5 MP webcams, IR cameras, privacy shutters and better microphone arrays than budget consumer laptops; older business models (8th–10th gen) often have 720p. Check the exact model's spec sheet.${heads.length ? `\n\nUSB headsets in stock:\n\n${plist(x, heads, 3)}` : ""}${camMon.length ? `\n\nMonitors with built-in webcams (for desk setups): from ${ksh(camMon[0].price)} (${asOf}).` : ""}` },
+      ],
+      faq: [
+        { question: "Is a 720p laptop webcam good enough for meetings?", answer: "Yes with good lighting; 1080p looks sharper. Lighting and camera position matter more than resolution." },
+        { question: "How do I improve laptop webcam quality?", answer: "Light your face from the front, raise the camera to eye level, clean the lens and choose the highest resolution in camera settings." },
+        { question: "Why is my laptop microphone not working?", answer: "Check the mute key and app mute, microphone privacy settings, the selected input device and the audio driver." },
+        { question: "Can I connect Bluetooth headphones to a laptop?", answer: "Yes: Settings → Bluetooth & devices → Add device → Bluetooth, with the headphones in pairing mode." },
+        { question: "What should I look for in a laptop for video conferencing?", answer: "A 1080p webcam, good microphones, Wi-Fi 6 or Ethernet, and at least an 8th-gen Core i5 with 8 GB RAM; add a headset for noisy places." },
+        { question: "Which laptop is best for online teaching?", answer: "A 2-in-1 or touchscreen laptop with a good webcam and 8–16 GB RAM, plus an external monitor and headset." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "hardware-problems",
+  path: "/learn/laptop-hardware-problems-and-inspection",
+  kw: "laptop keyboard not working",
+  secondary: ["some laptop keys not working", "test laptop before buying", "check laptop hinges", "laptop motherboard failure", "is it worth replacing laptop motherboard", "laptop screen flickering", "damaged charging port", "can a laptop work without battery", "laptop water damage signs"],
+  h1: "Laptop keyboard not working, screen flickering, water damage and other hardware checks",
+  title: "Laptop Keyboard Not Working? How to Fix It and Other Checks",
+  related: ["/learn/check-used-laptop-before-buying", "/learn/laptop-slow-freezing-not-charging-fixes", "/learn/check-if-laptop-is-genuine"],
+  write(x) {
+    const { link, SITE, PHONE } = x;
+    if (x.L.length < 50) return null;
+    return {
+      intro: `Laptop keyboard not working? First rule out software: restart, check Filter Keys and the keyboard layout in Settings, update or reinstall the keyboard driver, and test with an external keyboard. If only some keys fail, dirt or a spill is the usual cause. This guide covers keyboards, hinges, flickering screens, charging ports, batteries, water damage and motherboards: what each symptom suggests, what you can safely check, and when it's a job for a technician.`,
+      description: `Laptop hardware problems and pre-purchase checks: keyboards, keys, hinges, flickering screens, charging ports, running without a battery, water damage and motherboard faults.`,
+      sections: [
+        { heading: "Keyboard not working, or some keys dead", body: "1. Restart; check for a stuck key or a locked Fn key.\n2. Settings → Accessibility → Keyboard: turn off Filter Keys and Sticky Keys.\n3. Check the keyboard layout (Settings → Time & language → Language & region).\n4. Device Manager → Keyboards: update or uninstall the driver and restart.\n5. Test with an online keyboard tester and an external USB keyboard.\n\nSome keys dead after a spill or dirt: shut down, tilt and use compressed air. Several keys in one row failing together often means a liquid or cable fault: a technician can replace the keyboard (on many business laptops it's a straightforward part)." },
+        { heading: "Testing a laptop before buying", body: `Use the full ${link("12-point used-laptop checklist", `${SITE}/learn/check-used-laptop-before-buying`)}. The hardware essentials: every key in a keyboard tester, both touchpad buttons, every port with a flash drive, a white and a black full screen for dead pixels, the webcam and speakers, Wi-Fi, the battery report, and the serial number (${link("checking a laptop is genuine", `${SITE}/learn/check-if-laptop-is-genuine`)}).` },
+        { heading: "Checking the hinges", body: "Open and close the lid slowly several times: it should move smoothly and stay at any angle without drooping. Hold the base and gently wiggle the screen: wobble, creaking or gaps near the hinge mounts, cracked plastic around the hinges, or a screen cable that flickers when you move the lid are warning signs. Hinge repairs are often expensive because the mounts are part of the case." },
+        { heading: "Screen flickering", body: "- **Flickers all the time:** update the graphics driver; check the refresh rate (Settings → Display → Advanced display) and try another value.\n- **Only at low brightness:** some screens dim by flickering the backlight (PWM); raising brightness helps.\n- **When you move the lid:** a loose or damaged display cable; a technician job.\n- **External monitor is fine:** the problem is the laptop's own panel or cable, not the graphics." },
+        { heading: "Damaged charging port, and running without a battery", body: "Signs of a damaged charging port or DC jack: the plug feels loose, charging stops and starts when the cable moves, it charges only at an angle, or there's a burnt smell or discolouration: stop using it and have it repaired. Many laptops can run on the charger with the battery removed or disconnected, but they may run slower and switch off instantly in a power cut; most modern batteries are internal, so leave removing them to a technician (swollen batteries are a fire risk)." },
+        { heading: "Water damage", body: "Immediately: shut down, unplug, turn it upside down and don't switch it on until a technician has checked it. Signs of past water damage when buying: stains or tide marks around the keyboard, sticky keys, corrosion on ports, and (seen by a technician inside) liquid-damage indicator stickers that have changed colour. Water damage can cause faults weeks later." },
+        { heading: "Motherboard failure: causes and whether to replace it", body: `Common causes: overheating over years (dust), liquid spills, power surges (use a surge protector or UPS), drops, and age. Symptoms that point to the motherboard (only a technician can confirm): no power with a known-good charger, no display even on an external monitor, beeping at startup, random shutdowns while cool, ports failing one after another. Replacing a motherboard is rarely worth it on an older laptop: the part can cost a large share of a replacement laptop. Compare with ${link("best value laptops", `${SITE}/learn/best-value-laptops-kenya`)}; questions: WhatsApp ${PHONE}.` },
+      ],
+      faq: [
+        { question: "How do I check if a laptop keyboard is faulty?", answer: "Test every key in an online keyboard tester, rule out Filter Keys, layout and driver issues, and try an external keyboard." },
+        { question: "Why are some laptop keys not working?", answer: "Usually dirt or a spill; several keys in a row failing together suggests liquid or cable damage needing repair." },
+        { question: "How can I check laptop hinges before buying?", answer: "Open and close the lid slowly: it should stay at any angle without drooping, wobble or creaking, with no cracks at the hinge mounts." },
+        { question: "Why does my laptop screen flicker?", answer: "Often a graphics driver or refresh-rate issue; if it flickers when you move the lid, the display cable is likely damaged." },
+        { question: "Can a laptop work without a battery?", answer: "Many can on the charger, but they may run slower and switch off in a power cut; leave internal battery removal to a technician." },
+        { question: "How do I know if a laptop has water damage?", answer: "Look for stains, sticky keys and corrosion on ports; a technician can check the internal liquid-damage indicators." },
+        { question: "Is it worth replacing a laptop motherboard?", answer: "Rarely on an older laptop: the part often costs a large share of a replacement laptop." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "wfh-setup",
+  path: "/learn/work-from-home-laptop-setup",
+  kw: "work from home laptop setup",
+  secondary: ["connect laptop to two monitors", "usb-c docking station", "one docking station for different laptops", "hdmi 2.0 vs 2.1", "wireless projector laptop", "wifi 7 laptops", "connect laptop to 5g router", "bluetooth 5.3", "multiple bluetooth devices laptop"],
+  h1: "Work-from-home laptop setup: monitors, docks, HDMI, Wi-Fi 7 and Bluetooth",
+  title: "Work From Home Laptop Setup: A Guide to Monitors and Docks",
+  related: ["/learn/laptop-accessories-guide-kenya", "/learn/laptop-ports-explained", "/learn/laptop-wifi-and-internet-guide"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf, tableMd } = x;
+    if (!P || P.length < 50) return null;
+    const mons = dedupe(P.filter((p) => /(odyssey|ultragear|viewfinity|monitor|-\d{2}-(?:inch-)?(?:fhd|qhd|wqhd|4k|ips)|\d{2,3}hz)/.test(p.slug) && !/arm|mount|stand|laptop|bracket/.test(p.slug) && p.price > 8000).sort((a, b) => a.price - b.price));
+    const kb = dedupe(P.filter((p) => /keyboard|mouse/.test(p.slug) && !/surface/.test(p.slug)).sort((a, b) => a.price - b.price));
+    const ups = dedupe(P.filter((p) => /-ups-|va-/.test(p.slug)).sort((a, b) => a.price - b.price));
+    return {
+      intro: `A good work-from-home laptop setup: the laptop raised to eye level (or closed) with an external monitor, a separate keyboard and mouse, a headset, reliable internet (fibre or a 5G/4G router, by Ethernet if possible) and a UPS for power cuts. To connect two monitors or everything with one cable, you need the right ports: not every USB-C port carries video or charging, so check the laptop's specifications. Here's how each piece works, with the accessories in stock.`,
+      description: `Work-from-home laptop setup: two external monitors, USB-C docks, HDMI 2.0 vs 2.1, wireless projection, Wi-Fi 7, 5G routers, Bluetooth 5.3 and multiple Bluetooth devices.`,
+      sections: [
+        { heading: "The home office checklist", body: `- **Laptop:** 8th-gen+ Core i5, 8–16 GB RAM, Wi-Fi 6, at least HDMI and USB-C.\n- **Monitor:** 24–27-inch, connected by HDMI or USB-C.\n- **Keyboard and mouse:** wireless or USB.\n- **Headset** for calls.\n- **Internet:** fibre or a 5G/4G router; Ethernet for the steadiest calls.\n- **UPS:** keeps the router and monitor on through short power cuts.\n- **Laptop stand** or monitor arm for posture.${mons.length ? `\n\nMonitors in stock from ${ksh(mons[0].price)}:\n\n${plist(x, mons, 4)}` : ""}${kb.length ? `\n\nKeyboards and mice from ${ksh(kb[0].price)}.` : ""}${ups.length ? ` UPS units from ${ksh(ups[0].price)}.` : ""} Prices as of ${asOf}.` },
+        { heading: "Two external monitors", body: `Possible if the laptop has two video outputs (e.g. HDMI plus USB-C/Thunderbolt with DisplayPort), or through a dock the laptop supports. Windows laptops with Thunderbolt often drive two monitors through one dock; Apple M1/M2 MacBook Airs support only one external display natively. Check \"supported displays\" in the laptop's spec sheet. More in the ${link("accessories guide", `${SITE}/learn/laptop-accessories-guide-kenya`)}.` },
+        { heading: "USB-C docking stations", body: "A USB-C dock adds monitors, USB ports, Ethernet and charging through one cable. Three kinds:\n\n- **USB-C (DisplayPort Alt Mode):** works with laptops whose USB-C port carries video; often limited to one or two monitors.\n- **Thunderbolt / USB4:** the most capable: two 4K monitors, fast data and charging, on laptops with Thunderbolt or USB4.\n- **DisplayLink:** uses a driver to add monitors over USB; works on more laptops, but not ideal for gaming or video.\n\nCan one dock serve different laptops? Standard USB-C and Thunderbolt docks often work across brands, but the number of monitors and charging power depend on each laptop; older proprietary docks (some HP, Dell, Lenovo) only fit their own models. Check the dock maker's compatibility list." },
+        { heading: "HDMI 2.0 vs HDMI 2.1", body: tableMd(["", "HDMI 2.0", "HDMI 2.1"], [["Bandwidth", "Up to 18 Gbps", "Up to 48 Gbps"], ["Typical maximum", "4K at 60 Hz", "4K at 120 Hz, 8K at 60 Hz"], ["Extras", "", "Variable refresh rate (VRR), better HDR"]]) + "\n\nFor office monitors at 1080p or 1440p, HDMI 2.0 is plenty; HDMI 2.1 matters for high-refresh 4K gaming monitors. Both the laptop and monitor (and the cable) must support 2.1 to get its benefits." },
+        { heading: "Wireless projection", body: "Press Windows + K to connect to a Miracast-capable projector, TV or wireless display adapter; or cast from Chrome/Edge to Chromecast devices. Wireless adds some delay, so use HDMI for video or presentations with animation." },
+        { heading: "Wi-Fi 7, 5G routers and the internet connection", body: "Wi-Fi 7 (802.11be) is the newest standard, found on some laptops from 2024 onwards; it needs a Wi-Fi 7 router to make a difference. Wi-Fi 6/6E is plenty for home internet speeds in Kenya. A laptop connects to a 5G home router like any router (Wi-Fi or Ethernet): the laptop doesn't need 5G itself. Place the router centrally and use Ethernet for your work desk if you can." },
+        { heading: "Bluetooth 5.3 and multiple devices", body: "Bluetooth 5.x versions bring better range, lower power and more reliable connections; 5.2 and newer support LE Audio on compatible headphones. A laptop can connect several Bluetooth devices at once (mouse, keyboard and headphones together); audio usually plays to one device at a time. Pair each in Settings → Bluetooth & devices." },
+      ],
+      faq: [
+        { question: "Can I connect my laptop to two external monitors?", answer: "Yes if it has two video outputs or supports a dock that drives two; check the spec sheet. M1/M2 MacBook Airs support only one natively." },
+        { question: "What is a USB-C docking station?", answer: "A hub that adds monitors, USB ports, Ethernet and charging through one USB-C or Thunderbolt cable." },
+        { question: "Can I use one docking station for different laptops?", answer: "Standard USB-C and Thunderbolt docks often work across brands, but monitor count and charging depend on each laptop; proprietary docks fit only their brand." },
+        { question: "What is the difference between HDMI 2.0 and HDMI 2.1?", answer: "HDMI 2.1 has far more bandwidth (4K at 120 Hz, 8K, VRR); HDMI 2.0 handles 4K at 60 Hz, enough for office monitors." },
+        { question: "What is Wi-Fi 7 and do laptops support it?", answer: "The newest Wi-Fi standard, on some laptops from 2024 onwards; it needs a Wi-Fi 7 router. Wi-Fi 6 is plenty for most homes." },
+        { question: "Can I connect my laptop to a 5G router?", answer: "Yes, over Wi-Fi or Ethernet like any router; the laptop doesn't need 5G itself." },
+        { question: "How do I connect multiple Bluetooth devices to a laptop?", answer: "Pair each in Settings → Bluetooth & devices; mice, keyboards and headphones can be connected together." },
       ],
     };
   },

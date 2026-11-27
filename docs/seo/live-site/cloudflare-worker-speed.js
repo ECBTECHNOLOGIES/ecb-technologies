@@ -76,7 +76,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "101";
+const VERSION = "104";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -1162,6 +1162,8 @@ async function legacyTarget(url, ctx) {
 // Pages merged into another (keyword map: one page per keyword cluster).
 const PAGE_REDIRECTS = {
   "/laptop-prices-in-kenya": "/research/laptop-prices-kenya",
+  // Renamed on publication day (shorter URL); the first address was live briefly.
+  "/learn/windows-11-home-vs-pro-and-reset-guide": "/learn/windows-11-home-vs-pro",
 };
 
 export function finalUrl(url) {

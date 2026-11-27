@@ -383,5 +383,43 @@
         "answer": "Any 8th-gen or newer Core i5 with 8 GB RAM, plus a working webcam and microphone (1080p webcams look sharper) and stable internet."
       }
     ]
+  },
+  "/learn/business-laptop-procurement-kenya": {
+    "sections": [
+      {
+        "heading": "Finance department laptops",
+        "body": "Finance teams live in Excel, accounting systems and banking portals: choose a 10th-gen or newer Core i5/i7 with 16 GB RAM, a 15.6-inch screen with a number pad (or an external monitor and keypad), Windows 11 Pro with BitLocker, and a fingerprint reader for quick, secure sign-in. Keep a spare configured the same way for month-end."
+      },
+      {
+        "heading": "Consumer vs enterprise warranties",
+        "body": "Consumer warranties usually mean carry-in repair at a service centre within one year. Business and enterprise warranties from manufacturers can include longer terms (often three years), next-business-day or on-site service and accidental damage cover, sold as add-ons. Refurbished laptops carry the seller's warranty instead: get the length, what's covered and the repair process in writing. Check what's actually available for the specific model in Kenya before relying on it."
+      },
+      {
+        "heading": "Managing laptops for remote employees (endpoint management)",
+        "body": "Endpoint management means managing company laptops centrally: pushing updates and apps, enforcing encryption and passwords, and locking or wiping a lost device. Microsoft Intune (with Windows Autopilot for setting up new laptops remotely) is the common choice for Microsoft 365 businesses; it requires Windows 11 Pro or higher. Even without a tool: standard builds, automatic updates, BitLocker, separate admin accounts and a register of serial numbers."
+      },
+      {
+        "heading": "Protecting company laptops from data theft",
+        "body": "Encrypt every drive (BitLocker), require strong sign-in with two-step verification on company accounts, keep files in managed cloud storage (OneDrive/SharePoint) rather than only on the laptop, turn on remote lock/wipe, train staff on phishing, and collect laptops and revoke access when people leave. See the laptop security guide."
+      },
+      {
+        "heading": "What to include in a laptop procurement policy",
+        "body": "Standard models and minimum specs per role; who approves purchases; budget per role; new vs refurbished rules; required warranty and supplier documentation (invoice with serial numbers); security baseline (Windows 11 Pro, encryption, management enrolment); spares; replacement cycle; and how old laptops are wiped and disposed of."
+      },
+      {
+        "heading": "Budgeting for laptop replacement",
+        "body": "Divide the expected cost of each laptop by its planned life (e.g. KSh 50,000 over 4 years ≈ KSh 12,500 a year per employee) and set that aside annually; stagger replacements so about a quarter of the fleet is renewed each year, and add repairs, batteries and spares (one per 10–20 laptops)."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Should a company standardise on one laptop brand?",
+        "answer": "Often yes, or on one or two models: support, spare parts, chargers and docks become simpler. The model and spec matter more than the brand itself."
+      },
+      {
+        "question": "Where can companies in Kenya buy laptops in bulk?",
+        "answer": "From suppliers that can provide the same model in quantity with invoices listing serial numbers and written warranty terms. ECB Technologies takes quote requests on WhatsApp (0717 040 531) or at the shop on Moi Avenue, Nairobi CBD."
+      }
+    ]
   }
 }

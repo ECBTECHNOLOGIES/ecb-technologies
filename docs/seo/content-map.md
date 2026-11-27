@@ -1,4 +1,4 @@
-# Master content map: 400 questions
+# Master content map: 500 questions
 
 One architecture, one keyword map. Every question from the four briefs is mapped to a live page in:
 
@@ -8,8 +8,9 @@ One architecture, one keyword map. Every question from the four briefs is mapped
 | 2 | Models, processors, upgrades, software, displays, professions, MacBooks, gaming GPUs, accessories, buying safely | [question-map-2.md](question-map-2.md) | 96 / 100 |
 | 3 | Budgets, troubleshooting, security, Wi-Fi, specs, small business, comparisons, maintenance, ports, refurbished | [question-map-3.md](question-map-3.md) | 100 / 100 |
 | 4 | Students, creative, displays, hardware compatibility, software, charging, verification, specialist software, product families, procurement | [question-map-4.md](question-map-4.md) | 100 / 100 |
+| 5 | Prices and deals, performance, AI PCs and processors, graphics, storage and backups, Windows editions and resets, webcams and audio, hardware inspection, home-office setups, enterprise purchasing | [question-map-5.md](question-map-5.md) | 100 / 100 |
 
-**390 of 400 answered.** The 10 not published: ASUS and Acer (not stocked), repair prices and repair services (not confirmed by the shop), brand-new stock (no condition data), and prices of parts the shop doesn't sell (RAM, SSD, battery, charger).
+**490 of 500 answered.** The 10 not published: ASUS and Acer (not stocked), repair prices and repair services (not confirmed by the shop), brand-new stock (no condition data), and prices of parts the shop doesn't sell (RAM, SSD, battery, charger).
 
 ## Architecture
 
