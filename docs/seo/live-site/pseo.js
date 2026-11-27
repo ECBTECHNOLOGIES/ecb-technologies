@@ -1155,7 +1155,7 @@ function writePage(p, all, ctxAll) {
       "specs read from product addresses (processor, generation, RAM, SSD, touch, 2-in-1, graphics)",
       ...(p.kind === "profile" ? ["SERIES_FACTS timeline (pseo.js)"] : []),
     ],
-    _view: { sections, kind: p.kind, wa: wa(`Hi ECB, I saw "${p.h1}" on your site.`), updated: new Date(changedAt || Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" }) },
+    _view: { sections, kind: p.kind, wa: wa(`Hi ECB, I saw "${p.h1}" on your site.`), money: p.money || null, updated: new Date(changedAt || Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" }) },
   };
 }
 
@@ -1222,7 +1222,16 @@ export function pageHtml(doc) {
     `<p class="ecb-rs-lead"><strong>${escH(c.introduction)}</strong></p>` +
     // On-page checklist: internal links near the top, not only at the end.
     (doc.related_pages.length ? `<p class="ecb-pg-also">Related: ${doc.related_pages.slice(0, 3).map((r) => `<a href="${r.url.replace(SITE, "")}">${escH(r.title)}</a>`).join(" · ")}</p>` : "") +
-    `${body}${faq}` +
+    `${body}` +
+    // Money-page hand-off (articles): the one buying page that fits what the
+    // reader just read, before the FAQ. Only live pages are in related_pages.
+    (() => {
+      if (!/\/learn\//.test(doc.url)) return "";
+      if (v.money) return `<p class="ecb-pg-next"><strong>Next step:</strong> <a href="${v.money[0]}">${escH(v.money[1])}</a>.</p>`;
+      const m = doc.related_pages.find((r) => /\/(best|laptops|compare|series)\/|student-laptops-kenya|laptop-shop-nairobi|laptop-repair-nairobi/.test(r.url));
+      return m ? `<p class="ecb-pg-next"><strong>Next step:</strong> <a href="${m.url.replace(SITE, "")}">${escH(m.title)}</a>, with live prices from our stock.</p>` : "";
+    })() +
+    `${faq}` +
     `<p class="ecb-pg-about"><strong>About this guide.</strong> We sell these laptops at our shop on Moi Avenue, where you can see any of them before paying. Prices, specs and stock come from our live listings, the ranking formula is published on this page, and the guide updates itself when prices change. Questions or corrections: <a href="${v.wa}" rel="nofollow">WhatsApp ${PHONE}</a>.</p>` +
     `<p class="ecb-pg-cta">${escH(c.call_to_action)} <a href="${v.wa}" rel="nofollow">WhatsApp us</a></p>` +
     `<p class="ecb-rs-meta">Built from the live catalogue · <a href="${doc.url.replace(SITE, "")}.md">Markdown</a> · <a href="/guides">All guides</a></p></div>`
@@ -1276,6 +1285,7 @@ export function hubMarkdown(built) {
 export const PSEO_CSS =
   ".ecb-pg h2{margin:34px 0 12px}.ecb-pg h3{font-size:16px;margin:18px 0 6px}.ecb-pg-items{padding-left:22px}.ecb-pg-items li{margin:0 0 18px}" +
   ".ecb-pg-name{margin:0 0 2px;font-size:16px}.ecb-pg-price{font-family:inherit;white-space:nowrap;margin-left:6px;color:#e8191a;font-weight:700}" +
+  ".ecb-pg-next{margin:22px 0;padding:14px 16px;border-left:4px solid #1683ff;background:#eef4ff;border-radius:6px;font-size:15px}" +
   ".ecb-pg-also{font-size:14px;color:#4a5568;margin:-4px 0 18px}" +
   ".ecb-pg-about{margin:24px 0 8px;padding:14px 16px;background:#f4f7fb;border-radius:8px;font-size:14px;line-height:1.6;color:#4a5568}" +
   ".ecb-pg-pc{margin:2px 0;font-size:14px;color:#333}.ecb-pg-pc b{display:inline-block;width:14px}.ecb-pg-cta{margin-top:28px;padding:16px;border:1px solid #1683ff;border-radius:12px;background:#f4f8ff}" +

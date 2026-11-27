@@ -1213,3 +1213,10 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   (sampled: all links 200).
 - docs/seo/money-pages.md maps product, use-case, role, segment,
   comparison, pricing and integration pages for ECB.
+
+## 2026-11-27: articles hand off to money pages
+- Every /learn article (44) ends its content with a "Next step" link to the
+  matching buying page (budget, use case, comparison, series, repair or
+  accessories), chosen from live related pages or set per article.
+- docs/seo/money-pages.md: measurement (money pages in GSC, AI-referred
+  sessions in GA4, conversions, quarterly Share of Model prompts).

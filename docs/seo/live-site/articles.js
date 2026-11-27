@@ -548,6 +548,7 @@ export const ARTICLES = [
 // link to the guide where the term matters.
 ARTICLES.push({
   slug: "laptop-glossary",
+  money: ["/best/business-laptops-kenya", "Best business laptops in Kenya, with live prices"],
   path: "/learn/laptop-terms-explained",
   kw: "laptop terms explained",
   secondary: ["laptop specs explained", "what does x360 mean", "what is nvme ssd", "what is tpm 2.0", "what is ex-uk laptop"],
@@ -850,6 +851,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "battery-overheating",
+  money: ["/laptop-repair-nairobi", "Laptop repair at our shop in Nairobi CBD"],
   path: "/learn/laptop-battery-and-overheating-fixes",
   kw: "laptop battery draining fast",
   secondary: ["why does my laptop battery drain so fast", "laptop overheating what to do", "how to extend laptop battery life", "repair or replace old laptop"],
@@ -882,6 +884,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "upgrade-ram-ssd",
+  money: ["/laptop-repair-nairobi", "Have it upgraded or repaired at our shop in Nairobi CBD"],
   path: "/learn/laptop-upgrade-ram-ssd",
   kw: "upgrade laptop from hdd to ssd",
   secondary: ["can i upgrade my laptop ram", "laptop ssd upgrade", "how to know if a laptop has an ssd"],
@@ -1092,6 +1095,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "windows-software",
+  money: ["/best/business-laptops-kenya", "Business laptops that run Windows 11, with live prices"],
   path: "/learn/windows-11-and-laptop-software-kenya",
   kw: "Windows 10 or Windows 11 laptop",
   secondary: ["genuine windows 11 licence price kenya", "how to check windows is genuine", "laptop without operating system", "linux vs windows for programming", "microsoft office on chromebook", "microsoft office on macbook"],
@@ -1130,6 +1134,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "screen-build",
+  money: ["/best/business-laptops-kenya", "Best business laptops in Kenya, with live prices"],
   path: "/learn/laptop-screen-and-build-quality-guide",
   kw: "HD vs Full HD laptop screen",
   secondary: ["ips vs tn display", "best laptop screen size for work", "aluminium vs plastic laptop", "laptops with strongest build quality"],
@@ -1168,6 +1173,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "accessories",
+  money: ["/category/Computing-Accessories", "PC accessories in stock: monitors, mice, keyboards, UPS"],
   path: "/learn/laptop-accessories-guide-kenya",
   kw: "laptop accessories guide",
   secondary: ["can i charge my laptop with usb-c", "laptop charger compatibility", "connect laptop to two monitors", "connect laptop to tv", "do i need a cooling pad", "best wireless mouse for laptop"],
@@ -1302,6 +1308,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "slow-laptop",
+  money: ["/laptop-repair-nairobi", "Laptop repair at our shop in Nairobi CBD"],
   path: "/learn/laptop-slow-freezing-not-charging-fixes",
   kw: "why is my laptop running slow",
   secondary: ["laptop takes long to start", "laptop keeps restarting", "laptop freezes randomly", "laptop fan loud", "laptop switches off", "laptop black screen power light on", "laptop not charging plugged in", "make old laptop faster"],
@@ -1339,6 +1346,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "security",
+  money: ["/best/business-laptops-kenya", "Business laptops with TPM 2.0 and Windows 11, with live prices"],
   path: "/learn/laptop-security-guide-kenya",
   kw: "how to protect my laptop from hackers",
   secondary: ["do i need antivirus", "is windows defender enough", "best antivirus for windows laptop", "how to encrypt my laptop", "laptop public wifi security", "what to do if laptop is stolen", "how to know if laptop has virus"],
@@ -1377,6 +1385,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "wifi",
+  money: ["/best/business-laptops-kenya", "Business laptops in Kenya, with live prices"],
   path: "/learn/laptop-wifi-and-internet-guide",
   kw: "laptop not connecting to WiFi",
   secondary: ["laptop keeps disconnecting from wifi", "connect laptop to mobile hotspot", "improve laptop wifi speed", "connect laptop to ethernet", "wifi 5 vs wifi 6", "does a laptop need a sim card"],
@@ -1494,6 +1503,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "maintenance",
+  money: ["/laptop-repair-nairobi", "Laptop servicing and repair at our shop in Nairobi CBD"],
   path: "/learn/laptop-maintenance-guide",
   kw: "laptop maintenance tips",
   secondary: ["how often should i service my laptop", "how to clean laptop keyboard", "can dust damage a laptop", "should i leave my laptop plugged in", "is it bad to charge laptop overnight", "how to extend laptop battery lifespan"],
@@ -1529,6 +1539,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "ports",
+  money: ["/best/business-laptops-kenya", "Business laptops with the ports you need, with live prices"],
   path: "/learn/laptop-ports-explained",
   kw: "laptop ports explained",
   secondary: ["usb-a vs usb-c", "what is thunderbolt on a laptop", "external graphics card laptop", "connect printer to laptop wirelessly", "connect laptop to projector", "webcam resolution for meetings", "laptop for dual screen setup"],
@@ -1630,6 +1641,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "charging",
+  money: ["/laptop-repair-nairobi", "Battery or charging problem? Laptop repair in Nairobi CBD"],
   path: "/learn/laptop-charger-and-battery-guide",
   kw: "laptop battery cycle count",
   secondary: ["check laptop battery cycle count", "laptop battery drains when off", "laptop battery percentage jumps", "can i use laptop while charging", "does fast charging damage laptop battery", "is my laptop charger original", "wrong wattage charger", "can a power bank charge a laptop"],
@@ -1665,6 +1677,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "verify",
+  money: ["/laptop-shop-nairobi", "See any laptop at our shop before paying"],
   path: "/learn/check-if-laptop-is-genuine",
   kw: "how to check if a laptop is genuine",
   secondary: ["check hp laptop genuine", "verify dell warranty", "lenovo serial number check", "laptop manufacturing year", "is my laptop brand new", "grade a refurbished laptop", "documents when buying laptop kenya"],
@@ -1880,6 +1893,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "performance",
+  money: ["/best/16gb-ram-laptops-kenya", "Laptops with 16 GB RAM, with live prices"],
   path: "/learn/laptop-performance-guide",
   kw: "how to check laptop performance",
   secondary: ["laptop slow with 16gb ram", "ram or processor which makes laptop faster", "does ssd improve laptop performance", "reduce cpu usage", "laptop lags opening apps", "ideal ram for multitasking", "benchmark laptop"],
@@ -1916,6 +1930,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "gpu",
+  money: ["/best/gaming-laptops-kenya", "Gaming laptops with dedicated graphics, with live prices"],
   path: "/learn/laptop-graphics-cards-explained",
   kw: "laptop graphics card explained",
   secondary: ["how to check laptop graphics card", "nvidia optimus", "laptop gpu vs desktop gpu", "external gpu laptop", "ray tracing laptop", "vram for video editing", "intel graphics premiere pro", "esports gaming laptop"],
@@ -1956,6 +1971,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "storage-backup",
+  money: ["/best/business-laptops-kenya", "Business laptops in Kenya, with live prices"],
   path: "/learn/laptop-storage-backup-and-recovery",
   kw: "how to free up space on a laptop",
   secondary: ["laptop storage full", "check laptop storage", "recover deleted files laptop", "best way to back up laptop", "onedrive or external hard drive", "can ssd fail without warning", "check ssd health", "transfer files to new laptop"],
@@ -1991,6 +2007,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "home-vs-pro",
+  money: ["/best/business-laptops-kenya", "Business laptops in Kenya, with live prices"],
   path: "/learn/windows-11-home-vs-pro",
   kw: "Windows 11 Home vs Pro",
   secondary: ["is windows 11 pro worth it for business", "upgrade windows 11 home to pro", "what is bitlocker", "reset laptop without losing files", "factory reset hp laptop", "factory reset dell laptop", "factory reset lenovo laptop", "sleep vs hibernate vs shutdown", "reinstall windows on laptop"],
@@ -2027,6 +2044,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "webcam-audio",
+  money: ["/best/business-laptops-kenya", "Business laptops for meetings, with live prices"],
   path: "/learn/laptop-webcam-microphone-and-audio-guide",
   kw: "laptop for video conferencing",
   secondary: ["is 720p webcam good enough", "improve laptop webcam quality", "laptop microphone not working", "laptop speakers crackling", "connect bluetooth headphones to laptop", "noise cancelling microphone laptop", "laptop for online teaching"],
@@ -2064,6 +2082,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "hardware-problems",
+  money: ["/laptop-repair-nairobi", "Laptop repair at our shop in Nairobi CBD"],
   path: "/learn/laptop-hardware-problems-and-inspection",
   kw: "laptop keyboard not working",
   secondary: ["some laptop keys not working", "test laptop before buying", "check laptop hinges", "laptop motherboard failure", "is it worth replacing laptop motherboard", "laptop screen flickering", "damaged charging port", "can a laptop work without battery", "laptop water damage signs"],
@@ -2100,6 +2119,7 @@ ARTICLES.push({
 
 ARTICLES.push({
   slug: "wfh-setup",
+  money: ["/category/Computing-Accessories", "Monitors, keyboards, mice and UPS in stock"],
   path: "/learn/work-from-home-laptop-setup",
   kw: "work from home laptop setup",
   secondary: ["connect laptop to two monitors", "usb-c docking station", "one docking station for different laptops", "hdmi 2.0 vs 2.1", "wireless projector laptop", "wifi 7 laptops", "connect laptop to 5g router", "bluetooth 5.3", "multiple bluetooth devices laptop"],
