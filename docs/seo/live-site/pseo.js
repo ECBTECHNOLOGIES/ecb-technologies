@@ -493,7 +493,7 @@ export function buildPages(products, { changedAt = new Date().toISOString(), fir
   const usedSlugs = new Set();
   const usedKw = new Set();
   const asOfAll = new Date(changedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Nairobi" });
-  const actx = { L, ksh, median, pct, link, tableMd, SITE, PHONE, asOf: asOfAll, ordinal, recency, modelKey, modelName, brandOf, specLine, premium: (...a) => premium(...a) };
+  const actx = { P: cleanRows(products).map((r) => ({ ...r, short: shortName(r.name) })), L, ksh, median, pct, link, tableMd, SITE, PHONE, asOf: asOfAll, ordinal, recency, modelKey, modelName, brandOf, specLine, premium: (...a) => premium(...a) };
   for (const c of [...candidates(), ...articleCandidates(), ...comboCandidates(), ...modelCandidates(L), ...alternativeCandidates(L)]) {
     const skip = (reason) => skipped.push({ status: "SKIPPED", url: SITE + c.path, playbook_type: c.playbook, reason });
     // A template turned off (KV "guides-disabled") publishes nothing.

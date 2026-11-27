@@ -1120,3 +1120,19 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   new-vs-used condition not confirmed by the shop).
 - Articles without stock-dependent data now also require 50+ laptops in
   stock (thin-catalogue safety); model-page test keys on the template.
+
+## 2026-11-27: second 100 questions (see docs/seo/question-map-2.md)
+- 7 new pages: /learn/best-laptop-for-your-profession-kenya (accountants,
+  lawyers, marketers, developers, designers; live picks with price caps),
+  /learn/best-laptops-for-autocad-and-revit-kenya (Windows laptops with
+  16 GB+ and a dedicated GPU, cheapest first; Autodesk requirements),
+  /learn/macbook-buying-guide-kenya, /learn/windows-11-and-laptop-software-kenya
+  (live Windows 11 Pro and Office 2021 prices from the catalogue),
+  /learn/laptop-screen-and-build-quality-guide, /learn/laptop-accessories-guide-kenya
+  (monitors, mice, arms and UPS in stock; no universal-compatibility claims),
+  /learn/buying-a-laptop-safely-kenya (M-Pesa safety, warranty, serial checks;
+  states only verified ECB facts).
+- 29 FAQs and one section added to 9 existing pages via additions.json.
+- Articles can now use the whole catalogue (actx.P), not only laptops.
+- 96 of 100 questions answered; 4 not published (prices of parts the shop
+  doesn't stock: RAM, SSD, battery, charger).

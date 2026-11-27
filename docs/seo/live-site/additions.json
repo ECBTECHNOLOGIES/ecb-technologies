@@ -42,5 +42,171 @@
       }
     ],
     "sections": []
+  },
+  "/learn/hp-elitebook-models-explained": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Is the HP EliteBook 840 G5 worth buying in Kenya?",
+        "answer": "Yes, as a value business laptop: it's 14-inch with an 8th-gen Core i5 or i7, so it runs Windows 11, and it's sturdy and easy to repair. Check the battery health on any used unit. Current configurations and prices are on our HP EliteBook 840 G5 price page."
+      },
+      {
+        "question": "How much does an HP EliteBook 840 G8 cost in Kenya?",
+        "answer": "We don't have the 840 G8 in stock right now. It's the 2021 model with 11th-gen processors and Iris Xe graphics; for similar performance see the EliteBook 830 G8 and 840 G7 pages, or ask us on WhatsApp about incoming stock."
+      },
+      {
+        "question": "Is the HP ProBook 450 G8 good for business?",
+        "answer": "Yes for everyday office work: it's a 15.6-inch mid-range business laptop with 11th-gen processors and a number pad. EliteBooks are lighter and better built. We don't stock it right now; compare EliteBook vs ProBook for what's in stock."
+      },
+      {
+        "question": "Which HP Pavilion laptop is best for students?",
+        "answer": "We don't stock HP Pavilion (HP's consumer line). For students we recommend 8th-gen or newer business models such as the EliteBook 830/840 or ProBook, which are built for daily carrying and are easy to repair in Nairobi; see the student laptop guide."
+      }
+    ]
+  },
+  "/learn/dell-latitude-models-explained": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Is the Dell Latitude 5420 a good laptop?",
+        "answer": "Yes: it's a 14-inch mainstream business laptop from 2021 with 11th-gen Intel processors, sturdy and upgradeable. We don't have it in stock right now; see the Latitude models we do have on the Dell Latitude page."
+      },
+      {
+        "question": "How much does a Dell Latitude 7420 cost in Kenya?",
+        "answer": "We don't have the 7420 in stock right now. It's the 2021 premium 14-inch Latitude with 11th-gen processors; ask us on WhatsApp about incoming stock, or compare the Latitude models in stock with their current prices."
+      },
+      {
+        "question": "What is the difference between Dell Latitude and Dell Inspiron?",
+        "answer": "Latitude is Dell's business line (sturdier build, better keyboards, longer support, easy repairs); Inspiron is the consumer line (lower prices, lighter build). For daily use over many years, Latitude is the safer buy."
+      }
+    ]
+  },
+  "/learn/thinkpad-models-explained": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Which Lenovo ThinkPad is best for office work?",
+        "answer": "A T-series (T480, T490 or T14) with an 8th-gen or newer Core i5 and 8–16 GB RAM: comfortable keyboard, good ports and easy repairs. Choose an X-series if you carry it all day."
+      },
+      {
+        "question": "Is a Lenovo ThinkPad better than an HP EliteBook?",
+        "answer": "Neither is better across the board: ThinkPads are known for their keyboards and TrackPoint, EliteBooks for metal builds and design. Compare generation, RAM, battery health and price; our ThinkPad vs EliteBook comparison uses live stock."
+      }
+    ]
+  },
+  "/learn/laptop-processor-generations-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Is an Intel Core i5 6th-generation laptop still worth buying?",
+        "answer": "Only if it's very cheap and for basic tasks: it's dual-core in most laptops, slower with many tabs, and Windows 11 doesn't officially support it."
+      },
+      {
+        "question": "Is an Intel Core i7 8th generation good in 2026?",
+        "answer": "Yes for office work, study and light programming: it's quad-core and runs Windows 11. For heavy design or engineering software, a 10th-gen or newer processor is better."
+      },
+      {
+        "question": "What is the latest Intel Core processor generation?",
+        "answer": "Intel's newest laptop chips are sold as Core Ultra (from late 2023, with newer series since). The old numbered generations for laptops ended at 13th and 14th gen."
+      },
+      {
+        "question": "Can an Intel Core i3 laptop run Windows 11?",
+        "answer": "Yes, if it's 8th generation or newer (and has TPM 2.0 and Secure Boot). Older Core i3 laptops aren't officially supported."
+      }
+    ]
+  },
+  "/learn/core-i3-vs-i5-vs-i7-vs-ryzen": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "What is the difference between Intel U series and H series processors?",
+        "answer": "U-series chips are low-power for thin laptops and long battery life; H-series are high-performance chips for gaming laptops and workstations, faster under load but hotter and hungrier for power."
+      },
+      {
+        "question": "Is Intel Core i5 better than AMD Ryzen 5?",
+        "answer": "They're close when the same age: Ryzen 5 often has more cores and better built-in graphics; Core i5 is more common in Kenyan business laptops. Compare the specific models and generations."
+      },
+      {
+        "question": "What is the difference between Ryzen 5 and Ryzen 7?",
+        "answer": "Ryzen 7 has more cores or higher speeds for heavy multitasking, programming and editing; Ryzen 5 is plenty for most study and office work."
+      },
+      {
+        "question": "Which processor is best for heavy multitasking?",
+        "answer": "A 10th-gen or newer Core i7, a Ryzen 7 or a Core Ultra, paired with 16 GB RAM; for many browser tabs, RAM matters even more than the processor."
+      }
+    ]
+  },
+  "/learn/how-much-ram-laptop-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Can I upgrade my laptop from 8GB to 16GB RAM?",
+        "answer": "If it has a free or replaceable memory slot. Check Task Manager → Performance → Memory → Slots used, or the model's spec sheet; soldered memory can't be upgraded."
+      },
+      {
+        "question": "Can I add more RAM to an HP EliteBook?",
+        "answer": "Most 14-inch and 13-inch EliteBook 830/840 models (G5 to G8) have two memory slots and can be upgraded; the thin 1030/1040 models have soldered memory. Check the exact model first."
+      },
+      {
+        "question": "Does adding RAM make a laptop faster?",
+        "answer": "If the laptop is running out of memory (many tabs, big files), yes, noticeably. If it isn't, more RAM won't speed it up; a newer processor or an SSD would."
+      },
+      {
+        "question": "What is the difference between DDR3, DDR4 and DDR5 RAM?",
+        "answer": "They're successive generations: each is faster and more efficient, and they're not interchangeable. Most 6th-gen to 11th-gen laptops use DDR4; newer ones DDR5; older ones DDR3. Buy the type your laptop takes."
+      }
+    ]
+  },
+  "/learn/laptop-ssd-size-kenya": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "Is a 1TB SSD worth it for a laptop?",
+        "answer": "For video editing, large photo libraries, games or many years without cleaning up, yes. For office and study work with cloud storage, 256–512 GB is enough."
+      },
+      {
+        "question": "Can I use an external SSD with my laptop?",
+        "answer": "Yes: a USB-C or USB 3 external SSD adds fast storage without opening the laptop, ideal for backups and large files."
+      }
+    ]
+  },
+  "/learn/gaming-laptop-guide-kenya": {
+    "sections": [
+      {
+        "heading": "PUBG, Call of Duty, streaming and business laptops",
+        "body": "Popular shooters like PUBG and Call of Duty need a dedicated GPU (GTX 1650 at minimum, RTX 3050 or better for smooth play) and 16 GB RAM; check each game's current requirements on its official store page before buying, since they change with updates. Streaming while playing adds load on the processor: choose a recent Core i7/Ryzen 7 with an RTX GPU, which can encode video on the graphics card. A business laptop with Iris Xe graphics handles light games and older titles at low settings, but not new shooters. RTX cards are newer than GTX and add ray tracing and DLSS upscaling."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can Intel Iris Xe graphics handle gaming?",
+        "answer": "Light and older games at low settings, yes (11th-gen and newer Intel laptops). New demanding games need a dedicated GPU."
+      },
+      {
+        "question": "Is the NVIDIA MX450 good for gaming?",
+        "answer": "Only for light and older games: it's an entry-level chip, a step above built-in graphics but well below a GTX 1650."
+      },
+      {
+        "question": "How much VRAM do I need for gaming?",
+        "answer": "4 GB for esports and older games at 1080p; 6–8 GB for current games at higher settings."
+      }
+    ]
+  },
+  "/learn/laptop-battery-and-overheating-fixes": {
+    "sections": [],
+    "faq": [
+      {
+        "question": "How long should a laptop battery last on a single charge?",
+        "answer": "A thin business laptop in good health should give about 6–8 hours of light use; manufacturer claims are measured under ideal conditions, so real use is usually lower. Gaming laptops last much less."
+      },
+      {
+        "question": "Is a laptop with 80% battery health good?",
+        "answer": "Yes: 80% of design capacity is generally considered healthy. Below about 60%, expect short runtimes and plan a replacement."
+      },
+      {
+        "question": "How do I know if a laptop battery needs replacing?",
+        "answer": "The battery report shows below about 60% of design capacity, the laptop dies quickly or only runs plugged in, or the battery is swollen (replace a swollen battery immediately)."
+      }
+    ]
   }
 }

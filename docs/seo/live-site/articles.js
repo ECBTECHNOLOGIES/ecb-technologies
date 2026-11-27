@@ -951,3 +951,297 @@ ARTICLES.push({
     };
   },
 });
+
+// ---------- Batch 3 (27 Nov 2026): the second 100 questions ----------
+// See docs/seo/question-map-2.md. Software requirements quoted here are the
+// vendors' published minimums/recommendations for recent versions; each page
+// tells readers to check the exact version they'll use.
+
+const pickList = (x, rows, n = 6) => [...rows].sort((a, b) => b.score - a.score || a.price - b.price).slice(0, n).map((r) => `- ${x.link(r.short, `${x.SITE}/item/${r.slug}`)}: ${x.ksh(r.price)}${x.specLine(r.sp) ? ` (${x.specLine(r.sp)})` : ""}`).join("\n");
+const cheapestOf = (rows) => [...rows].sort((a, b) => a.price - b.price)[0];
+
+ARTICLES.push({
+  slug: "profession-laptops",
+  path: "/learn/best-laptop-for-your-profession-kenya",
+  kw: "best laptop for accountants in Kenya",
+  secondary: ["best laptop for lawyers", "best laptop for digital marketers", "best laptop for software developers kenya", "laptop for photoshop", "laptop for many browser tabs"],
+  h1: "The best laptop for your profession in Kenya: accountants, lawyers, developers and more",
+  title: "Best Laptop for Accountants, Lawyers & Developers (Kenya)",
+  related: ["/best/business-laptops-kenya", "/best/laptops-for-programming-kenya", "/learn/best-laptops-for-autocad-and-revit-kenya"],
+  write(x) {
+    const { L, ksh, link, SITE, asOf, recency } = x;
+    if (L.length < 50) return null;
+    const pro = [
+      ["Accountants", "Excel with large workbooks, accounting packages (QuickBooks, Sage, Tally), browser-based KRA iTax and banking portals.", "8th-gen or newer Core i5 / Ryzen 5, 8 GB RAM (16 GB for very large workbooks), SSD. A 15.6-inch screen with a number pad speeds up data entry.", (r) => (r.sp.tier || 0) >= 3 && recency(r.sp) >= 3 && r.price <= 60000],
+      ["Lawyers and consultants", "Word, PDFs, email, research databases and video calls, often away from the desk.", "8th-gen or newer Core i5, 8 GB RAM, a light 13–14-inch laptop with a comfortable keyboard and good battery.", (r) => (r.sp.tier || 0) >= 3 && recency(r.sp) >= 3 && /-(x2\d0|x3\d0|x13|t4\d0s|t14s|830|835|1030|1040|7390|7400|7410|7300)-/.test(`-${r.slug}-`)],
+      ["Digital marketers and heavy browser users", "Dozens of browser tabs, Canva, social media tools, spreadsheets and video calls at the same time.", "16 GB RAM matters most here (browsers use a lot of memory), with an 8th-gen or newer Core i5 or better.", (r) => r.sp.ram >= 16 && recency(r.sp) >= 3 && r.price <= 70000],
+      ["Software developers", "Code editors, browsers, Docker or virtual machines, local databases.", "16 GB RAM (32 GB for many containers or VMs), a 10th-gen or newer Core i5/i7 or Ryzen 5/7, 512 GB SSD.", (r) => r.sp.ram >= 16 && recency(r.sp) >= 4 && (r.sp.tier || 0) >= 3 && r.price <= 120000],
+      ["Graphic designers (Photoshop, Illustrator)", "Adobe apps with large files and layers.", "Adobe lists 8 GB RAM as the minimum and 16 GB as recommended for Photoshop, with a GPU that supports DirectX 12. Choose 16 GB, an 11th-gen or newer processor (stronger built-in graphics) or a dedicated GPU, and a good IPS screen.", (r) => r.sp.ram >= 16 && (r.sp.gpu || recency(r.sp) >= 5) && r.price <= 150000],
+    ];
+    const sections = pro.map(([who, does, needs, f]) => {
+      const rs = L.filter(f);
+      const c = cheapestOf(rs);
+      return { heading: `Best laptop for ${who.replace(/^\w/, (m) => m.toLowerCase())}`, body: `**What the work involves:** ${does}\n\n**What to buy:** ${needs}\n\n${rs.length ? `**In stock (${rs.length} match, from ${ksh(c.price)}), best specified first:**\n\n${pickList(x, rs, 5)}` : "None in stock right now; ask us on WhatsApp."}` };
+    });
+    return {
+      intro: `The best laptop for accountants in Kenya, and for most office professions, is an 8th-gen or newer Core i5 business laptop with 8–16 GB RAM and an SSD; developers, designers and heavy browser users should start at 16 GB RAM. Below: what each profession's software needs, and the laptops in stock that meet it, with live prices (${asOf}). Engineers and architects using AutoCAD or Revit have their own guide.`,
+      description: `The best laptop for accountants, lawyers, digital marketers, developers and designers in Kenya: what each job's software needs, with live picks and prices.`,
+      sections: [
+        ...sections,
+        { heading: "Engineers and architects", body: `AutoCAD, Revit and other 3D software need more: see ${link("the best laptops for AutoCAD and Revit", `${SITE}/learn/best-laptops-for-autocad-and-revit-kenya`)}.` },
+        { heading: "Choosing within a profession", body: `- **Entry level:** 8th-gen Core i5, 8 GB, 256 GB SSD: documents, email, browser-based tools.\n- **Mid-range:** 10th–11th gen, 16 GB, 512 GB SSD: heavier multitasking, larger files, more years of use.\n- **Professional:** 12th gen or Core Ultra, 16–32 GB, dedicated GPU where the software uses one.\n\nMore help: ${link("the laptop buying guide", `${SITE}/learn/laptop-buying-guide-kenya`)}, ${link("how much RAM you need", `${SITE}/learn/how-much-ram-laptop-kenya`)} and ${link("business laptops", `${SITE}/best/business-laptops-kenya`)}.` },
+      ],
+      faq: [
+        { question: "What is the best laptop for accountants in Kenya?", answer: "An 8th-gen or newer Core i5 business laptop with 8 GB RAM (16 GB for very large Excel files) and an SSD; a 15.6-inch model adds a number pad. Most desktop accounting software runs on Windows." },
+        { question: "Which laptop is best for a lawyer?", answer: "A light 13–14-inch business laptop (such as a ThinkPad X-series or T14s, or an EliteBook 830/840) with an 8th-gen or newer Core i5, 8 GB RAM and a comfortable keyboard." },
+        { question: "Which laptop is best for running many browser tabs?", answer: "One with 16 GB RAM: browsers use a lot of memory, so RAM matters more than processor speed for heavy tab use." },
+        { question: "Which laptop is best for software developers?", answer: "16 GB RAM (32 GB for containers or virtual machines), a 10th-gen or newer Core i5/i7 or Ryzen 5/7, and a 512 GB SSD." },
+        { question: "What laptop do I need for Photoshop?", answer: "Adobe recommends 16 GB RAM and a GPU that supports DirectX 12. An 11th-gen or newer processor with Iris Xe graphics, or a laptop with a dedicated GPU, handles it well." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "autocad-revit",
+  path: "/learn/best-laptops-for-autocad-and-revit-kenya",
+  kw: "best laptop for AutoCAD in Kenya",
+  secondary: ["laptop for revit", "laptop for civil engineering students", "laptop for architects kenya", "autocad laptop requirements"],
+  h1: "The best laptops for AutoCAD and Revit in Kenya (architects and engineers)",
+  title: "Best Laptops for AutoCAD and Revit in Kenya: Live Prices",
+  related: ["/best/laptops-for-graphic-design-and-video-editing-kenya", "/best/gaming-laptops-kenya", "/learn/best-laptop-for-your-profession-kenya"],
+  write(x) {
+    const { L, ksh, link, SITE, asOf, recency, tableMd } = x;
+    // Windows only (Revit has no macOS version).
+    const cad = L.filter((r) => x.brandOf(r.slug) !== "Apple" && r.sp.ram >= 16 && (r.sp.gpu || (recency(r.sp) >= 5 && (r.sp.tier || 0) >= 4)));
+    const gpuCad = cad.filter((r) => r.sp.gpu).sort((a, b) => a.price - b.price);
+    const ws = L.filter((r) => /-(zbook|precision|thinkpad-p\d|p\d{2}s?)-/.test(`-${r.slug}-`));
+    if (cad.length < 6) return null;
+    const tier = (lo, hi) => cad.filter((r) => r.price > lo && r.price <= hi);
+    const best = (rs) => [...rs].sort((a, b) => b.score - a.score || a.price - b.price)[0];
+    const cell = (r) => (r ? `${link(r.short, `${SITE}/item/${r.slug}`)} – ${ksh(r.price)}` : "none in stock");
+    return {
+      intro: `The best laptop for AutoCAD in Kenya has at least 16 GB RAM, a recent processor with strong single-core speed, and a dedicated graphics card (or at minimum strong built-in graphics); Revit needs the same with more memory. Autodesk's published requirements for recent versions list 8 GB RAM as the minimum for AutoCAD (with more recommended) and 16 GB as the minimum for Revit. ${cad.length} laptops in stock meet that bar (${asOf}).`,
+      description: `Laptops for AutoCAD and Revit in Kenya: what Autodesk's software needs (RAM, GPU, processor), with ${cad.length} qualifying laptops in stock and live prices.`,
+      sections: [
+        { heading: "What AutoCAD and Revit need", body: tableMd(["", "AutoCAD (2D and light 3D)", "Revit (BIM, 3D)"], [
+          ["RAM", "8 GB minimum; 16–32 GB recommended", "16 GB minimum; 32 GB for large models"],
+          ["Processor", "Fast cores matter most (high clock speed)", "Fast cores; more cores help rendering"],
+          ["Graphics", "A DirectX 11/12 GPU; dedicated recommended for 3D", "Dedicated GPU with 4 GB+ video memory recommended"],
+          ["Storage", "SSD", "SSD, 512 GB or more (projects grow fast)"],
+          ["Operating system", "Windows (64-bit); there's a separate AutoCAD for Mac", "Windows only"],
+        ]) + "\n\nRequirements change with each version: check Autodesk's system requirements page for the exact version your course or office uses." },
+        { heading: "Recommended laptops in stock", body: `${cad.length} Windows laptops in stock have 16 GB RAM or more and a dedicated GPU (or a 12th-gen/Core Ultra class processor with strong integrated graphics).${gpuCad.length ? ` The ${gpuCad.length} with a dedicated graphics card are the best fit for 3D and Revit; cheapest first:\n\n${gpuCad.slice(0, 8).map((r) => `- ${link(r.short, `${SITE}/item/${r.slug}`)}: ${ksh(r.price)}${x.specLine(r.sp) ? ` (${x.specLine(r.sp)})` : ""}`).join("\n")}` : `\n\n${pickList(x, cad, 8)}`}` },
+        { heading: "By budget", body: tableMd(["Budget", "Qualifying laptops", "Best specified"], [[0, 70000, "Up to KSh 70,000"], [70000, 120000, "KSh 70,001–120,000"], [120000, 10000000, "Over KSh 120,000"]].map(([lo, hi, l]) => [l, String(tier(lo, hi).length), cell(best(tier(lo, hi)))])) },
+        { heading: "Mobile workstations", body: ws.length ? `Workstation lines (HP ZBook, Dell Precision, ThinkPad P) have professional graphics certified for CAD software. ${ws.length} are in stock, from ${ksh(cheapestOf(ws).price)}: see ${link("HP ZBook laptops", `${SITE}/series/zbook-kenya`)}.` : "Workstation lines (HP ZBook, Dell Precision, ThinkPad P) have professional graphics certified for CAD software; ask us on WhatsApp for current stock." },
+        { heading: "For students: civil engineering and architecture", body: `First-year students mostly draw in 2D AutoCAD; an 8th-gen or newer Core i5/i7 with 16 GB RAM is enough to start. From the second year, Revit and 3D modelling make a dedicated GPU worth it. Avoid MacBooks if your course uses Revit (Windows only). See also ${link("best laptops for students", `${SITE}/student-laptops-kenya`)}.` },
+        { heading: "Gaming laptops for CAD?", body: `Gaming laptops (HP Victus and OMEN, Lenovo Legion) have the GPU, RAM and cooling CAD needs, often for less than a workstation; they're heavier and louder. Compare in ${link("gaming laptops", `${SITE}/best/gaming-laptops-kenya`)} and ${link("laptops for design and video editing", `${SITE}/best/laptops-for-graphic-design-and-video-editing-kenya`)}.` },
+      ],
+      faq: [
+        { question: "What is the best laptop for AutoCAD in Kenya?", answer: `One with 16 GB RAM, a recent fast processor and a dedicated GPU.${gpuCad.length ? ` ${gpuCad.length} such laptops are in stock; the most affordable is the ${gpuCad[0].short} at ${ksh(gpuCad[0].price)} (${asOf}).` : ""}` },
+        { question: "How much RAM do I need for Revit?", answer: "Autodesk lists 16 GB as the minimum for recent Revit versions; 32 GB is better for large models." },
+        { question: "Can I run Revit on a MacBook?", answer: "Not natively: Revit is Windows-only. AutoCAD has a Mac version, but many courses and offices use the Windows version." },
+        { question: "Which laptop should a civil engineering student buy?", answer: "An 8th-gen or newer Core i5/i7 with 16 GB RAM for first-year AutoCAD; a dedicated GPU from the second year if you'll use Revit or 3D software." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "macbook-guide",
+  path: "/learn/macbook-buying-guide-kenya",
+  kw: "which MacBook to buy",
+  secondary: ["macbook air vs macbook pro", "macbook air m1 vs m2", "is 8gb ram enough for macbook", "refurbished macbook kenya", "can macbook run windows apps"],
+  h1: "Which MacBook should you buy? MacBook Air vs Pro, M1 to M5",
+  title: "Which MacBook to Buy: Air vs Pro, M1 to M5 (Kenya)",
+  related: ["/laptops/macbook-price-kenya", "/compare/macbook-vs-windows-laptops-kenya", "/student-laptops-kenya"],
+  write(x) {
+    const { L, ksh, median, link, SITE, asOf, tableMd } = x;
+    const mac = L.filter((r) => x.brandOf(r.slug) === "Apple" && /macbook/.test(r.slug));
+    if (mac.length < 5) return null;
+    const air = mac.filter((r) => /-air-/.test(`-${r.slug}-`));
+    const pro = mac.filter((r) => /-pro-/.test(`-${r.slug}-`));
+    return {
+      intro: `Which MacBook to buy: for most people a MacBook Air with an Apple chip (M1 or newer) and 16 GB of memory if your budget allows; choose a MacBook Pro for long video, music or software builds that need its fans and extra performance. At ECB Technologies, MacBook Airs start at ${air.length ? ksh(cheapestOf(air).price) : "n/a"} and MacBook Pros at ${pro.length ? ksh(cheapestOf(pro).price) : "n/a"} (${asOf}); every model and price is on ${link("MacBook prices in Kenya", `${SITE}/laptops/macbook-price-kenya`)}.`,
+      description: `Which MacBook to buy in Kenya: Air vs Pro, M1 vs M2 and newer chips, 8 GB vs 16 GB, Windows apps, battery life, and checks before buying a used MacBook.`,
+      sections: [
+        { heading: "MacBook Air or MacBook Pro?", body: tableMd(["", "MacBook Air", "MacBook Pro"], [
+          ["Best for", "Students, office work, travel, light creative work", "Video and music production, long code builds, heavy creative work"],
+          ["Cooling", "No fan: silent, but slows down under long heavy loads", "Fans: sustains full speed for long tasks"],
+          ["Screen", "13.6 or 15.3-inch (recent models)", "14 or 16-inch, brighter, 120 Hz ProMotion"],
+          ["Ports", "2 × USB-C/Thunderbolt + MagSafe on recent models", "More ports, including HDMI and SD card on 14/16-inch"],
+          ["In stock", air.length ? `${air.length}, from ${ksh(cheapestOf(air).price)}` : "none now", pro.length ? `${pro.length}, from ${ksh(cheapestOf(pro).price)}` : "none now"],
+        ]) },
+        { heading: "M1, M2, M3 and newer: what changes", body: `Every Apple-chip MacBook (M1 from late 2020 onwards) is fast, cool and efficient; each newer generation is faster, with better graphics. An M1 MacBook Air is still a capable laptop in 2026 for study and office work, and it runs current macOS. M2 brought a redesigned Air (thinner, larger screen, MagSafe charging); later chips add speed and better external display support. Avoid Intel-based MacBooks (2020 and earlier) unless very cheap: they're slower and are dropping out of new macOS versions.` },
+        { heading: "8 GB or 16 GB?", body: `8 GB is enough for browsing, Office, Zoom and light photo editing on an Apple-chip MacBook. Choose 16 GB for video editing, programming, or if you keep the laptop for many years: memory can't be upgraded after purchase, and newer MacBooks start at 16 GB.` },
+        { heading: "Can a MacBook run Windows apps and Microsoft Office?", body: `Microsoft Office runs natively on macOS (Word, Excel, PowerPoint, Outlook, Teams). Windows-only programs are harder: Apple-chip MacBooks can't use Boot Camp, so you need virtualisation software that runs an Arm version of Windows, and some programs (many engineering tools, some accounting packages, Revit) won't run well or at all. Check your software first; see ${link("MacBook vs Windows laptops", `${SITE}/compare/macbook-vs-windows-laptops-kenya`)}.` },
+        { heading: "Battery life", body: `Apple quotes up to 15–18 hours of video playback for recent MacBook Airs (by model); real-world mixed use is lower but often a full working day. On a used MacBook, check battery health: Apple menu → System Settings → Battery → Battery Health, and the cycle count in System Information → Power.` },
+        { heading: "Before buying a used or refurbished MacBook", body: `1. **Activation Lock:** the seller must sign out of iCloud and turn off Find My; a locked MacBook can't be used.\n2. **Management (MDM):** no "remote management" screen during setup (it means it's still controlled by a company).\n3. **Battery:** health and cycle count (above).\n4. **Model and chip:** Apple menu → About This Mac should match the listing.\n5. **Keyboard, ports, screen and speakers:** test them all.\n\nThe general list: ${link("how to check a used laptop", `${SITE}/learn/check-used-laptop-before-buying`)}.` },
+        { heading: "MacBooks in stock", body: `${pickList(x, mac, 8)}\n\nMedian MacBook price: ${ksh(median(mac.map((r) => r.price)))} (${asOf}).` },
+      ],
+      faq: [
+        { question: "Is a MacBook Air M1 still worth buying in 2026?", answer: "Yes, for study and office work at the right price: it's fast, silent and runs current macOS. Prefer 16 GB of memory if you'll keep it for years." },
+        { question: "Is the MacBook Air M2 better than the M1?", answer: "Yes: it's faster, has a larger screen and a newer design with MagSafe charging. The M1 is the better value if the price gap is large." },
+        { question: "Is 8GB RAM enough for a MacBook?", answer: "For browsing, Office and video calls, yes. Choose 16 GB for video editing, programming or many years of use, because it can't be upgraded later." },
+        { question: "Which MacBook is best for university students?", answer: "A MacBook Air with an Apple chip, if your course software runs on macOS. Engineering and architecture students using Revit or other Windows-only software should choose a Windows laptop." },
+        { question: "How long does a MacBook battery last?", answer: "Apple quotes up to 15–18 hours of video playback for recent MacBook Airs; real mixed use is less but often a full working day. Check battery health and cycle count on a used one." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "windows-software",
+  path: "/learn/windows-11-and-laptop-software-kenya",
+  kw: "Windows 10 or Windows 11 laptop",
+  secondary: ["genuine windows 11 licence price kenya", "how to check windows is genuine", "laptop without operating system", "linux vs windows for programming", "microsoft office on chromebook", "microsoft office on macbook"],
+  h1: "Windows 10 or Windows 11? Licences, Office and laptop software explained",
+  title: "Windows 10 or 11 Laptop? Licences and Office in Kenya",
+  related: ["/learn/laptop-processor-generations-kenya", "/learn/refurbished-vs-used-laptops-kenya", "/learn/macbook-buying-guide-kenya"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf } = x;
+    const find = (re) => P.find((p) => re.test(p.slug));
+    const win = find(/^windows-11-pro/);
+    const office = find(/^microsoft-office-20/);
+    if (!P || P.length < 50) return null;
+    return {
+      intro: `Windows 10 or Windows 11 laptop: buy Windows 11. Windows 10 reached the end of support on 14 October 2025, so it no longer gets regular free security updates. Windows 11 officially needs an 8th-gen Intel (or Ryzen 2000-series) processor or newer, TPM 2.0 and Secure Boot. ${win ? `A genuine Windows 11 Pro licence costs ${ksh(win.price)} at ECB Technologies` : "Ask us for genuine Windows licences"}${office ? `, and Microsoft Office 2021 ${ksh(office.price)}` : ""} (${asOf}).`,
+      description: `Windows 10 or 11 on a laptop in Kenya: Windows 11 requirements, genuine licence prices and checks, laptops without an OS, Office on Mac and Chromebook, Linux for coding.`,
+      sections: [
+        { heading: "Windows 10 or Windows 11?", body: `Windows 10's support ended on 14 October 2025 ([Microsoft](https://www.microsoft.com/en-us/windows/end-of-support)). A Windows 10 laptop still works, but without regular security updates it's riskier for banking, M-Pesa web portals and work email. Buy a laptop that runs Windows 11: 8th-gen Intel or newer (see ${link("processor generations explained", `${SITE}/learn/laptop-processor-generations-kenya`)}).` },
+        { heading: "Can an old laptop run Windows 11?", body: `Officially, only with an 8th-gen or newer Intel processor (a few 7th-gen exceptions), an AMD Ryzen 2000-series or newer, TPM 2.0 and Secure Boot ([Windows 11 specifications](https://www.microsoft.com/en-us/windows/windows-11-specifications)). Run Microsoft's PC Health Check app to see whether a laptop qualifies. Installing it on unsupported hardware is possible with workarounds, but Microsoft doesn't support it and updates aren't guaranteed. A Core i3 runs Windows 11 if it's 8th gen or newer.` },
+        { heading: "Genuine licences: price and how to check", body: `${win ? `**Price:** ${link(win.short, `${SITE}/item/${win.slug}`)} costs ${ksh(win.price)}${office ? `; ${link(office.short, `${SITE}/item/${office.slug}`)} costs ${ksh(office.price)}` : ""} (${asOf}).\n\n` : ""}**Check activation:** Settings → System → Activation should say "Windows is activated" (often "with a digital license" on laptops that came with Windows). A watermark saying "Activate Windows", or a request for a product key, means it isn't activated.\n\n**Warning signs:** very cheap keys sold online, or activation tools downloaded from the internet, aren't genuine and can carry malware.` },
+        { heading: "Laptops without an operating system", body: `A laptop sold without an OS can save money if you already own a licence or will use Linux. Otherwise add the cost of a Windows licence to the price before comparing. Most business laptops that originally shipped with Windows 10 or 11 reactivate automatically after a clean install, because the licence is tied to the hardware.` },
+        { heading: "Installing Windows on a refurbished laptop", body: `Use Microsoft's Media Creation Tool to make a USB installer, boot from it (F12 on Dell and Lenovo, F9 on HP for the boot menu), and choose "I don't have a product key" if the laptop had Windows before: it usually activates itself once online. Back up first; a clean install erases the drive.` },
+        { heading: "Microsoft Office on Windows, Mac and Chromebook", body: `- **Windows:** every edition of Office runs.\n- **MacBook:** Office for Mac (Word, Excel, PowerPoint, Outlook) runs natively; a few Excel features (some add-ins, Power Pivot) are Windows-only.\n- **Chromebook:** only the web versions (Office on the web) through the browser; desktop Office can't be installed.\n\nFor Office work, any 8th-gen or newer Core i5 with 8 GB RAM is plenty: see ${link("business laptops", `${SITE}/best/business-laptops-kenya`)}.` },
+        { heading: "Linux or Windows for programming?", body: `Linux is excellent for web and backend development, servers and data work, and runs well on older ThinkPads and EliteBooks. Windows includes WSL (Windows Subsystem for Linux), so you can run Linux tools without leaving Windows, and it's needed for .NET desktop, some games and Windows-only tools. Many developers use Windows with WSL, or dual-boot. See ${link("laptops for programming", `${SITE}/best/laptops-for-programming-kenya`)}.` },
+      ],
+      faq: [
+        { question: "Should I buy a laptop with Windows 10 or Windows 11?", answer: "Windows 11. Windows 10 support ended on 14 October 2025, so it no longer gets regular free security updates." },
+        { question: "How much does a genuine Windows 11 licence cost in Kenya?", answer: win ? `Windows 11 Pro costs ${ksh(win.price)} at ECB Technologies (${asOf}).` : "Ask us on WhatsApp for current licence prices." },
+        { question: "How do I know if my Windows licence is genuine?", answer: "Settings → System → Activation should say Windows is activated. An 'Activate Windows' watermark or a request for a product key means it isn't." },
+        { question: "Can I run Microsoft Excel on a Chromebook?", answer: "Only the web version through the browser; the desktop version can't be installed on ChromeOS." },
+        { question: "Can I use a MacBook for Microsoft Office?", answer: "Yes: Office for Mac runs natively. A few advanced Excel features and some add-ins are Windows-only." },
+        { question: "Is Linux better than Windows for programming?", answer: "For web, backend and server work, Linux is excellent. Windows with WSL runs Linux tools too, and is needed for some Windows-only development." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "screen-build",
+  path: "/learn/laptop-screen-and-build-quality-guide",
+  kw: "HD vs Full HD laptop screen",
+  secondary: ["ips vs tn display", "best laptop screen size for work", "aluminium vs plastic laptop", "laptops with strongest build quality"],
+  h1: "Laptop screens and build quality: HD vs Full HD, IPS vs TN, metal vs plastic",
+  title: "HD vs Full HD Laptop Screens, IPS vs TN & Build Quality",
+  related: ["/learn/laptop-buying-guide-kenya", "/learn/touchscreen-laptop-worth-it-kenya", "/best/business-laptops-kenya"],
+  write(x) {
+    const { L, link, SITE, tableMd } = x;
+    if (L.length < 50) return null;
+    return {
+      intro: `HD vs Full HD laptop screen: choose Full HD (1920×1080) on any laptop 13 inches or larger; HD (1366×768) looks grainy and fits less on screen. Prefer an IPS panel over TN for colour and viewing angles, 300 nits or more if you work near windows, and 14 inches for most work. For build quality, business lines (ThinkPad, EliteBook, Latitude) are the toughest, and many are tested against MIL-STD-810 durability standards.`,
+      description: `Laptop screens explained (HD, Full HD, 4K, IPS vs TN, brightness, size) and build quality (aluminium vs plastic, toughest laptop lines), for buyers in Kenya.`,
+      sections: [
+        { heading: "Resolution: HD, Full HD, QHD and 4K", body: tableMd(["Resolution", "Pixels", "Verdict"], [
+          ["HD", "1366×768", "Grainy on 13–15-inch screens; fits less. Only on very cheap laptops"],
+          ["Full HD (FHD)", "1920×1080", "The standard: sharp and fits two windows side by side"],
+          ["QHD / 2.5K / 3K", "2560×1440 and up", "Sharper text; good for design; uses a little more battery"],
+          ["4K (UHD)", "3840×2160", "Sharpest; for photo and video work; shortest battery life"],
+        ]) + "\n\nListings often don't say the resolution: ask, or check Settings → System → Display → Display resolution on the laptop." },
+        { heading: "IPS vs TN vs OLED", body: "- **IPS:** good colours and viewing angles; the standard on most business laptops from 2018 on.\n- **TN:** older, cheaper panels; colours wash out when you tilt the screen. Avoid if you can.\n- **OLED:** deep blacks and vivid colour, on newer premium models; great for media and design.\n\nA quick test: tilt the screen and look from the side. If the colours invert or fade, it's TN." },
+        { heading: "Brightness", body: "Brightness is measured in nits: about 250 is fine indoors, 300–400+ is better near windows, outdoors or under bright office lights. Matte screens reflect less than glossy touchscreens." },
+        { heading: "Best screen size for work", body: tableMd(["Size", "Best for"], [["13.3 inch", "Carrying all day: lawyers, consultants, students"], ["14 inch", "The best balance for most office work"], ["15.6 inch", "Spreadsheets, accounting (number pad), design; mostly at a desk"]]) + `\n\nFor long desk work, add an external monitor: see the ${link("laptop accessories guide", `${SITE}/learn/laptop-accessories-guide-kenya`)}.` },
+        { heading: "Aluminium vs plastic", body: "Aluminium and magnesium bodies feel stiffer, flex less and stay cooler to the touch; quality plastic (like on many ThinkPads) is light and doesn't dent. Material matters less than design: a well-built plastic business laptop outlasts a thin consumer laptop with a metal lid. Check for flex: press the keyboard deck and twist the lid gently." },
+        { heading: "Which laptops have the strongest build", body: `Business lines are built for years of daily carrying: Lenovo ThinkPad, HP EliteBook and ZBook, and Dell Latitude. Many of their models are tested against MIL-STD-810 (the US military's durability tests for drops, vibration and temperature); check the specific model's spec sheet. They also have spill-resistant keyboards on many models and are easy to repair in Nairobi. Browse ${link("business laptops", `${SITE}/best/business-laptops-kenya`)} or read ${link("ThinkPad", `${SITE}/learn/thinkpad-models-explained`)}, ${link("EliteBook", `${SITE}/learn/hp-elitebook-models-explained`)} and ${link("Latitude", `${SITE}/learn/dell-latitude-models-explained`)} explained.` },
+      ],
+      faq: [
+        { question: "What is the difference between HD, Full HD and 4K laptop screens?", answer: "Resolution: HD is 1366×768, Full HD 1920×1080 and 4K 3840×2160. Full HD is the sensible standard on 13–15-inch laptops." },
+        { question: "Is an IPS display better than TN?", answer: "Yes for most people: IPS has better colours and viewing angles. TN panels are older and wash out when tilted." },
+        { question: "What is the best laptop screen size for work?", answer: "14 inches for most people; 13.3 inches if you carry it all day; 15.6 inches for spreadsheets and design at a desk." },
+        { question: "Are aluminium laptops better than plastic laptops?", answer: "Aluminium feels stiffer and premium, but a well-designed plastic business laptop (like many ThinkPads) can be just as durable and is lighter." },
+        { question: "Which laptops have the strongest build quality?", answer: "Business lines: Lenovo ThinkPad, HP EliteBook and ZBook, and Dell Latitude. Many models are tested against MIL-STD-810 durability standards." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "accessories",
+  path: "/learn/laptop-accessories-guide-kenya",
+  kw: "laptop accessories guide",
+  secondary: ["can i charge my laptop with usb-c", "laptop charger compatibility", "connect laptop to two monitors", "connect laptop to tv", "do i need a cooling pad", "best wireless mouse for laptop"],
+  h1: "Laptop accessories guide: chargers, USB-C, monitors, docks and more",
+  title: "Laptop Accessories Guide: Chargers, USB-C and Monitors",
+  related: ["/learn/laptop-buying-guide-kenya", "/learn/laptop-battery-and-overheating-fixes", "/best/business-laptops-kenya"],
+  write(x) {
+    const { P, ksh, link, SITE, asOf } = x;
+    if (!P || P.length < 50) return null;
+    const mice = P.filter((p) => /mouse/.test(p.slug) && !/pad/.test(p.slug)).sort((a, b) => a.price - b.price);
+    const seen = new Set();
+    const uniq = (rs) => rs.filter((r) => { const k = `${r.short}|${r.price}`; return seen.has(k) ? false : (seen.add(k), true); });
+    const mons = uniq(P.filter((p) => /(odyssey|ultragear|viewfinity|monitor|-\d{2}-(?:inch-)?(?:fhd|qhd|wqhd|4k|ips|va|curved)|\d{2,3}hz)/.test(p.slug) && !/arm|mount|stand|laptop|bracket/.test(p.slug) && p.price > 8000)).sort((a, b) => a.price - b.price);
+    const arms = P.filter((p) => /(monitor-arm|laptop-mount|monitor-arms)/.test(p.slug));
+    const ups = P.filter((p) => /-ups-|va-/.test(p.slug) && !/laptop/.test(p.slug));
+    const li = (rs, n) => rs.slice(0, n).map((r) => `- ${link(r.short, `${SITE}/item/${r.slug}`)}: ${ksh(r.price)}`).join("\n");
+    return {
+      intro: `A laptop accessories guide in one line: match chargers by connector, voltage and wattage (never just by shape); USB-C charging works only if the laptop supports USB-C Power Delivery; and for two monitors you need two video outputs or a dock the laptop supports. Below: chargers, USB-C, monitors, docks, cooling pads, mice and bags, with the accessories ECB Technologies stocks and their prices (${asOf}).`,
+      description: `Laptop accessories explained: charger compatibility, USB-C charging, external monitors, two-monitor setups, docks, TV connection, cooling pads, mice and bags.`,
+      sections: [
+        { heading: "Chargers: what makes one compatible", body: "Three things must match the laptop:\n\n1. **Connector:** HP uses 4.5 mm (blue tip) and 7.4 mm barrel plugs on older models and USB-C on newer ones; Dell uses 4.5 mm and 7.4 mm barrels or USB-C; Lenovo uses the rectangular \"slim tip\" or USB-C.\n2. **Voltage:** usually 19–20 V on barrel chargers; it must match.\n3. **Wattage:** equal to or higher than the original (45 W, 65 W, 90 W…). A lower-wattage charger charges slowly or not at all, and may trigger a warning at startup.\n\nThe label under the laptop and on the original charger lists all three. An original or good-quality charger protects the battery; very cheap ones can overheat." },
+        { heading: "Can I charge my laptop with USB-C?", body: "Only if its USB-C port supports **USB Power Delivery (PD)**: many laptops from about 2018 on do (look for a charging symbol by the port, or check the spec sheet). Use a PD charger with enough wattage (usually 65 W for business laptops; 45 W charges slowly). A phone charger may not be enough. Older laptops with a barrel charger can't charge over USB-C even if they have the port." },
+        { heading: "External monitors", body: `A 24–27-inch monitor makes long work far easier. Connect by HDMI (most laptops), USB-C/Thunderbolt with DisplayPort (one cable on many newer laptops), or DisplayPort.\n\n${mons.length ? `Monitors in stock (${mons.length}, from ${ksh(mons[0].price)}):\n\n${li(mons, 6)}` : "Ask us on WhatsApp for current monitors."}${arms.length ? `\n\nMonitor arms and laptop mounts (${arms.length}) from ${ksh(Math.min(...arms.map((a) => a.price)))} free up desk space.` : ""}` },
+        { heading: "Can I connect two monitors to one laptop?", body: "Yes, if the laptop has two video outputs (for example HDMI plus USB-C/Thunderbolt with DisplayPort), or through a dock. Notes:\n\n- **Windows** laptops with Thunderbolt or DisplayPort over USB-C often drive two screens from one port through a dock (DisplayPort MST).\n- **MacBook Air (M1/M2)** supports only one external display natively; Pro models and newer chips support more.\n- Check the laptop's spec sheet for \"supports up to N displays\"." },
+        { heading: "Docking stations", body: "A dock connects monitors, keyboard, network and power with one cable. Buy one that matches the laptop's port (Thunderbolt, USB-C with DisplayPort, or the maker's own dock connector on older business models) and supplies enough charging power. Docks are not universal: check the laptop maker's compatibility list." },
+        { heading: "Connecting a laptop to a TV", body: "Use an HDMI cable (laptop HDMI port, or a USB-C to HDMI adapter) and choose the TV's HDMI input; press Windows + P to pick Duplicate or Extend. Wirelessly, many smart TVs accept Miracast (Windows: Windows + K) or casting from Chrome." },
+        { heading: "Do you need a cooling pad?", body: `For gaming laptops, long video calls or editing in hot rooms, a cooling pad helps keep temperatures and fan noise down. For office work on a hard desk, usually not: cleaning the vents does more. See ${link("laptop overheating fixes", `${SITE}/learn/laptop-battery-and-overheating-fixes`)}.` },
+        { heading: "Mouse, keyboard and bag", body: `${mice.length ? `Wireless mice in stock from ${ksh(mice[0].price)}:\n\n${li(mice, 4)}\n\n` : ""}A wireless mouse with a USB receiver works on any laptop; Bluetooth mice save a USB port. For bags, choose a padded laptop compartment that fits your screen size (14 or 15.6 inches), water resistance for the rainy season, and comfortable straps; students carrying a laptop daily benefit most from padding.${ups.length ? `\n\nFor desktops and monitors at home or the office, a UPS protects against power cuts: ${ups.length} UPS models are in stock.` : ""}` },
+      ],
+      faq: [
+        { question: "Which laptop charger is compatible with HP laptops?", answer: "One with the same connector (4.5 mm blue tip, 7.4 mm or USB-C), the same voltage and the same or higher wattage as the original. Check the label under the laptop." },
+        { question: "Can I charge my laptop using USB-C?", answer: "Only if its USB-C port supports USB Power Delivery. Use a PD charger with enough wattage, usually 65 W for business laptops." },
+        { question: "Can I connect two monitors to one laptop?", answer: "Yes, with two video outputs (such as HDMI plus USB-C/DisplayPort) or a compatible dock. Older MacBook Airs support only one external display." },
+        { question: "How do I connect a laptop to a TV?", answer: "With an HDMI cable (or USB-C to HDMI adapter), then Windows + P to choose Duplicate or Extend; or wirelessly with Miracast or casting." },
+        { question: "Do I need a cooling pad for my laptop?", answer: "For gaming and heavy work in warm rooms, it helps. For office work on a hard surface, cleaning the vents usually matters more." },
+      ],
+    };
+  },
+});
+
+ARTICLES.push({
+  slug: "buy-safely",
+  path: "/learn/buying-a-laptop-safely-kenya",
+  kw: "buy a laptop online in Kenya safely",
+  secondary: ["pay for laptop with mpesa", "laptop warranty kenya", "verify laptop serial number", "ex-uk vs brand new laptop", "laptop with replaced battery", "negotiate laptop price kenya"],
+  h1: "How to buy a laptop safely in Kenya: payment, warranty and checks",
+  title: "How to Buy a Laptop Safely in Kenya: Payment & Warranty",
+  related: ["/laptop-shop-nairobi", "/learn/refurbished-vs-used-laptops-kenya", "/learn/check-used-laptop-before-buying"],
+  write(x) {
+    const { L, ksh, link, SITE, PHONE, asOf } = x;
+    if (L.length < 50) return null;
+    const warr = L.filter((r) => /warranty/.test(r.slug)).length;
+    return {
+      intro: `To buy a laptop online in Kenya safely: buy from a seller with a physical shop you can visit, pay a business (a registered till or paybill, or on delivery) rather than a personal number, get the warranty in writing, and check the laptop's serial number and condition before paying. Here's how each step works, what to ask, and how ECB Technologies handles it.`,
+      description: `Buying a laptop safely in Kenya: online vs shop, M-Pesa and payment safety, instalments, warranties, serial checks, ex-UK vs new, replaced batteries and negotiating.`,
+      sections: [
+        { heading: "Online or in a shop?", body: `Online is convenient and lets you compare prices; a shop lets you test the laptop before paying. The safest is both: an online shop with a physical address. ECB Technologies lists every price online and has a shop at Techmart Iconic Business Plaza, 3rd floor, room T12, Moi Avenue, Nairobi CBD (Monday to Saturday, 9am–7pm), where you can see any laptop first. See ${link("the shop page", `${SITE}/laptop-shop-nairobi`)} and ${link("delivery across Kenya", `${SITE}/delivery`)}.` },
+        { heading: "Paying with M-Pesa safely", body: "- Pay to a **business till or paybill**, and check the business name M-Pesa shows before entering your PIN.\n- Be wary of sellers who ask you to send money to a personal number before you've seen the laptop.\n- Keep the M-Pesa confirmation and ask for a receipt that lists the laptop's model and serial number.\n- Never share your PIN or an M-Pesa code someone sends you.\n\nAt ECB Technologies, online orders can currently be paid on delivery; ask on WhatsApp about other payment options." },
+        { heading: "Instalments", body: `Some sellers and lenders offer instalment or lipa-mdogo-mdogo plans. Before signing, compare the total you'll pay with the cash price, and read what happens if you miss a payment. Ask us on WhatsApp (${PHONE}) about current options rather than assuming they exist.` },
+        { heading: "Warranty: what to expect", body: `New laptops come with the manufacturer's warranty (often one year). Refurbished and ex-UK laptops carry the seller's warranty, which varies: ask what it covers (battery? screen? keyboard?), for how long, and where repairs happen, and get it in writing on the receipt. At ECB Technologies, ${warr} listings state a one-year warranty in the product name; ask about the warranty on any other model before you buy.` },
+        { heading: "Verify the serial number", body: "Read the serial (HP, Lenovo) or service tag (Dell) on the label underneath or in the BIOS, then enter it on the manufacturer's warranty check page: the model and specs shown should match the listing. Also confirm the serial in the BIOS matches the label, and that the receipt lists it." },
+        { heading: "Ex-UK vs brand new", body: `Ex-UK means imported after use (usually in UK companies): cheaper, often a business model, but with wear and the seller's warranty. Brand new means unused with the manufacturer's warranty, at a higher price. More: ${link("refurbished vs used vs new laptops", `${SITE}/learn/refurbished-vs-used-laptops-kenya`)}.` },
+        { heading: "A laptop with a replaced battery", body: "A replaced battery is fine, even good, if it's a quality part and the seller says so. Ask which brand it is and whether it's covered by the warranty, then check the battery report (`powercfg /batteryreport`): a new battery shows close to 100% of design capacity." },
+        { heading: "Risks of buying without a warranty", body: `Without a warranty, any fault after you pay is your cost: a battery, screen or motherboard can cost a large share of the laptop's price. If there's no warranty, insist on testing everything first using ${link("the 12-point checklist", `${SITE}/learn/check-used-laptop-before-buying`)}.` },
+        { heading: "Negotiating and timing", body: `- Compare: our ${link("laptop price research", `${SITE}/research/laptop-prices-kenya`)} shows typical prices by brand, processor and budget, updated from live stock.\n- Ask what's included (bag, mouse, Office) as well as the price.\n- Paying in full and collecting yourself can help.\n- Demand rises around university intake; shopping earlier gives more choice.\n\nPrices on our product pages are the current prices (${asOf}).` },
+      ],
+      faq: [
+        { question: "Can I pay for a laptop using M-Pesa in Kenya?", answer: "Most Kenyan shops accept M-Pesa. Pay to a business till or paybill and check the business name before entering your PIN. At ECB Technologies, online orders can currently be paid on delivery; ask on WhatsApp about other options." },
+        { question: "Do laptop shops in Kenya offer instalment payments?", answer: "Some do, often through lenders. Compare the total cost with the cash price and read the terms. Ask us on WhatsApp about current options." },
+        { question: "What warranty should I expect when buying a laptop?", answer: "New laptops usually have the manufacturer's warranty; refurbished and ex-UK laptops have the seller's. Ask what's covered and for how long, and get it on the receipt." },
+        { question: "How do I verify a laptop's serial number?", answer: "Enter the serial or service tag from the label on the manufacturer's warranty check page and confirm the model and specs match; it should also match the serial in the BIOS." },
+        { question: "Is it better to buy a laptop online or from a physical shop?", answer: "An online shop with a physical address gives both: prices to compare online and a place to test the laptop and return to if there's a problem." },
+        { question: "How do I negotiate the price of a laptop in Kenya?", answer: "Compare prices first, ask what's included (bag, mouse, software), and be ready to pay in full and collect. Our price research shows typical prices by budget and brand." },
+      ],
+    };
+  },
+});
