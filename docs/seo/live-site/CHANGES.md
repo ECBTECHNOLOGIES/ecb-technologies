@@ -1096,3 +1096,10 @@ original stylesheets, as long as the `ecb-theme.css?v=` version changed.
   a thin page per term (the skip reason says so in /guides/pages.json).
 - Check: every URL used by the 90 published guides (329, including all
   links in their content) returns 200.
+
+## 2026-11-27: "Indexed, though blocked by robots.txt"
+- robots.txt now blocks only /admin. Cart, checkout, account, wishlist,
+  compare, track-order and cart-action URLs are crawlable so Google can read
+  their noindex and drop them (a robots block hides the noindex).
+- Added X-Robots-Tag noindex to /item/compare, /wishlist(s), /track-order,
+  /subscriber, /currency and /language responses (they had none).

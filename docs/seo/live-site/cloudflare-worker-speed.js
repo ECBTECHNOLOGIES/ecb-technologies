@@ -76,7 +76,7 @@ import {
   waOrderButton, waFloat, llmsTxt, parseKsh, decode, SOCIALS, X_HANDLE, productQaHtml, setLiveDupes, socialLinks, nothingFooter,
 } from "./seo.js";
 
-const VERSION = "93";
+const VERSION = "94";
 
 // IndexNow (Bing, Yandex, Seznam, Naver): public ownership key, served at
 // /<key>.txt. Submissions are triggered with the INDEXNOW_TOKEN secret.
@@ -241,7 +241,7 @@ const handler = {
       if (isRead && STATIC_PAGES[url.pathname]) return agentHeaders(await staticPage(request, url, env, ctx), url);
       if (isRead && GUIDE_PATH.test(url.pathname.replace(/\/+$/, ""))) return agentHeaders(await guidePage(request, url, env, ctx), url);
       // Cart actions and quick-view copies: never indexed.
-      if (isRead && (/^\/item\/(quick|show)\//.test(url.pathname) || /^\/(addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart)(\/|$)/.test(url.pathname))) {
+      if (isRead && (/^\/item\/(quick|show|compare)(\/|$)/.test(url.pathname) || /^\/(addcart|addnumcart|addtonumcart|addbyone|reducebyone|removecart|wishlists?|track-order|subscriber|currency|language)(\/|$)/.test(url.pathname))) {
         const res = await fetch(request);
         const out = new Response(res.body, res);
         out.headers.set("X-Robots-Tag", "noindex, nofollow");

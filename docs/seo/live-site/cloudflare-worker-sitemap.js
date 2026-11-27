@@ -185,8 +185,9 @@ async function buildSitemap(path, env) {
 
 async function robots(url) {
   // All crawlers, search engines and AI assistants included, may read every
-  // public page. Only account, cart, checkout, agent/rider and admin areas
-  // are kept out (they are also marked noindex).
+  // page except the admin area. Account, cart, checkout and cart-action URLs
+  // are crawlable on purpose: they send noindex, which Google must be able to
+  // read to drop them.
   const text = [
     "# ECB Technologies - robots.txt",
     "# Keep in sync with /llms.txt and /ai.txt.",
@@ -210,29 +211,10 @@ async function robots(url) {
     "User-agent: Google-Extended",
     "User-agent: Applebot-Extended",
     "User-agent: *",
+    // Only the admin area is blocked. Cart, checkout, account and cart-action
+    // URLs send "noindex" instead: a robots.txt block hides that noindex, so
+    // Google kept them as "Indexed, though blocked by robots.txt".
     "Disallow: /admin",
-    "Disallow: /user/",
-    "Disallow: /rider/",
-    "Disallow: /agent/",
-    "Disallow: /vendor/",
-    "Disallow: /carts",
-    "Disallow: /checkout",
-    "Disallow: /wishlist",
-    "Disallow: /item/compare",
-    "Disallow: /item/quick/",
-    "Disallow: /item/show/",
-    "Disallow: /addcart/",
-    "Disallow: /addnumcart",
-    "Disallow: /addtonumcart",
-    "Disallow: /addbyone",
-    "Disallow: /reducebyone",
-    "Disallow: /removecart/",
-    "Disallow: /subscriber/",
-    "Disallow: /currency/",
-    "Disallow: /language/",
-    "Disallow: /wishlists",
-    "Disallow: /track-order",
-    "Disallow: /search",
     "Allow: /",
     "",
     "Sitemap: https://www.ecbtechkenya.com/sitemap.xml",
